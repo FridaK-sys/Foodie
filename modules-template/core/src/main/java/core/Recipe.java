@@ -1,4 +1,9 @@
-Public class Recipe {
+package core;
+
+import core.Cookbook;
+import core.Ingredient;
+
+public class Recipe {
     private String name;
     private CollectionIngredient> ingredients;
     private int portions;
