@@ -35,7 +35,7 @@ public class Recipe {
         this.name = name;
     }
 
-    public getPortions() {
+    public int getPortions() {
         return this.portions;
     }
 
@@ -47,13 +47,15 @@ public class Recipe {
         ingredients.stream().forEach(i -> i.setAmount(i.getAmount() * portions));
     }
 
+    public List<Ingredient> getIngredients(){
+        return new ArrayList<>(ingredients);
+    }
 
     public void addIngredient(Ingredient ingredient) {
         if (!ingredients.contains(ingredient)){
             ingredients.add(ingredient);
         }
     }
-
 
     public void removeIngredient(Ingredient ingredient){
         if (!ingredients.contains(ingredient)){
@@ -71,5 +73,4 @@ public class Recipe {
     }
 
   
-
 }
