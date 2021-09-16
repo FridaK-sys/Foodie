@@ -1,5 +1,5 @@
 package ui;
- 
+
 import java.net.URL;
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CookbookApp extends Application{
+public class CookbookApp extends Application {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
@@ -18,7 +18,8 @@ public class CookbookApp extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Main.fxml"));
+        // FXMLLoader fxmlLoader = new
+        // FXMLLoader(getClass().getClassLoader().getResource("Main.fxml"));
         URL fxmlLocation = getClass().getResource("Main.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = fxmlLoader.load();
@@ -31,5 +32,5 @@ public class CookbookApp extends Application{
         stage.setScene(scene);
         stage.show();
     }
-    
+
 }

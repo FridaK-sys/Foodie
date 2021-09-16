@@ -1,4 +1,5 @@
 package core;
+
 public class Ingredient {
 
     private String name;
@@ -10,7 +11,7 @@ public class Ingredient {
         setAmount(amount);
         this.name = name;
         this.amount = amount;
-        this.unit = unit; 
+        this.unit = unit;
     }
 
     public String getName() {
@@ -18,7 +19,7 @@ public class Ingredient {
     }
 
     public void setName(String name) {
-        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\s]+{1, 20}$")){
+        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
             throw new IllegalArgumentException("Invalid name");
         }
         this.name = name;
@@ -29,7 +30,7 @@ public class Ingredient {
     }
 
     public void setAmount(double amount) {
-        if (amount <= 0){
+        if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be more than 0");
         }
     }
@@ -43,18 +44,18 @@ public class Ingredient {
     }
 
     public String toString() {
-		if (amount >= 0 && unit != null) {
-			if (amount % 1 != 0) {
-				String amounInString = String.format("%.1f", amount);
-				return "" + amounInString + "    " + unit + "\t\t" + name;
-			} else {
-				String amounInString = String.format("%.0f", amount);
-				return "" + amounInString + "    " + unit + "\t\t" + name;
-			}
+        if (amount >= 0 && unit != null) {
+            if (amount % 1 != 0) {
+                String amounInString = String.format("%.1f", amount);
+                return "" + amounInString + "    " + unit + "\t\t" + name;
+            } else {
+                String amounInString = String.format("%.0f", amount);
+                return "" + amounInString + "    " + unit + "\t\t" + name;
+            }
 
-		} else {
-			return name + "";
-		}
-	}
+        } else {
+            return name + "";
+        }
+    }
 
 }

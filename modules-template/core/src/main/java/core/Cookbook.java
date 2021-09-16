@@ -2,56 +2,56 @@ package core;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Cookbook{
-    
-    private String name;
-    private List<Recipe> recipes;
 
-    public Cookbook(String name, List<Recipe> recipes){
+public class Cookbook {
+
+    private String name;
+    private List<Recipe> recipes = new ArrayList<>();
+
+    public Cookbook(String name, List<Recipe> recipes) {
         setName(name);
         this.name = name;
-        this.recipes = new ArrayList<>(recipes);
+        this.recipes = recipes;
     }
 
-    public Cookbook(){
-
+    public Cookbook() {
+        this.name = "tom";
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
-        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+{1, 20}$")){
+    public void setName(String name) {
+        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
             throw new IllegalArgumentException("Invalid name");
         }
         this.name = name;
     }
 
-    public List<Recipe> getRecipes(){
+    public List<Recipe> getRecipes() {
         return new ArrayList<>(recipes);
     }
 
-    public void addRecipe(Recipe recipe){
-        if (!recipes.contains(recipe)){
+    public void addRecipe(Recipe recipe) {
+        if (!recipes.contains(recipe)) {
             recipes.add(recipe);
         }
     }
 
-    public void removeRecipe(Recipe recipe){
-        if (!recipes.contains(recipe)){
+    public void removeRecipe(Recipe recipe) {
+        if (!recipes.contains(recipe)) {
             throw new IllegalArgumentException(name + "does not contain this recipe");
         }
         recipes.remove(recipe);
     }
 
     public void removeRecipe(String name) {
-        for (Recipe r: recipes) {
-            if (r.getName().equals(name)){
+        for (Recipe r : recipes) {
+            if (r.getName().equals(name)) {
                 recipes.remove(r);
             }
         }
     }
-
 
 }
