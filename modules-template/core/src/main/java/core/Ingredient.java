@@ -19,7 +19,7 @@ public class Ingredient {
     }
 
     public void setName(String name) {
-        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\s]+{1,20}$")) {
+        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
             throw new IllegalArgumentException("Invalid name");
         }
         this.name = name;
