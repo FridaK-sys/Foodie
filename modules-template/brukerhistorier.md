@@ -31,3 +31,9 @@ Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengd
 ### Viktig å kunne gjøre
 
 - Redigere antall porsjoner på en oppskrift 
+
+
+<p>
+  <img src="/kokebok.png" width="350">
+  <img src="/oppskrift.png" width="350">
+</p>

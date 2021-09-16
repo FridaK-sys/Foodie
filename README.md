@@ -1,3 +1,1 @@
-readmefil
-
-to be continued...
+Kodingsprosjektet vårt med readme om prosjektet og brukerhistorier ligger i modules-template. Dokumentasjonen for hver release ligger i mappen docs.
