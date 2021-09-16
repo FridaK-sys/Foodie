@@ -45,7 +45,7 @@ public class Cookbook{
         recipes.remove(recipe);
     }
 
-    public void removeIngredient(String name) {
+    public void removeRecipe(String name) {
         for (Recipe r: recipes) {
             if (r.getName().equals(name)){
                 recipes.remove(r);
@@ -53,8 +53,5 @@ public class Cookbook{
         }
     }
 
-    public boolean isInCookbook(String recipeName){
-        return recipes.stream().anyMatch(recipe -> recipe.getName().equals(recipeName));
-    }
 
 }
