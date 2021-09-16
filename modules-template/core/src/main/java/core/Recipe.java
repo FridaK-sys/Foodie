@@ -9,7 +9,7 @@ public class Recipe {
     private List<Ingredient> ingredients;
     private int portions;
 
-    Recipe(String name, int portions, List<Ingredient> ingredients) {
+    public Recipe(String name, int portions, List<Ingredient> ingredients) {
         setName(name);
         setPortions(portions);
         this.name = name;
@@ -17,7 +17,7 @@ public class Recipe {
         this.ingredients = new ArrayList<>(ingredients);
     }
 
-    Recipe(String name, int portions){
+    public Recipe(String name, int portions){
         setName(name);
         setPortions(portions);
         this.name = name;
