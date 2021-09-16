@@ -6,13 +6,15 @@ import java.util.List;
 public class Recipe {
 
     private String name;
+    private String description;
     private List<Ingredient> ingredients;
     private int portions;
 
-    public Recipe(String name, int portions, List<Ingredient> ingredients) {
+    public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
         setName(name);
         setPortions(portions);
         this.name = name;
+        this.description = description;
         this.portions = portions;
         this.ingredients = new ArrayList<>(ingredients);
     }
@@ -33,6 +35,17 @@ public class Recipe {
             throw new IllegalArgumentException("Invalid name");
         }
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    } 
+
+    public void setDescription(String description) {
+        if (!description.matches("^[ÆØÅæøåa-zA-Z0-9\s]+{1, 20}$")){
+            throw new IllegalArgumentException("Invalid name");
+        }
+        this.description = description;
     }
 
     public int getPortions() {
