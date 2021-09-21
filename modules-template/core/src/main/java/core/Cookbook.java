@@ -11,11 +11,11 @@ public class Cookbook {
     public Cookbook(String name, List<Recipe> recipes) {
         setName(name);
         this.name = name;
-        this.recipes = recipes;
+        this.recipes = new ArrayList<>(recipes);
     }
 
     public Cookbook() {
-        this.name = "tom";
+        this.name = "Ny kokebok";
     }
 
     public String getName() {
