@@ -1,3 +1,5 @@
+package core;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,15 +23,19 @@ public class IngredientTest {
 		
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("%:)", 2, "dl");
-		});
+		}, "Invalid name for ingredient");
 
         assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", 2, "dl");
-		});
+		}, "Name of ingredient contains to many characters");
 
-        	assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Ingredient("Sukker", 0, "dl");
+		}, "Amount cannot be zero");
+
+        assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("Sukker", -2, "dl");
-		});
+		}, "Amount cannot be negative");
 	
 	}
 	
@@ -42,11 +48,25 @@ public class IngredientTest {
 			ingredient.setName("%:)");
 		}, "Invalid name for ingredient");
         
-		
 		 assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", 2, "dl");
-		});
+		}, "Name of ingredient contains to many characters");
+    }
+
+
+	@Test
+	public void testSetAmount() {
+        ingredient.setAmount(250);
+		assertEquals(ingredient.getAmount(), 250);
 		
+		assertThrows(IllegalArgumentException.class, () -> {
+			ingredient.setAmount(0);
+		}, "Amount cannot be zero");
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			ingredient.setAmount(-2);
+		}, "Amount cannot be negative");
+        
     }
 
 }

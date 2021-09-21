@@ -33,6 +33,7 @@ public class Ingredient {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be more than 0");
         }
+        this.amount = amount;
     }
 
     public String getUnit() {
