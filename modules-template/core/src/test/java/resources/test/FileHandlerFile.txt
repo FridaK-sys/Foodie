@@ -1,0 +1,6 @@
+recipe1;2
+Aspareges;2.0;stk&
+Kok aspargesene
+recipe2;2
+Egg;3.0;Stk&
+Kok eggene
