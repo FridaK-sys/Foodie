@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 
 public class ViewRecipeController implements Initializable {
 
@@ -28,6 +29,9 @@ public class ViewRecipeController implements Initializable {
     @FXML
 	private ListView<Ingredient> ingredientsListView;
 
+    @FXML
+    private TextArea textField;
+
 
     public void incPortion(ActionEvent event) {
 		if (portion > 0) {
@@ -43,7 +47,7 @@ public class ViewRecipeController implements Initializable {
 
     public void alterPortions(int portionSize){
         selectedRecipe.setPortions(portionSize);
-        ingredientsListView.setItems(ingredients);
+        ingredients.setAll(selectedRecipe.getIngredients());
         portions.setText(Integer.toString(portionSize));
     }
 
@@ -51,6 +55,7 @@ public class ViewRecipeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ingredientsListView.setItems(ingredients);
+        textField.setText("Hmm her var det tomt...");
     }
 
     public void initData(Recipe recipe) {
@@ -64,6 +69,9 @@ public class ViewRecipeController implements Initializable {
         portions.setText(Integer.toString(recipe.getPortions()));
         if (!recipe.getIngredients().isEmpty()){
             ingredients.addAll(recipe.getIngredients());
+        }
+        if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
+            textField.setText(recipe.getDescription());
         }
         
     }
