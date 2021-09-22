@@ -32,8 +32,8 @@ Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengd
 
 - Redigere antall porsjoner på en oppskrift 
 
+### Illustrende skjermbilde av appen
+![kokebok](kokebok.png)
 
-<p>
-  <img src="/kokebok.png" width="350">
-  <img src="/oppskrift.png" width="350">
-</p>
+![oppskrift](oppskrift.png)
+
