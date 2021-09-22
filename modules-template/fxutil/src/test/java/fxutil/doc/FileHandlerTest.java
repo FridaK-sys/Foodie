@@ -1,4 +1,22 @@
-public class FileReaderTest {
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.util.Arrays;
+import fxutil.src.main.java.fxutil.doc.FileHandler.java;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+public class FileHandlerTest {
 	private Cookbook cookbook;
 	private Recipe recipe1;
 	private Recipe recipe2;
@@ -11,13 +29,13 @@ public class FileReaderTest {
 
 	@BeforeEach
 	public void setup() {
-		fileReader = new FileReader();
+		FileHandler = new FileHandler();
 		recipe1 = new Recipe("recipe1", 2);
-		recipe1.addIngredient("Aspareges", 2, "stk");
+		recipe1.addIngredient(new Ingredient("Aspareges", 2, "stk"));
         recipe1.setDescription("Kok aspargesene");
 
 		recipe2 = new Recipe("recipe2", 2);
-		recipe2.addIngredient("Egg", 3, "Stk");
+		recipe2.addIngredient(new Ingredient("Egg", 3, "Stk"));
 		recipe2.setDescription("Kok eggene");
 
 		cookbook = new Cookbook();
@@ -75,7 +93,7 @@ public class FileReaderTest {
 	public void testWriteRecipesToFile() throws IOException {
 		FileHandler.writeRecipesToFile(tempFile.getAbsolutePath(), cookbook);
 
-		assertTrue(compareFileString(Path.of("src/main/java/test/java/resources/test/FileHandlerFile.txt"), path));
+		assertTrue(compareFiles(Path.of("src/main/java/test/java/resources/test/FileHandlerFile.txt"), path));
 
 	}
 
