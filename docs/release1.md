@@ -9,7 +9,6 @@ I denne sprinten ønsker vi å implementere grunnleggende logikk for appen vår:
 - GUI-design som implementerer funksjonene beskrevet overfor (estimert tid: 5 timer)
 - File-klasse som skriver og leser informasjon om kokebok, oppskrift og ingredienser til og fra fil (estimert tid: 4 timer)
 - Test-klasse som tester den viktigste logikken i applikasjonen (estimert tid: 2 timer)
--Lage brukerhistorer med passende scenarioer (estimert tid: 1 time)
--Lage illustrerende bilder for den tenkte appen (estimert tid: 1 timer)
--Lage README filer som beskriver innholdet i kodingslageret, prosjeket og brukerhistorier (estimert tid: 1 time) 
-
+- Lage brukerhistorer med passende scenarioer (estimert tid: 1 time)
+- Lage illustrerende bilder for den tenkte appen (estimert tid: 1 timer)
+- Lage README filer som beskriver innholdet i kodingslageret, prosjeket og brukerhistorier (estimert tid: 1 time)
