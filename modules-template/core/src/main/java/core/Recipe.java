@@ -19,6 +19,14 @@ public class Recipe {
         this.ingredients = new ArrayList<>(ingredients);
     }
 
+    public Recipe(String name, int portions) {
+        setName(name);
+        setPortions(portions);
+        this.name = name;
+        this.portions = portions;
+        this.description = "nothing here...";
+    }
+
     public String getName() {
         return this.name;
     }
@@ -32,6 +40,10 @@ public class Recipe {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getPortions() {
