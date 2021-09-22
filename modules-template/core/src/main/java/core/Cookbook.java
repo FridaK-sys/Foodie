@@ -16,7 +16,6 @@ public class Cookbook {
 
     public Cookbook() {
         this.name = "Ny kokebok";
-        this.recipes = null;
     }
 
     public String getName() {
