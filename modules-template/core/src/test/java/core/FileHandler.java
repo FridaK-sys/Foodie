@@ -1,7 +1,17 @@
+package core;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class FileHandler {
 
-    @Override
-    public void writeRecipeToFile(Strign filename, Cookbook cookbook) throws IOException {
+    
+    public void writeRecipeToFile(String filename, Cookbook cookbook) throws IOException {
         int index = 0;
 		try (FileWriter fileWriter = new FileWriter(filename)) {
 			for (Recipe recipe : cookbook.getRecipes()) {
@@ -22,10 +32,7 @@ public class FileHandler {
 			fileWriter.close();
 		}
 	}
-     
-    }
 
-    @Override
 	public void readRecipesFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {
 		try (Scanner scanner = new Scanner(new File(filename))) {
 			while (scanner.hasNextLine()) {
@@ -35,7 +42,7 @@ public class FileHandler {
 				int intPortions = Integer.parseInt(portions);
 				Recipe newRecipe = new Recipe(recipeTitle, intPortions);
 
-				String[] ingredients = scanner.NextLine().split("&");
+				String[] ingredients = scanner.nextLine().split("&");
 				for (String ing : ingredients) {
 					String[] ingredientElements = ing.split(";");
 					
@@ -44,7 +51,7 @@ public class FileHandler {
 					newRecipe.addIngredient(newIngredient);
 				}
 
-				String description = scanner.NextLine();
+				String description = scanner.nextLine();
 				newRecipe.setDescription(description);
 				
 				cookbook.addRecipe(newRecipe);
@@ -52,5 +59,9 @@ public class FileHandler {
 			scanner.close();
 		}
 	}
+
+	
+
+	
     
 }

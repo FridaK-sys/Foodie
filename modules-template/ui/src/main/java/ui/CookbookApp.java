@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class CookbookApp extends Application {
-
+ 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
         launch(CookbookApp.class, args);
