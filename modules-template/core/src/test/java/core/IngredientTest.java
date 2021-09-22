@@ -22,12 +22,12 @@ public class IngredientTest {
         assertEquals(ingredient.getUnit(), "g");
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("%:)", 2, "dl");
+			new Ingredient("$~@", 2, "dl");
 		}, "Invalid name for ingredient");
 
         assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", 2, "dl");
-		}, "Name of ingredient contains to many characters");
+		}, "Name contains to many characters");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("Sukker", 0, "dl");
@@ -45,11 +45,11 @@ public class IngredientTest {
 		assertEquals(ingredient.getName(), "Smør");
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			ingredient.setName("%:)");
+			ingredient.setName("$~@");
 		}, "Invalid name for ingredient");
         
 		 assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", 2, "dl");
+			ingredient.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
 		}, "Name of ingredient contains to many characters");
     }
 
