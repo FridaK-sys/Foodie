@@ -16,14 +16,7 @@ public class Recipe {
         this.name = name;
         this.description = description;
         this.portions = portions;
-        this.ingredients = ingredients;
-    }
-
-    public Recipe(String name, int portions) {
-        setName(name);
-        setPortions(portions);
-        this.name = name;
-        this.portions = portions;
+        this.ingredients = new ArrayList<>(ingredients);
     }
 
     public String getName() {
@@ -31,7 +24,7 @@ public class Recipe {
     }
 
     public void setName(String name) {
-        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
+        if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,40}$")) {
             throw new IllegalArgumentException("Invalid name");
         }
         this.name = name;
@@ -39,13 +32,6 @@ public class Recipe {
 
     public String getDescription() {
         return this.description;
-    }
-
-    public void setDescription(String description) {
-        if (!description.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
-            throw new IllegalArgumentException("Invalid name");
-        }
-        this.description = description;
     }
 
     public int getPortions() {
@@ -56,8 +42,8 @@ public class Recipe {
         if (portions <= 0) {
             throw new IllegalArgumentException("Portions must be more than 0");
         }
+        ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
         this.portions = portions;
-        ingredients.stream().forEach(i -> i.setAmount(i.getAmount() * portions));
     }
 
     public List<Ingredient> getIngredients() {
