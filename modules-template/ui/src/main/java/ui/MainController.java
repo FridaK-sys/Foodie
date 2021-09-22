@@ -1,11 +1,19 @@
 package ui;
 
 import javafx.collections.FXCollections;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 import core.Recipe;
 import core.Cookbook;
 import core.Ingredient;
@@ -34,6 +42,27 @@ public class MainController implements Initializable {
         recipes.add(recipe2);
         mainListView.getItems().addAll(recipes);
         // recipes.add(("e"));
+    }
+
+    public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
+        // if (!mainListView.getSelectionModel().isEmpty()) {
+            URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+            
+            // FXMLLoader loader = new FXMLLoader();
+            // loader.setLocation(getClass().getClassLoader().getResource("ViewRecipe.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Scene viewRecipesScene = new Scene(root);
+
+            ViewRecipeController controller = fxmlLoader.getController();
+            controller.initData(mainListView.getSelectionModel().getSelectedItem());
+        
+
+            Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+            stage.setScene(viewRecipesScene);
+            stage.show();
+        // }
     }
 
 }
