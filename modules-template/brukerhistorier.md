@@ -33,7 +33,6 @@ Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengd
 - Redigere antall porsjoner på en oppskrift 
 
 
-<p>
-  <img src="/kokebok.png" width="350">
-  <img src="/oppskrift.png" width="350">
-</p>
+![kokebok](kokebok.png)
+![oppskrift](oppskirft.png)
+
