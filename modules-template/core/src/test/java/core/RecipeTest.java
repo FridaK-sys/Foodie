@@ -34,21 +34,20 @@ public class RecipeTest {
 		assertEquals(recipe.getIngredients(), ingredients);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("%:)", 2, "dl");
-		}, "Invalid name for ingredient");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", 2, "dl");
-		}, "Name of ingredient contains to many characters");
+			new Recipe("$~@", "Min favoritt dessert", 10, ingredients);
+		}, "Invalid name for recipe");
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("Sukker", 0, "dl");
-		}, "Amount cannot be zero");
+			new Recipe("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", "Min favoritt dessert", 10, ingredients);
+		}, "Name contains to many characters");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("Sukker", -2, "dl");
-		}, "Amount cannot be negative");
-	
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Recipe("Muffins", "Min favoritt dessert", -1, ingredients);
+		}, "Portions cannot be zero");
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Recipe("Muffins", "Min favoritt dessert", -1, ingredients);
+		}, "Portions cannot be negative");
 	}
 	
 	@Test
@@ -57,7 +56,7 @@ public class RecipeTest {
 		assertEquals(recipe.getName(), "Muffins");
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			recipe.setName("%:)");
+			recipe.setName("$~@");
 		}, "Invalid name for recipe");
         
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -67,16 +66,12 @@ public class RecipeTest {
 
 
 	@Test
-	public void testSetDescription() {
-        recipe.setDescription("My favorite recipe");
-		assertEquals(recipe.getDescription(), "My favorite recipe");
-    }
-
-
-	@Test
 	public void testSetPortions() {
-        recipe.setPortions(2);
-		assertEquals(recipe.getPortions(), 2);
+
+        recipe.setPortions(3);
+		assertEquals(recipe.getPortions(), 3);
+		assertEquals(recipe.getIngredients().get(0).getAmount(), 600);
+		assertEquals(recipe.getIngredients().get(1).getAmount(), 6);
 		
 		assertThrows(IllegalArgumentException.class, () -> {
 			recipe.setPortions(0);
@@ -87,28 +82,23 @@ public class RecipeTest {
 		}, "Portions cannot be negative");
 	}
 
-		@Test
-		public void testAddIngredient() {
-        	recipe.addIngredient(ingredient3);
-			assertEquals(recipe.getIngredients(), Arrays.asList(ingredient1, ingredient2, ingredient3));
-		}
+	@Test
+	public void testAddIngredient() {
+    	recipe.addIngredient(ingredient3);
+		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient1, ingredient2, ingredient3));
+	}
 
-		@Test
-		public void testRemoveIngredient() {
-        	recipe.removeIngredient(ingredient2);
-			assertEquals(recipe.getIngredients(), Arrays.asList(ingredient1, ingredient3));
+	@Test
+	public void testRemoveIngredient() {
+       	recipe.removeIngredient(ingredient1);
+		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2));
+    }
 
-    	}
 
-
-		@Test
-		public void testRemoveIngredientString() {
-			recipe.removeIngredient("Mel");
-			assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2, ingredient3));
-			
-			assertThrows(IllegalArgumentException.class, () -> {
-				recipe.removeIngredient("Bakepulver");
-			}, "Recipe does not contain this ingredient");
-    	}
+	@Test
+	public void testRemoveIngredientString() {
+		recipe.removeIngredient("Mel");
+		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2));
+	}
 
 }
