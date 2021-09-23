@@ -70,7 +70,7 @@ public class NewRecipeController implements Initializable   {
         }
         Cookbook testBook = new Cookbook();
         testBook.addRecipe(newRecipe);
-        fileHandler.writeRecipesToFile("modules-template/ui/src/main/resources/ui/test.txt", testBook);
+        fileHandler.writeRecipeToFile("modules-template/ui/src/main/resources/ui/test.txt", newRecipe);
         backButton.fire();
     }
 
