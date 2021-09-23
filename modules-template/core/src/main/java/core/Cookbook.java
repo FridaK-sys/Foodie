@@ -15,7 +15,7 @@ public class Cookbook {
     }
 
     public Cookbook() {
-        this.name = "tom";
+        this.name = "Ny kokebok";
     }
 
     public String getName() {
