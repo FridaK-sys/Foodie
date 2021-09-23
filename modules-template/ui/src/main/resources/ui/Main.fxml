@@ -10,12 +10,12 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ListView fx:id="mainListView" prefHeight="329.0" prefWidth="600.0" />
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <ListView fx:id="mainListView" prefHeight="464.0" prefWidth="600.0" />
+            <Pane prefHeight="136.0" prefWidth="600.0">
                <children>
-                  <Button layoutX="273.0" layoutY="17.0" mnemonicParsing="false" onAction="#changeSceneToViewRecipe" text="Button" />
+                  <Button layoutX="392.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToViewRecipe" text="Vis oppskrift" />
+                  <Button layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" text="Ny oppskrift" />
                </children></Pane>
-            <Pane prefHeight="336.0" prefWidth="600.0" />
          </children></VBox>
    </children>
 </AnchorPane>
