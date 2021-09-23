@@ -24,8 +24,7 @@ public class CookbookApp extends Application {
         Scene scene = new Scene(root);
 
         stage.setTitle("Cookbook<3");
-        // Image icon = new Image("crochet-icon-12.jpeg");
-        // stage.getIcons().add(icon);
+
 
         stage.setScene(scene);
         stage.show();
