@@ -1,2 +1,2 @@
-recipe1;2;Fisk;3.0;dl&/ntestin
-recipe2;2;Fisk;3.0;dl&/nhello
+recipe1;2;Fisk:3.0:dl&;testin
+recipe2;2;Fisk:3.0:dl&;hello

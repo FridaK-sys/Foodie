@@ -14,17 +14,19 @@ import core.Recipe;
 
 public class FileHandler {
 
-    
+    // gjorde en endring siden scanner.nextLine ikke deler på /n
+	// endret til å dele opp navn, porsjoner, ingredienser og beskrivelse på ;
+	//Ingredienser deles opp med & og de tre delene de består av med :
     public void writeRecipeToFile(String filename, Cookbook cookbook) throws IOException {
         int index = 0;
 		try (FileWriter fileWriter = new FileWriter(filename)) {
 			for (Recipe recipe : cookbook.getRecipes()) {
-				String newLine = recipe.getName() + ";" + recipe.getPortions() + "/n";
+				String newLine = recipe.getName() + ";" + recipe.getPortions() + ";";
 				for (Ingredient ingredient : recipe.getIngredients()) {
-					newLine += ingredient.getName() + ";" + ingredient.getAmount() + ";" + ingredient.getUnit() + "&";
+					newLine += ingredient.getName() + ":" + ingredient.getAmount() + ":" + ingredient.getUnit() + "&";
 				}
 
-				newLine += "/n" + recipe.getDescription();
+				newLine += ";" + recipe.getDescription();
 	
 				if (index < cookbook.getRecipes().size()) {
 					newLine += "\n";
@@ -37,6 +39,7 @@ public class FileHandler {
 		}
 	}
 
+
 	public void readRecipesFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {
 		try (Scanner scanner = new Scanner(new File(filename))) {
 			while (scanner.hasNextLine()) {
@@ -46,17 +49,17 @@ public class FileHandler {
 				int intPortions = Integer.parseInt(portions);
 				Recipe newRecipe = new Recipe(recipeTitle, intPortions);
 
-				String[] ingredients = scanner.nextLine().split("&");
+				String[] ingredients = recipeInformation[2].split("&");
 				for (String ing : ingredients) {
-					String[] ingredientElements = ing.split(";");
+					String[] ingredientElements = ing.split(":");
 					
 					Ingredient newIngredient = new Ingredient(ingredientElements[0],
 					    Double.parseDouble(ingredientElements[1]), ingredientElements[2]);
 					newRecipe.addIngredient(newIngredient);
 				}
-
-				String description = scanner.nextLine();
-				newRecipe.setDescription(description);
+				if (recipeInformation.length == 4)	{
+					newRecipe.setDescription(recipeInformation[3]);
+				}
 				
 				cookbook.addRecipe(newRecipe);
 			}
