@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,7 @@ public class NewRecipeController implements Initializable   {
 
     private Recipe newRecipe;
     private FileHandler fileHandler = new FileHandler();
+    private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
 
 
     @FXML
@@ -49,6 +52,15 @@ public class NewRecipeController implements Initializable   {
 
     @FXML
     private Button backButton;
+
+    // public void addIngredientButton(ActionEvent ae){
+    //     for (Ingredient i : ingredients) {
+	// 		if (i.getName().equals(ingredientTitle.getText())) {
+	// 			errorMessageLabel.setText("Denne ingrediensen finnes allerede i oppskriften");
+	// 			return;
+	// 		}
+	// 	}
+    // }
 
 
 
