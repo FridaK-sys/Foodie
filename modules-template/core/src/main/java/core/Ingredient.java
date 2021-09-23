@@ -9,8 +9,6 @@ public class Ingredient {
     public Ingredient(String name, double amount, String unit) {
         setName(name);
         setAmount(amount);
-        this.name = name;
-        this.amount = amount;
         this.unit = unit;
     }
 

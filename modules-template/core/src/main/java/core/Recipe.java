@@ -13,17 +13,13 @@ public class Recipe {
     public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
         setName(name);
         setPortions(portions);
-        this.name = name;
         this.description = description;
-        this.portions = portions;
         this.ingredients = new ArrayList<>(ingredients);
     }
 
     public Recipe(String name, int portions) {
         setName(name);
         setPortions(portions);
-        this.name = name;
-        this.portions = portions;
         this.description = "nothing here...";
     }
 

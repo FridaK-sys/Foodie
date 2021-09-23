@@ -10,7 +10,6 @@ public class Cookbook {
 
     public Cookbook(String name, List<Recipe> recipes) {
         setName(name);
-        this.name = name;
         this.recipes = recipes;
     }
 

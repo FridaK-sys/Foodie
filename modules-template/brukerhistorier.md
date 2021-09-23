@@ -32,7 +32,7 @@ Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengd
 
 - Redigere antall porsjoner på en oppskrift 
 
-### Illustrerende skjermbilde av appen
+### Illustrerende skjermbilder av appen
 ![kokebok](kokebok.png)
 
 ![oppskrift](oppskrift.png)
