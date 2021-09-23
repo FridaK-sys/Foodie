@@ -31,7 +31,7 @@ public class MainController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         try {
-			fileHandler.readRecipesFromFile("modules-template/ui/src/main/resources/ui/test.txt", mainBook);
+			fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
