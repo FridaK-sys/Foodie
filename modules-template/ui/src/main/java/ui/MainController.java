@@ -42,7 +42,7 @@ public class MainController implements Initializable {
         // mainBook.addRecipe(recipe2);
         recipes.add(recipe1);
         recipes.add(recipe2);
-        mainListView.getItems().addAll(recipes);
+        mainListView.setItems(recipes);
         // recipes.add(("e"));
     }
 
@@ -66,6 +66,33 @@ public class MainController implements Initializable {
             stage.show();
         // }
     }
+
+    public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
+        // if (!mainListView.getSelectionModel().isEmpty()) {
+            URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+            
+            // FXMLLoader loader = new FXMLLoader();
+            // loader.setLocation(getClass().getClassLoader().getResource("ViewRecipe.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Scene viewRecipesScene = new Scene(root);
+
+            Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+            stage.setScene(viewRecipesScene);
+            stage.show();
+        // }
+    }
+
+    public void initData(Recipe recipe) {
+        Recipe recipe3 = recipe;
+        recipes.add(recipe3);
+        // mainListView.getItems().addAll(recipes);
+    }
+
+        // public void addRecipe(Recipe recipe)    {
+        //     recipes.add(recipe);
+        // }
 
 }
 
