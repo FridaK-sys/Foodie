@@ -17,7 +17,7 @@ public class FileHandler {
     // gjorde en endring siden scanner.nextLine ikke deler på /n
 	// endret til å dele opp navn, porsjoner, ingredienser og beskrivelse på ;
 	//Ingredienser deles opp med & og de tre delene de består av med :
-    public void writeRecipeToFile(String filename, Cookbook cookbook) throws IOException {
+    public void writeRecipesToFile(String filename, Cookbook cookbook) throws IOException {
         int index = 0;
 		try (FileWriter fileWriter = new FileWriter(filename)) {
 			for (Recipe recipe : cookbook.getRecipes()) {
@@ -49,14 +49,18 @@ public class FileHandler {
 				int intPortions = Integer.parseInt(portions);
 				Recipe newRecipe = new Recipe(recipeTitle, intPortions);
 
+				if(!recipeInformation[2].isEmpty())	{
+
 				String[] ingredients = recipeInformation[2].split("&");
 				for (String ing : ingredients) {
 					String[] ingredientElements = ing.split(":");
-					
+				
 					Ingredient newIngredient = new Ingredient(ingredientElements[0],
 					    Double.parseDouble(ingredientElements[1]), ingredientElements[2]);
 					newRecipe.addIngredient(newIngredient);
 				}
+			}
+			
 				if (recipeInformation.length == 4)	{
 					newRecipe.setDescription(recipeInformation[3]);
 				}
@@ -82,7 +86,7 @@ public class FileHandler {
 		book.addRecipe(recipe2);
 
 		FileHandler filehandler = new FileHandler();
-		filehandler.writeRecipeToFile("test", book);
+		filehandler.writeRecipesToFile("test", book);
 
 		filehandler.readRecipesFromFile("test", book2);
 		System.out.println(book2);

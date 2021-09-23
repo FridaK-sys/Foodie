@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 public class NewRecipeController implements Initializable   {
 
     private Recipe newRecipe;
+    private FileHandler fileHandler = new FileHandler();
 
 
     @FXML
@@ -51,13 +53,13 @@ public class NewRecipeController implements Initializable   {
 
 
 
-    public void createRecipe(ActionEvent ae)    {
+    public void createRecipe(ActionEvent ae) throws IOException    {
         if(recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
             throw new IllegalArgumentException("Mangler tittel og porsjoner");
         }
         try {
-            // Recipe newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
-            Recipe newRecipe = new Recipe("test", 2);
+            Recipe newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
+            // Recipe newRecipe = new Recipe("test", 2);
 
             if (!(recipeDescription.getText() == null)){
                 newRecipe.setDescription(recipeDescription.getText());
@@ -66,7 +68,9 @@ public class NewRecipeController implements Initializable   {
         } catch (NumberFormatException e)   {
             throw new NumberFormatException("Ingrediensvolum må være et tall");
         }
-        
+        Cookbook testBook = new Cookbook();
+        testBook.addRecipe(newRecipe);
+        fileHandler.writeRecipesToFile("modules-template/ui/src/main/resources/ui/test.txt", testBook);
         backButton.fire();
     }
 
@@ -84,8 +88,8 @@ public class NewRecipeController implements Initializable   {
             Parent root = fxmlLoader.load();
             Scene viewRecipesScene = new Scene(root);
 
-            MainController controller = fxmlLoader.getController();
-            controller.initData(newRecipe);
+            // MainController controller = fxmlLoader.getController();
+            // controller.initData(newRecipe);
 
             Stage stage = (Stage) ((Node) ea.getSource()).getScene().getWindow();
             stage.setScene(viewRecipesScene);
