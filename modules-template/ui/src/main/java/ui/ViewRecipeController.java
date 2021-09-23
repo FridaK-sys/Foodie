@@ -55,6 +55,7 @@ public class ViewRecipeController implements Initializable {
         selectedRecipe.setPortions(portionSize);
         ingredients.setAll(selectedRecipe.getIngredients());
         portions.setText(Integer.toString(portionSize));
+        this.portion = portionSize;
     }
 
 
