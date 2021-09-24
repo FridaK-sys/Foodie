@@ -50,6 +50,7 @@ public class FileHandler {
 				if (recipe.getDescription()!= null) {
 					recipeString += ";" + recipe.getDescription();
 				}
+				recipeString += "\n";
 
 				fileWriter.write(recipeString);
 				fileWriter.close();
