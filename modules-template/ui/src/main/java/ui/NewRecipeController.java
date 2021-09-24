@@ -104,8 +104,9 @@ public class NewRecipeController implements Initializable   {
         } catch (NumberFormatException e)   {
             throw new NumberFormatException("Ingrediensvolum må være et tall");
         }
-        Cookbook testBook = new Cookbook();
-        testBook.addRecipe(newRecipe);
+        for (Ingredient i : ingredients){
+            newRecipe.addIngredient(i);
+        }
         fileHandler.writeRecipeToFile("src/main/resources/ui/test.txt", newRecipe);
         backButton.fire();
     }
