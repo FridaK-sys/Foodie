@@ -53,14 +53,38 @@ public class NewRecipeController implements Initializable   {
     @FXML
     private Button backButton;
 
-    // public void addIngredientButton(ActionEvent ae){
-    //     for (Ingredient i : ingredients) {
-	// 		if (i.getName().equals(ingredientTitle.getText())) {
-	// 			errorMessageLabel.setText("Denne ingrediensen finnes allerede i oppskriften");
-	// 			return;
-	// 		}
-	// 	}
-    // }
+    public void addIngredientButton(ActionEvent ae){
+        for (Ingredient i : ingredients) {
+			if (i.getName().equals(ingredientTitle.getText())) {
+				throw new IllegalArgumentException("Ingrediensen finnes allerede"); //Nå gjør vi en dobbel sjekk! vil heller endre recipemetoden til å kaste en exceptin som vi håndterer her
+			}
+		}
+        try {
+			if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
+				Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
+						(Double.parseDouble(ingredientAmount.getText())),
+						(ingredientUnit.getText()));
+				ingredients.add(newIngredient);
+			} 
+            // else {
+			// 	Ingredient newIngredient = new Ingredient(ingredientTitle.getText()); //legge til en konstruktør i ingredient slitk at vi kan legge til ingredienser uten mengde, eks "salt"
+			// 	ingredients.add(newIngredient);
+			// }
+			ingredientAmount.setText(null);
+			ingredientTitle.setText(null);
+			ingredientUnit.setText(null);
+
+		} catch (NumberFormatException e) {
+			// errorMessageLabel.setText("Ugyldig input: Ingrediensvolum må være et tall");
+            e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// errorMessageLabel.setText("Ugyldig input: En ingrediens kan bare bestå av bokstaver");
+            e.printStackTrace();
+		} catch (NullPointerException e) {
+			// errorMessageLabel.setText("må ha en tittel på ingrediensen");
+            e.printStackTrace();
+		}
+    }
 
 
 
@@ -82,14 +106,14 @@ public class NewRecipeController implements Initializable   {
         }
         Cookbook testBook = new Cookbook();
         testBook.addRecipe(newRecipe);
-        fileHandler.writeRecipeToFile("modules-template/ui/src/main/resources/ui/test.txt", newRecipe);
+        fileHandler.writeRecipeToFile("src/main/resources/ui/test.txt", newRecipe);
         backButton.fire();
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
+        ingredientListView.setItems(ingredients);
         
     }
 
