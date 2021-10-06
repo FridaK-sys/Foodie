@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -53,35 +54,36 @@ public class NewRecipeController implements Initializable   {
     @FXML
     private Button backButton;
 
+    @FXML
+    private Label errorMessageLabel;
+
     public void addIngredientButton(ActionEvent ae){
-        for (Ingredient i : ingredients) {
-			if (i.getName().equals(ingredientTitle.getText())) {
-				throw new IllegalArgumentException("Ingrediensen finnes allerede"); //Nå gjør vi en dobbel sjekk! vil heller endre recipemetoden til å kaste en exceptin som vi håndterer her
-			}
-		}
         try {
+            if(ingredientTitle.getText().isBlank()) {
+                throw new IllegalArgumentException("Missing a title here...");
+            }
 			if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
 				Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
 						(Double.parseDouble(ingredientAmount.getText())),
 						(ingredientUnit.getText()));
 				ingredients.add(newIngredient);
 			} 
-            // else {
-			// 	Ingredient newIngredient = new Ingredient(ingredientTitle.getText()); //legge til en konstruktør i ingredient slitk at vi kan legge til ingredienser uten mengde, eks "salt"
-			// 	ingredients.add(newIngredient);
-			// }
+            else {
+				Ingredient newIngredient = new Ingredient(ingredientTitle.getText()); //legge til en konstruktør i ingredient slitk at vi kan legge til ingredienser uten mengde, eks "salt"
+				ingredients.add(newIngredient);
+			}
 			ingredientAmount.setText(null);
 			ingredientTitle.setText(null);
 			ingredientUnit.setText(null);
 
 		} catch (NumberFormatException e) {
-			// errorMessageLabel.setText("Ugyldig input: Ingrediensvolum må være et tall");
+			errorMessageLabel.setText("Invalid input: ingredient amount must be a number");
             e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// errorMessageLabel.setText("Ugyldig input: En ingrediens kan bare bestå av bokstaver");
+			errorMessageLabel.setText(e.getMessage());
             e.printStackTrace();
 		} catch (NullPointerException e) {
-			// errorMessageLabel.setText("må ha en tittel på ingrediensen");
+			errorMessageLabel.setText("The ingredient needs a title");
             e.printStackTrace();
 		}
     }
@@ -90,27 +92,39 @@ public class NewRecipeController implements Initializable   {
 
 
     public void createRecipe(ActionEvent ae) throws IOException    {
-        if(recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
-            throw new IllegalArgumentException("Mangler tittel og porsjoner");
-        }
+        
         try {
+            if(recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
+                throw new IllegalArgumentException("Missing name or portion size");
+            }
             Recipe newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
-            // Recipe newRecipe = new Recipe("test", 2);
 
             if (!(recipeDescription.getText() == null)){
                 newRecipe.setDescription(recipeDescription.getText());
             }
             this.newRecipe = newRecipe;
+            if (ingredients.isEmpty()){
+                throw new IllegalArgumentException("You are missing ingredients");
+            }
+
+            for (Ingredient i : ingredients){
+                newRecipe.addIngredient(i);
+            }
+            newRecipe.setDescription(recipeDescription.getText());
+
+            fileHandler.writeRecipeToFile("src/main/resources/ui/test.txt", newRecipe);
+            backButton.fire();
+        } catch (NullPointerException e)   {
+            errorMessageLabel.setText("You have empty fields");
         } catch (NumberFormatException e)   {
-            throw new NumberFormatException("Ingrediensvolum må være et tall");
-        }
-        for (Ingredient i : ingredients){
-            newRecipe.addIngredient(i);
-        }
-        fileHandler.writeRecipeToFile("src/main/resources/ui/test.txt", newRecipe);
-        backButton.fire();
+            errorMessageLabel.setText("ingredient amount must be a number");
+        } catch (IllegalArgumentException e)   {
+            errorMessageLabel.setText(e.getMessage());
+        } 
+        
     }
 
+    //mvn -pl ui javafx:run 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
