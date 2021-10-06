@@ -12,6 +12,13 @@ public class Ingredient {
         this.unit = unit;
     }
 
+
+    public Ingredient(String name) {
+        setName(name);
+        this.amount = 0;
+        this.unit = "";
+    }
+
     public String getName() {
         return this.name;
     }
