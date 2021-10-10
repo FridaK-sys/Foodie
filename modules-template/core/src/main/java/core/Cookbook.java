@@ -54,10 +54,8 @@ public class Cookbook {
     }
 
     public String toString() {
-        String ing = "";
-        for (Recipe r : recipes) {
-            ing += r.toString();
-        }
-        return ing;
+        StringBuilder sb = new StringBuilder();
+        recipes.stream().forEach(r -> sb.append(r.getName()));
+        return getName() + ": " + sb.toString();
     }
 }

@@ -48,16 +48,7 @@ public class Ingredient {
     }
 
     public String toString() {
-        if (amount >= 0 && unit != null) {
-            if (amount % 1 != 0) {
-                String amounInString = String.format("%.1f", amount);
-                return "" + amounInString + "    " + unit + "\t\t" + name;
-            } else {
-                String amounInString = String.format("%.0f", amount);
-                return "" + amounInString + "    " + unit + "\t\t" + name;
-            }
-        } else {
-            return name + "";
-        }
+        return getName() + ": " + Double.toString(amount) + getUnit();
     }
+
 }

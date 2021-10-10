@@ -85,6 +85,8 @@ public class Recipe {
     }
 
     public String toString() {
-        return this.name;
+        StringBuilder sb = new StringBuilder();
+        ingredients.stream().forEach(i -> sb.append(i.getName()));
+        return getName() + ": " + sb.toString();
     }
 }
