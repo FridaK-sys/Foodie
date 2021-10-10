@@ -1,7 +1,6 @@
 package core;
 
 public class Ingredient {
-
     private String name;
     private double amount;
     private String unit;
@@ -11,7 +10,6 @@ public class Ingredient {
         setAmount(amount);
         this.unit = unit;
     }
-
 
     public Ingredient(String name) {
         setName(name);
@@ -58,10 +56,8 @@ public class Ingredient {
                 String amounInString = String.format("%.0f", amount);
                 return "" + amounInString + "    " + unit + "\t\t" + name;
             }
-
         } else {
             return name + "";
         }
     }
-
 }

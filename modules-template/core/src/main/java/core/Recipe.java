@@ -28,8 +28,8 @@ public class Recipe {
     }
 
     public void setName(String name) {
-        if(name.isBlank()){
-            throw new IllegalArgumentException("Invalid name"); 
+        if (name.isBlank()) {
+            throw new IllegalArgumentException("Invalid name");
         }
         if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
             throw new IllegalArgumentException("Invalid name");
@@ -87,5 +87,4 @@ public class Recipe {
     public String toString() {
         return this.name;
     }
-
 }

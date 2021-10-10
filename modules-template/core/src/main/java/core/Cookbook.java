@@ -52,13 +52,12 @@ public class Cookbook {
             }
         }
     }
-     
-    public String toString(){
+
+    public String toString() {
         String ing = "";
-        for (Recipe r : recipes){
+        for (Recipe r : recipes) {
             ing += r.toString();
         }
         return ing;
     }
-
 }
