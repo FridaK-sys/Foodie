@@ -10,7 +10,7 @@ Design av brukergrensesnittet i javafx, kontrollere og filbehandling ligger i mo
 Prosjektet bruker maven til bygging og kjøring. 
 For å kjøre prosjektet, bruk `mvn install`, deretter `mvn -pl ui javafx:run` Dette kjører også alt av tester. 
 
-##Verktøy tilknyttet kodekvalitet
+## Verktøy tilknyttet kodekvalitet
 Vi har brukt følgende verktøy tilknyttet kodekvalitet:
 
 - [checkstyle](https://checkstyle.sourceforge.io) - sjekker mer overfladiske og stilmessige egenskaper til koden som tekst
