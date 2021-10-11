@@ -74,7 +74,7 @@ public class NewRecipeControllerTest extends AbstractAppTest{
         clickOn("#recipeDescription").write("Epler...");
         clickOn("#createRecipe");
         handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
-        checkRecipe(cookbook.getRecipes().get(2), recipe1);
+        checkRecipe(cookbook.getRecipes().get(0), recipe1);
     }
 
 
