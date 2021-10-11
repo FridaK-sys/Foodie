@@ -2,9 +2,10 @@ package ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -147,6 +148,8 @@ public class NewRecipeController implements Initializable   {
             stage.show();
     }
 
-    
+    public List<Ingredient> getIngredients(){
+        return new ArrayList<Ingredient>(ingredients);
+    }
     
 }
