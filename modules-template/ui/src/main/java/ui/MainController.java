@@ -21,7 +21,7 @@ import core.Cookbook;
 import core.Ingredient;
 import javafx.fxml.Initializable;
 
-public class MainController implements Initializable {
+public class MainController implements Initializable{ 
 
     private Cookbook mainBook = new Cookbook();
     private ObservableList<Recipe> recipes = FXCollections.observableArrayList();

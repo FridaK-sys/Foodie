@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import json.FileHandler;
 
-public class NewRecipeController implements Initializable   {
+public class NewRecipeController implements Initializable  { 
 
     private Recipe newRecipe;
     private FileHandler fileHandler = new FileHandler();
