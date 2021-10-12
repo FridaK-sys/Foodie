@@ -66,6 +66,32 @@ public class FileHandler {
     	}
 	}
 
+	public void writeRecipeToFile(String filename, Recipe recipe) {
+		JSONObject res = new JSONObject();
+		for(Ingredient ingredient : recipe.getIngredients()) {
+			JSONObject ing = new JSONObject();
+			ing.put("Name", ingredient.getName());
+			ing.put("Amount", ingredient.getAmount());
+			ing.put("Unit", ingredient.getUnit());
+
+			res.put("Name", recipe.getName());
+			res.put("Portions", recipe.getPortions());
+			res.put("Ingrediens", ing);
+
+			
+		}
+		//Write JSON file
+        try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) { 
+            //We can write any JSONArray or JSONObject instance to the file
+            file.write(res.toJSONString());  //gjør om til JSON toString?
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+    	}
+
+	}
+
 	public void readRecipesFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {
 		//JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
