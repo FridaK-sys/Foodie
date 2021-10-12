@@ -1,6 +1,6 @@
 module calc.core { 
-    exports core;
-    exports json;
+    exports foodie.core;
+    exports foodie.json;
     requires json.simple;
     
    
