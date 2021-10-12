@@ -2,9 +2,10 @@ package ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -22,8 +23,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+// import json.FileHandler;
 
-public class NewRecipeController implements Initializable   {
+public class NewRecipeController implements Initializable  { 
 
     private Recipe newRecipe;
     private FileHandler fileHandler = new FileHandler();
@@ -147,6 +149,8 @@ public class NewRecipeController implements Initializable   {
             stage.show();
     }
 
-    
+    public List<Ingredient> getIngredients(){
+        return new ArrayList<Ingredient>(ingredients);
+    }
     
 }

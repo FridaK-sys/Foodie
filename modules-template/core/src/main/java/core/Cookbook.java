@@ -28,7 +28,7 @@ public class Cookbook {
         this.name = name;
     }
 
-    public List<Recipe> getRecipes() {
+    public ArrayList<Recipe> getRecipes() {
         return new ArrayList<>(recipes);
     }
 

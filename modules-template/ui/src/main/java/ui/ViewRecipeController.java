@@ -20,7 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-public class ViewRecipeController implements Initializable {
+public class ViewRecipeController  implements Initializable { 
 
     private Recipe selectedRecipe;
     private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
