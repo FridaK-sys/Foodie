@@ -2,12 +2,14 @@ package foodie.json;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Iterator;
@@ -57,8 +59,7 @@ public class FileHandler {
   		
         //Write JSON file
         try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) { 
-            //We can write any JSONArray or JSONObject instance to the file
-            file.write(mainObj.toJSONString());  //gjør om til JSON toString?
+            file.write(mainObj.toJSONString());  
             file.flush();
  
         } catch (IOException e) {
@@ -82,8 +83,7 @@ public class FileHandler {
 		}
 		//Write JSON file
         try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) { 
-            //We can write any JSONArray or JSONObject instance to the file
-            file.write(res.toJSONString());  //gjør om til JSON toString?
+            file.write(res.toJSONString());  
             file.flush();
  
         } catch (IOException e) {
@@ -96,12 +96,11 @@ public class FileHandler {
 		//JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
          
-        try (FileReader reader = new FileReader(filename))
-        {
+        try (InputStreamReader input = new InputStreamReader(new FileInputStream(filename))) 
+        { //try (FileReader reader = new FileReader(filename))
             //Read JSON file
-            Object obj = jsonParser.parse(new FileReader(filename));
+            Object obj = jsonParser.parse(new InputStreamReader(new FileInputStream(filename))); //jsonParser.parse(new FileReader(filename));
 			JSONObject Jobj = (JSONObject) obj;
- 
             JSONArray recipeList = (JSONArray) Jobj.get("Recipes");
 
 			Iterator<JSONObject> iterator = recipeList.iterator();
