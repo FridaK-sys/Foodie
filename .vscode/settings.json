@@ -5,7 +5,8 @@
     "[java]": {
       "editor.tabSize": 2
     },
-    "java.dependency.packagePresentation": "hierarchical"
+    "java.dependency.packagePresentation": "hierarchical",
+    "editor.tabSize": 2
 }
 
     
