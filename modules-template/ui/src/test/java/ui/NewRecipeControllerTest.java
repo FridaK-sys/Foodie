@@ -1,4 +1,4 @@
-package foodie.ui;
+package ui;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -9,15 +9,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
-import foodie.json.FileHandler;
-import foodie.ui.NewRecipeController;
+import core.Cookbook;
+import core.Ingredient;
+import core.Recipe;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import json.FileHandler;
+import ui.NewRecipeController;
 
 public class NewRecipeControllerTest extends AbstractAppTest{
 
@@ -75,7 +75,7 @@ public class NewRecipeControllerTest extends AbstractAppTest{
         clickOn("#addIngredient");
         clickOn("#recipeDescription").write("Epler...");
         clickOn("#createRecipe");
-        handler.readRecipesFromFile("src/main/resources/foodie/ui/test.txt", cookbook);
+        handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
         checkRecipe(cookbook.getRecipes().get(0), recipe1);
     }
 

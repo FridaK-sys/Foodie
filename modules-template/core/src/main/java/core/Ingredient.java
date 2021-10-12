@@ -1,4 +1,4 @@
-package foodie.core;
+package core;
 
 public class Ingredient {
   private String name;

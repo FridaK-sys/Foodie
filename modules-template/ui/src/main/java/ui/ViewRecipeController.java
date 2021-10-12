@@ -1,11 +1,11 @@
-package foodie.ui;
+package ui;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
+import core.Ingredient;
+import core.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
