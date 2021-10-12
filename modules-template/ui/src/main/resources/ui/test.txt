@@ -1,6 +1,3 @@
-Ny awesome oppskeit;4;;fefsfdgrg
-Awesomeoppskrift 2;5;;fefe
-Eplepai;14;Sukker:3.0:kg&Epler:3.0:stk&;Epler og sukker nam
-Fiskekake;17;Fisk:3.0:dl&purre:1.0:stk&;Dette er gode fiskekaker
-mammas pudding;7;Pudding mystisk:1.0:stk&;Ingen vet...
-Evas spesial;2;;En uforglemmelig opplevelse
+Taco;4;Kjøtt:500.0:g&Lomper:3.0:stk&;Enkel taco
+Fiskekake;3;Fisk:3.0:dl&purre:1.0:stk&;Dette er gode fiskekaker
+Eple;2;Eple:3.0:stk&;Epler...

@@ -76,6 +76,10 @@ public class MainController implements Initializable{
         recipes.add(recipe3);
     }
 
+    public Cookbook getCookbook(){
+        return mainBook;
+    }
+
 
 }
 
