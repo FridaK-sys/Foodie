@@ -1,4 +1,4 @@
-package json;
+package foodie.json;
 
 
 import java.io.FileNotFoundException;
@@ -16,9 +16,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 public class FileHandler {
 

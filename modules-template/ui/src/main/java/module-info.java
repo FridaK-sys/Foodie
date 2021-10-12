@@ -5,5 +5,5 @@ module calc.ui {
     requires json.simple;
     
 
-    opens ui to javafx.graphics, javafx.fxml, json.simple;
+    opens foodie.ui to javafx.graphics, javafx.fxml, json.simple;
 }

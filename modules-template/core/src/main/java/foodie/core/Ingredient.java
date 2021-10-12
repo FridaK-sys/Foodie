@@ -1,4 +1,4 @@
-package core;
+package foodie.core;
 
 public class Ingredient {
 
