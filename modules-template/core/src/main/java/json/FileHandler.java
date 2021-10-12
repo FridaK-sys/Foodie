@@ -1,10 +1,15 @@
 package json;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Iterator;
 
 
@@ -51,7 +56,7 @@ public class FileHandler {
 		}
   		
         //Write JSON file
-        try (FileWriter file = new FileWriter(filename)) {
+        try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) { 
             //We can write any JSONArray or JSONObject instance to the file
             file.write(mainObj.toJSONString());  //gjør om til JSON toString?
             file.flush();
