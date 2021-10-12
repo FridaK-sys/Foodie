@@ -1,6 +1,5 @@
 package foodie.json;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,10 +13,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Iterator;
 
-
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.fasterxml.jackson.databind.module.SimpleModule;
-
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -115,32 +112,46 @@ public class FileHandler {
     }
 
     
-		public static void main(String[] args) throws IOException {
-			Cookbook book = new Cookbook();
-			Cookbook book2 = new Cookbook();
-			Recipe recipe1 = new Recipe("recipe1", 2);
-			recipe1.addIngredient(new Ingredient("Fisk", 3, "dl"));
-			recipe1.setDescription("testin");
-	
-			Recipe recipe2 = new Recipe("recipe2", 2);
-			recipe2.addIngredient(new Ingredient("Fisk", 3, "dl"));
-			recipe2.setDescription("hello");
-	
-			book.addRecipe(recipe1);
-			book.addRecipe(recipe2);
-	
-			FileHandler filehandler = new FileHandler();
-			filehandler.writeRecipesToFile("test", book);
-	
-			filehandler.readRecipesFromFile("test", book2);
-			System.out.println(book2);
-		}
-	}
 
+  public void readRecipeFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {
+    // JSON parser object to parse read file
+    JSONParser jsonParser = new JSONParser();
 
-	
-	
+    try (FileReader reader = new FileReader(filename)) {
+      // Read JSON file
+      Object obj = jsonParser.parse(new FileReader(filename));
+      JSONObject Jobj = (JSONObject) obj;
 
-	
-    
+      JSONArray recipeList = (JSONArray) Jobj.get("Recipes");
 
+      Iterator<JSONObject> iterator = recipeList.iterator();
+      while (iterator.hasNext()) {
+        System.out.println(iterator.next());
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+    Cookbook book = new Cookbook();
+    Cookbook book2 = new Cookbook();
+    Recipe recipe1 = new Recipe("recipe1", 2);
+    recipe1.addIngredient(new Ingredient("Fisk", 3, "dl"));
+    recipe1.setDescription("testin");
+
+    Recipe recipe2 = new Recipe("recipe2", 2);
+    recipe2.addIngredient(new Ingredient("Fisk", 3, "dl"));
+    recipe2.setDescription("hello");
+
+    book.addRecipe(recipe1);
+    book.addRecipe(recipe2);
+
+    FileHandler filehandler = new FileHandler();
+    filehandler.writeRecipesToFile("test", book);
+
+    filehandler.readRecipesFromFile("test", book2);
+    System.out.println(book2);
+  }
+}

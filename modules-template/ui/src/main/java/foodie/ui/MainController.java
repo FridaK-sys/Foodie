@@ -22,65 +22,62 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
-public class MainController implements Initializable{ 
+public class MainController implements Initializable {
 
-    private Cookbook mainBook = new Cookbook();
-    private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
-    private FileHandler fileHandler = new FileHandler();
+  private Cookbook mainBook = new Cookbook();
+  private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
+  private FileHandler fileHandler = new FileHandler();
 
-    @FXML
-    private ListView<Recipe> mainListView;
+  @FXML
+  private ListView<Recipe> mainListView;
 
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
-			fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-        recipes.setAll(mainBook.getRecipes());
-        mainListView.setItems(recipes);
+  public void initialize(URL url, ResourceBundle rb) {
+    try {
+      fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
     }
 
-    public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
-            URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-            
-            Parent root = fxmlLoader.load();
+    recipes.setAll(mainBook.getRecipes());
+    mainListView.setItems(recipes);
+  }
 
-            Scene viewRecipesScene = new Scene(root);
+  public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
+    URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
-            ViewRecipeController controller = fxmlLoader.getController();
-            controller.initData(mainListView.getSelectionModel().getSelectedItem());
-        
+    Parent root = fxmlLoader.load();
 
-            Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-            stage.setScene(viewRecipesScene);
-            stage.show();
-    }
+    Scene viewRecipesScene = new Scene(root);
 
-    public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
-            URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-            
-            Parent root = fxmlLoader.load();
+    ViewRecipeController controller = fxmlLoader.getController();
+    controller.initData(mainListView.getSelectionModel().getSelectedItem());
 
-            Scene viewRecipesScene = new Scene(root);
+    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
+  }
 
-            Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-            stage.setScene(viewRecipesScene);
-            stage.show();
-    }
+  public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
+    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
-    public void initData(Recipe recipe) {
-        Recipe recipe3 = recipe;
-        recipes.add(recipe3);
-    }
+    Parent root = fxmlLoader.load();
 
-    public Cookbook getCookbook(){
-        return mainBook;
-    }
+    Scene viewRecipesScene = new Scene(root);
 
+    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
+  }
+
+  public void initData(Recipe recipe) {
+    Recipe recipe3 = recipe;
+    recipes.add(recipe3);
+  }
+
+  public Cookbook getCookbook() {
+    return mainBook;
+  }
 
 }
-
