@@ -11,6 +11,7 @@ import foodie.core.Recipe;
 import javafx.scene.control.ListView;
 
 public abstract class AbstractAppTest extends ApplicationTest {
+    
 
 
 
