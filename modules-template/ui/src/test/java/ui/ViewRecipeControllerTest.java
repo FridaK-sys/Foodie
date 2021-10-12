@@ -1,4 +1,4 @@
-package foodie.ui;
+package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,14 +9,15 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
+import core.Ingredient;
+import core.Recipe;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import ui.ViewRecipeController;
 
 public class ViewRecipeControllerTest extends AbstractAppTest {
 

@@ -1,4 +1,4 @@
-package foodie.ui;
+package ui;
 
 import java.net.URL;
 

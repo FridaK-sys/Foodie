@@ -1,4 +1,4 @@
-package foodie.ui;
+package ui;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
-import foodie.json.FileHandler;
+import core.Cookbook;
+import core.Ingredient;
+import core.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,10 +24,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import json.FileHandler;
 
 public class NewRecipeController implements Initializable {
 
   private Recipe newRecipe;
+  private Cookbook cookbook = new Cookbook();
   private FileHandler fileHandler = new FileHandler();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
 
@@ -109,8 +111,10 @@ public class NewRecipeController implements Initializable {
         newRecipe.addIngredient(i);
       }
       newRecipe.setDescription(recipeDescription.getText());
+      fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
+      cookbook.addRecipe(newRecipe);
 
-      fileHandler.writeRecipeToFile("src/main/resources/ui/test.txt", newRecipe);
+      fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
       backButton.fire();
     } catch (NullPointerException e) {
       errorMessageLabel.setText("You have empty fields");

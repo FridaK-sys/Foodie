@@ -1,3 +1,0 @@
-Taco;4;Kjøtt:500.0:g&Lomper:3.0:stk&;Enkel taco
-Fiskekake;3;Fisk:3.0:dl&purre:1.0:stk&;Dette er gode fiskekaker
-Eple;2;Eple:3.0:stk&;Epler...Eple;2;Eple:3.0:stk&;Epler...
