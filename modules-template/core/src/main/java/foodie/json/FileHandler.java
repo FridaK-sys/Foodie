@@ -1,4 +1,4 @@
-package json;
+package foodie.json;
 
 
 import java.io.File;
@@ -21,9 +21,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 public class FileHandler {
 
@@ -64,6 +64,32 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
     	}
+	}
+
+	public void writeRecipeToFile(String filename, Recipe recipe) {
+		JSONObject res = new JSONObject();
+		for(Ingredient ingredient : recipe.getIngredients()) {
+			JSONObject ing = new JSONObject();
+			ing.put("Name", ingredient.getName());
+			ing.put("Amount", ingredient.getAmount());
+			ing.put("Unit", ingredient.getUnit());
+
+			res.put("Name", recipe.getName());
+			res.put("Portions", recipe.getPortions());
+			res.put("Ingrediens", ing);
+
+			
+		}
+		//Write JSON file
+        try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) { 
+            //We can write any JSONArray or JSONObject instance to the file
+            file.write(res.toJSONString());  //gjør om til JSON toString?
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+    	}
+
 	}
 
 	public void readRecipesFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {

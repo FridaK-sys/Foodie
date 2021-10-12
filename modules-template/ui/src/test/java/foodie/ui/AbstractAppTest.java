@@ -1,4 +1,4 @@
-package ui;
+package foodie.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 import javafx.scene.control.ListView;
 
 public abstract class AbstractAppTest extends ApplicationTest {

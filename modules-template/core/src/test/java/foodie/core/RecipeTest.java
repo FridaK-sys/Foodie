@@ -1,9 +1,12 @@
-package core;
+package foodie.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
