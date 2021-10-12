@@ -26,66 +26,6 @@ import foodie.core.Recipe;
 
 public class FileHandler {
 
-<<<<<<< HEAD
-  // gjorde en endring siden scanner.nextLine ikke deler på /n
-  // endret til å dele opp navn, porsjoner, ingredienser og beskrivelse på ;
-  // Ingredienser deles opp med & og de tre delene de består av med :
-  public void writeRecipesToFile(String filename, Cookbook cookbook) throws IOException {
-    // @SuppressWarnings("unchecked")
-    JSONArray recipes = new JSONArray();
-    JSONObject mainObj = new JSONObject();
-
-    for (Recipe recipe : cookbook.getRecipes()) {
-      for (Ingredient ingredient : recipe.getIngredients()) {
-        JSONObject ing = new JSONObject();
-        ing.put("Name", ingredient.getName());
-        ing.put("Amount", ingredient.getAmount());
-        ing.put("Unit", ingredient.getUnit());
-
-        JSONObject rec = new JSONObject();
-        rec.put("Name", recipe.getName());
-        rec.put("Portions", recipe.getPortions());
-        rec.put("Ingrediens", ing);
-
-        recipes.add(rec);
-        mainObj.put("Recipes", recipes);
-
-      }
-    }
-
-    // Write JSON file
-    try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) {
-      // We can write any JSONArray or JSONObject instance to the file
-      file.write(mainObj.toJSONString()); // gjør om til JSON toString?
-      file.flush();
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void writeRecipeToFile(String filename, Recipe recipe) {
-    JSONObject res = new JSONObject();
-    for (Ingredient ingredient : recipe.getIngredients()) {
-      JSONObject ing = new JSONObject();
-      ing.put("Name", ingredient.getName());
-      ing.put("Amount", ingredient.getAmount());
-      ing.put("Unit", ingredient.getUnit());
-
-      res.put("Name", recipe.getName());
-      res.put("Portions", recipe.getPortions());
-      res.put("Ingrediens", ing);
-
-    }
-    // Write JSON file
-    try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) {
-      // We can write any JSONArray or JSONObject instance to the file
-      file.write(res.toJSONString()); // gjør om til JSON toString?
-      file.flush();
-
-    } catch (IOException e) {
-      e.printStackTrace();
-=======
 	
 
     // gjorde en endring siden scanner.nextLine ikke deler på /n
@@ -169,12 +109,11 @@ public class FileHandler {
          catch (Exception e) {
             e.printStackTrace();
         } 
->>>>>>> 7a0c3eb749263d1f893c2efcc87ff435872e5621
     }
 
-  }
+    
 
-  public void readRecipesFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {
+  public void readRecipeFromFile(String filename, Cookbook cookbook) throws FileNotFoundException {
     // JSON parser object to parse read file
     JSONParser jsonParser = new JSONParser();
 
