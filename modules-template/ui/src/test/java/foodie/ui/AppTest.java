@@ -17,7 +17,6 @@ import foodie.ui.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 public class AppTest extends AbstractAppTest {

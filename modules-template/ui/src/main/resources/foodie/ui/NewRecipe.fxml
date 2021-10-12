@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewRecipeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.NewRecipeController">
    <children>
       <TextField fx:id="recipeTitle" layoutX="42.0" layoutY="73.0" promptText="Title of your recipe" />
       <TextField fx:id="recipePortions" layoutX="221.0" layoutY="73.0" prefHeight="26.0" prefWidth="71.0" promptText="Portions" />

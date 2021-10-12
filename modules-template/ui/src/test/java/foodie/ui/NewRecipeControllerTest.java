@@ -12,6 +12,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
+import foodie.json.FileHandler;
 import foodie.ui.NewRecipeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -74,7 +75,7 @@ public class NewRecipeControllerTest extends AbstractAppTest{
         clickOn("#addIngredient");
         clickOn("#recipeDescription").write("Epler...");
         clickOn("#createRecipe");
-        handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
+        handler.readRecipesFromFile("src/main/resources/foodie/ui/test.txt", cookbook);
         checkRecipe(cookbook.getRecipes().get(0), recipe1);
     }
 
