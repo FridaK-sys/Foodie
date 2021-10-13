@@ -13,14 +13,14 @@ Design av brukergrensesnittet i javafx, kontrollere og filbehandling ligger i mo
 
 ## Bygging og kjøring av prosjektet
 Prosjektet bruker maven til bygging og kjøring. 
-For å kjøre prosjektet, bruk `mvn install`, deretter `mvn -pl ui javafx:run` Dette kjører også alt av tester. 
+For å kjøre prosjektet, bruk `mvn install`, deretter `mvn -pl ui javafx:run` i mappen modules-template. Dette kjører også alt av tester. 
 
 ## Verktøy tilknyttet kodekvalitet
 Vi har brukt følgende verktøy tilknyttet kodekvalitet:
 
-- [checkstyle](https://checkstyle.sourceforge.io) - sjekker mer overfladiske og stilmessige egenskaper til koden som tekst
-- [spotbugs](https://spotbugs.github.io/) - analyserer koden for vanlige feil
-- [jacoco](https://www.jacoco.org) - samler inn og presenterer informasjon og testdekningsgrad
+- [checkstyle] - sjekker mer overfladiske og stilmessige egenskaper til koden som tekst
+- [spotbugs] - analyserer koden for vanlige feil
+- [jacoco] - samler inn og presenterer informasjon og testdekningsgrad
 
 ## Arbeidsvaner og arbeidsflyt
 Vi bruker Scrum som en del av vår utviklingsprosess. Scrum er et rammeverk for å støtte smidig utvikling av informasjonssystemer. 
