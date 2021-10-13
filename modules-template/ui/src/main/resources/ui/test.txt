@@ -1,1 +1,1 @@
-{"Recipes":[{"Portions":2,"Ingrediens":[{"Amount":3.0,"Unit":"stk","Name":"Eple"}],"Name":"Eple"},{"Portions":2,"Ingrediens":[{"Amount":3.0,"Unit":"stk","Name":"Eple"}],"Name":"Eple"}]}
+{"Recipes":[{"Portions":2,"Ingredients":[{"Amount":3.0,"Unit":"stk","Name":"Eple"}],"Name":"Eple"}]}

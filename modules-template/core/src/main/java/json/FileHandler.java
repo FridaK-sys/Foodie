@@ -52,12 +52,13 @@ public class FileHandler {
       JSONObject rec = new JSONObject();
       rec.put("Name", recipe.getName());
       rec.put("Portions", recipe.getPortions());
-      rec.put("Ingrediens", ingredients);
+      rec.put("Ingredients", ingredients);
 
       recipes.add(rec);
 
     }
     mainObj.put("Recipes", recipes);
+    System.out.println(mainObj);
 
     // Write JSON file
     try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) {
@@ -79,7 +80,7 @@ public class FileHandler {
 
       res.put("Name", recipe.getName());
       res.put("Portions", recipe.getPortions());
-      res.put("Ingrediens", ing);
+      res.put("Ingredients", ing);
 
     }
     // Write JSON file
@@ -107,7 +108,7 @@ public class FileHandler {
 
       for (int i = 0; i < recipeList.size(); i++) {
         JSONObject rec = (JSONObject) recipeList.get(i);
-        JSONArray ing = (JSONArray) rec.get("Ingrediens");
+        JSONArray ing = (JSONArray) rec.get("Ingredients");
         String name = (String) rec.get("Name");
         Long portionsLong = (Long) rec.get("Portions");
         int portions = portionsLong.intValue();
@@ -123,6 +124,7 @@ public class FileHandler {
           recipe.addIngredient(ingre);
         }
         cookbook.addRecipe(recipe);
+
       }
 
       /*
