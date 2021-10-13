@@ -51,6 +51,12 @@
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
+<!-- for å teste med json -->
+        <dependency>
+		    <groupId>org.skyscreamer</groupId>
+		    <artifactId>jsonassert</artifactId>
+		    <version>1.5.0</version>
+	</dependency>
     </dependencies>
 
     <build>
