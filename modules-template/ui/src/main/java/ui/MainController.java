@@ -32,11 +32,7 @@ public class MainController implements Initializable {
   private ListView<Recipe> mainListView;
 
   public void initialize(URL url, ResourceBundle rb) {
-    try {
-      fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
+    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
 
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
