@@ -127,13 +127,6 @@ public class FileHandler {
 
       }
 
-      /*
-       * Iterator<JSONObject> iterator = recipeList.iterator(); while
-       * (iterator.hasNext()) { JSONObject recipe = (JSONObject) iterator.next();
-       * JSONObject portion = (JSONObject) recipe.get("Portions"); //
-       * System.out.println(portion); }
-       */
-
     } catch (Exception e) {
       e.printStackTrace();
     }

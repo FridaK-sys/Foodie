@@ -31,6 +31,32 @@ public class FileHandlerTest {
   private List<Recipe> recipeList = new ArrayList<>();
   private Cookbook cookbook;
 
+  public Recipe readRecipe(String filename, int i) {
+    InputStream input = new FileInputStream(filename);
+    JSONParser jsonParser = new JSONParser();
+    JSONObject Jobj = (JSONObject) obj;
+    JSONArray recipeList = (JSONArray) Jobj.get("Recipes");
+    JSONObject rec = (JSONObject) recipeList.get(i);
+    JSONArray ing = (JSONArray) rec.get("Ingredients");
+    String name = (String) rec.get("Name");
+    Long portionsLong = (Long) rec.get("Portions");
+    int portions = portionsLong.intValue();
+    String description = (String) rec.get("Description");
+    Recipe recipe = new Recipe(name, portions);
+    recipe.setDescription(description);
+
+    for (int j = 0; j < ing.size(); j++) {
+      JSONObject ingredient = (JSONObject) ing.get(j);
+      String nameI = (String) ingredient.get("Name");
+      Double amountI = (Double) ingredient.get("Amount");
+      String unitI = (String) ingredient.get("Unit");
+      Ingredient ingre = new Ingredient(nameI, amountI, unitI);
+
+      recipe.addIngredient(ingre);
+    }
+    return recipe;
+  }
+
   @BeforeEach
   public void setup() {
     filehandler = new FileHandler();
@@ -52,32 +78,33 @@ public class FileHandlerTest {
   @Test
   public void testWriteRecipesToFile() {
     filehandler.writeRecipesToFile("testFile", cookbook);
-    JSONObject obj = new JSONObject();
-
+    int i = 0;
     for (Recipe recipe : cookbook.getRecipes()) {
-      JSONAssert.assertEquals(recipe.getName(), obj.get("Name"), true); // må gjøre recipe.getname om til array?
-      JSONAssert.assertEquals(recipe.getPortions(), obj.get("Portions"), true);
-      JSONAssert.assertEquals(recipe.getIngredients(), obj.get("Ingredients")); // skrevet ingedient
+      JSONAssert.assertEquals(recipe.getName(), readRecipe("testFile", i).getName(), true); // må gjøre recipe.getname
+                                                                                            // om til array?
+      JSONAssert.assertEquals(recipe.getPortions(), readRecipe("testFile", i).getPortions(), true);
+      JSONAssert.assertEquals(recipe.getIngredients(), readRecipe("testFile", i).getIngredients()); // skrevet ingedient
+      i++;
     }
 
   }
-
-  @Test
-  public void testWriteRecipeToFile() {
-    filehandler.writeRecipeToFile("testFile2", recipe2);
-    JSONObject obj = new JSONObject();
-
-    JSONAssert.assertEquals("Kakao", obj.get("Name"), true);
-    JSONAssert.assertEquals(1, obj.get("Portions"), true);
-    // JSONAssert.assertEquals({["Amount": 1.5, "Unit":"dl",
-    // "Name":"Sukker","Amount":1,"Unit":"dl","Name":"Kakao"]},
-    // obj.get("Ingrediens"), true);
-
-  }
-
-  @Test
-  public void testReadRecipeFromFile() {
-
-  }
+  /*
+   * @Test public void testWriteRecipeToFile() {
+   * filehandler.writeRecipeToFile("testFile2", recipe2); JSONObject obj = new
+   * JSONObject();
+   * 
+   * JSONAssert.assertEquals("Kakao", obj.get("Name"), true);
+   * JSONAssert.assertEquals(1, obj.get("Portions"), true); //
+   * JSONAssert.assertEquals({["Amount": 1.5, "Unit":"dl", //
+   * "Name":"Sukker","Amount":1,"Unit":"dl","Name":"Kakao"]}, //
+   * obj.get("Ingrediens"), true);
+   * 
+   * }
+   */
+  /*
+   * @Test public void testReadRecipeFromFile() {
+   * 
+   * }
+   */
 
 }
