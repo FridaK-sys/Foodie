@@ -3,6 +3,10 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Lists of recipies in a cookbook.
+ */
+
 public class Cookbook {
 
   private String name;

@@ -3,6 +3,9 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Lists of ingredients in a recipe.
+ */
 public class Recipe {
 
   private String name;
