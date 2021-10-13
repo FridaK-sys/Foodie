@@ -13,7 +13,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.net.FileNameMap;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -37,22 +40,24 @@ public class FileHandler {
     JSONObject mainObj = new JSONObject();
 
     for (Recipe recipe : cookbook.getRecipes()) {
+      JSONArray ingredients = new JSONArray();
       for (Ingredient ingredient : recipe.getIngredients()) {
         JSONObject ing = new JSONObject();
         ing.put("Name", ingredient.getName());
         ing.put("Amount", ingredient.getAmount());
         ing.put("Unit", ingredient.getUnit());
-
-        JSONObject rec = new JSONObject();
-        rec.put("Name", recipe.getName());
-        rec.put("Portions", recipe.getPortions());
-        rec.put("Ingrediens", ing);
-
-        recipes.add(rec);
-        mainObj.put("Recipes", recipes);
+        ingredients.add(ing);
 
       }
+      JSONObject rec = new JSONObject();
+      rec.put("Name", recipe.getName());
+      rec.put("Portions", recipe.getPortions());
+      rec.put("Ingrediens", ingredients);
+
+      recipes.add(rec);
+
     }
+    mainObj.put("Recipes", recipes);
 
     // Write JSON file
     try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) {
@@ -100,10 +105,32 @@ public class FileHandler {
       JSONObject Jobj = (JSONObject) obj;
       JSONArray recipeList = (JSONArray) Jobj.get("Recipes");
 
-      Iterator<JSONObject> iterator = recipeList.iterator();
-      while (iterator.hasNext()) {
-        System.out.println(iterator.next());
+      for (int i = 0; i < recipeList.size(); i++) {
+        JSONObject rec = (JSONObject) recipeList.get(i);
+        JSONArray ing = (JSONArray) rec.get("Ingrediens");
+        String name = (String) rec.get("Name");
+        Long portionsLong = (Long) rec.get("Portions");
+        int portions = portionsLong.intValue();
+        Recipe recipe = new Recipe(name, portions);
+
+        for (int j = 0; j < ing.size(); j++) {
+          JSONObject ingredient = (JSONObject) ing.get(j);
+          String nameI = (String) ingredient.get("Name");
+          Double amountI = (Double) ingredient.get("Amount");
+          String unitI = (String) ingredient.get("Unit");
+          Ingredient ingre = new Ingredient(nameI, amountI, unitI);
+
+          recipe.addIngredient(ingre);
+        }
+        cookbook.addRecipe(recipe);
       }
+
+      /*
+       * Iterator<JSONObject> iterator = recipeList.iterator(); while
+       * (iterator.hasNext()) { JSONObject recipe = (JSONObject) iterator.next();
+       * JSONObject portion = (JSONObject) recipe.get("Portions"); //
+       * System.out.println(portion); }
+       */
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -115,6 +142,7 @@ public class FileHandler {
     Cookbook book2 = new Cookbook();
     Recipe recipe1 = new Recipe("recipe1", 2);
     recipe1.addIngredient(new Ingredient("Fisk", 3, "dl"));
+    recipe1.addIngredient(new Ingredient("Gulrot", 2, "dl"));
     recipe1.setDescription("testin");
 
     Recipe recipe2 = new Recipe("recipe2", 2);

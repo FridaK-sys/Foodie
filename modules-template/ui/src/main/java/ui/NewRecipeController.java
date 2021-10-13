@@ -97,12 +97,12 @@ public class NewRecipeController implements Initializable {
       if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
         throw new IllegalArgumentException("Missing name or portion size");
       }
-      Recipe newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
+      this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
 
       if (!(recipeDescription.getText() == null)) {
         newRecipe.setDescription(recipeDescription.getText());
       }
-      this.newRecipe = newRecipe;
+      // this.newRecipe = newRecipe;
       if (ingredients.isEmpty()) {
         throw new IllegalArgumentException("You are missing ingredients");
       }
