@@ -127,6 +127,8 @@ public class NewRecipeController implements Initializable {
 
   // mvn -pl ui javafx:run
 
+  
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ingredientListView.setItems(ingredients);
