@@ -67,6 +67,18 @@ public class MainController implements Initializable {
     stage.show();
   }
 
+  // public void deleteRecipeButtonPushed(ActionEvent ae) {
+    // mainBook.removeRecipe(mainListView.getSelectionModel().getSelectedIndex());
+    // recipes.remove(mainListView.getSelectionModel().getSelectedIndex());
+    // mainBook.getRecipes().remove(mainListView.getSelectionModel().getSelectedIndex());
+    // mainBook.getRecipes().get(mainListView.getSelectionModel().getSelectedIndex());
+    // mainBook.removeRecipe(mainListView.getSelectionModel().getSelectedIndex());
+    // fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", );
+    // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
+  // }
+
+
+
   public void initData(Recipe recipe) {
     Recipe recipe3 = recipe;
     recipes.add(recipe3);
@@ -77,3 +89,4 @@ public class MainController implements Initializable {
   }
 
 }
+// mvn -pl ui javafx
