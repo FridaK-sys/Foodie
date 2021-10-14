@@ -27,7 +27,7 @@ public class AppTest extends AbstractAppTest {
 
     @Override
     public void start(final Stage stage) throws Exception {
-        
+
         URL fxmlLocation = getClass().getResource("Main_test.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = fxmlLoader.load();
@@ -56,53 +56,45 @@ public class AppTest extends AbstractAppTest {
         recipe2.addIngredient(ing4);
         recipe2.setDescription("Dette er gode fiskekaker");
     }
-
-
-
-    @Test
-    public void testController_MainController() {
-        assertNotNull(this.controller);
-        assertNotNull(this.cookbook);
-        testRecipes(this.cookbook.getRecipes(), recipe1, recipe2);
-    }
-
-    @Test
-    public void testRecipeListView() {
-        checkRecipesListViewItems(recipe1, recipe2);
-    }
-
-
+    /*
+     * @Test public void testController_MainController() {
+     * assertNotNull(this.controller); assertNotNull(this.cookbook);
+     * testRecipes(this.cookbook.getRecipes(), recipe1, recipe2); }
+     * 
+     * @Test public void testRecipeListView() { checkRecipesListViewItems(recipe1,
+     * recipe2); }
+     */
     // public void checkIngredient(Ingredient ingredient, Ingredient compIng) {
-    //     assertEquals(ingredient.getAmount(), compIng.getAmount());
-    //     assertEquals(ingredient.getName(), compIng.getName());
-    //     assertEquals(ingredient.getUnit(), compIng.getUnit());
+    // assertEquals(ingredient.getAmount(), compIng.getAmount());
+    // assertEquals(ingredient.getName(), compIng.getName());
+    // assertEquals(ingredient.getUnit(), compIng.getUnit());
     // }
 
     // public void checkRecipesListViewItems(Recipe... recipes) {
-    //     ListView<Recipe> todoListView = lookup("#mainListView").query();
-    //     testRecipes(todoListView.getItems(), recipes);
-    //   }    
+    // ListView<Recipe> todoListView = lookup("#mainListView").query();
+    // testRecipes(todoListView.getItems(), recipes);
+    // }
 
     // public void checkRecipe(Recipe recipe, Recipe compareRecipe) {
-    //     assertEquals(recipe.getPortions(), compareRecipe.getPortions());
-    //     assertEquals(recipe.getName(), compareRecipe.getName());
-    //     // if (recipe.getDescription() != null) {
-    //     assertEquals(recipe.getDescription(), compareRecipe.getDescription());
-    //     // }
-    //     for (int i = 0; i < 2; i++) {
-    //         checkIngredient(recipe.getIngredients().get(i), compareRecipe.getIngredients().get(i));
-    //     }
+    // assertEquals(recipe.getPortions(), compareRecipe.getPortions());
+    // assertEquals(recipe.getName(), compareRecipe.getName());
+    // // if (recipe.getDescription() != null) {
+    // assertEquals(recipe.getDescription(), compareRecipe.getDescription());
+    // // }
+    // for (int i = 0; i < 2; i++) {
+    // checkIngredient(recipe.getIngredients().get(i),
+    // compareRecipe.getIngredients().get(i));
+    // }
     // }
 
     // public void testRecipes(Iterable<Recipe> re, Recipe... recipes) {
-    //     int i = 0;
-    //     for (Recipe r : re) {
-    //         assertTrue(i < recipes.length);
-    //         checkRecipe(r, recipes[i]);
-    //         i++;
-    //     }
-    //     assertTrue(i == recipes.length);
+    // int i = 0;
+    // for (Recipe r : re) {
+    // assertTrue(i < recipes.length);
+    // checkRecipe(r, recipes[i]);
+    // i++;
     // }
-
+    // assertTrue(i == recipes.length);
+    // }
 
 }
