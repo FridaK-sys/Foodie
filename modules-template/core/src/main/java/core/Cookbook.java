@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Lists of recipies in a cookbook.
+ * Lists of recipes in a cookbook.
  */
 
 public class Cookbook {
