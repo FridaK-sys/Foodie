@@ -53,6 +53,10 @@ public class Cookbook {
     }
   }
 
+  public void removeRecipe(int index) {
+    recipes.remove(index);
+  }
+
   public String toString() {
     StringBuilder sb = new StringBuilder();
     recipes.stream().forEach(r -> sb.append(r.getName()));
