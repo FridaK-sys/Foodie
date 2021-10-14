@@ -67,17 +67,13 @@ public class MainController implements Initializable {
     stage.show();
   }
 
-  // public void deleteRecipeButtonPushed(ActionEvent ae) {
-    // mainBook.removeRecipe(mainListView.getSelectionModel().getSelectedIndex());
-    // recipes.remove(mainListView.getSelectionModel().getSelectedIndex());
-    // mainBook.getRecipes().remove(mainListView.getSelectionModel().getSelectedIndex());
-    // mainBook.getRecipes().get(mainListView.getSelectionModel().getSelectedIndex());
-    // mainBook.removeRecipe(mainListView.getSelectionModel().getSelectedIndex());
-    // fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", );
+  public void deleteRecipeButtonPushed(ActionEvent ae) {
+    int index = mainListView.getSelectionModel().getSelectedIndex();
+    recipes.remove(index);
+    mainBook.removeRecipe(index);
+    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
     // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
-  // }
-
-
+  }
 
   public void initData(Recipe recipe) {
     Recipe recipe3 = recipe;
