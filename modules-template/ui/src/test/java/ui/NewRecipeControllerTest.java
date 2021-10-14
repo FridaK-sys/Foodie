@@ -54,20 +54,30 @@ public class NewRecipeControllerTest extends AbstractAppTest {
         recipe1.addIngredient(ing1);
         recipe1.setDescription("Epler...");
     }
-    
-     @Test public void testNewIngredient() {
-     clickOn("#ingredientTitle").write("Eple");
-     clickOn("#ingredientAmount").write("3");
-     clickOn("#ingredientUnit").write("stk"); clickOn("#addIngredient");
-     checkIngredient(controller.getIngredients().get(0), ing1); }
-     
-     @Test public void testNewRecipe() throws FileNotFoundException {
-     clickOn("#recipeTitle").write("Eple"); clickOn("#recipePortions").write("2");
-     clickOn("#ingredientTitle").write("Eple");
-     clickOn("#ingredientAmount").write("3");
-     clickOn("#ingredientUnit").write("stk"); clickOn("#addIngredient");
-     clickOn("#recipeDescription").write("Epler..."); clickOn("#createRecipe");
-     handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
-     checkRecipe(cookbook.getRecipes().get(cookbook.getRecipes().size() - 1), recipe1); }
-     
+
+    @Test
+    public void testNewIngredient() {
+        clickOn("#ingredientTitle").write("Eple");
+        clickOn("#ingredientAmount").write("3");
+        clickOn("#ingredientUnit").write("stk");
+        clickOn("#addIngredient");
+        checkIngredient(controller.getIngredients().get(0), ing1);
+    }
+
+    @Test
+    public void testNewRecipe() throws FileNotFoundException {
+        clickOn("#recipeTitle").write("Eple");
+        clickOn("#recipePortions").write("2");
+        clickOn("#ingredientTitle").write("Eple");
+        clickOn("#ingredientAmount").write("3");
+        clickOn("#ingredientUnit").write("stk");
+        clickOn("#addIngredient");
+        clickOn("#recipeDescription").write("Epler...");
+        clickOn("#createRecipe");
+        handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
+        checkRecipe(cookbook.getRecipes().get(cookbook.getRecipes().size() - 1), recipe1);
+        cookbook.getRecipes().remove(cookbook.getRecipes().size() - 1);
+        handler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
+    }
+
 }
