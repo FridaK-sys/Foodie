@@ -58,6 +58,10 @@ public class RecipeTest {
 		assertEquals(recipe.getName(), "Muffins");
 
 		assertThrows(IllegalArgumentException.class, () -> {
+			recipe.setName("");
+		}, "Must select name for recipe");
+
+		assertThrows(IllegalArgumentException.class, () -> {
 			recipe.setName("$~@");
 		}, "Invalid name for recipe");
 
@@ -87,12 +91,20 @@ public class RecipeTest {
 	public void testAddIngredient() {
 		recipe.addIngredient(ingredient3);
 		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient1, ingredient2, ingredient3));
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			recipe.addIngredient(ingredient3);
+		}, "Recipe already contains this ingredient");
 	}
 
 	@Test
 	public void testRemoveIngredient() {
 		recipe.removeIngredient(ingredient1);
 		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2));
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			recipe.removeIngredient(ingredient3);
+		}, "Recipe does not contain this ingredient");
 	}
 
 	@Test
