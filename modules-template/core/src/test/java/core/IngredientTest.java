@@ -10,18 +10,31 @@ import core.Ingredient;
 
 public class IngredientTest {
 
-	private Ingredient ingredient;
+	private Ingredient ingredient1, ingredient2;
 
 	@BeforeEach
 	public void setUp() {
-		ingredient = new Ingredient("Mel", 200, "g");
+		ingredient1 = new Ingredient("Mel", 200, "g");
+		ingredient2 = new Ingredient("Smør");
 	}
 
 	@Test
 	public void testConstructor() {
-		assertEquals(ingredient.getName(), "Mel");
-		assertEquals(ingredient.getAmount(), 200);
-		assertEquals(ingredient.getUnit(), "g");
+		assertEquals(ingredient1.getName(), "Mel");
+		assertEquals(ingredient1.getAmount(), 200);
+		assertEquals(ingredient1.getUnit(), "g");
+
+		assertEquals(ingredient2.getName(), "Smør");
+		assertEquals(ingredient2.getAmount(), 0);
+		assertEquals(ingredient2.getUnit(), "");
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Ingredient("$~@");
+		}, "Invalid name for ingredient");
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
+		}, "Name contains to many characters");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("$~@", 2, "dl");
@@ -43,29 +56,29 @@ public class IngredientTest {
 
 	@Test
 	public void testSetName() {
-		ingredient.setName("Smør");
-		assertEquals(ingredient.getName(), "Smør");
+		ingredient1.setName("Smør");
+		assertEquals(ingredient1.getName(), "Smør");
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			ingredient.setName("$~@");
+			ingredient1.setName("$~@");
 		}, "Invalid name for ingredient");
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			ingredient.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
+			ingredient1.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
 		}, "Name of ingredient contains to many characters");
 	}
 
 	@Test
 	public void testSetAmount() {
-		ingredient.setAmount(250);
-		assertEquals(ingredient.getAmount(), 250);
+		ingredient1.setAmount(250);
+		assertEquals(ingredient1.getAmount(), 250);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			ingredient.setAmount(0);
+			ingredient1.setAmount(0);
 		}, "Amount cannot be zero");
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			ingredient.setAmount(-2);
+			ingredient1.setAmount(-2);
 		}, "Amount cannot be negative");
 
 	}

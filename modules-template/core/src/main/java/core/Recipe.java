@@ -68,7 +68,7 @@ public class Recipe {
     if (!ingredients.contains(ingredient)) {
       ingredients.add(ingredient);
     } else {
-      throw new IllegalArgumentException("Oppskriften inneholder denne ingrediensen");
+      throw new IllegalArgumentException("Recipe contains this ingredient");
     }
   }
 
