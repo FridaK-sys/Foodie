@@ -1,9 +1,6 @@
 package json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,20 +9,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 import core.Cookbook;
 import core.Ingredient;
@@ -123,16 +114,16 @@ public class FileHandlerTest {
       JSONObject Jobj = (JSONObject) obj;
       JSONArray recipeList = (JSONArray) Jobj.get("Recipes");
       switch (whatToReturn) {
-        case "cookbook":
-          return Jobj;
-        case "recipe":
-          return (JSONObject) recipeList.get(recipeNumber);
-        case "ingredient":
-          JSONObject recipe = (JSONObject) recipeList.get(recipeNumber);
-          JSONArray ingredients = (JSONArray) recipe.get("Ingredients");
-          return (JSONObject) ingredients.get(ingredientNumber);
-        default:
-          return null;
+      case "cookbook":
+        return Jobj;
+      case "recipe":
+        return (JSONObject) recipeList.get(recipeNumber);
+      case "ingredient":
+        JSONObject recipe = (JSONObject) recipeList.get(recipeNumber);
+        JSONArray ingredients = (JSONArray) recipe.get("Ingredients");
+        return (JSONObject) ingredients.get(ingredientNumber);
+      default:
+        return null;
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -154,13 +145,13 @@ public class FileHandlerTest {
       Object obj = jsonParser.parse(filereader);
       JSONObject Jobj = (JSONObject) obj;
       switch (whatToReturn) {
-        case "recipe":
-          return Jobj;
-        case "ingredient":
-          JSONArray ingredients = (JSONArray) Jobj.get("Ingredients");
-          return (JSONObject) ingredients.get(ingredientNumber);
-        default:
-          return null;
+      case "recipe":
+        return Jobj;
+      case "ingredient":
+        JSONArray ingredients = (JSONArray) Jobj.get("Ingredients");
+        return (JSONObject) ingredients.get(ingredientNumber);
+      default:
+        return null;
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();

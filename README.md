@@ -22,6 +22,10 @@ Vi har brukt følgende verktøy tilknyttet kodekvalitet:
 - **Spotbugs** - analyserer koden for vanlige feil
 - **Jacoco** - samler inn og presenterer informasjon og testdekningsgrad
 
+
+## Implisitt lagring
+Vi har valgt å bruke implisitt lagring fordi vi skal senere knytte prosjeket til API. Da har det ikke noe å si for brukeren hvor prosjeketet lagres. 
+
 ## Arbeidsvaner og arbeidsflyt
 Vi bruker Scrum som en del av vår utviklingsprosess. Scrum er et rammeverk for å støtte smidig utvikling av informasjonssystemer. 
 Her struktureres utviklingen i sykler kalt sprinter. For hvert møte setter vi oss et sprint-goal for dagen, og planlegger arbeidsoppgaver i henhold til dette. Her foretar vi også vurdering av tidligere arbeid. Vi møtes minst to ganger i uken for å jobbe sammen med prosjektet. 

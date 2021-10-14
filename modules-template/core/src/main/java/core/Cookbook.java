@@ -57,8 +57,15 @@ public class Cookbook {
     }
   }
 
+  // public void removeRecipe(int index) {
+  // recipes.remove(index);
+  // }
   public void removeRecipe(int index) {
-    recipes.remove(index);
+    if (index <= recipes.size()) {
+      recipes.remove(index);
+    } else {
+      throw new IllegalArgumentException();
+    }
   }
 
   public String toString() {
