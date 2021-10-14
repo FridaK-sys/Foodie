@@ -22,10 +22,10 @@ Vi har brukt følgende verktøy tilknyttet kodekvalitet:
 - **Spotbugs** - analyserer koden for vanlige feil
 - **Jacoco** - samler inn og presenterer informasjon og testdekningsgrad
 
-##JSON og fillagring
+## JSON og fillagring
 Vi har valgt å bruke JSON.simple som er et Java bibliotek for JSON prosessering, samt lesing og skriving til fil. Vi valgte å lage to metoder som skriver til fil. Den ene skriver hele kokeboken til fil, mens den andre bare skriven en oppskrift. I tillegg har vi en metode som leser fra fil. 
 
-##Implisitt lagring
+## Implisitt lagring
 Vi har valgt å bruke implisitt lagring fordi vi skal senere knytte prosjeket til API. Da har det ikke noe å si for brukeren hvor prosjeketet lagres. 
 
 ## Arbeidsvaner og arbeidsflyt
