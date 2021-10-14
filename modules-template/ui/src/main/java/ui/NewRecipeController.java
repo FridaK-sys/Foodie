@@ -102,7 +102,6 @@ public class NewRecipeController implements Initializable {
       if (!(recipeDescription.getText() == null)) {
         newRecipe.setDescription(recipeDescription.getText());
       }
-      // this.newRecipe = newRecipe;
       if (ingredients.isEmpty()) {
         throw new IllegalArgumentException("You are missing ingredients");
       }
@@ -119,7 +118,7 @@ public class NewRecipeController implements Initializable {
     } catch (NullPointerException e) {
       errorMessageLabel.setText("You have empty fields");
     } catch (NumberFormatException e) {
-      errorMessageLabel.setText("ingredient amount must be a number");
+      errorMessageLabel.setText("Ingredient amount must be a number");
     } catch (IllegalArgumentException e) {
       errorMessageLabel.setText(e.getMessage());
     }
@@ -140,9 +139,6 @@ public class NewRecipeController implements Initializable {
 
     Parent root = fxmlLoader.load();
     Scene viewRecipesScene = new Scene(root);
-
-    // MainController controller = fxmlLoader.getController();
-    // controller.initData(newRecipe);
 
     Stage stage = (Stage) ((Node) ea.getSource()).getScene().getWindow();
     stage.setScene(viewRecipesScene);
