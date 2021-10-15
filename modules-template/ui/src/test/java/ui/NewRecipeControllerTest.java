@@ -76,8 +76,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
         clickOn("#createRecipe");
         handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
         checkRecipe(cookbook.getRecipes().get(cookbook.getRecipes().size() - 1), recipe1);
-        cookbook.getRecipes().remove(cookbook.getRecipes().size() - 1);
-        handler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
+        handler.writeRecipesToFile("src/main/resources/ui/test.txt", setUpCookBook());
     }
 
 }
