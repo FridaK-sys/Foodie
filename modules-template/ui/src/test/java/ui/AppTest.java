@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URL;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -16,14 +17,17 @@ import core.Recipe;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import json.FileHandler;
 import ui.MainController;
 
 public class AppTest extends AbstractAppTest {
 
     private MainController controller;
     private Cookbook cookbook;
-    private Recipe recipe1, recipe2;
+    private Cookbook referenceBook;
+    private Recipe recipe1 = new Recipe("test", 2);
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -33,6 +37,7 @@ public class AppTest extends AbstractAppTest {
         Parent root = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
         this.cookbook = this.controller.getCookbook();
+
         Scene scene = new Scene(root);
 
         stage.setTitle("Cookbook<3");
@@ -43,30 +48,32 @@ public class AppTest extends AbstractAppTest {
 
     @BeforeEach
     public void setupItems() {
-        recipe1 = new Recipe("Taco", 4);
-        Ingredient ing1 = new Ingredient("Kjøtt", 500, "g");
-        Ingredient ing2 = new Ingredient("Lomper", 3, "stk");
-        recipe1.addIngredient(ing1);
-        recipe1.addIngredient(ing2);
-        recipe1.setDescription("Enkel taco");
-        recipe2 = new Recipe("Fiskekaker", 3);
-        Ingredient ing3 = new Ingredient("Fisk", 3, "dl");
-        Ingredient ing4 = new Ingredient("Purre", 1, "stk");
-        recipe2.addIngredient(ing3);
-        recipe2.addIngredient(ing4);
-        recipe2.setDescription("Dette er gode fiskekaker");
+        referenceBook = setUpCookBook();
     }
 
     @Test
     public void testController_MainController() {
         assertNotNull(this.controller);
         assertNotNull(this.cookbook);
-        testRecipes(this.cookbook.getRecipes(), recipe1, recipe2);
+        testRecipes(this.cookbook.getRecipes(), referenceBook.getRecipes());
     }
 
     @Test
     public void testRecipeListView() {
-        checkRecipesListViewItems(recipe1, recipe2);
+        checkRecipesListViewItems(cookbook.getRecipes());
+    }
+
+    @Test
+    public void testDeleteButton() {
+        if (referenceBook.getRecipes().size() != 0) {
+
+            ListView<Recipe> recipeListView = lookup("#mainListView").query();
+            recipeListView.getSelectionModel().select(cookbook.getRecipes().size() - 1);
+            clickOn("#deleteButton");
+            checkRecipesListViewItems(controller.getCookbook().getRecipes());
+            FileHandler handler = new FileHandler();
+            handler.writeRecipesToFile("src/main/resources/ui/test.txt", referenceBook);
+        }
     }
 
 }

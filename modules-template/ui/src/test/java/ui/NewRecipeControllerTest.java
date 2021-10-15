@@ -28,6 +28,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     private Ingredient ing1, ing2;
     private List<Ingredient> ingredients = new ArrayList<>();
     private Cookbook cookbook = new Cookbook();
+    private Cookbook originalCookbook;
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -53,6 +54,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
         recipe1.addIngredient(ing1);
         recipe1.setDescription("Epler...");
+        originalCookbook = setUpCookBook();
     }
 
     @Test
@@ -76,8 +78,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
         clickOn("#createRecipe");
         handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
         checkRecipe(cookbook.getRecipes().get(cookbook.getRecipes().size() - 1), recipe1);
-        cookbook.getRecipes().remove(cookbook.getRecipes().size() - 1);
-        handler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
+        handler.writeRecipesToFile("src/main/resources/ui/test.txt", originalCookbook);
     }
 
 }

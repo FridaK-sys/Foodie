@@ -13,8 +13,9 @@
             <ListView fx:id="mainListView" prefHeight="464.0" prefWidth="600.0" />
             <Pane prefHeight="136.0" prefWidth="600.0">
                <children>
-                  <Button layoutX="392.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToViewRecipe" text="Vis oppskrift" />
-                  <Button fx:id="newRecipe" layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" text="Ny oppskrift" />
+                  <Button layoutX="392.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToViewRecipe" text="Show recipe" />
+                  <Button layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" text="New recipe" />
+                  <Button fx:id="deleteButton" layoutX="34.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteRecipeButtonPushed" prefHeight="26.0" prefWidth="102.0" text="Delete recipe" />
                </children></Pane>
          </children></VBox>
    </children>
