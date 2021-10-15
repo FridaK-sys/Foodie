@@ -81,7 +81,15 @@ public class MainController implements Initializable {
   }
 
   public Cookbook getCookbook() {
-    return mainBook;
+    Cookbook newBook = new Cookbook("New Book", mainBook.getRecipes());
+    return newBook;
+  }
+
+  public void setRecipes(Cookbook cookbook) {
+    mainBook.getRecipes().clear();
+    mainBook.getRecipes().addAll(cookbook.getRecipes());
+    recipes.setAll(mainBook.getRecipes());
+    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
   }
 
 }
