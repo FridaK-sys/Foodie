@@ -1,20 +1,20 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
- * Lists of recipes in a cookbook.
+ * List of recipes in a cookbook.
  */
 
 public class Cookbook {
 
   private String name;
-  private List<Recipe> recipes = new ArrayList<>();
+  private Collection<Recipe> recipes = new ArrayList<>();
 
-  public Cookbook(String name, List<Recipe> recipes) {
+  public Cookbook(String name, Collection<Recipe> recipes) {
     setName(name);
-    this.recipes = recipes;
+    this.recipes = new ArrayList<>(recipes);
   }
 
   public Cookbook() {
@@ -32,7 +32,7 @@ public class Cookbook {
     this.name = name;
   }
 
-  public ArrayList<Recipe> getRecipes() {
+  public Collection<Recipe> getRecipes() {
     return new ArrayList<>(recipes);
   }
 
@@ -57,9 +57,6 @@ public class Cookbook {
     }
   }
 
-  // public void removeRecipe(int index) {
-  // recipes.remove(index);
-  // }
   public void removeRecipe(int index) {
     if (index <= recipes.size()) {
       recipes.remove(index);
