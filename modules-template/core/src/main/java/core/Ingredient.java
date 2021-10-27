@@ -3,7 +3,9 @@ package core;
 /**
  * An ingredient containing name, amount and unit.
  */
+
 public class Ingredient {
+  
   private String name;
   private double amount;
   private String unit;
