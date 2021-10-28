@@ -24,8 +24,6 @@ import core.Recipe;
 
 public class FileHandlerTest {
 
-  private static String cookbookString;
-  private static String recipe2String;
   private static FileHandler filehandler;
   private static Recipe recipe;
   private static Recipe recipe2;
@@ -37,61 +35,6 @@ public class FileHandlerTest {
 
   @BeforeAll
   public static void setup() {
-    cookbookString = """
-        {
-          "Recipes":
-          [{
-            "Favorite":false,
-            "Portions":1,
-            "Description":"Den beste oppskriften på bløtkake!",
-            "Ingredients":
-            [{
-              "Amount":200.0,
-              "Unit":"g",
-              "Name":"Mel"
-            },
-            {"Amount":2.0,
-            "Unit":"stk",
-            "Name":"Egg"
-          }],
-          "Label":"",
-          "Name":"Bløtkake"
-        },{
-          "Favorite":false,
-          "Portions":1,
-          "Description":"Varm og god dessert!",
-          "Ingredients":
-          [{
-            "Amount":1.5,
-            "Unit":"dl",
-            "Name":"Sukker"
-          },{
-            "Amount":1.0,
-            "Unit":"dl",
-            "Name":"Kakao"
-          }],
-          "Label":"",
-          "Name":"Kakao"
-        }],
-        "Name":"Kokebok"}
-        """;
-    recipe2String = """
-          {
-            "Favorite":false,
-            "Portions":1,
-            "Description":"Varm og god dessert!",
-            "Ingredients":
-            [{"Amount":1.5,
-            "Unit":"dl",
-            "Name":"Sukker"
-          },{
-            "Amount":1.0,
-            "Unit":"dl",
-            "Name":"Kakao"
-          }],"Label":"",
-          "Name":"Kakao"
-        }
-              """;
     filehandler = new FileHandler();
     ingredient1 = new Ingredient("Mel", 200, "g");
     ingredient2 = new Ingredient("Egg", 2, "stk");
@@ -102,7 +45,9 @@ public class FileHandlerTest {
     ingredients2.add(ingredient3);
     ingredients2.add(ingredient4);
     recipe = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredients);
+    recipe.setLabel("Frokost");
     recipe2 = new Recipe("Kakao", "Varm og god dessert!", 1, ingredients2);
+    recipe2.setFav();
     recipeList.add(recipe);
     recipeList.add(recipe2);
     cookbook = new Cookbook("Kokebok", recipeList);
@@ -174,41 +119,40 @@ public class FileHandlerTest {
   public void testWriteRecipesToFile() {
     filehandler.writeRecipesToFile("testFile", cookbook);
     assertEquals(cookbook.getName(), (String) readCookbookFile("testFile", "cookbook", 0, 0).get("Name"),
-        "Navnet på kokeboken er feil. Det som står i teksten er "
-            + (String) readCookbookFile("testFile", "cookbook", 0, 0).get("Name") + "mens det skal vaere "
-            + cookbook.getName());
+        "Cookbook name should be " + cookbook.getName() + ", but is "
+            + (String) readCookbookFile("testFile", "cookbook", 0, 0).get("Name"));
     int i = 0;
     for (Recipe recipe : cookbook.getRecipes()) {
       assertEquals(recipe.getName(), (String) readCookbookFile("testFile", "recipe", i, 0).get("Name"),
-          "Navnet på oppskrift nummer " + i + 1 + "er feil. Det som står i teksten er "
-              + (String) readCookbookFile("testFile", "recipe", i, 0).get("Name") + "men det skal vare "
-              + recipe.getName());
+          "Name of recipe number " + i + 1 + " should be" + recipe.getName() + ", but is "
+              + (String) readCookbookFile("testFile", "recipe", i, 0).get("Name"));
+      assertEquals(recipe.getFav(), (Boolean) readCookbookFile("testFile", "recipe", i, 0).get("Favorite"),
+          "Favorite of recipe number " + i + 1 + " should be " + recipe.getFav() + ", but is "
+              + (Boolean) readCookbookFile("testFile", "recipe", i, 0).get("Favorite"));
       assertEquals(String.valueOf(recipe.getPortions()),
           (String.valueOf(readCookbookFile("testFile", "recipe", i, 0).get("Portions"))),
-          "Antall porsjoner på oppskrift nummer " + i + 1 + "er feil. Det som står i teksten er "
-              + readCookbookFile("testFile", "recipe", i, 0).get("Portions") + "men det skal vaere "
-              + recipe.getPortions());
+          "Number of portions in recipe number " + i + 1 + " should be " + recipe.getPortions() + ", but is"
+              + readCookbookFile("testFile", "recipe", i, 0).get("Portions"));
       assertEquals(recipe.getDescription(), (String) readCookbookFile("testFile", "recipe", i, 0).get("Description"),
-          "Beskrivelsen på oppskrift nummer " + i + 1 + "er feil. Det som står i teksten er "
-              + (String) readCookbookFile("testFile", "recipe", i, 0).get("Description") + "men det skal vare "
-              + recipe.getDescription());
+          "Description of recipe number " + i + 1 + " should be " + recipe.getDescription() + ", but is"
+              + (String) readCookbookFile("testFile", "recipe", i, 0).get("Description"));
+      assertEquals(recipe.getLabel(), (String) readCookbookFile("testFile", "recipe", i, 0).get("Label"),
+          "Label of recipe number " + i + 1 + " should be" + recipe.getLabel() + ", but is "
+              + (String) readCookbookFile("testFile", "recipe", i, 0).get("Label"));
       int j = 0;
       for (Ingredient ingredient : recipe.getIngredients()) {
         assertEquals(ingredient.getName(), (String) readCookbookFile("testFile", "ingredient", i, j).get("Name"),
-            "Navnet på ingrediens nummer" + j + 1 + " på oppskrift nummer " + i + 1
-                + "er feil. Det som står i teksten er "
-                + (String) readCookbookFile("testFile", "ingredient", i, j).get("Name") + "men det skal vare "
-                + ingredient.getName());
+            "Name of ingredient number" + j + 1 + " in recipe number" + i + 1 + "should be " + ingredient.getName()
+                + ", but is " + (String) readCookbookFile("testFile", "ingredient", i, j).get("Name"));
         assertEquals(String.valueOf(ingredient.getAmount()),
             (String.valueOf(readCookbookFile("testFile", "ingredient", i, j).get("Amount"))),
-            "Mengden på ingrediens nummer" + j + 1 + " på oppskrift nummer " + i + 1
-                + "er feil. Det som står i teksten er " + readCookbookFile("testFile", "ingredient", i, j).get("Amount")
-                + "men det skal vare " + ingredient.getAmount());
+            "Amount of ingredient number " + j + 1 + " in recipe number " + i + 1 + "is wrong. It should be "
+                + ingredient.getAmount() + ", but is "
+                + readCookbookFile("testFile", "ingredient", i, j).get("Amount"));
         assertEquals(ingredient.getUnit(), (String) readCookbookFile("testFile", "ingredient", i, j).get("Unit"),
-            "Uniten på ingrediens nummer" + j + 1 + " på oppskrift nummer " + i + 1
-                + "er feil. Det som står i teksten er "
-                + (String) readCookbookFile("testFile", "ingredient", i, j).get("Unit") + "men det skal vare "
-                + ingredient.getUnit());
+            "Uniten of ingredient number" + j + 1 + " in recipe number " + i + 1 + "is wrong. It should be "
+                + ingredient.getUnit() + ", but is "
+                + (String) readCookbookFile("testFile", "ingredient", i, j).get("Unit") + "men det skal vare ");
         j++;
       }
       i++;
@@ -219,32 +163,31 @@ public class FileHandlerTest {
   @Test
   public void testWriteRecipeToFile() {
     filehandler.writeRecipeToFile("testFile2", recipe2);
-    assertEquals(recipe2.getName(), (String) readRecipeFile("testFile2", "recipe", 0).get("Name"),
-        "Navnet på oppskrift er feil. Det som står i teksten er "
-            + (String) readRecipeFile("testFile2", "recipe", 0).get("Name") + "men det skal vare " + recipe2.getName());
+    assertEquals(recipe2.getName(), (String) readRecipeFile("testFile2", "recipe", 0).get("Name"), "Name should be "
+        + recipe2.getName() + ", but is " + (String) readRecipeFile("testFile2", "recipe", 0).get("Name"));
+    assertEquals(recipe2.getFav(), (Boolean) readRecipeFile("testFile2", "recipe", 0).get("Favorite"),
+        "Favorite should be " + recipe2.getFav() + ", but is "
+            + (Boolean) readRecipeFile("testFile2", "recipe", 0).get("Favorite") + "men det skal vare ");
     assertEquals(String.valueOf(recipe2.getPortions()),
-        (String.valueOf(readRecipeFile("testFile2", "recipe", 0).get("Portions"))),
-        "Antall porsjoner er feil. Det som står i teksten er "
-            + readRecipeFile("testFile2", "recipe", 0).get("Portions") + "men det skal vaere " + recipe2.getPortions());
+        (String.valueOf(readRecipeFile("testFile2", "recipe", 0).get("Portions"))), "Portions should be "
+            + recipe2.getPortions() + ", but is " + readRecipeFile("testFile2", "recipe", 0).get("Portions"));
     assertEquals(recipe2.getDescription(), (String) readRecipeFile("testFile2", "recipe", 0).get("Description"),
-        "Navnet på oppskrift er feil. Det som står i teksten er "
-            + (String) readRecipeFile("testFile2", "recipe", 0).get("Description") + "men det skal vare "
-            + recipe2.getDescription());
+        "Description should be " + recipe2.getDescription() + ", but is "
+            + (String) readRecipeFile("testFile2", "recipe", 0).get("Description"));
+    assertEquals(recipe2.getLabel(), (String) readRecipeFile("testFile2", "recipe", 0).get("Label"), "Label should be "
+        + recipe2.getLabel() + ", but is " + (String) readRecipeFile("testFile2", "recipe", 0).get("Label"));
     int j = 0;
     for (Ingredient ingredient : recipe2.getIngredients()) {
       assertEquals(ingredient.getName(), (String) readRecipeFile("testFile2", "ingredient", j).get("Name"),
-          "Navnet på ingrediens nummer" + j + 1 + "er feil. Det som står i teksten er "
-              + (String) readRecipeFile("testFile2", "ingredient", j).get("Name") + "men det skal vare "
-              + ingredient.getName());
+          "Name of ingredient number" + j + 1 + " should be " + ingredient.getName() + ", but is "
+              + (String) readRecipeFile("testFile2", "ingredient", j).get("Name"));
       assertEquals(String.valueOf(ingredient.getAmount()),
           (String.valueOf(readRecipeFile("testFile2", "ingredient", j).get("Amount"))),
-          "Mengden på ingrediens nummer" + j + 1 + "er feil. Det som står i teksten er "
-              + readRecipeFile("testFile2", "ingredient", j).get("Amount") + "men det skal vare "
-              + ingredient.getAmount());
+          "Amount of ingredient number" + j + 1 + "should be " + ingredient.getAmount() + ", but is "
+              + readRecipeFile("testFile2", "ingredient", j).get("Amount"));
       assertEquals(ingredient.getUnit(), (String) readRecipeFile("testFile2", "ingredient", j).get("Unit"),
-          "Uniten på ingrediens nummer" + j + 1 + "er feil. Det som står i teksten er "
-              + (String) readRecipeFile("testFile2", "ingredient", j).get("Unit") + "men det skal vare "
-              + ingredient.getUnit());
+          "Unit of ingredient number" + j + 1 + " should be " + ingredient.getUnit() + ", but is "
+              + (String) readRecipeFile("testFile2", "ingredient", j).get("Unit"));
       j++;
     }
 
@@ -255,33 +198,33 @@ public class FileHandlerTest {
     Cookbook newCookbook = new Cookbook();
     filehandler.readRecipesFromFile("test.json", newCookbook);
     assertEquals(cookbook.getName(), newCookbook.getName(),
-        "Leste feil navn fra fil. Skulle være " + cookbook.getName() + ", men var " + newCookbook.getName());
+        "Cookbook name should be " + cookbook.getName() + ", but was " + newCookbook.getName());
 
     int i = 0;
     for (Recipe recipe : cookbook.getRecipes()) {
       assertEquals(recipe.getName(), newCookbook.getRecipes().get(i).getName(),
-          "Leste feil navn fra fil på oppskrift. Skulle vaere " + recipe.getName() + ", men var "
-              + newCookbook.getRecipes().get(i).getName());
-      assertEquals(recipe.getPortions(), newCookbook.getRecipes().get(i).getPortions(),
-          "Leste feil porsjon fra fil på " + recipe.getName() + ". Skulle vaere " + recipe.getPortions() + ", men var "
-              + newCookbook.getRecipes().get(i).getPortions());
+          "Recipe name should be " + recipe.getName() + ", but was " + newCookbook.getRecipes().get(i).getName());
+      assertEquals(recipe.getFav(), newCookbook.getRecipes().get(i).getFav(),
+          "Favorite of recipe should be " + recipe.getFav() + ", but was " + newCookbook.getRecipes().get(i).getFav());
+      assertEquals(recipe.getPortions(), newCookbook.getRecipes().get(i).getPortions(), "Recipe portions should be "
+          + recipe.getPortions() + ", but was " + newCookbook.getRecipes().get(i).getPortions());
       assertEquals(recipe.getDescription(), newCookbook.getRecipes().get(i).getDescription(),
-          "Leste feil porsjon fra fil på " + recipe.getName() + ". Skulle væaee " + recipe.getDescription()
-              + ", men var " + newCookbook.getRecipes().get(i).getDescription());
+          "Recipe description should be " + recipe.getDescription() + ", but was  " + ", men var "
+              + newCookbook.getRecipes().get(i).getDescription());
+      assertEquals(recipe.getLabel(), newCookbook.getRecipes().get(i).getLabel(),
+          "Recipe label should be " + recipe.getLabel() + ", but was " + newCookbook.getRecipes().get(i).getLabel());
       int j = 0;
       for (Ingredient ingredient : recipe.getIngredients()) {
 
         assertEquals(ingredient.getName(), newCookbook.getRecipes().get(i).getIngredients().get(j).getName(),
-            "Leste feil ingrediens fra fil på " + recipe.getName() + ". Skulle vaere " + ingredient.getName()
-                + ", men var" + newCookbook.getRecipes().get(i).getIngredients().get(j).getName());
+            "Ingredient name should be" + ingredient.getName() + ", but was" + ", men var"
+                + newCookbook.getRecipes().get(i).getIngredients().get(j).getName());
         assertEquals(ingredient.getAmount(), newCookbook.getRecipes().get(i).getIngredients().get(j).getAmount(),
-            "Leste feil mengde av" + ingredient.getName() + "fra fil på " + recipe.getName() + ". Skulle vaere "
-                + ingredient.getAmount() + ", men var"
-                + newCookbook.getRecipes().get(i).getIngredients().get(j).getAmount());
+            "Amount of " + ingredient.getName() + " in " + recipe.getName() + " should be" + ingredient.getAmount()
+                + ", but was" + newCookbook.getRecipes().get(i).getIngredients().get(j).getAmount());
         assertEquals(ingredient.getUnit(), newCookbook.getRecipes().get(i).getIngredients().get(j).getUnit(),
-            "Leste feil unit på " + ingredient.getName() + " fra fil på " + recipe.getName() + ". Skulle vaere "
-                + ingredient.getUnit() + ", men var "
-                + newCookbook.getRecipes().get(i).getIngredients().get(j).getUnit());
+            "Unit of " + ingredient.getName() + " in " + recipe.getName() + " should be " + ingredient.getUnit()
+                + ", but was " + newCookbook.getRecipes().get(i).getIngredients().get(j).getUnit());
         j++;
       }
       i++;

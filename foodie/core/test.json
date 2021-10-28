@@ -15,10 +15,10 @@
             "Unit":"stk",
             "Name":"Egg"
           }],
-          "Label":"",
+          "Label":"Frokost",
           "Name":"Bløtkake"
         },{
-          "Favorite":false,
+          "Favorite":true,
           "Portions":1,
           "Description":"Varm og god dessert!",
           "Ingredients":
