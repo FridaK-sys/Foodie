@@ -1,5 +1,8 @@
 package json;
 
+import core.Cookbook;
+import core.Ingredient;
+import core.Recipe;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,20 +15,14 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
-
 public class FileHandler {
 
 	public void writeRecipesToFile(String filename, Cookbook cookbook) {
-
 		JSONArray recipes = new JSONArray();
 		JSONObject mainObj = new JSONObject();
 		mainObj.put("Name", cookbook.getName());
@@ -40,6 +37,7 @@ public class FileHandler {
 				ingredients.add(ing);
 
 			}
+
 			JSONObject rec = new JSONObject();
 			rec.put("Name", recipe.getName());
 			rec.put("Favorite", recipe.getFav());
@@ -51,8 +49,8 @@ public class FileHandler {
 			recipes.add(rec);
 
 		}
+
 		mainObj.put("Recipes", recipes);
-		System.out.println(mainObj);
 
 		try (Writer file = new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")) { // Write JSON file
 			file.write(mainObj.toJSONString());

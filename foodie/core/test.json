@@ -1,6 +1,8 @@
-{
+
+        {
           "Recipes":
           [{
+            "Favorite":false,
             "Portions":1,
             "Description":"Den beste oppskriften på bløtkake!",
             "Ingredients":
@@ -9,28 +11,27 @@
               "Unit":"g",
               "Name":"Mel"
             },
-            {
-              "Amount":2.0,
-              "Unit":"stk",
-              "Name":"Egg"
-            }
-            ],
-            "Name":"Bløtkake"
-          },
-          {
-            "Portions":1,
-            "Description":"Varm og god dessert!",
-            "Ingredients":
-            [{
-              "Amount":1.5,
-              "Unit":"dl",
-              "Name":"Sukker"
-            },{
-              "Amount":1.0,
-              "Unit":"dl",
-              "Name":"Kakao"
-            }],
+            {"Amount":2.0,
+            "Unit":"stk",
+            "Name":"Egg"
+          }],
+          "Label":"Frokost",
+          "Name":"Bløtkake"
+        },{
+          "Favorite":true,
+          "Portions":1,
+          "Description":"Varm og god dessert!",
+          "Ingredients":
+          [{
+            "Amount":1.5,
+            "Unit":"dl",
+            "Name":"Sukker"
+          },{
+            "Amount":1.0,
+            "Unit":"dl",
             "Name":"Kakao"
           }],
-          "Name": "Kokebok"
-        }
+          "Label":"",
+          "Name":"Kakao"
+        }],
+        "Name":"Kokebok"}

@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class Recipe {
   private int portions;
   private boolean fav = false;
   private String label = "";
-  static public List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
+  static final List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
 
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
