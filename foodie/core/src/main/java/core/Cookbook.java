@@ -1,7 +1,7 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * List of recipes in a cookbook.
@@ -10,9 +10,9 @@ import java.util.Collection;
 public class Cookbook {
 
   private String name;
-  private Collection<Recipe> recipes = new ArrayList<>();
+  private List<Recipe> recipes = new ArrayList<>();
 
-  public Cookbook(String name, Collection<Recipe> recipes) {
+  public Cookbook(String name, List<Recipe> recipes) {
     setName(name);
     this.recipes = new ArrayList<>(recipes);
   }
@@ -32,7 +32,7 @@ public class Cookbook {
     this.name = name;
   }
 
-  public Collection<Recipe> getRecipes() {
+  public List<Recipe> getRecipes() {
     return new ArrayList<>(recipes);
   }
 
