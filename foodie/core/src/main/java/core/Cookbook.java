@@ -65,6 +65,10 @@ public class Cookbook {
     }
   }
 
+  public List<Recipe> getFavRecipes() {
+    return recipes.stream().filter(r -> r.getFav() == true).toList();
+  }
+
   public String toString() {
     StringBuilder sb = new StringBuilder();
     recipes.stream().forEach(r -> sb.append(r.getName()));
