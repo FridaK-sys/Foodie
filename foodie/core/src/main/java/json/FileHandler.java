@@ -106,6 +106,7 @@ public class FileHandler {
 				JSONObject rec = (JSONObject) recipeList.get(i);
 				JSONArray ing = (JSONArray) rec.get("Ingredients");
 				String name = (String) rec.get("Name");
+				System.out.println(rec.get("Favorite").getClass());
 				Boolean fav = (Boolean) rec.get("Favorite");
 				String label = (String) rec.get("Label");
 				Long portionsLong = (Long) rec.get("Portions");

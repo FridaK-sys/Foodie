@@ -41,6 +41,7 @@ public class FileHandlerTest {
         {
           "Recipes":
           [{
+            "Favorite":false,
             "Portions":1,
             "Description":"Den beste oppskriften på bløtkake!",
             "Ingredients":
@@ -49,44 +50,48 @@ public class FileHandlerTest {
               "Unit":"g",
               "Name":"Mel"
             },
-            {
-              "Amount":2.0,
-              "Unit":"stk",
-              "Name":"Egg"
-            }
-            ],
-            "Name":"Bløtkake"
-          },
-          {
-            "Portions":1,
-            "Description":"Varm og god dessert!",
-            "Ingredients":
-            [{
-              "Amount":1.5,
-              "Unit":"dl",
-              "Name":"Sukker"
-            },{
-              "Amount":1.0,
-              "Unit":"dl",
-              "Name":"Kakao"
-            }],
-            "Name":"Kakao"
+            {"Amount":2.0,
+            "Unit":"stk",
+            "Name":"Egg"
           }],
-          "Name":"Kokebok"
-        }
-            """;
-    recipe2String = """
-        {
+          "Label":"",
+          "Name":"Bløtkake"
+        },{
+          "Favorite":false,
           "Portions":1,
           "Description":"Varm og god dessert!",
           "Ingredients":
-          {
+          [{
+            "Amount":1.5,
+            "Unit":"dl",
+            "Name":"Sukker"
+          },{
             "Amount":1.0,
             "Unit":"dl",
             "Name":"Kakao"
-          },"Name":"Kakao"
+          }],
+          "Label":"",
+          "Name":"Kakao"
+        }],
+        "Name":"Kokebok"}
+        """;
+    recipe2String = """
+          {
+            "Favorite":false,
+            "Portions":1,
+            "Description":"Varm og god dessert!",
+            "Ingredients":
+            [{"Amount":1.5,
+            "Unit":"dl",
+            "Name":"Sukker"
+          },{
+            "Amount":1.0,
+            "Unit":"dl",
+            "Name":"Kakao"
+          }],"Label":"",
+          "Name":"Kakao"
         }
-            """;
+              """;
     filehandler = new FileHandler();
     ingredient1 = new Ingredient("Mel", 200, "g");
     ingredient2 = new Ingredient("Egg", 2, "stk");
