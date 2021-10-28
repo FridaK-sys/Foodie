@@ -34,6 +34,7 @@ public class RecipeTest {
 		assertEquals(recipe.getDescription(), "Den beste oppskriften på bløtkake!");
 		assertEquals(recipe.getPortions(), 1);
 		assertEquals(recipe.getIngredients(), ingredients);
+		assertEquals(recipe.getFav(), false);
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Recipe("$~@", "Min favoritt dessert", 10, ingredients);
@@ -111,6 +112,14 @@ public class RecipeTest {
 	public void testRemoveIngredientString() {
 		recipe.removeIngredient("Mel");
 		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2));
+	}
+
+	@Test
+	public void testFav() {
+		recipe.setFav();
+		assertEquals(recipe.getFav(), true);
+		recipe.removeFav();
+		assertEquals(recipe.getFav(), false);
 	}
 
 }
