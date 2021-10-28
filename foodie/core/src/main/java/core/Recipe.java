@@ -1,6 +1,8 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,6 +15,8 @@ public class Recipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private boolean fav = false;
+  private String label;
+  static public List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
 
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
@@ -98,6 +102,22 @@ public class Recipe {
 
   public boolean getFav() {
     return this.fav;
+  }
+
+  public void setLabel(String label) {
+    if (allowedLabels.contains(label)) {
+      this.label = label;
+    } else {
+      throw new IllegalArgumentException("Label has to be either Frokost, Lunsj or Middag");
+    }
+  }
+
+  public void removeLabel() {
+    this.label = "";
+  }
+
+  public String getLabel() {
+    return this.label;
   }
 
   public String toString() {

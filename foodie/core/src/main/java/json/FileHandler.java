@@ -43,6 +43,7 @@ public class FileHandler {
 			JSONObject rec = new JSONObject();
 			rec.put("Name", recipe.getName());
 			rec.put("Favorite", recipe.getFav());
+			rec.put("Label", recipe.getLabel());
 			rec.put("Portions", recipe.getPortions());
 			rec.put("Description", recipe.getDescription());
 			rec.put("Ingredients", ingredients);
@@ -66,6 +67,7 @@ public class FileHandler {
 		JSONObject res = new JSONObject();
 		res.put("Name", recipe.getName());
 		res.put("Favorite", recipe.getFav());
+		res.put("Label", recipe.getLabel());
 		res.put("Portions", recipe.getPortions());
 		res.put("Description", recipe.getDescription());
 		JSONArray ingredients = new JSONArray();
@@ -105,13 +107,18 @@ public class FileHandler {
 				JSONArray ing = (JSONArray) rec.get("Ingredients");
 				String name = (String) rec.get("Name");
 				Boolean fav = (Boolean) rec.get("Favorite");
+				String label = (String) rec.get("Label");
 				Long portionsLong = (Long) rec.get("Portions");
 				int portions = portionsLong.intValue();
 				String description = (String) rec.get("Description");
 				Recipe recipe = new Recipe(name, portions);
 				recipe.setDescription(description);
+
 				if (fav) {
 					recipe.setFav();
+				}
+				if (!label.equals("")) {
+					recipe.setLabel(label);
 				}
 
 				for (int j = 0; j < ing.size(); j++) {

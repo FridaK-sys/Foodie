@@ -35,6 +35,7 @@ public class RecipeTest {
 		assertEquals(recipe.getPortions(), 1);
 		assertEquals(recipe.getIngredients(), ingredients);
 		assertEquals(recipe.getFav(), false);
+		assertEquals(recipe.getLabel(), "");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Recipe("$~@", "Min favoritt dessert", 10, ingredients);
@@ -120,6 +121,24 @@ public class RecipeTest {
 		assertEquals(recipe.getFav(), true);
 		recipe.removeFav();
 		assertEquals(recipe.getFav(), false);
+	}
+
+	@Test
+	public void testSetLabel() {
+		assertThrows(IllegalArgumentException.class, () -> recipe.setLabel("Dessert"), "Dessert is not an allowed label");
+		recipe.setLabel("Middag");
+		assertEquals("Middag", recipe.getLabel());
+		recipe.setLabel("Lunsj");
+		assertEquals("Lunsj", recipe.getLabel());
+		recipe.setLabel("Frokost");
+		assertEquals("Frokost", recipe.getLabel());
+	}
+
+	@Test
+	public void testRemoveLabel() {
+		recipe.setLabel("Middag");
+		recipe.removeLabel();
+		assertEquals("", recipe.getLabel());
 	}
 
 }

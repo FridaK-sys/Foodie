@@ -30,7 +30,9 @@ public class CookbookTest {
 
 		recipe1 = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredientList1);
 		recipe2 = new Recipe("Kjøttkaker", "Mormor sin oppskrift", 4, ingredientList1);
+		recipe2.setLabel("Middag");
 		recipe3 = new Recipe("Wok", "Rask middag", 5, ingredientList1);
+		recipe3.setLabel("Middag");
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 
@@ -111,6 +113,15 @@ public class CookbookTest {
 		recipe1.removeFav();
 		favs.remove(recipe1);
 		assertEquals(cookbook1.getFavRecipes(), favs);
+	}
+
+	public void testGetRecipesWithLabel() {
+		assertThrows(IllegalArgumentException.class, () -> cookbook1.getRecipesWithLabel("Dessert"));
+
+		cookbook1.addRecipe(recipe3);
+		List<Recipe> labeled = Arrays.asList(recipe2, recipe3);
+		assertEquals(labeled, cookbook1.getRecipesWithLabel("Middag"));
+
 	}
 
 }
