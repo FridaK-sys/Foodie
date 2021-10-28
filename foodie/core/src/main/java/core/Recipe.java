@@ -91,7 +91,7 @@ public class Recipe {
     }
   }
 
-  private void setLabel(String label) {
+  public void setLabel(String label) {
     if (allowedLabels.contains(label)) {
       this.label = label;
     } else {
@@ -99,11 +99,11 @@ public class Recipe {
     }
   }
 
-  private void removeLabel() {
+  public void removeLabel() {
     this.label = "";
   }
 
-  private String getLabel() {
+  public String getLabel() {
     return this.label;
   }
 
