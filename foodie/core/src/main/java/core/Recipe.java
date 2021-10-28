@@ -1,7 +1,7 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Lists of ingredients in a recipe.
@@ -10,10 +10,10 @@ public class Recipe {
 
   private String name;
   private String description;
-  private Collection<Ingredient> ingredients = new ArrayList<>();
+  private List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
 
-  public Recipe(String name, String description, int portions, Collection<Ingredient> ingredients) {
+  public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
     setPortions(portions);
     this.description = description;
@@ -60,7 +60,7 @@ public class Recipe {
     this.portions = portions;
   }
 
-  public Collection<Ingredient> getIngredients() {
+  public List<Ingredient> getIngredients() {
     return new ArrayList<>(ingredients);
   }
 
