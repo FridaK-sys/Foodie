@@ -66,6 +66,9 @@ public class Cookbook {
   }
 
   public List<Recipe> getRecipesWithLabel(String label) {
+    if (!Recipe.allowedLabels.contains(label)) {
+      throw new IllegalArgumentException("Label is not valid");
+    }
     return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
   }
 
