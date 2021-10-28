@@ -15,7 +15,7 @@ public class Recipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private String label;
-  static private List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
+  static public List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
 
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
