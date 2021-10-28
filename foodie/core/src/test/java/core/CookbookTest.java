@@ -96,9 +96,21 @@ public class CookbookTest {
 	}
 
 	@Test
-	public void testRemoveRecipeInt(){
+	public void testRemoveRecipeInt() {
 		cookbook1.removeRecipe(0);
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
+	}
+
+	@Test
+	public void testGetFavRecipes() {
+		recipe1.setFav();
+		List<Recipe> favs = new ArrayList<>();
+		favs.add(recipe1);
+		assertEquals(cookbook1.getFavRecipes(), favs);
+
+		recipe1.removeFav();
+		favs.remove(recipe1);
+		assertEquals(cookbook1.getFavRecipes(), favs);
 	}
 
 }

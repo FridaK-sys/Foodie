@@ -12,6 +12,7 @@ public class Recipe {
   private String description;
   private List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
+  private boolean fav = false;
 
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
@@ -85,6 +86,18 @@ public class Recipe {
         ingredients.remove(i);
       }
     }
+  }
+
+  public void setFav() {
+    this.fav = true;
+  }
+
+  public void removeFav() {
+    this.fav = false;
+  }
+
+  public boolean getFav() {
+    return this.fav;
   }
 
   public String toString() {
