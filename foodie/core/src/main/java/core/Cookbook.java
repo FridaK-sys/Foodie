@@ -65,6 +65,10 @@ public class Cookbook {
     }
   }
 
+  public List<Recipe> getRecipesWithLabel(String label) {
+    return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
+  }
+
   public String toString() {
     StringBuilder sb = new StringBuilder();
     recipes.stream().forEach(r -> sb.append(r.getName()));
