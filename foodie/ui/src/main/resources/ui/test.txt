@@ -1,1 +1,1 @@
-{"Recipes":[{"Portions":2,"Description":"Epler...","Ingredients":[{"Amount":3.0,"Unit":"stk","Name":"Eple"}],"Name":"Eple"}],"Name":"Ny kokebok"}
+{"Recipes":[{"Favorite":false,"Portions":2,"Description":"","Ingredients":[{"Amount":2.0,"Unit":"stk","Name":"Epler"},{"Amount":3.0,"Unit":"gram","Name":"Sukker"}],"Label":"","Name":"Eplepai"}],"Name":"Recipes"}
