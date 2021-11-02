@@ -39,7 +39,7 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
-        controller.initData(recipe1);
+        controller.initData(recipe1, 1);
         Scene scene = new Scene(root);
 
         stage.setTitle("Cookbook<3");
