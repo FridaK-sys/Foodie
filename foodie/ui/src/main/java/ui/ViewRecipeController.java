@@ -49,10 +49,10 @@ public class ViewRecipeController implements Initializable {
   public void favorizeRecipeButton(ActionEvent ae) {
     if (selectedRecipe.getFav() == true) {
       selectedRecipe.removeFav();
-      faveButton.setText("not");
+      faveButton.setText("Add to favorite");
     } else {
       selectedRecipe.setFav();
-      faveButton.setText("fav");
+      faveButton.setText("Remove from favorite");
     }
     fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);
   }
@@ -80,6 +80,7 @@ public class ViewRecipeController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setItems(ingredients);
     textField.setText("Hmm her var det tomt...");
+
   }
 
   public void initData(Recipe recipe, int index) {
@@ -97,6 +98,11 @@ public class ViewRecipeController implements Initializable {
     }
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
       textField.setText(recipe.getDescription());
+    }
+    if (selectedRecipe.getFav() == true) {
+      faveButton.setText("Remove from favorite");
+    } else {
+      faveButton.setText("Add to favorite");
     }
 
   }
