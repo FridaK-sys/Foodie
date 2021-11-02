@@ -47,8 +47,8 @@ public class MainController implements Initializable {
     Scene viewRecipesScene = new Scene(root);
 
     ViewRecipeController controller = fxmlLoader.getController();
-    controller.initData(mainListView.getSelectionModel().getSelectedItem());
-
+    controller.initData(mainListView.getSelectionModel().getSelectedItem(),
+        mainListView.getSelectionModel().getSelectedIndex());
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
     stage.setScene(viewRecipesScene);
     stage.show();
@@ -75,10 +75,6 @@ public class MainController implements Initializable {
     // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
   }
 
-  public void initData(Recipe recipe) {
-    Recipe recipe3 = recipe;
-    recipes.add(recipe3);
-  }
 
   public Cookbook getCookbook() {
     return mainBook;
@@ -89,11 +85,11 @@ public class MainController implements Initializable {
     recipes.setAll(mainBook.getRecipes());
   }
 
-  public void removeRecipe(int index){
+  public void removeRecipe(int index) {
     mainBook.removeRecipe(index);
     recipes.setAll(mainBook.getRecipes());
   }
-  
+
   public void setRecipes(Cookbook cookbook) {
     mainBook = new Cookbook("test", cookbook.getRecipes());
     recipes.setAll(mainBook.getRecipes());
