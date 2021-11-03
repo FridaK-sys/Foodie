@@ -143,6 +143,16 @@ public class FileHandler {
 		}
 	}
 
+	public void replaceRecipeInFile(Recipe recipe, int index) {
+		Cookbook tempBook = new Cookbook();
+		readRecipesFromFile("src/main/resources/ui/test.txt", tempBook);
+		List<Recipe> recipes = new ArrayList<>(tempBook.getRecipes());
+		recipes.remove(index);
+		recipes.add(index, recipe);
+		Cookbook returnBook = new Cookbook("Recipes", recipes);
+		writeRecipesToFile("src/main/resources/ui/test.txt", returnBook);
+	}
+
 	public static void main(String[] args) throws IOException {
 		FileHandler filehandler = new FileHandler();
 		Ingredient ingredient1 = new Ingredient("Mel", 200, "g");

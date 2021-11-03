@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -18,13 +19,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import json.FileHandler;
 
 public class ViewRecipeController implements Initializable {
 
   private Recipe selectedRecipe;
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
+  private int index;
+  private FileHandler fileHandler = new FileHandler();
 
   @FXML
   private Label recipeTitle;
@@ -38,14 +43,28 @@ public class ViewRecipeController implements Initializable {
   @FXML
   private TextArea textField;
 
+  @FXML
+  private Button faveButton;
+
+  public void favorizeRecipeButton(ActionEvent ae) {
+    if (selectedRecipe.getFav() == true) {
+      selectedRecipe.removeFav();
+      faveButton.setText("Add to favorite");
+    } else {
+      selectedRecipe.setFav();
+      faveButton.setText("Remove from favorite");
+    }
+    fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);
+  }
+
   public void incPortion(ActionEvent event) {
-    if (portion > 0) {
+    if (this.portion > 0) {
       alterPortions(portion + 1);
     }
   }
 
   public void decPortion(ActionEvent event) {
-    if (portion != 1 && portion != 0) {
+    if (this.portion != 1 && portion != 0) {
       alterPortions(portion - 1);
     }
   }
@@ -61,11 +80,13 @@ public class ViewRecipeController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setItems(ingredients);
     textField.setText("Hmm her var det tomt...");
+
   }
 
-  public void initData(Recipe recipe) {
-    selectedRecipe = recipe;
-    portion = recipe.getPortions();
+  public void initData(Recipe recipe, int index) {
+    this.index = index;
+    this.selectedRecipe = recipe;
+    this.portion = recipe.getPortions();
     if (selectedRecipe.getName() != null) {
       recipeTitle.setText(selectedRecipe.getName());
     } else {
@@ -77,6 +98,11 @@ public class ViewRecipeController implements Initializable {
     }
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
       textField.setText(recipe.getDescription());
+    }
+    if (selectedRecipe.getFav() == true) {
+      faveButton.setText("Remove from favorite");
+    } else {
+      faveButton.setText("Add to favorite");
     }
 
   }

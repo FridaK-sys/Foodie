@@ -50,5 +50,6 @@
       </VBox>
       <TextArea fx:id="textField" layoutX="307.0" layoutY="62.0" prefHeight="263.0" prefWidth="242.0" />
       <Button fx:id="backButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeSceneToMain" text="&lt;-" />
+      <Button fx:id="faveButton" layoutX="520.0" layoutY="15.0" mnemonicParsing="false" onAction="#favorizeRecipeButton" text="Fave" />
    </children>
 </AnchorPane>
