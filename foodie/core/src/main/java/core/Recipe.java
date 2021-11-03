@@ -7,8 +7,10 @@ import java.util.List;
 /**
  * Lists of ingredients in a recipe.
  */
+//*Entity
 public class Recipe {
 
+  //private @Id @GenerateValue Long id;
   private String name;
   private String description;
   private List<Ingredient> ingredients = new ArrayList<>();

@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch RestapiApplication",
+      "request": "launch",
+      "mainClass": "foodie.restapi.RestapiApplication",
+      "projectName": ""
+    },
+    {
+      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}"
