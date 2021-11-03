@@ -77,8 +77,6 @@ public class Cookbook {
   }
 
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    recipes.stream().forEach(r -> sb.append(r.getName()));
-    return getName() + ": " + sb.toString();
+    return getName();
   }
 }
