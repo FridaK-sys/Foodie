@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import json.FileHandler;
 
@@ -32,21 +33,10 @@ public class NewRecipeController implements Initializable {
   private Cookbook cookbook = new Cookbook();
   private FileHandler fileHandler = new FileHandler();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
+  private String label = "";
 
   @FXML
-  private TextField recipeTitle;
-
-  @FXML
-  private TextField recipePortions;
-
-  @FXML
-  private TextField ingredientTitle;
-
-  @FXML
-  private TextField ingredientAmount;
-
-  @FXML
-  private TextField ingredientUnit;
+  private TextField ingredientTitle, ingredientAmount, ingredientUnit, recipePortions, recipeTitle;
 
   @FXML
   private ListView<Ingredient> ingredientListView;
@@ -59,6 +49,12 @@ public class NewRecipeController implements Initializable {
 
   @FXML
   private Label errorMessageLabel;
+
+  @FXML
+  private Button breakfastTag, lunchTag, dinnerTag;
+
+  @FXML
+  private HBox hb;
 
   public void addIngredientButton(ActionEvent ae) {
     try {
@@ -109,6 +105,10 @@ public class NewRecipeController implements Initializable {
       for (Ingredient i : ingredients) {
         newRecipe.addIngredient(i);
       }
+      if (!this.label.isBlank()) {
+        newRecipe.setLabel(this.label);
+      }
+
       newRecipe.setDescription(recipeDescription.getText());
       fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
       cookbook.addRecipe(newRecipe);
@@ -125,13 +125,33 @@ public class NewRecipeController implements Initializable {
 
   }
 
-  // mvn -pl ui javafx:run
+  public void breakfastTagPushed(ActionEvent ae) {
+    setLabel("Breakfast");
+  }
 
-  
+  public void lunchTagPushed(ActionEvent ae) {
+    setLabel("Lunch");
+  }
+
+  public void dinnerTagPushed(ActionEvent ae) {
+    setLabel("Dinner");
+  }
+
+  public void setLabel(String label) {
+    if (!this.label.equals(label)) {
+      this.label = label;
+      setLabelButton(label);
+    } else {
+      this.label = "";
+      setLabelButton("blank");
+    }
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ingredientListView.setItems(ingredients);
+    setLabelButton("blank");
+    hb.setSpacing(20);
 
   }
 
@@ -149,6 +169,27 @@ public class NewRecipeController implements Initializable {
 
   public List<Ingredient> getIngredients() {
     return new ArrayList<Ingredient>(ingredients);
+  }
+
+  public void setLabelButton(String label) {
+    if (label.equals("Breakfast")) {
+      breakfastTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
+      dinnerTag.setStyle("-fx-background-color: white");
+      lunchTag.setStyle("-fx-background-color: white");
+    } else if (label.equals("Lunch")) {
+      lunchTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
+      dinnerTag.setStyle("-fx-background-color: white");
+      breakfastTag.setStyle("-fx-background-color: white");
+    } else if (label.equals("Dinner")) {
+      dinnerTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
+      breakfastTag.setStyle("-fx-background-color: white");
+      lunchTag.setStyle("-fx-background-color: white");
+    } else if (label.equals("blank")) {
+      lunchTag.setStyle("-fx-background-color: white");
+      breakfastTag.setStyle("-fx-background-color: white");
+      dinnerTag.setStyle("-fx-background-color: white");
+
+    }
   }
 
 }

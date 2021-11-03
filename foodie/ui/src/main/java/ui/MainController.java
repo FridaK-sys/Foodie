@@ -75,7 +75,6 @@ public class MainController implements Initializable {
     // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
   }
 
-
   public Cookbook getCookbook() {
     return mainBook;
   }

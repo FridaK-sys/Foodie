@@ -45,7 +45,7 @@ public class FileHandlerTest {
     ingredients2.add(ingredient3);
     ingredients2.add(ingredient4);
     recipe = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredients);
-    recipe.setLabel("Frokost");
+    recipe.setLabel("Breakfast");
     recipe2 = new Recipe("Kakao", "Varm og god dessert!", 1, ingredients2);
     recipe2.setFav();
     recipeList.add(recipe);
