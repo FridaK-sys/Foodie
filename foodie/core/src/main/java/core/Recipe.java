@@ -3,14 +3,17 @@ package core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Lists of ingredients in a recipe.
- */
-//*Entity
+ *///
+@Entity
 public class Recipe {
 
-  //private @Id @GenerateValue Long id;
+  private @Id @GeneratedValue Long id;
   private String name;
   private String description;
   private List<Ingredient> ingredients = new ArrayList<>();
@@ -30,6 +33,14 @@ public class Recipe {
     setName(name);
     setPortions(portions);
     this.description = "nothing here...";
+  }
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
