@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewRecipeController">
@@ -16,7 +17,7 @@
       <TextField fx:id="ingredientAmount" layoutX="159.0" layoutY="124.0" prefHeight="26.0" prefWidth="50.0" promptText="Amount" />
       <TextField fx:id="ingredientUnit" layoutX="218.0" layoutY="124.0" prefHeight="26.0" prefWidth="50.0" promptText="unit" />
       <ListView fx:id="ingredientListView" layoutX="42.0" layoutY="162.0" prefHeight="187.0" prefWidth="266.0" />
-      <TextArea fx:id="recipeDescription" layoutX="344.0" layoutY="77.0" prefHeight="276.0" prefWidth="227.0" promptText="Description" />
+      <TextArea fx:id="recipeDescription" layoutX="344.0" layoutY="125.0" prefHeight="228.0" prefWidth="227.0" promptText="Description" />
       <Label layoutX="97.0" layoutY="28.0" text="Create a new recipe!">
          <font>
             <Font size="18.0" />
@@ -26,5 +27,12 @@
       <Button fx:id="createRecipe" layoutX="454.0" layoutY="360.0" mnemonicParsing="false" onAction="#createRecipe" text="Create new recipe" />
       <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#changeSceneToListView" prefHeight="26.0" prefWidth="36.0" text="&lt;-" />
       <Label fx:id="errorMessageLabel" layoutX="43.0" layoutY="365.0" prefHeight="17.0" prefWidth="266.0" />
+      <HBox fx:id="hb" layoutX="343.0" layoutY="71.0" prefHeight="30.0" prefWidth="220.0">
+         <children>
+            <Button fx:id="breakfastTag" mnemonicParsing="false" onAction="#breakfastTagPushed" text="Breakfast" />
+            <Button fx:id="lunchTag" mnemonicParsing="false" onAction="#lunchTagPushed" text="Lunch" />
+            <Button fx:id="dinnerTag" mnemonicParsing="false" onAction="#dinnerTagPushed" text="Dinner" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
