@@ -32,10 +32,7 @@ public class ViewRecipeController implements Initializable {
   private FileHandler fileHandler = new FileHandler();
 
   @FXML
-  private Label recipeTitle;
-
-  @FXML
-  private Label portions;
+  private Label recipeTitle, labelTag, portions;
 
   @FXML
   private ListView<Ingredient> ingredientsListView;
@@ -103,6 +100,9 @@ public class ViewRecipeController implements Initializable {
       faveButton.setText("Remove from favorite");
     } else {
       faveButton.setText("Add to favorite");
+    }
+    if (!selectedRecipe.getLabel().isBlank()) {
+      labelTag.setText(selectedRecipe.getLabel());
     }
 
   }
