@@ -30,9 +30,9 @@ public class CookbookTest {
 
 		recipe1 = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredientList1);
 		recipe2 = new Recipe("Kjøttkaker", "Mormor sin oppskrift", 4, ingredientList1);
-		recipe2.setLabel("Middag");
-		recipe3 = new Recipe("Wok", "Rask middag", 5, ingredientList1);
-		recipe3.setLabel("Middag");
+		recipe2.setLabel("Dinner");
+		recipe3 = new Recipe("Wok", "Rask Dinner", 5, ingredientList1);
+		recipe3.setLabel("Dinner");
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 
@@ -120,7 +120,7 @@ public class CookbookTest {
 
 		cookbook1.addRecipe(recipe3);
 		List<Recipe> labeled = Arrays.asList(recipe2, recipe3);
-		assertEquals(labeled, cookbook1.getRecipesWithLabel("Middag"));
+		assertEquals(labeled, cookbook1.getRecipesWithLabel("Dinner"));
 
 	}
 

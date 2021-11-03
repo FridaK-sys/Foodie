@@ -15,7 +15,7 @@ public class Recipe {
   private int portions;
   private boolean fav = false;
   private String label = "";
-  static final List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
+  static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner");
 
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
@@ -107,7 +107,7 @@ public class Recipe {
     if (allowedLabels.contains(label)) {
       this.label = label;
     } else {
-      throw new IllegalArgumentException("Label has to be either Frokost, Lunsj or Middag");
+      throw new IllegalArgumentException("Label has to be either Breakfast, Lunch or Dinner");
     }
   }
 
@@ -120,8 +120,6 @@ public class Recipe {
   }
 
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    ingredients.stream().forEach(i -> sb.append(i.getName()));
-    return getName() + ": " + sb.toString();
+    return getName();
   }
 }

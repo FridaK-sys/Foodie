@@ -126,17 +126,17 @@ public class RecipeTest {
 	@Test
 	public void testSetLabel() {
 		assertThrows(IllegalArgumentException.class, () -> recipe.setLabel("Dessert"), "Dessert is not an allowed label");
-		recipe.setLabel("Middag");
-		assertEquals("Middag", recipe.getLabel());
-		recipe.setLabel("Lunsj");
-		assertEquals("Lunsj", recipe.getLabel());
-		recipe.setLabel("Frokost");
-		assertEquals("Frokost", recipe.getLabel());
+		recipe.setLabel("Dinner");
+		assertEquals("Dinner", recipe.getLabel());
+		recipe.setLabel("Lunch");
+		assertEquals("Lunch", recipe.getLabel());
+		recipe.setLabel("Breakfast");
+		assertEquals("Breakfast", recipe.getLabel());
 	}
 
 	@Test
 	public void testRemoveLabel() {
-		recipe.setLabel("Middag");
+		recipe.setLabel("Dinner");
 		recipe.removeLabel();
 		assertEquals("", recipe.getLabel());
 	}
