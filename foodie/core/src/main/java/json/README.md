@@ -1,4 +1,4 @@
-# JSON filbehandling
+# Filbehandling med JSON
 Vi har valgt å bruke JSON.simple til filbehandling. JSON.simple er et Java-bibliotek som brukes til JSON prosessering, samt lesing og skriving av JSON-data. 
 
 Klassen `FileHandler` består av metoder for lesing og skriving til fil. Her er det implementert metoder for å skrive én kokebok eller oppskrift til fil, lese oppskriftene fra en kokebok og erstatte én oppskrift.  
