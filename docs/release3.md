@@ -2,7 +2,7 @@
 
 ***Sprint goal: Bygge et REST-API som knyttes til applikasjonen, samt utvide applikasjonen med mer funksjonalitet og forbedret kodekvalitet.***
 
- ## Oppgaver for denne sprinten
+### Oppgaver for denne sprinten
 - Bygge et REST-API (XL)
 - Knytte REST-API-et til UI (L)
 - Implementere en favoritt-knapp for oppskrifter (M)

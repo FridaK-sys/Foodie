@@ -1,10 +1,13 @@
-#release2
-I første scrum-møte ble vi enige om hva vi skulle gjøre i løpet av denne sprinten:
+# Release 2
 
-Oppgaver:
-- gjøre om fileHandler.java til å kunne skrive til og lese fra JSON-filer (6 timer)
-- skrive filbehandlingstest (3 timer)
-- skrive UI-tester (5 timer)
-- oppdatere dokumentasjon (readme-filer og dos) (1 timer)
-- testtillegg (Jacoco) og tillegg for kodekvalitet (Spotbugs og Checkstyle) (4 timer)
-- lage PlantUML (1 time)
+***Sprint Goal: implementere testtillegg for kodekvalitet samt testing av UI og filbehandling.***
+
+### Oppgaver for denne sprinten
+- Utarbeide tester for UI (L)
+- Utarbeide tester for filbehandling i JSON (M)
+- Implementere testtillegg for kodekvalitet: Checkstyle, Spotbugs og Jacoco (M)
+- Lage et diagram for domenelaget (S)
+- Oppdatere dokumentasjon (S)
+
+
+**Tidsestimat: S, M, L, XL**
