@@ -11,7 +11,7 @@ Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. H
 Selve kodingsprosjektet ligger i mappen foodie. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
 Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen core. Vi har valgt å bruke JSON for lesing og skriving til fil. 
 Testene av logikken og filbehandlingen er utført med JUnit 5.
-Design av brukergrensesnittet i JavaFX og kontrollere ligger i mappen ui. 
+Design av brukergrensesnittet i JavaFX og kontrollerne ligger i mappen ui. 
 Restapiet er utviklet med Spring Boot ... ?
 Dokumentasjonen for hver release ligger i mappen docs.
 
@@ -19,8 +19,6 @@ Dokumentasjonen for hver release ligger i mappen docs.
 Prosjektet bruker Maven til bygging og kjøring. 
 For å kjøre prosjektet, naviger deg til mappen "foodie" med `cd foodie` og skriv `mvn install` etterfulgt av `mvn -pl ui javafx:run`. Dette kjører også alt av tester. 
 
-Prosjektet kan åpnes i Gitpod. 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/.../...)
 
 ## Verktøy tilknyttet kodekvalitet
 Vi har brukt følgende verktøy tilknyttet kodekvalitet:
