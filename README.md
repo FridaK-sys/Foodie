@@ -1,30 +1,34 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/.../...)
+
 # Foodie-prosjektet 
 
 Dette prosjektet er tilknyttet emnet IT1901 Informatikk prosjektarbeid I.
 
 ## Om appen
-Appen Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. Hver oppskrift kan redigeres ved å legge til eller fjerne ingredienser, samt skalere antall porsjoner for oppskriften. Appen er ment for å brukes som en digital samling av kokebøker, og bidra til lettere matlagingsopplevelse i hverdagen. 
+Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. Hver oppskrift kan redigeres ved å legge til eller fjerne ingredienser, samt skalere antall porsjoner for oppskriften. Appen er ment til å brukes som en digital samling av kokebøker for å bidra til en lettere matlagingsopplevelse i hverdagen. 
 
 ## Oppsett av prosjektet 
-Selve kodingsprosjektet ligger i modules-template.
+Selve kodingsprosjektet ligger i mappen foodie. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
+Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen core. Vi har valgt å bruke JSON for lesing og skriving til fil. 
+Testene av logikken og filbehandlingen er utført med JUnit 5.
+Design av brukergrensesnittet i JavaFX og kontrollere ligger i mappen ui. 
+Restapiet er utviklet med Spring Boot ... ?
 Dokumentasjonen for hver release ligger i mappen docs.
-Logikken og tester til disse klassene ligger i modules-template/core/src/.
-Design av brukergrensesnittet i javafx, kontrollere og filbehandling ligger i modules-template/ui/src.
 
 ## Bygging og kjøring av prosjektet
-Prosjektet bruker maven til bygging og kjøring. 
-For å kjøre prosjektet, bruk `mvn install`, deretter `mvn -pl ui javafx:run` i mappen modules-template. Dette kjører også alt av tester. 
+Prosjektet bruker Maven til bygging og kjøring. 
+For å kjøre prosjektet, naviger deg til mappen "foodie" med `cd foodie` og skriv `mvn install` etterfulgt av `mvn -pl ui javafx:run`. Dette kjører også alt av tester. 
+
+Prosjektet kan åpnes i Gitpod. 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/.../...)
 
 ## Verktøy tilknyttet kodekvalitet
 Vi har brukt følgende verktøy tilknyttet kodekvalitet:
 
-- **Checkstyle** - sjekker mer overfladiske og stilmessige egenskaper til koden som tekst
-- **Spotbugs** - analyserer koden for vanlige feil
-- **Jacoco** - samler inn og presenterer informasjon og testdekningsgrad
+- **Checkstyle** - sjekker mer overfladiske og stilmessige egenskaper til koden som tekst.
+- **Spotbugs** - analyserer koden for vanlige feil.
+- **Jacoco** - samler inn og presenterer informasjon og testdekningsgrad.
 
-
-## Implisitt lagring
-Vi har valgt å bruke implisitt lagring fordi vi skal senere knytte prosjeket til API. Da har det ikke noe å si for brukeren hvor prosjeketet lagres. 
 
 ## Arbeidsvaner og arbeidsflyt
 Vi bruker Scrum som en del av vår utviklingsprosess. Scrum er et rammeverk for å støtte smidig utvikling av informasjonssystemer. 
