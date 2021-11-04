@@ -34,6 +34,8 @@ public class NewRecipeController implements Initializable {
   private FileHandler fileHandler = new FileHandler();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private String label = "";
+  private boolean editing = false;
+  private int index;
 
   @FXML
   private TextField ingredientTitle, ingredientAmount, ingredientUnit, recipePortions, recipeTitle;
@@ -45,13 +47,13 @@ public class NewRecipeController implements Initializable {
   private TextArea recipeDescription;
 
   @FXML
-  private Button backButton;
-
-  @FXML
   private Label errorMessageLabel;
 
   @FXML
-  private Button breakfastTag, lunchTag, dinnerTag;
+  private Button backButton, breakfastTag, lunchTag, dinnerTag;
+
+  @FXML
+  private Button saveRecipeButton, deleteRecipeButton, createRecipeButton;
 
   @FXML
   private HBox hb;
@@ -87,12 +89,42 @@ public class NewRecipeController implements Initializable {
     }
   }
 
-  public void createRecipe(ActionEvent ae) throws IOException {
-
+  public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
-      if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
-        throw new IllegalArgumentException("Missing name or portion size");
+      Recipe createdRecipe = createRecipe();
+      Cookbook tempBook = new Cookbook();
+      fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", tempBook);
+      tempBook.addRecipe(createdRecipe);
+      fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", tempBook);
+      backButton.fire();
+
+    } catch (Exception e) {
+      errorMessageLabel.setText(e.getMessage());
+    }
+  }
+
+  public void saveRecipe() {
+    try {
+      Recipe updatedRecipe = createRecipe();
+      fileHandler.replaceRecipeInFile(updatedRecipe, index);
+      backButton.fire();
+
+    } catch (Exception e) {
+      errorMessageLabel.setText(e.getMessage());
+    }
+  }
+
+  public Recipe createRecipe() {
+    if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
+      throw new IllegalArgumentException("Missing name or portion size");
+    }
+    if (!editing) {
+      if (this.cookbook.isInCookbook(recipeTitle.getText())) {
+        throw new IllegalArgumentException("This recipe title already exists");
       }
+    }
+    try {
+
       this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
 
       if (!(recipeDescription.getText() == null)) {
@@ -110,18 +142,45 @@ public class NewRecipeController implements Initializable {
       }
 
       newRecipe.setDescription(recipeDescription.getText());
-      fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
-      cookbook.addRecipe(newRecipe);
 
-      fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
-      backButton.fire();
+      return newRecipe;
+
     } catch (NullPointerException e) {
-      errorMessageLabel.setText("You have empty fields");
+      throw new NullPointerException("You have empty fields");
     } catch (NumberFormatException e) {
-      errorMessageLabel.setText("Ingredient amount must be a number");
+      throw new NumberFormatException("Ingredient amount must be a number");
     } catch (IllegalArgumentException e) {
-      errorMessageLabel.setText(e.getMessage());
+      throw new IllegalArgumentException(e.getMessage());
     }
+
+  }
+
+  public void initData(Recipe recipe, int recipeIndex, Cookbook cookbook) {
+    this.recipeTitle.setText(recipe.getName());
+    this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    if (!recipe.getDescription().isEmpty()) {
+      this.recipeDescription.setText(recipe.getDescription());
+    }
+    if (!recipe.getLabel().isEmpty()) {
+      setLabel(recipe.getLabel());
+    }
+    ingredients.addAll(recipe.getIngredients());
+    this.editing = true;
+    this.cookbook = cookbook;
+    this.index = recipeIndex;
+
+    createRecipeButton.setVisible(false);
+    saveRecipeButton.setVisible(true);
+    deleteRecipeButton.setVisible(true);
+
+  }
+
+  public void initData(Cookbook cookbook) {
+    this.cookbook = cookbook;
+
+    createRecipeButton.setVisible(true);
+    saveRecipeButton.setVisible(false);
+    deleteRecipeButton.setVisible(false);
 
   }
 
@@ -145,6 +204,12 @@ public class NewRecipeController implements Initializable {
       this.label = "";
       setLabelButton("blank");
     }
+  }
+
+  public void deleteRecipe(ActionEvent ea) {
+    cookbook.removeRecipe(index);
+    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
+    backButton.fire();
   }
 
   @Override
