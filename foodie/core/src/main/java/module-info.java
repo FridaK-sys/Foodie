@@ -1,4 +1,4 @@
-module calc.core {
+module foodie.core {
   exports core;
   exports json;
 

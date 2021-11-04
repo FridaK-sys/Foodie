@@ -152,5 +152,6 @@
     <modules>
         <module>core</module>
         <module>ui</module>
+        <module>restapi</module>
     </modules>
 </project>
