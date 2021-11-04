@@ -38,9 +38,11 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         URL fxmlLocation = getClass().getResource("ViewRecipes_test.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = fxmlLoader.load();
+        setupItems();
+        
+        Scene scene = new Scene(root);
         this.controller = fxmlLoader.getController();
         controller.initData(recipe1, 1);
-        Scene scene = new Scene(root);
 
         stage.setTitle("Cookbook<3");
 
