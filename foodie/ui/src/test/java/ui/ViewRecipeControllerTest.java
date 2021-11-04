@@ -35,7 +35,7 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
     @Override
     public void start(final Stage stage) throws Exception {
 
-        URL fxmlLocation = getClass().getResource("ViewRecipe_test.fxml");
+        URL fxmlLocation = getClass().getResource("ViewRecipes_test.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
