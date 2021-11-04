@@ -69,6 +69,15 @@ public class Cookbook {
     return recipes.stream().filter(r -> r.getFav() == true).toList();
   }
 
+  public boolean isInCookbook(String recipeName) {
+    for (Recipe r : recipes) {
+      if (r.getName().equals(recipeName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public List<Recipe> getRecipesWithLabel(String label) {
     if (!Recipe.allowedLabels.contains(label)) {
       throw new IllegalArgumentException("Label is not valid");
