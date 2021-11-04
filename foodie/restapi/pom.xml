@@ -2,19 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>it1901</groupId>
+  <artifactId>modules-restapi</artifactId>
+
 	<parent>
       <groupId>it1901</groupId>
       <artifactId>modules-template</artifactId>
       <version>0.0.1-SNAPSHOT</version>
       <relativePath>..</relativePath>
-    </parent>
-
-
-	<groupId>foodie</groupId>
-	<artifactId>restapi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>restapi</name>
-	<description>Demo project for Spring Boot</description>
+  </parent>
 
 	<properties>
 		<java.version>16</java.version>
