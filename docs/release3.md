@@ -1,6 +1,6 @@
 # Release 3
 
-** Sprint goal: Bygge et REST-API som knyttes til applikasjonen, samt utvide applikasjonen med mer funksjonalitet og forbedret kodekvalitet.**
+***Sprint goal: Bygge et REST-API som knyttes til applikasjonen, samt utvide applikasjonen med mer funksjonalitet og forbedret kodekvalitet.***
 
  ## Oppgaver for denne sprinten
 - Bygge et REST-API (XL)
@@ -16,4 +16,4 @@
 - Oppdatere dokumentasjon (S)
 
 
-Tidsestimat: S, M, L, XL
+**Tidsestimat: S, M, L, XL**
