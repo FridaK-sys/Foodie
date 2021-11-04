@@ -37,6 +37,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
+        controller.initData(cookbook);
         // this.cookbook = this.controller.getCookbook();
         Scene scene = new Scene(root);
 
@@ -75,7 +76,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
         clickOn("#ingredientUnit").write("stk");
         clickOn("#addIngredient");
         clickOn("#recipeDescription").write("Epler...");
-        clickOn("#createRecipe");
+        clickOn("#createRecipeButton");
         handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
         checkRecipe(cookbook.getRecipes().get(cookbook.getRecipes().size() - 1), recipe1);
         handler.writeRecipesToFile("src/main/resources/ui/test.txt", originalCookbook);

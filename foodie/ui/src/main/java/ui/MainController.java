@@ -61,6 +61,24 @@ public class MainController implements Initializable {
     Parent root = fxmlLoader.load();
 
     Scene viewRecipesScene = new Scene(root);
+    NewRecipeController controller = fxmlLoader.getController();
+    controller.initData(mainBook);
+
+    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
+  }
+
+  public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
+    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+
+    Parent root = fxmlLoader.load();
+    Scene viewRecipesScene = new Scene(root);
+
+    NewRecipeController controller = fxmlLoader.getController();
+    controller.initData(mainListView.getSelectionModel().getSelectedItem(),
+        mainListView.getSelectionModel().getSelectedIndex(), mainBook);
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
     stage.setScene(viewRecipesScene);
