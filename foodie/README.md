@@ -1,0 +1,3 @@
+## Arkitekturdiagram
+
+![Arkitektur](architecture.png)
