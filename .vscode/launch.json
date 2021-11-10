@@ -9,6 +9,13 @@
       "name": "Launch RestapiApplication",
       "request": "launch",
       "mainClass": "foodie.restapi/restapi.RestapiApplication",
+      "projectName": "modules-restapi"
+    },
+    {
+      "type": "java",
+      "name": "Launch RestapiApplication",
+      "request": "launch",
+      "mainClass": "foodie.restapi/restapi.RestapiApplication",
       "projectName": "restapi (2)"
     },
     {
