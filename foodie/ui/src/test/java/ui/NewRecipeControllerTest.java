@@ -28,7 +28,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     private Ingredient ing1, ing2;
     private List<Ingredient> ingredients = new ArrayList<>();
     private Cookbook cookbook = new Cookbook();
-    private Cookbook originalCookbook;
+    private Cookbook originalCookbook = new Cookbook();
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -55,7 +55,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
         recipe1.addIngredient(ing1);
         recipe1.setDescription("Epler...");
-        originalCookbook = setUpCookBook();
+        // originalCookbook = setUpCookBook();
     }
 
     @Test
@@ -69,6 +69,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
     @Test
     public void testNewRecipe() throws FileNotFoundException {
+        handler.readRecipesFromFile("src/main/resources/ui/test.txt", originalCookbook);
         clickOn("#recipeTitle").write("Eple");
         clickOn("#recipePortions").write("2");
         clickOn("#ingredientTitle").write("Eple");
@@ -77,8 +78,9 @@ public class NewRecipeControllerTest extends AbstractAppTest {
         clickOn("#addIngredient");
         clickOn("#recipeDescription").write("Epler...");
         clickOn("#createRecipeButton");
-        handler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
-        checkRecipe(cookbook.getRecipes().get(cookbook.getRecipes().size() - 1), recipe1);
+        Cookbook temp = new Cookbook();
+        handler.readRecipesFromFile("src/main/resources/ui/test.txt", temp);
+        checkRecipe(temp.getRecipes().get(temp.getRecipes().size() - 1), recipe1);
         handler.writeRecipesToFile("src/main/resources/ui/test.txt", originalCookbook);
     }
 
