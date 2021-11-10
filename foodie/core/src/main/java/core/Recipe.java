@@ -3,9 +3,15 @@ package core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * Lists of ingredients in a recipe.
@@ -16,7 +22,7 @@ public class Recipe {
   private @Id @GeneratedValue Long id;
   private String name;
   private String description;
-  private List<Ingredient> ingredients = new ArrayList<>();
+  private @Column @ElementCollection(targetClass = Ingredient.class) List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private boolean fav = false;
   private String label = "";
