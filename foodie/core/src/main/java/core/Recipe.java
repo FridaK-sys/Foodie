@@ -5,18 +5,28 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Lists of ingredients in a recipe.
+ * A recipe containing a name, description, ingredients, portions, fav and
+ * label.
  */
 public class Recipe {
 
+  private Long id;
   private String name;
   private String description;
   private List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private boolean fav = false;
   private String label = "";
-  static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner");
+  static final List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
 
+  /**
+   * Constructor for recipe with name, description, portions and ingredients
+   * 
+   * @param name
+   * @param description
+   * @param portions
+   * @param ingredients
+   */
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
     setPortions(portions);
@@ -24,20 +34,41 @@ public class Recipe {
     this.ingredients = new ArrayList<>(ingredients);
   }
 
+  /**
+   * Constructor for recipe with name and portions. Description is automatically
+   * set to "nothing here..."
+   * 
+   * @param name
+   * @param portions
+   */
   public Recipe(String name, int portions) {
     setName(name);
     setPortions(portions);
     this.description = "nothing here...";
   }
 
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
   public String getName() {
     return this.name;
   }
 
+  /**
+   * Sets name of recipe if param consists of 1-20 characters (letters and
+   * numbers).
+   * 
+   * @param name
+   * @throws IllegalArgumentException if param is not 1-20 characters long or
+   *                                  contains other characters than letters and
+   *                                  numbers
+   */
   public void setName(String name) {
-    if (name.isBlank()) {
-      throw new IllegalArgumentException("Invalid name");
-    }
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
       throw new IllegalArgumentException("Invalid name");
     }
@@ -56,6 +87,13 @@ public class Recipe {
     return this.portions;
   }
 
+  /**
+   * Sets portions if param is a positive integer. Updates the amount of each
+   * ingredient to fit with portions.
+   * 
+   * @param portions
+   * @throws IllegalArgumentException if param is negative integer
+   */
   public void setPortions(int portions) {
     if (portions <= 0) {
       throw new IllegalArgumentException("Portions must be more than 0");
@@ -68,6 +106,12 @@ public class Recipe {
     return new ArrayList<>(ingredients);
   }
 
+  /**
+   * Adds ingredient to ingredientlist if it is not already there
+   * 
+   * @param ingredient
+   * @throws IllegalArgumentException if list already contains ingredient
+   */
   public void addIngredient(Ingredient ingredient) {
     if (!ingredients.contains(ingredient)) {
       ingredients.add(ingredient);
@@ -76,18 +120,18 @@ public class Recipe {
     }
   }
 
-  public void removeIngredient(Ingredient ingredient) {
-    if (!ingredients.contains(ingredient)) {
-      throw new IllegalArgumentException(this.name + "does not contain this ingredient");
-    }
-    ingredients.remove(ingredient);
-  }
-
-  public void removeIngredient(String name) {
-    for (Ingredient i : ingredients) {
-      if (i.getName().equals(name)) {
-        ingredients.remove(i);
-      }
+  /**
+   * Remove ingredient from ingredientList if index is in the list
+   * 
+   * @param index
+   * @throws IllegalArgumentException if index is larger than size of
+   *                                  ingredientList
+   */
+  public void removeIngredient(int index) {
+    if (index <= ingredients.size()) {
+      ingredients.remove(index);
+    } else {
+      throw new IllegalArgumentException();
     }
   }
 
@@ -103,11 +147,18 @@ public class Recipe {
     return this.fav;
   }
 
+  /**
+   * Sets label of recipe if label is valid
+   * 
+   * @param index
+   * @throws IllegalArgumentException if index is larger than size of
+   *                                  ingredientList
+   */
   public void setLabel(String label) {
     if (allowedLabels.contains(label)) {
       this.label = label;
     } else {
-      throw new IllegalArgumentException("Label has to be either Breakfast, Lunch or Dinner");
+      throw new IllegalArgumentException("Label has to be either Frokost, Lunsj or Middag");
     }
   }
 
@@ -120,6 +171,8 @@ public class Recipe {
   }
 
   public String toString() {
-    return getName();
+    StringBuilder sb = new StringBuilder();
+    ingredients.stream().forEach(i -> sb.append(i.getName()));
+    return getName() + ": " + sb.toString();
   }
 }

@@ -5,17 +5,29 @@ package core;
  */
 
 public class Ingredient {
-  
+
   private String name;
   private double amount;
   private String unit;
 
+  /**
+   * Constructor for ingredient with name, amount and unit
+   * 
+   * @param name
+   * @param amoumt
+   * @param unit
+   */
   public Ingredient(String name, double amount, String unit) {
     setName(name);
     setAmount(amount);
     this.unit = unit;
   }
 
+  /**
+   * Constructor for ingredient with name
+   * 
+   * @param name
+   */
   public Ingredient(String name) {
     setName(name);
     this.amount = 0;

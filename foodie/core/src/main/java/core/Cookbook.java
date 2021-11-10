@@ -43,9 +43,6 @@ public class Cookbook {
   }
 
   public void removeRecipe(Recipe recipe) {
-    if (!recipes.contains(recipe)) {
-      throw new IllegalArgumentException(name + "does not contain this recipe");
-    }
     recipes.remove(recipe);
   }
 
