@@ -150,9 +150,8 @@ public class Recipe {
   /**
    * Sets label of recipe if label is valid
    * 
-   * @param index
-   * @throws IllegalArgumentException if index is larger than size of
-   *                                  ingredientList
+   * @param label
+   * @throws IllegalArgumentException if label is not valid
    */
   public void setLabel(String label) {
     if (allowedLabels.contains(label)) {

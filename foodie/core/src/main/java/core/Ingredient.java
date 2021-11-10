@@ -38,6 +38,15 @@ public class Ingredient {
     return this.name;
   }
 
+  /**
+   * Sets name of ingredient if param consists of 1-20 characters (letters and
+   * numbers).
+   * 
+   * @param name
+   * @throws IllegalArgumentException if param is not 1-20 characters long or
+   *                                  contains other characters than letters and
+   *                                  numbers
+   */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
       throw new IllegalArgumentException("Invalid name");
@@ -49,6 +58,12 @@ public class Ingredient {
     return this.amount;
   }
 
+  /**
+   * Sets amount if param is larger than zero
+   * 
+   * @param amount
+   * @throws IllegalArgumentException if param is a negative integer or zero
+   */
   public void setAmount(double amount) {
     if (amount <= 0) {
       throw new IllegalArgumentException("Amount must be more than 0");
