@@ -46,7 +46,7 @@ public class RecipeController {
 
     return repository.findById(id).map(recipe -> {
       recipe.setName(newRecipe.getName());
-      recipe.setRole(newRecipe.getRole());
+      recipe.setPortions(newRecipe.getPortions());
       return repository.save(recipe);
     }).orElseGet(() -> {
       newRecipe.setId(id);

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class RecipeNotFoundAdvice {
 
   @ResponseBody
-  @ExceptionHandler(RecipeNotFoundException.class)
+  @ExceptionHandler(RecipeNotFoundException.class) // kjører bare hvis RecipeNotFoundException kastes
   @ResponseStatus(HttpStatus.NOT_FOUND)
   String employeeNotFoundHandler(RecipeNotFoundException ex) {
     return ex.getMessage();

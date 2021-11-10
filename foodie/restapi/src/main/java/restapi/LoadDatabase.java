@@ -13,17 +13,17 @@ import core.Ingredient;
 
 public class LoadDatabase {
   private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
-  private Ingredient ingredient1 = new Ingredient("Hvetemel", 2, "dl");
-  private Ingredient ingredient2 = new Ingredient("Tomatsaus", 1, "dl");
-  private List<Ingredient> ingrediens = new ArrayList<>();
+  // private Ingredient ingredient1 = new Ingredient("Hvetemel", 2, "dl");
+  // private Ingredient ingredient2 = new Ingredient("Tomatsaus", 1, "dl");
+  // private List<Ingredient> ingrediens = new ArrayList<>();
 
   @Bean
   CommandLineRunner initDatabase(RecipeRepository repository) {
-    ingrediens.add(ingredient1); // må kanskje flyttes
-    ingrediens.add(ingredient2);
+    // ingrediens.add(ingredient1); // må kanskje flyttes
+    // ingrediens.add(ingredient2);
 
     return args -> {
-      log.info("Preloading " + repository.save(new Recipe("Pizza", "Den beste!", 2, ingrediens)));
+      log.info("Preloading " + repository.save(new Recipe("Pizza", 2)));
 
     };
   }
