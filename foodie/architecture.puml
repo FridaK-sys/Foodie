@@ -1,44 +1,56 @@
 @startuml architecture
 
 component core {
-	package simpleex.core
-	package simpleex.json
+	package foodie.core
+	package foodie.json
 }
 
-component jackson {
+component JSON.simple {
 }
 
-simpleex.json ..> jackson
+foodie.json ..> JSON.simple
 
-component fxui {
-	package simpleex.ui
+component ui {
+	package foodie.ui
 }
 
-simpleex.ui ..> simpleex.core
-simpleex.ui ..> simpleex.json
+foodie.ui ..> foodie.core
+foodie.ui ..> foodie.json
 
 component javafx {
 	component fxml {
 	}
 }
 
-fxui ..> javafx
-fxui ..> fxml
+ui ..> javafx
+ui ..> fxml
 
 component restapi {
-	package simpleex.restapi
+	package foodie.restapi
 }
 
-simpleex.restapi ..> simpleex.core
-simpleex.restapi ..> simpleex.json
+foodie.restapi ..> foodie.core
+foodie.restapi ..> foodie.json
 
+component spring {
+}
+
+restapi ..> spring
 
 component restserver {
-	package simpleex.restserver
+	package foodie.restserver
 }
 
-simpleex.restserver ..> simpleex.core
-simpleex.restserver ..> simpleex.restapi
+foodie.restserver ..> foodie.core
+foodie.restserver ..> foodie.restapi
 
+component jersey {
+}
+
+component grizzly2 {
+}
+
+restserver ..> jersey
+restserver ..> grizzly2
 
 @enduml
