@@ -119,7 +119,7 @@ public class NewRecipeController implements Initializable {
       throw new IllegalArgumentException("Missing name or portion size");
     }
     if (!editing) {
-      if (this.cookbook.isInCookbook(recipeTitle.getText())) {
+      if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
         throw new IllegalArgumentException("This recipe title already exists");
       }
     }
