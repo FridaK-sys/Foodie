@@ -2,7 +2,10 @@ package restapi;
 
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,28 +23,35 @@ public class RecipeController {
     this.repository = repository;
   }
 
-  // Aggregate root
-  // tag::get-aggregate-root[]
-  @GetMapping("/Recipes")
-  List<Recipe> all() {
-    return repository.findAll(); // fiks
-  }
-  // end::get-aggregate-root[]
-
-  @PostMapping("/Recipes")
+  /*
+   * // Aggregate root // tag::get-aggregate-root[]
+   * 
+   * @GetMapping("/recipes") CollectionModel<EntityModel<Recipe>> all() {
+   * 
+   * List<EntityModel<Recipe>> recipes = repository.findAll().stream() .map(recipe
+   * -> EntityModel.of(recipe,
+   * linkTo(methodOn(RecipeController.class).one(recipe.getId())).withSelfRel(),
+   * linkTo(methodOn(RecipeController.class).all()).withRel("recipes")))
+   * .collect(Collectors.toList());
+   * 
+   * return CollectionModel.of(recipes,
+   * linkTo(methodOn(RecipeController.class).all()).withSelfRel()); } //
+   * end::get-aggregate-root[]
+   */
+  @PostMapping("/recipes")
   Recipe newRecipe(@RequestBody Recipe newRecipe) {
     return repository.save(newRecipe);
   }
 
   // Single item
 
-  @GetMapping("/Recipes/{id}")
+  @GetMapping("/recipes/{id}")
   Recipe one(@PathVariable Long id) {
 
     return repository.findById(id).orElseThrow(() -> new RecipeNotFoundException(id));
   }
 
-  @PutMapping("/Recipes/{id}")
+  @PutMapping("/recipes/{id}")
   Recipe replaceRecipe(@RequestBody Recipe newRecipe, @PathVariable Long id) {
 
     return repository.findById(id).map(recipe -> {
@@ -54,9 +64,19 @@ public class RecipeController {
     });
   }
 
-  @DeleteMapping("/Recipes/{id}")
+  @DeleteMapping("/recipes/{id}")
   void deleteRecipe(@PathVariable Long id) {
     repository.deleteById(id);
   }
+  /*
+   * @GetMapping("/recipes/{id}") EntityModel<Recipe> one(@PathVariable Long id) {
+   * 
+   * Recipe recipe = repository.findById(id) // .orElseThrow(() -> new
+   * RecipeNotFoundException(id));
+   * 
+   * return EntityModel.of(recipe, //
+   * linkTo(methodOn(RecipeController.class).one(id)).withSelfRel(),
+   * linkTo(methodOn(RecipeController.class).all()).withRel("recipes")); }
+   */
 
 }

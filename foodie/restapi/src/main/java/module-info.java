@@ -8,5 +8,6 @@ module foodie.restapi {
   requires spring.boot.autoconfigure;
   requires spring.data.jpa;
   requires org.slf4j;
+  requires spring.hateoas;
 
 }
