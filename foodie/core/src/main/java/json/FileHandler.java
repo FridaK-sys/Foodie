@@ -152,26 +152,4 @@ public class FileHandler {
 		Cookbook returnBook = new Cookbook("Recipes", recipes);
 		writeRecipesToFile("src/main/resources/ui/test.txt", returnBook);
 	}
-
-	public static void main(String[] args) throws IOException {
-		FileHandler filehandler = new FileHandler();
-		Ingredient ingredient1 = new Ingredient("Mel", 200, "g");
-		Ingredient ingredient2 = new Ingredient("Egg", 2, "stk");
-		Ingredient ingredient3 = new Ingredient("Sukker", 1.5, "dl");
-		Ingredient ingredient4 = new Ingredient("Kakao", 1, "dl");
-		List<Ingredient> ingredients = new ArrayList<Ingredient>();
-		ingredients.add(ingredient1);
-		ingredients.add(ingredient2);
-		List<Ingredient> ingredients2 = new ArrayList<Ingredient>();
-		ingredients2.add(ingredient3);
-		ingredients2.add(ingredient4);
-		Recipe recipe = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredients);
-		Recipe recipe2 = new Recipe("Kakao", "Varm og god dessert!", 1, ingredients2);
-		List<Recipe> recipeList = new ArrayList<Recipe>();
-		recipeList.add(recipe);
-		recipeList.add(recipe2);
-		Cookbook cookbook = new Cookbook("Kokebook", recipeList);
-
-		filehandler.writeRecipesToFile("testFile", cookbook);
-	}
 }
