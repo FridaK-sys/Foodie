@@ -1,82 +1,117 @@
 package restapi;
 
-import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import core.Recipe;
+import core.Cookbook;
 
 @RestController
+@RequestMapping(RecipeController.RECIPE_SERVICE_PATH)
 public class RecipeController {
 
-  private final RecipeRepository repository;
+  private static final String RECIPE_SERVICE_PATH = "restapi/recipe";
 
-  RecipeController(RecipeRepository repository) {
-    this.repository = repository;
+  @Autowired
+  private RecipeService resService;
+
+  @GetMapping
+  public Recipe getRecipe() {
+    resService.getRecipe();
+
+  }
+
+  @GetMapping
+  public Cookbook getCookbook() {
+    resService.getCookBook();
   }
 
   /*
-   * // Aggregate root // tag::get-aggregate-root[]
-   * 
-   * @GetMapping("/recipes") CollectionModel<EntityModel<Recipe>> all() {
-   * 
-   * List<EntityModel<Recipe>> recipes = repository.findAll().stream() .map(recipe
-   * -> EntityModel.of(recipe,
-   * linkTo(methodOn(RecipeController.class).one(recipe.getId())).withSelfRel(),
-   * linkTo(methodOn(RecipeController.class).all()).withRel("recipes")))
-   * .collect(Collectors.toList());
-   * 
-   * return CollectionModel.of(recipes,
-   * linkTo(methodOn(RecipeController.class).all()).withSelfRel()); } //
-   * end::get-aggregate-root[]
+   * private void autoSaveTodoModel() { todoModelService.autoSaveTodoModel(); }
    */
-  @PostMapping("/recipes")
-  Recipe newRecipe(@RequestBody Recipe newRecipe) {
-    return repository.save(newRecipe);
+  private void checkTodoList(Recipe recipe, String name) {
+    if (recipe == null) {
+      throw new IllegalArgumentException("No recipe named \"" + name + "\"");
+    }
   }
 
-  // Single item
-
-  @GetMapping("/recipes/{id}")
-  Recipe one(@PathVariable Long id) {
-
-    return repository.findById(id).orElseThrow(() -> new RecipeNotFoundException(id));
-  }
-
-  @PutMapping("/recipes/{id}")
-  Recipe replaceRecipe(@RequestBody Recipe newRecipe, @PathVariable Long id) {
-
-    return repository.findById(id).map(recipe -> {
-      recipe.setName(newRecipe.getName());
-      recipe.setPortions(newRecipe.getPortions());
-      return repository.save(recipe);
-    }).orElseGet(() -> {
-      newRecipe.setId(id);
-      return repository.save(newRecipe);
-    });
-  }
-
-  @DeleteMapping("/recipes/{id}")
-  void deleteRecipe(@PathVariable Long id) {
-    repository.deleteById(id);
-  }
-  /*
-   * @GetMapping("/recipes/{id}") EntityModel<Recipe> one(@PathVariable Long id) {
-   * 
-   * Recipe recipe = repository.findById(id) // .orElseThrow(() -> new
-   * RecipeNotFoundException(id));
-   * 
-   * return EntityModel.of(recipe, //
-   * linkTo(methodOn(RecipeController.class).one(id)).withSelfRel(),
-   * linkTo(methodOn(RecipeController.class).all()).withRel("recipes")); }
+  /**
+   * Gets the corresponding TodoList.
+   *
+   * @param name the name of the TodoList
+   * @return the corresponding TodoList
    */
+  @GetMapping(path = "/{name}")
+  public Recipe getRecipe(@PathVariable("name") String name) {
+    Recipe res = getRecipe();
+    // checkTodoList(todoList, name);
+    return res;
+  }
+
+  /**
+   * Replaces or adds a TodoList.
+   *
+   * @param name     the name of the TodoList
+   * @param todoList the todoList to add
+   * @return true if it was added, false if it replaced
+   */
+  @PutMapping(path = "/{name}")
+  public boolean putRecipe(@PathVariable("name") String name, @RequestBody Recipe recipe) {
+    boolean added = true;
+    for (Recipe res : getCookbook().getRecipes()) {
+      if (res.getName() == recipe.getName()) {
+        added = false;
+
+      }
+      return added;
+
+    }
+    // autoSaveTodoModel();
+    return added;
+  }
+
+  /**
+   * Renames the Recipe.
+   *
+   * @param name    the name of the Recipe
+   * @param newName the new name
+   */
+  @PostMapping(path = "/{name}/rename")
+  public boolean renameTodoList(@PathVariable("name") String name, @RequestParam("newName") String newName) {
+    for (Recipe res : getCookbook().getRecipes()) {
+      if (res.getName() == newName) {
+        throw new IllegalArgumentException("A Recipe named \"" + newName + "");
+      }
+
+      Recipe newRes = getRecipe();
+      newRes.setName(newName);
+      // autoSaveTodoModel();
+      return true;
+
+    }
+
+  }
+
+  /**
+   * Removes the TodoList.
+   *
+   * @param name the name of the TodoList
+   */
+  @DeleteMapping(path = "/{name}")
+  public boolean removeTodoList(@PathVariable("name") String name) {
+    AbstractTodoList todoList = getTodoModel().getTodoList(name);
+    checkTodoList(todoList, name);
+    getTodoModel().removeTodoList(todoList);
+    autoSaveTodoModel();
+    return true;
+  }
 
 }
