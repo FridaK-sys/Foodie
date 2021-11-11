@@ -117,7 +117,6 @@ public class RecipeTest {
 
 	@Test
 	public void testFav() {
-		recipe.setFav();
 		assertEquals(recipe.getFav(), true);
 		recipe.removeFav();
 		assertEquals(recipe.getFav(), false);

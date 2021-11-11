@@ -105,7 +105,6 @@ public class CookbookTest {
 
 	@Test
 	public void testGetFavRecipes() {
-		recipe1.setFav();
 		List<Recipe> favs = new ArrayList<>();
 		favs.add(recipe1);
 		assertEquals(cookbook1.getFavRecipes(), favs);
