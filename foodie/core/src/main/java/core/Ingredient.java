@@ -13,7 +13,7 @@ public class Ingredient {
   private String name;
   private double amount;
   private String unit;
-  private static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts"));
+  public static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts"));
 
   /**
    * Constructor for ingredient with name, amount and unit
@@ -47,11 +47,11 @@ public class Ingredient {
    * Sets name of ingredient if param consists of letters and numbers
    * 
    * @param name
-   * @throws IllegalArgumentException if param contains other characters than letters and
-   * numbers
+   * @throws IllegalArgumentException if param contains other characters than
+   * letters and numbers
    */
   public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;
