@@ -2,6 +2,7 @@ package restapi;
 
 import org.springframework.stereotype.Service;
 import core.Recipe;
+import json.CookbookPersistence;
 import core.Cookbook;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,20 +16,20 @@ public class RecipeService {
 
   private Recipe recipe;
   private Cookbook cookbook;
-  private RecipePersistence recipePersistence;
+  private CookbookPersistence cookbookPersistence;
 
   /**
    * Initializes the service with a specific cookbook.
    *
    * @param cookbook
    */
-  public CookbookService(Cookbook cookbook) {
+  public RecipeService(Cookbook cookbook) {
     this.cookbook = cookbook;
-    this.recipePersistence = new RecipePersistence();
-    recipePersistence.setSaveFile("springbootserver-cookbook.json");
+    this.cookbookPersistence = new CookbookPersistence();
+    cookbookPersistence.setSaveFile("springbootserver-cookbook.json");
   }
 
-  public CookbookService() {
+  public RecipeService() {
     this(createDefaultCookbook());
   }
 
@@ -42,7 +43,7 @@ public class RecipeService {
 
   private static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
-    URL url = CookbookService.class.getResource("default-cookbook.json");
+    URL url = RecipeService.class.getResource("default-cookbook.json");
     if (url != null) {
       try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
         return cookbookPersistence.readCookbook(reader);
