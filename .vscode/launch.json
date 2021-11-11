@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch CookbookApplication",
+      "request": "launch",
+      "mainClass": "foodie.restapi/restapi.CookbookApplication",
+      "projectName": "modules-restapi"
+    },
+    {
+      "type": "java",
       "name": "Launch RestapiApplication",
       "request": "launch",
       "mainClass": "foodie.restapi/restapi.RestapiApplication",

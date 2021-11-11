@@ -3,7 +3,6 @@ package restapi;
 import com.fasterxml.jackson.databind.Module;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import json.CookbookPersistence;
 import org.springframework.context.annotation.Bean;
 
