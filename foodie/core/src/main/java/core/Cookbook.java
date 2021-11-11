@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A cookbook containing a name and list of recipes
+ * A cookbook containing a name and list of recipes.
  */
 
 public class Cookbook {
@@ -13,18 +13,20 @@ public class Cookbook {
   private List<Recipe> recipes = new ArrayList<>();
 
   /**
-   * Constructor for cookbook with name and list of recipes
+   * Constructor for a cookbook with name and list of recipes.
    * 
    * @param name
    * @param recipes
+   * 
    */
+
   public Cookbook(String name, List<Recipe> recipes) {
     setName(name);
     this.recipes = new ArrayList<>(recipes);
   }
 
   /**
-   * Constructor for empty cookbook
+   * Constructor for an empty cookbook.
    */
   public Cookbook() {
     this.name = "Ny kokebok";
@@ -35,11 +37,11 @@ public class Cookbook {
   }
 
   /**
-   * Sets name if param consists of letters and numbers
+   * Sets name of cookbook.
    * 
    * @param name
    * @throws IllegalArgumentException if param contains other characters than
-   *                                  letters and numbers
+   *                                  letters and numbers.
    */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
@@ -53,10 +55,11 @@ public class Cookbook {
   }
 
   /**
-   * Adds recipe to recipeList if it is not already there
+   * Adds recipe to cookbook.
    * 
    * @param recipe
    * @throws IllegalArgumentException if list already contains recipe
+   * 
    */
   public void addRecipe(Recipe recipe) {
     if (!recipes.contains(recipe)) {
@@ -86,7 +89,7 @@ public class Cookbook {
    * Checks if recipe is in cookbook based on name of recipe
    * 
    * @param recipeName
-   * @return true if recipe is in RecipeList, false if not
+   * @return true if recipe is in RecipeList, false if not.
    */
   public boolean isInCookbook(String recipeName) {
     for (Recipe r : recipes) {
@@ -105,7 +108,7 @@ public class Cookbook {
    * @return list of all recipes in recipeList with label = param
    */
   public List<Recipe> getRecipesWithLabel(String label) {
-    if (!Recipe.allowedLabels.contains(label)) {
+    if (!Recipe.labels.contains(label)) {
       throw new IllegalArgumentException("Label is not valid");
     }
     return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();

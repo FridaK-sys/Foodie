@@ -76,12 +76,11 @@ public class CookbookTest {
 
 	@Test
 	public void testGetFavRecipes() {
-		recipe1.setFav();
+		recipe1.setFav(true);
 		List<Recipe> favs = new ArrayList<>();
 		favs.add(recipe1);
 		assertEquals(cookbook1.getFavRecipes(), favs);
-
-		recipe1.removeFav();
+		recipe1.setFav(false);
 		favs.remove(recipe1);
 		assertEquals(cookbook1.getFavRecipes(), favs);
 	}

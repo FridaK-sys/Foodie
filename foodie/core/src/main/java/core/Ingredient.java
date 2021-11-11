@@ -16,7 +16,7 @@ public class Ingredient {
   public static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts"));
 
   /**
-   * Constructor for ingredient with name, amount and unit
+   * Constructor for ingredient with name, amount and unit.
    * 
    * @param name
    * @param amount
@@ -29,7 +29,7 @@ public class Ingredient {
   }
 
   /**
-   * Constructor for ingredient with name
+   * Constructor for ingredient with name.
    * 
    * @param name
    */
@@ -44,11 +44,12 @@ public class Ingredient {
   }
 
   /**
-   * Sets name of ingredient if param consists of letters and numbers
+   * Sets name of ingredient.
    * 
    * @param name
    * @throws IllegalArgumentException if param contains other characters than
-   * letters and numbers
+   *                                  letters and numbers
+   * 
    */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
@@ -62,10 +63,11 @@ public class Ingredient {
   }
 
   /**
-   * Sets amount if param is larger than zero
+   * Sets amount of ingredient.
    * 
    * @param amount
    * @throws IllegalArgumentException if param is a negative integer or zero
+   * 
    */
   public void setAmount(double amount) {
     if (amount <= 0) {

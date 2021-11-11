@@ -90,9 +90,9 @@ public class RecipeTest {
 
 	@Test
 	public void testFavorite() {
-		recipe.setFav();
+		recipe.setFav(true);
 		assertEquals(recipe.getFav(), true);
-		recipe.removeFav();
+		recipe.setFav(false);
 		assertEquals(recipe.getFav(), false);
 	}
 

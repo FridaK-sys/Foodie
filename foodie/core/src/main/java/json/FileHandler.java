@@ -113,7 +113,7 @@ public class FileHandler {
 				recipe.setDescription(description);
 
 				if (fav) {
-					recipe.setFav();
+					recipe.setFav(true);
 				}
 				if (!label.equals("")) {
 					recipe.setLabel(label);

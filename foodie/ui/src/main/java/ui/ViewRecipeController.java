@@ -44,10 +44,10 @@ public class ViewRecipeController implements Initializable {
 
   public void favorizeRecipeButton(ActionEvent ae) {
     if (selectedRecipe.getFav() == true) {
-      selectedRecipe.removeFav();
+      selectedRecipe.setFav(false);
       faveButton.setText("Add to favorite");
     } else {
-      selectedRecipe.setFav();
+      selectedRecipe.setFav(true);
       faveButton.setText("Remove from favorite");
     }
     fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);

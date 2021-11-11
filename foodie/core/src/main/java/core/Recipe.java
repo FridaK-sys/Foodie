@@ -2,30 +2,38 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * A recipe containing a name, description, ingredients, portions, fav and
- * label.
+ * Recipe containing a name, description, ingredients, portions, favorite tag
+ * and label.
  */
 public class Recipe {
 
-  private Long id;
   private String name;
   private String description;
   private List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private boolean fav = false;
   private String label = "";
-  public static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner", "Dessert");
+  public static final List<String> labels = Collections.unmodifiableList(new ArrayList<String>() {
+    {
+      add("Breakfast");
+      add("Lunch");
+      add("Dinner");
+      add("Dessert");
+    }
+  });
 
   /**
-   * Constructor for recipe with name, description, portions and ingredients
+   * Constructor for recipe with name, description, portions and ingredients.
    * 
    * @param name
    * @param description
    * @param portions
    * @param ingredients
+   * 
    */
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
@@ -35,11 +43,11 @@ public class Recipe {
   }
 
   /**
-   * Constructor for recipe with name and portions. Description is automatically
-   * set to "nothing here..."
+   * Constructor for recipe with name and portions.
    * 
    * @param name
    * @param portions
+   * 
    */
   public Recipe(String name, int portions) {
     setName(name);
@@ -47,20 +55,12 @@ public class Recipe {
     this.description = "nothing here...";
   }
 
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getName() {
     return this.name;
   }
 
   /**
-   * Sets name of recipe if param consists of letters and numbers
+   * Sets name of recipe.
    * 
    * @param name
    * @throws IllegalArgumentException if param contains other characters than
@@ -86,8 +86,7 @@ public class Recipe {
   }
 
   /**
-   * Sets portions if param is a positive integer. Updates the amount of each
-   * ingredient to fit with portions.
+   * Sets portions. Updates the amount of each ingredient to fit with portions.
    * 
    * @param portions
    * @throws IllegalArgumentException if param is negative integer
@@ -105,7 +104,7 @@ public class Recipe {
   }
 
   /**
-   * Add ingredient that is not already in the recipe
+   * Add ingredient to recipe.
    * 
    * @param ingredient
    * @throws IllegalArgumentException if list already contains ingredient
@@ -119,7 +118,7 @@ public class Recipe {
   }
 
   /**
-   * Remove ingredient from ingredientList if index is in the list
+   * Remove ingredient from recipe.
    * 
    * @param index
    * @throws IllegalArgumentException if index is larger than size of
@@ -137,12 +136,8 @@ public class Recipe {
     return this.fav;
   }
 
-  public void setFav() {
-    this.fav = true;
-  }
-
-  public void removeFav() {
-    this.fav = false;
+  public void setFav(boolean isFav) {
+    this.fav = isFav;
   }
 
   public String getLabel() {
@@ -150,13 +145,13 @@ public class Recipe {
   }
 
   /**
-   * Sets label of recipe if label is valid
+   * Sets label for recipe.
    * 
    * @param label
    * @throws IllegalArgumentException if label is not valid
    */
   public void setLabel(String label) {
-    if (allowedLabels.contains(label)) {
+    if (labels.contains(label)) {
       this.label = label;
     } else {
       throw new IllegalArgumentException("Invalid label");
