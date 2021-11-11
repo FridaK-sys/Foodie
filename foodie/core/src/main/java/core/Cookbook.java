@@ -35,15 +35,14 @@ public class Cookbook {
   }
 
   /**
-   * Sets name if param consists of 1-20 characters (letters and numbers).
+   * Sets name if param consists of letters and numbers
    * 
    * @param name
-   * @throws IllegalArgumentException if param is not 1-20 characters long or
-   *                                  contains other characters than letters and
-   *                                  numbers
+   * @throws IllegalArgumentException if param contains other characters than
+   *                                  letters and numbers
    */
   public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;
@@ -66,17 +65,12 @@ public class Cookbook {
   }
 
   /**
-   * Removes recipe from recipeList if index is in the list
+   * Removes recipe from recipeList
    * 
    * @param index
-   * @throws IllegalArgumentException if index is larger than size of list
    */
   public void removeRecipe(int index) {
-    if (index <= recipes.size()) {
-      recipes.remove(index);
-    } else {
-      throw new IllegalArgumentException();
-    }
+    recipes.remove(index);
   }
 
   /**

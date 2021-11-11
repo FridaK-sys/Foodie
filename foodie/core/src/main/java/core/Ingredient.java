@@ -1,5 +1,9 @@
 package core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * An ingredient containing name, amount and unit.
  */
@@ -9,12 +13,13 @@ public class Ingredient {
   private String name;
   private double amount;
   private String unit;
+  private static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts"));
 
   /**
    * Constructor for ingredient with name, amount and unit
    * 
    * @param name
-   * @param amoumt
+   * @param amount
    * @param unit
    */
   public Ingredient(String name, double amount, String unit) {
@@ -39,16 +44,14 @@ public class Ingredient {
   }
 
   /**
-   * Sets name of ingredient if param consists of 1-20 characters (letters and
-   * numbers).
+   * Sets name of ingredient if param consists of letters and numbers
    * 
    * @param name
-   * @throws IllegalArgumentException if param is not 1-20 characters long or
-   *                                  contains other characters than letters and
-   *                                  numbers
+   * @throws IllegalArgumentException if param contains other characters than letters and
+   * numbers
    */
   public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;
