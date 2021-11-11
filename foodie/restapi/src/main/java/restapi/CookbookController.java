@@ -74,7 +74,7 @@ public class CookbookController {
    * @param newName the new name
    */
   @PostMapping(path = "/{name}/rename")
-  public boolean renameTodoList(@PathVariable("name") String name, @RequestParam("newName") String newName) {
+  public boolean renameRecipe(@PathVariable("name") String name, @RequestParam("newName") String newName) {
     Recipe res = getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findFirst()
         .orElseThrow(() -> new IllegalArgumentException("No recipe named \"" + name + "\""));
 
