@@ -19,7 +19,7 @@ class IngredientWriter extends JsonSerializer<Ingredient> {
       throws IOException {
     jsonGen.writeStartObject();
     jsonGen.writeStringField("name", ingredient.getName());
-    jsonGen.writeNumberField("amount", ingredient.getAmount();
+    jsonGen.writeNumberField("amount", ingredient.getAmount());
     jsonGen.writeStringField("unit", ingredient.getUnit());
     jsonGen.writeEndObject();
   }

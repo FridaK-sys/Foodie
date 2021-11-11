@@ -8,15 +8,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
+import core.Ingredient;
 import core.Recipe;
-
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 class RecipeReader extends JsonDeserializer<Recipe> {
 
-  private RecipeReader recipeReader = new RecipeReader();
+  private IngredientReader ingredientReader = new IngredientReader();
   /*
    * format: { "items": [ ... ] }
    */
@@ -31,47 +29,30 @@ class RecipeReader extends JsonDeserializer<Recipe> {
   Recipe deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode objectNode) {
       JsonNode nameNode = objectNode.get("name");
-      if (!(nameNode instanceof TextNode)) {
-        return null;
-      }
       String name = nameNode.asText();
       JsonNode descriptionNode = objectNode.get("description");
-      if (!(descriptionNode instanceof TextNode)) {
-        return null;
-      }
       String description = descriptionNode.asText();
       JsonNode portionsNode = objectNode.get("portions");
-      if (!(portionsNode instanceof TextNode)) {
-        return null;
-      }
-      String portions = portionsNode.asText();
+      int portions = portionsNode.asInt();
       JsonNode favNode = objectNode.get("fav");
-      if (!(favNode instanceof TextNode)) {
-        return null;
-      }
-      String fav = nameNode.asText();
+      boolean fav = favNode.asBoolean();
       JsonNode labelNode = objectNode.get("label");
-      if (!(labelNode instanceof TextNode)) { // husk å sjekk et sted om label er gyldig
-        return null;
-      }
-      String label = labelNode.asText();
+      String label = labelNode.asText(); // sjekk om gyldig label
 
-      JsonNode itemsNode = objectNode.get("items");
-      boolean hasItems = itemsNode instanceof ArrayNode;
-      AbstractTodoList todoList = (hasItems ? new TodoList(name) : new AbstractTodoList(name));
-      JsonNode deadlineNode = objectNode.get("deadline");
-      if (deadlineNode instanceof TextNode) {
-        todoList.setDeadline(LocalDateTime.parse(deadlineNode.asText()));
+      Recipe recipe = new Recipe(name, portions);
+      recipe.setDescription(description);
+      recipe.setFav(fav);
+      if (!label.isEmpty()) {
+        recipe.setLabel(label);
       }
-      if (hasItems) {
-        for (JsonNode elementNode : ((ArrayNode) itemsNode)) {
-          TodoItem item = todoItemDeserializer.deserialize(elementNode);
-          if (item != null) {
-            todoList.addTodoItem(item);
-          }
-        }
+
+      JsonNode ingredientsNode = objectNode.get("ingredients");
+      for (JsonNode ingredientNode : (ArrayNode) ingredientsNode) {
+        Ingredient ingredient = ingredientReader.deserialize(ingredientNode);
+        recipe.addIngredient(ingredient);
+
       }
-      return todoList;
+      return recipe;
     }
     return null;
   }

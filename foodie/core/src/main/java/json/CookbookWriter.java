@@ -3,9 +3,7 @@ package json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import core.Cookbook;
-import core.Ingredient;
 import core.Recipe;
 
 import java.io.IOException;
@@ -13,7 +11,7 @@ import java.io.IOException;
 public class CookbookWriter extends JsonSerializer<Cookbook> {
 
   /*
-   * format: { "lists": [ ... ] }
+   * format: { "name": "...", "recipes": [ ... ] }
    */
 
   @Override
@@ -23,24 +21,9 @@ public class CookbookWriter extends JsonSerializer<Cookbook> {
     jsonGen.writeStringField("Cookbookname", cookbook.getName());
     jsonGen.writeArrayFieldStart("Recipes");
     for (Recipe recipe : cookbook.getRecipes()) {
-      jsonGen.writeStartObject();
-      jsonGen.writeStringField("name", recipe.getName());
-      jsonGen.writeStringField("description", recipe.getDescription());
-      jsonGen.writeNumberField("portions", recipe.getPortions());
-      jsonGen.writeBooleanField("fav", recipe.getFav());
-      jsonGen.writeStringField("label", recipe.getLabel());
-      jsonGen.writeArrayFieldStart("Ingredients");
-      for (Ingredient ing : recipe.getIngredients()) {
-        jsonGen.writeStartObject();
-        jsonGen.writeStringField("name", ing.getName());
-        jsonGen.writeNumberField("amount", ing.getAmount());
-        jsonGen.writeStringField("unit", ing.getUnit());
-      }
-      jsonGen.writeEndArray();
-      jsonGen.writeEndObject();
+      jsonGen.writeObject(recipe);
     }
     jsonGen.writeEndArray();
-    jsonGen.writeFieldName("Cookbook");
     jsonGen.writeEndObject();
   }
 

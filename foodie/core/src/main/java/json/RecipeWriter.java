@@ -3,32 +3,31 @@ package json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import core.Ingredient;
 import core.Recipe;
 import java.io.IOException;
 
 class RecipeWriter extends JsonSerializer<Recipe> {
 
   /*
-   * format: { "name": "...", "items": [ ... ] }
+   * format: { "name": "...","description": "...","portions": "...","fav":
+   * "...","label": "...", "ingredients": [ ... ] }
    */
 
   @Override
-  public void serialize(AbstractTodoList list, JsonGenerator jsonGen, SerializerProvider serializerProvider)
+  public void serialize(Recipe recipe, JsonGenerator jsonGen, SerializerProvider serializerProvider)
       throws IOException {
     jsonGen.writeStartObject();
-    if (list.getName() != null) {
-      jsonGen.writeStringField("name", list.getName());
+    jsonGen.writeStringField("name", recipe.getName());
+    jsonGen.writeStringField("description", recipe.getDescription());
+    jsonGen.writeNumberField("portions", recipe.getPortions());
+    jsonGen.writeBooleanField("fav", recipe.getFav());
+    jsonGen.writeStringField("label", recipe.getLabel());
+    jsonGen.writeArrayFieldStart("ingredients");
+    for (Ingredient ing : recipe.getIngredients()) {
+      jsonGen.writeObject(ing);
     }
-    if (list.getDeadline() != null) {
-      jsonGen.writeStringField("deadline", list.getDeadline().toString());
-    }
-    if (list instanceof TodoList) {
-      jsonGen.writeArrayFieldStart("items");
-      for (TodoItem item : list) {
-        jsonGen.writeObject(item);
-      }
-      jsonGen.writeEndArray();
-    }
+    jsonGen.writeEndArray();
     jsonGen.writeEndObject();
   }
 }

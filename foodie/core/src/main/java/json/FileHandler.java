@@ -112,9 +112,6 @@ public class FileHandler {
 				Recipe recipe = new Recipe(name, portions);
 				recipe.setDescription(description);
 
-				if (fav) {
-					recipe.setFav();
-				}
 				if (!label.equals("")) {
 					recipe.setLabel(label);
 				}

@@ -110,8 +110,8 @@ public class Recipe {
     }
   }
 
-  public void setFav() {
-    this.fav = true;
+  public void setFav(boolean bool) {
+    this.fav = bool;
   }
 
   public void removeFav() {
