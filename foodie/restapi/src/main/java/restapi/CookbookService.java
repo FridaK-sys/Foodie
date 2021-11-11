@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecipeService {
+public class CookbookService {
 
   private Recipe recipe;
   private Cookbook cookbook;
@@ -23,13 +23,13 @@ public class RecipeService {
    *
    * @param cookbook
    */
-  public RecipeService(Cookbook cookbook) {
+  public CookbookService(Cookbook cookbook) {
     this.cookbook = cookbook;
     this.cookbookPersistence = new CookbookPersistence();
     cookbookPersistence.setSaveFile("springbootserver-cookbook.json");
   }
 
-  public RecipeService() {
+  public CookbookService() {
     this(createDefaultCookbook());
   }
 
@@ -43,7 +43,7 @@ public class RecipeService {
 
   private static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
-    URL url = RecipeService.class.getResource("default-cookbook.json");
+    URL url = CookbookService.class.getResource("default-cookbook.json");
     if (url != null) {
       try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
         return cookbookPersistence.readCookbook(reader);
@@ -60,7 +60,7 @@ public class RecipeService {
   /**
    * Saves the TodoModel to disk. Should be called after each update.
    */
-  public void autoSaveTodoModel() {
+  public void autoSaveCookbook() {
     if (cookbookPersistence != null) {
       try {
         cookbookPersistence.saveCookbook(this.cookbook);

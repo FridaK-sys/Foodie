@@ -1,5 +1,8 @@
 package restapi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,45 +18,34 @@ import core.Recipe;
 import core.Cookbook;
 
 @RestController
-@RequestMapping(RecipeController.RECIPE_SERVICE_PATH)
-public class RecipeController {
+@RequestMapping(CookbookController.COOKBOOK_SERVICE_PATH)
+public class CookbookController {
 
-  private static final String RECIPE_SERVICE_PATH = "restapi/recipe";
+  public static final String COOKBOOK_SERVICE_PATH = "restapi/cookbook";
 
   @Autowired
-  private RecipeService resService;
-
-  @GetMapping
-  public Recipe getRecipe() {
-    resService.getRecipe();
-
-  }
+  private CookbookService resService;
 
   @GetMapping
   public Cookbook getCookbook() {
-    resService.getCookBook();
+    return resService.getCookbook();
   }
 
-  /*
-   * private void autoSaveTodoModel() { todoModelService.autoSaveTodoModel(); }
-   */
-  private void checkTodoList(Recipe recipe, String name) {
-    if (recipe == null) {
-      throw new IllegalArgumentException("No recipe named \"" + name + "\"");
-    }
+  private void autoSaveCookbook() {
+    resService.autoSaveCookbook();
   }
 
   /**
-   * Gets the corresponding TodoList.
+   * Gets the corresponding recipe.
    *
    * @param name the name of the TodoList
    * @return the corresponding TodoList
    */
   @GetMapping(path = "/{name}")
   public Recipe getRecipe(@PathVariable("name") String name) {
-    Recipe res = getRecipe();
-    // checkTodoList(todoList, name);
-    return res;
+    return getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("No recipe named \"" + name + "\""));
+
   }
 
   /**
@@ -67,14 +59,14 @@ public class RecipeController {
   public boolean putRecipe(@PathVariable("name") String name, @RequestBody Recipe recipe) {
     boolean added = true;
     for (Recipe res : getCookbook().getRecipes()) {
-      if (res.getName() == recipe.getName()) {
+      if (res.getName().equals(recipe.getName())) {
         added = false;
 
       }
       return added;
 
     }
-    // autoSaveTodoModel();
+    autoSaveCookbook();
     return added;
   }
 
@@ -86,31 +78,25 @@ public class RecipeController {
    */
   @PostMapping(path = "/{name}/rename")
   public boolean renameTodoList(@PathVariable("name") String name, @RequestParam("newName") String newName) {
-    for (Recipe res : getCookbook().getRecipes()) {
-      if (res.getName() == newName) {
-        throw new IllegalArgumentException("A Recipe named \"" + newName + "");
-      }
+    Recipe res = getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("No recipe named \"" + name + "\""));
 
-      Recipe newRes = getRecipe();
-      newRes.setName(newName);
-      // autoSaveTodoModel();
-      return true;
-
-    }
+    res.setName(newName);
+    autoSaveCookbook();
+    return true;
 
   }
 
   /**
-   * Removes the TodoList.
+   * Removes the Recipe.
    *
-   * @param name the name of the TodoList
+   * @param name the name of the Recipe
    */
   @DeleteMapping(path = "/{name}")
-  public boolean removeTodoList(@PathVariable("name") String name) {
-    AbstractTodoList todoList = getTodoModel().getTodoList(name);
-    checkTodoList(todoList, name);
-    getTodoModel().removeTodoList(todoList);
-    autoSaveTodoModel();
+  public boolean removeRecipe(@PathVariable("name") String name) {
+    Cookbook cook = getCookbook();
+    cook.removeRecipe(name);
+    autoSaveCookbook();
     return true;
   }
 
