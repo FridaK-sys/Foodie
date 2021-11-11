@@ -17,7 +17,7 @@ public class Recipe {
   private int portions;
   private boolean fav = false;
   private String label = "";
-  static final List<String> allowedLabels = Arrays.asList("Frokost", "Lunsj", "Middag");
+  static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner");
 
   /**
    * Constructor for recipe with name, description, portions and ingredients

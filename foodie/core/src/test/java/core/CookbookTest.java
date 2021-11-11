@@ -82,22 +82,6 @@ public class CookbookTest {
 	}
 
 	@Test
-	public void testRemoveRecipe() {
-		cookbook1.removeRecipe(recipe1);
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			cookbook1.removeRecipe(recipe3);
-		}, "Cookbook does not contain this recipe");
-	}
-
-	@Test
-	public void testRemoveRecipeString() {
-		cookbook1.removeRecipe("Bløtkake");
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
-	}
-
-	@Test
 	public void testRemoveRecipeInt() {
 		cookbook1.removeRecipe(0);
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
