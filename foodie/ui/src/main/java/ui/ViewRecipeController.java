@@ -51,7 +51,6 @@ public class ViewRecipeController implements Initializable {
       selectedRecipe.removeFav();
       faveButton.setText("Add to favorite");
     } else {
-      selectedRecipe.setFav();
       faveButton.setText("Remove from favorite");
     }
     fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);
