@@ -11,6 +11,8 @@ module foodie.restapi {
   requires spring.data.jpa;
   requires org.slf4j;
 
+  exports restapi;
+
   opens foodie.restapi to spring.beans, spring.context, spring.web;
 
 }
