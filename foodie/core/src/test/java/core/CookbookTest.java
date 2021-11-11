@@ -48,11 +48,6 @@ public class CookbookTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Cookbook("$~@", recipes);
 		}, "Invalid name for cookbook");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Cookbook("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", recipes);
-		}, "Name contains to many characters");
-
 	}
 
 	@Test
@@ -69,10 +64,6 @@ public class CookbookTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			cookbook1.setName("$~@");
 		}, "Invalid name for cookbook");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			cookbook1.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
-		}, "Name contains to many characters");
 	}
 
 	@Test

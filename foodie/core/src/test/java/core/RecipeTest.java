@@ -42,10 +42,6 @@ public class RecipeTest {
 		}, "Invalid name for recipe");
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Recipe("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", "Min favoritt dessert", 10, ingredients);
-		}, "Name contains to many characters");
-
-		assertThrows(IllegalArgumentException.class, () -> {
 			new Recipe("Muffins", "Min favoritt dessert", -1, ingredients);
 		}, "Portions cannot be zero");
 
@@ -66,10 +62,6 @@ public class RecipeTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			recipe.setName("$~@");
 		}, "Invalid name for recipe");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			recipe.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
-		}, "Name of recipe contains to many characters");
 	}
 
 	@Test

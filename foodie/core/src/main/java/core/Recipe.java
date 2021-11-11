@@ -60,16 +60,14 @@ public class Recipe {
   }
 
   /**
-   * Sets name of recipe if param consists of 1-20 characters (letters and
-   * numbers).
+   * Sets name of recipe if param consists of letters and numbers
    * 
    * @param name
-   * @throws IllegalArgumentException if param is not 1-20 characters long or
-   *                                  contains other characters than letters and
-   *                                  numbers
+   * @throws IllegalArgumentException if param contains other characters than letters and
+   * numbers
    */
   public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;
@@ -107,7 +105,7 @@ public class Recipe {
   }
 
   /**
-   * Adds ingredient to ingredientlist if it is not already there
+   * Add ingredient that is not already in the recipe
    * 
    * @param ingredient
    * @throws IllegalArgumentException if list already contains ingredient
