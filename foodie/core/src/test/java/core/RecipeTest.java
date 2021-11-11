@@ -99,21 +99,7 @@ public class RecipeTest {
 		}, "Recipe already contains this ingredient");
 	}
 
-	@Test
-	public void testRemoveIngredient() {
-		recipe.removeIngredient(ingredient1);
-		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2));
 
-		assertThrows(IllegalArgumentException.class, () -> {
-			recipe.removeIngredient(ingredient3);
-		}, "Recipe does not contain this ingredient");
-	}
-
-	@Test
-	public void testRemoveIngredientString() {
-		recipe.removeIngredient("Mel");
-		assertEquals(recipe.getIngredients(), Arrays.asList(ingredient2));
-	}
 
 	@Test
 	public void testFav() {
