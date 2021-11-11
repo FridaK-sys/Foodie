@@ -17,7 +17,7 @@ public class Recipe {
   private int portions;
   private boolean fav = false;
   private String label = "";
-  static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner");
+  public static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner", "Dessert");
 
   /**
    * Constructor for recipe with name, description, portions and ingredients
@@ -63,11 +63,11 @@ public class Recipe {
    * Sets name of recipe if param consists of letters and numbers
    * 
    * @param name
-   * @throws IllegalArgumentException if param contains other characters than letters and
-   * numbers
+   * @throws IllegalArgumentException if param contains other characters than
+   *                                  letters and numbers
    */
   public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;
@@ -133,6 +133,10 @@ public class Recipe {
     }
   }
 
+  public boolean getFav() {
+    return this.fav;
+  }
+
   public void setFav() {
     this.fav = true;
   }
@@ -141,8 +145,8 @@ public class Recipe {
     this.fav = false;
   }
 
-  public boolean getFav() {
-    return this.fav;
+  public String getLabel() {
+    return this.label;
   }
 
   /**
@@ -155,16 +159,12 @@ public class Recipe {
     if (allowedLabels.contains(label)) {
       this.label = label;
     } else {
-      throw new IllegalArgumentException("Label has to be either Frokost, Lunsj or Middag");
+      throw new IllegalArgumentException("Invalid label");
     }
   }
 
   public void removeLabel() {
     this.label = "";
-  }
-
-  public String getLabel() {
-    return this.label;
   }
 
   public String toString() {

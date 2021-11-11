@@ -42,7 +42,7 @@ public class Cookbook {
    *                                  letters and numbers
    */
   public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;

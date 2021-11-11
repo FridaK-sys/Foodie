@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import core.Ingredient;
-import core.Recipe;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,10 +88,8 @@ public class RecipeTest {
 		}, "Recipe already contains this ingredient");
 	}
 
-
-
 	@Test
-	public void testFav() {
+	public void testFavorite() {
 		recipe.setFav();
 		assertEquals(recipe.getFav(), true);
 		recipe.removeFav();
@@ -103,13 +98,9 @@ public class RecipeTest {
 
 	@Test
 	public void testSetLabel() {
-		assertThrows(IllegalArgumentException.class, () -> recipe.setLabel("Dessert"), "Dessert is not an allowed label");
+		assertThrows(IllegalArgumentException.class, () -> recipe.setLabel("Vegetar"), "Vegetar is not a valid label");
 		recipe.setLabel("Dinner");
 		assertEquals("Dinner", recipe.getLabel());
-		recipe.setLabel("Lunch");
-		assertEquals("Lunch", recipe.getLabel());
-		recipe.setLabel("Breakfast");
-		assertEquals("Breakfast", recipe.getLabel());
 	}
 
 	@Test
