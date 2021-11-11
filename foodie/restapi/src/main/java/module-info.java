@@ -1,7 +1,6 @@
 module foodie.restapi {
   requires com.fasterxml.jackson.databind;
 
-  requires transitive foodie.json;
   requires transitive foodie.core;
   requires spring.beans;
   requires spring.context;
