@@ -9,12 +9,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CookbookService {
 
-  private Recipe recipe;
   private Cookbook cookbook;
   private CookbookPersistence cookbookPersistence;
 
