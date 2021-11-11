@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -39,6 +40,9 @@ public class MainController implements Initializable {
   private ListView<Recipe> mainListView;
 
   @FXML
+  private Button viewButton;
+
+  @FXML
   private ToggleButton Fav;
 
   private ToggleGroup group = new ToggleGroup();
@@ -52,6 +56,7 @@ public class MainController implements Initializable {
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
     setToggleListener();
+    setListViewListener();
   }
 
   public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
@@ -127,6 +132,16 @@ public class MainController implements Initializable {
     mainBook = new Cookbook("test", cookbook.getRecipes());
     recipes.setAll(mainBook.getRecipes());
     fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
+  }
+
+  public void setListViewListener() {
+    mainListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recipe>() {
+      @Override
+      public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, Recipe newValue) {
+        viewButton.fire();
+        System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
+      }
+    });
   }
 
   public void setToggleListener() {

@@ -106,6 +106,21 @@ public class ViewRecipeController implements Initializable {
 
   }
 
+  public void changeToEditRecipe(ActionEvent ae) throws IOException {
+    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+
+    Parent root = fxmlLoader.load();
+    Scene viewRecipesScene = new Scene(root);
+
+    NewRecipeController controller = fxmlLoader.getController();
+    controller.initData(selectedRecipe, index);
+
+    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
+  }
+
   public void changeSceneToMain(ActionEvent ea) throws IOException {
     URL fxmlLocation = getClass().getResource("Main.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
