@@ -1,1 +1,1 @@
-{"Recipes":[],"Name":"Recipes"}
+{"Recipes":[{"Favorite":false,"Portions":4,"Description":"","Ingredients":[{"Amount":5.0,"Unit":"hi","Name":"hj"}],"Label":"Lunch","Name":"ghjk"},{"Favorite":true,"Portions":3,"Description":"","Ingredients":[{"Amount":3.0,"Unit":"ff","Name":"Epler"}],"Label":"Breakfast","Name":"Test"}],"Name":"Recipes"}

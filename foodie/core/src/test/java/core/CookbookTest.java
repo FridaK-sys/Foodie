@@ -5,10 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +26,9 @@ public class CookbookTest {
 
 		recipe1 = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredientList1);
 		recipe2 = new Recipe("Kjøttkaker", "Mormor sin oppskrift", 4, ingredientList1);
-		recipe2.setLabel("Middag");
-		recipe3 = new Recipe("Wok", "Rask middag", 5, ingredientList1);
-		recipe3.setLabel("Middag");
+		recipe2.setLabel("Dinner");
+		recipe3 = new Recipe("Wok", "Rask Dinner", 5, ingredientList1);
+		recipe3.setLabel("Dinner");
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 
@@ -48,11 +44,6 @@ public class CookbookTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Cookbook("$~@", recipes);
 		}, "Invalid name for cookbook");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Cookbook("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", recipes);
-		}, "Name contains to many characters");
-
 	}
 
 	@Test
@@ -69,32 +60,12 @@ public class CookbookTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			cookbook1.setName("$~@");
 		}, "Invalid name for cookbook");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			cookbook1.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
-		}, "Name contains to many characters");
 	}
 
 	@Test
 	public void testAddRecipe() {
 		cookbook1.addRecipe(recipe3);
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2, recipe3));
-	}
-
-	@Test
-	public void testRemoveRecipe() {
-		cookbook1.removeRecipe(recipe1);
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			cookbook1.removeRecipe(recipe3);
-		}, "Cookbook does not contain this recipe");
-	}
-
-	@Test
-	public void testRemoveRecipeString() {
-		cookbook1.removeRecipe("Bløtkake");
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
 	}
 
 	@Test
@@ -105,11 +76,11 @@ public class CookbookTest {
 
 	@Test
 	public void testGetFavRecipes() {
+		recipe1.setFav(true);
 		List<Recipe> favs = new ArrayList<>();
 		favs.add(recipe1);
-		// assertEquals(cookbook1.getFavRecipes(), favs);
-
-		recipe1.removeFav();
+		assertEquals(cookbook1.getFavRecipes(), favs);
+		recipe1.setFav(false);
 		favs.remove(recipe1);
 		// assertEquals(cookbook1.getFavRecipes(), favs);
 	}
@@ -119,7 +90,7 @@ public class CookbookTest {
 
 		cookbook1.addRecipe(recipe3);
 		List<Recipe> labeled = Arrays.asList(recipe2, recipe3);
-		assertEquals(labeled, cookbook1.getRecipesWithLabel("Middag"));
+		assertEquals(labeled, cookbook1.getRecipesWithLabel("Dinner"));
 
 	}
 

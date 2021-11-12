@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import core.Ingredient;
-
 public class IngredientTest {
 
 	private Ingredient ingredient1, ingredient2;
@@ -33,16 +31,8 @@ public class IngredientTest {
 		}, "Invalid name for ingredient");
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
-		}, "Name contains to many characters");
-
-		assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("$~@", 2, "dl");
 		}, "Invalid name for ingredient");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Ingredient("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ", 2, "dl");
-		}, "Name contains to many characters");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("Sukker", 0, "dl");
@@ -62,10 +52,6 @@ public class IngredientTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			ingredient1.setName("$~@");
 		}, "Invalid name for ingredient");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			ingredient1.setName("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");
-		}, "Name of ingredient contains to many characters");
 	}
 
 	@Test

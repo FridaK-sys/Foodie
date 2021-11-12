@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -32,10 +31,7 @@ public class ViewRecipeController implements Initializable {
   private FileHandler fileHandler = new FileHandler();
 
   @FXML
-  private Label recipeTitle;
-
-  @FXML
-  private Label portions;
+  private Label recipeTitle, labelTag, portions;
 
   @FXML
   private ListView<Ingredient> ingredientsListView;
@@ -48,9 +44,10 @@ public class ViewRecipeController implements Initializable {
 
   public void favorizeRecipeButton(ActionEvent ae) {
     if (selectedRecipe.getFav() == true) {
-      selectedRecipe.removeFav();
+      selectedRecipe.setFav(false);
       faveButton.setText("Add to favorite");
     } else {
+      selectedRecipe.setFav(true);
       faveButton.setText("Remove from favorite");
     }
     fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);
@@ -103,7 +100,25 @@ public class ViewRecipeController implements Initializable {
     } else {
       faveButton.setText("Add to favorite");
     }
+    if (!selectedRecipe.getLabel().isBlank()) {
+      labelTag.setText(selectedRecipe.getLabel());
+    }
 
+  }
+
+  public void changeToEditRecipe(ActionEvent ae) throws IOException {
+    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+
+    Parent root = fxmlLoader.load();
+    Scene viewRecipesScene = new Scene(root);
+
+    NewRecipeController controller = fxmlLoader.getController();
+    controller.initData(selectedRecipe, index);
+
+    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
   }
 
   public void changeSceneToMain(ActionEvent ea) throws IOException {

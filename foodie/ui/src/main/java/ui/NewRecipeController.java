@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
@@ -23,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import json.FileHandler;
 
@@ -32,21 +32,12 @@ public class NewRecipeController implements Initializable {
   private Cookbook cookbook = new Cookbook();
   private FileHandler fileHandler = new FileHandler();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
+  private String label = "";
+  private boolean editing = false;
+  private int index;
 
   @FXML
-  private TextField recipeTitle;
-
-  @FXML
-  private TextField recipePortions;
-
-  @FXML
-  private TextField ingredientTitle;
-
-  @FXML
-  private TextField ingredientAmount;
-
-  @FXML
-  private TextField ingredientUnit;
+  private TextField ingredientTitle, ingredientAmount, ingredientUnit, recipePortions, recipeTitle;
 
   @FXML
   private ListView<Ingredient> ingredientListView;
@@ -55,10 +46,16 @@ public class NewRecipeController implements Initializable {
   private TextArea recipeDescription;
 
   @FXML
-  private Button backButton;
+  private Label errorMessageLabel;
 
   @FXML
-  private Label errorMessageLabel;
+  private Button backButton, breakfastTag, lunchTag, dinnerTag;
+
+  @FXML
+  private Button saveRecipeButton, deleteRecipeButton, createRecipeButton;
+
+  @FXML
+  private HBox hb;
 
   public void addIngredientButton(ActionEvent ae) {
     try {
@@ -91,47 +88,152 @@ public class NewRecipeController implements Initializable {
     }
   }
 
-  public void createRecipe(ActionEvent ae) throws IOException {
-
+  public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
-      if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
-        throw new IllegalArgumentException("Missing name or portion size");
+      Recipe createdRecipe = createRecipe();
+      this.cookbook.addRecipe(createdRecipe);
+      fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", this.cookbook);
+      backButton.fire();
+
+    } catch (Exception e) {
+      errorMessageLabel.setText(e.getMessage());
+    }
+  }
+
+  public void saveRecipe() {
+    try {
+      Recipe updatedRecipe = createRecipe();
+      fileHandler.replaceRecipeInFile(updatedRecipe, index);
+      changeSceneToViewRecipe();
+
+    } catch (Exception e) {
+      errorMessageLabel.setText(e.getMessage());
+    }
+  }
+
+  public Recipe createRecipe() {
+    if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
+      throw new IllegalArgumentException("Missing name or portion size");
+    }
+    if (!editing) {
+      if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
+        throw new IllegalArgumentException("This recipe title already exists");
       }
+    }
+    try {
+
       this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
 
       if (!(recipeDescription.getText() == null)) {
-        newRecipe.setDescription(recipeDescription.getText());
+        this.newRecipe.setDescription(recipeDescription.getText());
       }
       if (ingredients.isEmpty()) {
-        throw new IllegalArgumentException("You are missing ingredients");
+        throw new IllegalArgumentException("You have missing ingredients");
       }
 
       for (Ingredient i : ingredients) {
-        newRecipe.addIngredient(i);
+        this.newRecipe.addIngredient(i);
       }
-      newRecipe.setDescription(recipeDescription.getText());
-      fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", cookbook);
-      cookbook.addRecipe(newRecipe);
+      if (!this.label.isBlank()) {
+        this.newRecipe.setLabel(this.label);
+      }
 
-      fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
-      backButton.fire();
+      this.newRecipe.setDescription(recipeDescription.getText());
+
+      return newRecipe;
+
     } catch (NullPointerException e) {
-      errorMessageLabel.setText("You have empty fields");
+      throw new NullPointerException("You have empty fields");
     } catch (NumberFormatException e) {
-      errorMessageLabel.setText("Ingredient amount must be a number");
+      throw new NumberFormatException("Ingredient amount must be a number");
     } catch (IllegalArgumentException e) {
-      errorMessageLabel.setText(e.getMessage());
+      throw new IllegalArgumentException(e.getMessage());
     }
 
   }
 
-  // mvn -pl ui javafx:run
+  public void initData(Recipe recipe, int recipeIndex) {
+    this.recipeTitle.setText(recipe.getName());
+    this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    if (!recipe.getDescription().isEmpty()) {
+      this.recipeDescription.setText(recipe.getDescription());
+    }
+    if (!recipe.getLabel().isEmpty()) {
+      setLabel(recipe.getLabel());
+    }
+    ingredients.addAll(recipe.getIngredients());
+    this.editing = true;
+    this.index = recipeIndex;
 
-  
+    createRecipeButton.setVisible(false);
+    saveRecipeButton.setVisible(true);
+    deleteRecipeButton.setVisible(true);
+
+  }
+
+  public void initData(Recipe recipe, int recipeIndex, Cookbook cookbook) {
+    this.recipeTitle.setText(recipe.getName());
+    this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    if (!recipe.getDescription().isEmpty()) {
+      this.recipeDescription.setText(recipe.getDescription());
+    }
+    if (!recipe.getLabel().isEmpty()) {
+      setLabel(recipe.getLabel());
+    }
+    ingredients.addAll(recipe.getIngredients());
+    this.editing = true;
+    this.cookbook = cookbook;
+    this.index = recipeIndex;
+
+    createRecipeButton.setVisible(false);
+    saveRecipeButton.setVisible(true);
+    deleteRecipeButton.setVisible(true);
+
+  }
+
+  public void initData(Cookbook cookbook) {
+    this.cookbook = cookbook;
+
+    createRecipeButton.setVisible(true);
+    saveRecipeButton.setVisible(false);
+    deleteRecipeButton.setVisible(false);
+
+  }
+
+  public void breakfastTagPushed(ActionEvent ae) {
+    setLabel("Breakfast");
+  }
+
+  public void lunchTagPushed(ActionEvent ae) {
+    setLabel("Lunch");
+  }
+
+  public void dinnerTagPushed(ActionEvent ae) {
+    setLabel("Dinner");
+  }
+
+  public void setLabel(String label) {
+    if (!this.label.equals(label)) {
+      this.label = label;
+      setLabelButton(label);
+    } else {
+      this.label = "";
+      setLabelButton("blank");
+    }
+  }
+
+  public void deleteRecipe(ActionEvent ea) {
+    cookbook.removeRecipe(index);
+    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
+    backButton.fire();
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ingredientListView.setItems(ingredients);
+    setLabelButton("blank");
+    hb.setSpacing(20);
+    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", this.cookbook);
 
   }
 
@@ -147,8 +249,44 @@ public class NewRecipeController implements Initializable {
     stage.show();
   }
 
+  public void changeSceneToViewRecipe() throws IOException {
+    URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+
+    Parent root = fxmlLoader.load();
+
+    Scene viewRecipesScene = new Scene(root);
+
+    ViewRecipeController controller = fxmlLoader.getController();
+    controller.initData(newRecipe, index);
+    Stage stage = (Stage) backButton.getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
+  }
+
   public List<Ingredient> getIngredients() {
     return new ArrayList<Ingredient>(ingredients);
+  }
+
+  public void setLabelButton(String label) {
+    if (label.equals("Breakfast")) {
+      breakfastTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
+      dinnerTag.setStyle("-fx-background-color: white");
+      lunchTag.setStyle("-fx-background-color: white");
+    } else if (label.equals("Lunch")) {
+      lunchTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
+      dinnerTag.setStyle("-fx-background-color: white");
+      breakfastTag.setStyle("-fx-background-color: white");
+    } else if (label.equals("Dinner")) {
+      dinnerTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
+      breakfastTag.setStyle("-fx-background-color: white");
+      lunchTag.setStyle("-fx-background-color: white");
+    } else if (label.equals("blank")) {
+      lunchTag.setStyle("-fx-background-color: white");
+      breakfastTag.setStyle("-fx-background-color: white");
+      dinnerTag.setStyle("-fx-background-color: white");
+
+    }
   }
 
 }
