@@ -22,12 +22,6 @@ public class CookbookController {
   public Cookbook getCookbook() {
     return cookbookService.getCookbook();
   }
-  /*
-   * @GetMapping(path = "/{name}") public Recipe getRecipe(@PathVariable("name")
-   * String name) { return cookbookService.getRecipe(name);
-   * 
-   * }
-   */
 
   @PostMapping(path = "/{name}")
   public boolean addRecipe(@PathVariable("name") String name, @RequestBody Recipe recipe) {
@@ -35,12 +29,6 @@ public class CookbookController {
     return true;
   }
 
-  /**
-   * Renames the Recipe.
-   *
-   * @param name    the name of the Recipe
-   * @param newName the new name
-   */
   /*
    * @PostMapping(path = "/{name}/rename") public boolean
    * renameRecipe(@PathVariable("name") String name, @RequestParam("newName")
@@ -49,11 +37,6 @@ public class CookbookController {
    * }
    */
 
-  /**
-   * Removes the Recipe.
-   *
-   * @param name the name of the Recipe
-   */
   @DeleteMapping(path = "/{name}")
   public boolean removeRecipe(@PathVariable("name") String name) {
     cookbookService.removeRecipe(name);
