@@ -1,5 +1,6 @@
 package foodie.restapi;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,12 +30,5 @@ public class IntegrationTest {
     assertNotNull(response.getBody());
   }
 
-  @Test
-  void testAddRecipe() {
-    Recipe recipe = new Recipe("recipe3", 2);
-    HttpEntity<Recipe> request = new HttpEntity<Recipe>(recipe);
-    ResponseEntity<String> result = this.restTemplate.postForEntity("/cookbook/recipe3", request, String.class);
-    assertTrue(Boolean.parseBoolean(result.getBody()));
-
-  }
+  // test get recipe??
 }
