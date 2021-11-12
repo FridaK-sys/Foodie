@@ -3,34 +3,34 @@
           [{
             "fav":false,
             "portions":1,
-            "description":"Den beste oppskriften på bløtkake!",
+            "description":"Recipe for cake",
             "ingredients":
             [{
               "amount":200.0,
               "unit":"g",
-              "name":"Mel"
+              "name":"FLour"
             },
             {"amount":2.0,
             "unit":"stk",
             "name":"Egg"
           }],
           "label":"Breakfast",
-          "name":"Bløtkake"
+          "name":"Cake"
         },{
           "fav":true,
           "portions":1,
-          "description":"Varm og god dessert!",
+          "description":"Good dessert",
           "ingredients":
           [{
             "amount":1.5,
             "unit":"dl",
-            "name":"Sukker"
+            "name":"Sugar"
           },{
             "amount":1.0,
             "unit":"dl",
-            "name":"Kakao"
+            "name":"Cocoa"
           }],
           "label":"",
-          "name":"Kakao"
+          "name":"Hot chocolate"
         }],
-        "name":"Kokebok"}
+        "name":"Cookbook"}

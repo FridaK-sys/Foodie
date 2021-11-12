@@ -77,9 +77,10 @@ public class CookbookService {
    * }
    */
 
-  public void addRecipe(Recipe recipe) {
+  public boolean addRecipe(Recipe recipe) {
     cookbook.addRecipe(recipe);
     autoSaveCookbook();
+    return true;
   }
   /*
    * public void renameRecipe(String name, String newName) { Recipe res =
@@ -90,9 +91,10 @@ public class CookbookService {
    * res.setName(newName); autoSaveCookbook(); }
    */
 
-  public void removeRecipe(String name) {
+  public boolean removeRecipe(String name) {
     cookbook.removeRecipe(name);
     autoSaveCookbook();
+    return true;
   }
 
 }
