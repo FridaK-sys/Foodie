@@ -5,15 +5,25 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 /**
  * Recipe containing a name, description, ingredients, portions, favorite tag
  * and label.
  */
 public class Recipe {
 
+  private @Id @GeneratedValue Long id;
   private String name;
   private String description;
-  private List<Ingredient> ingredients = new ArrayList<>();
+  private @Column @ElementCollection(targetClass = Ingredient.class) List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private boolean fav = false;
   private String label = "";
@@ -53,6 +63,14 @@ public class Recipe {
     setName(name);
     setPortions(portions);
     this.description = "nothing here...";
+  }
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
