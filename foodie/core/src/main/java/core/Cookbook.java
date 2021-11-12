@@ -29,7 +29,7 @@ public class Cookbook {
    * Constructor for an empty cookbook.
    */
   public Cookbook() {
-    this.name = "Ny kokebok";
+    this.name = "Cookbook";
   }
 
   public String getName() {
@@ -74,6 +74,17 @@ public class Cookbook {
    */
   public void removeRecipe(int index) {
     recipes.remove(index);
+  }
+
+  /**
+   * Removes recipe from recipeList
+   * 
+   * @param iname
+   */
+  public void removeRecipe(String name) {
+    Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
+        .orElseThrow(() -> new IllegalArgumentException("No recipe with name " + name));
+    recipes.remove(res);
   }
 
   /**
