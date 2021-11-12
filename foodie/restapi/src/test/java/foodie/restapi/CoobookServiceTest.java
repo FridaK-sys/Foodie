@@ -17,7 +17,6 @@ import core.Recipe;
 @ContextConfiguration(classes = { CookbookController.class, CookbookService.class, CookbookApplication.class })
 class CookbookServiceTest {
 
-  @SuppressWarnings("SpringJavaAutowiredMembersInspection")
   @Autowired
   private CookbookService service;
 
