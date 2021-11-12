@@ -77,6 +77,17 @@ public class Cookbook {
   }
 
   /**
+   * Removes recipe from recipeList
+   * 
+   * @param name
+   */
+  public void removeRecipe(String name) {
+    Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
+        .orElseThrow(() -> new IllegalArgumentException("No recipe with the name " + name));
+    recipes.remove(res);
+  }
+
+  /**
    * Makes list of all recipes in recipeList with fav = true
    * 
    * @return list of recipes in recipeList with fav = true
