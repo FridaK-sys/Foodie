@@ -25,46 +25,36 @@ import json.CookbookPersistence;
 import restapi.CookbookApplication;
 import restapi.CookbookController;
 import restapi.CookbookService;
-
-@AutoConfigureMockMvc
-@ContextConfiguration(classes = { CookbookController.class, CookbookService.class, CookbookApplication.class })
-@WebMvcTest
-public class CookbookApplicationTest {
-
-  @Autowired
-  private MockMvc mockMvc;
-
-  private ObjectMapper objectMapper;
-
-  @BeforeEach
-  public void setup() throws Exception {
-    objectMapper = CookbookPersistence.createObjectMapper();
-  }
-
-  private String cookbookUrl(String... segments) {
-    String url = "/" + CookbookController.COOKBOOK_SERVICE_PATH;
-    for (String segment : segments) {
-      url = url + "/" + segment;
-    }
-    return url;
-  }
-
-  @Test
-  public void testGet_cookbook() throws Exception {
-    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(cookbookUrl()).accept(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
-    try {
-      Cookbook cookbook = objectMapper.readValue(result.getResponse().getContentAsString(), Cookbook.class);
-      // Iterator<Recipe> it = iterator();
-      // assertTrue(it.hasNext());
-      // Recipe recipe1 = it.next();
-      // assertTrue(it.hasNext());
-      // Recipe recipe2 = it.next();
-      // assertFalse(it.hasNext());
-      // assertEquals("recipe", recipe1.getName());
-      // assertEquals("recipe2", recipe2.getName());
-    } catch (JsonProcessingException e) {
-      fail(e.getMessage());
-    }
-  }
-}
+/*
+ * @AutoConfigureMockMvc
+ * 
+ * @ContextConfiguration(classes = { CookbookController.class,
+ * CookbookService.class, CookbookApplication.class })
+ * 
+ * @WebMvcTest public class CookbookApplicationTest {
+ * 
+ * @Autowired private MockMvc mockMvc;
+ * 
+ * private ObjectMapper objectMapper;
+ * 
+ * @BeforeEach public void setup() throws Exception { objectMapper =
+ * CookbookPersistence.createObjectMapper(); }
+ * 
+ * private String cookbookUrl(String... segments) { String url = "/" +
+ * CookbookController.COOKBOOK_SERVICE_PATH; for (String segment : segments) {
+ * url = url + "/" + segment; } return url; }
+ * 
+ * @Test public void testGet_cookbook() throws Exception { MvcResult result =
+ * mockMvc.perform(MockMvcRequestBuilders.get(cookbookUrl()).accept(MediaType.
+ * APPLICATION_JSON))
+ * .andExpect(MockMvcResultMatchers.status().isOk()).andReturn(); try { Cookbook
+ * cookbook = objectMapper.readValue(result.getResponse().getContentAsString(),
+ * Cookbook.class); // Iterator<Recipe> it = iterator(); //
+ * assertTrue(it.hasNext()); // Recipe recipe1 = it.next(); //
+ * assertTrue(it.hasNext()); // Recipe recipe2 = it.next(); //
+ * assertFalse(it.hasNext()); // assertEquals("recipe", recipe1.getName()); //
+ * assertEquals("recipe2", recipe2.getName()); } catch (JsonProcessingException
+ * e) { fail(e.getMessage()); } }
+ * 
+ * }
+ */
