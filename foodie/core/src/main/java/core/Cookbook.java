@@ -79,11 +79,11 @@ public class Cookbook {
   /**
    * Removes recipe from recipeList
    * 
-   * @param iname
+   * @param name
    */
   public void removeRecipe(String name) {
     Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
-        .orElseThrow(() -> new IllegalArgumentException("No recipe with name " + name));
+        .orElseThrow(() -> new IllegalArgumentException("No recipe with the name " + name));
     recipes.remove(res);
   }
 
