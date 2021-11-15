@@ -17,7 +17,7 @@ import core.Cookbook;
 @RequestMapping(CookbookController.COOKBOOK_SERVICE_PATH)
 public class CookbookController {
 
-  public static final String COOKBOOK_SERVICE_PATH = "restapi/cookbook";
+  public static final String COOKBOOK_SERVICE_PATH = "/cookbook";
 
   @Autowired
   private CookbookService resService;
@@ -91,7 +91,8 @@ public class CookbookController {
   @DeleteMapping(path = "/{name}")
   public boolean removeRecipe(@PathVariable("name") String name) {
     Cookbook cook = getCookbook();
-    cook.removeRecipe(name);
+
+    // cook.removeRecipe(name);
     autoSaveCookbook();
     return true;
   }

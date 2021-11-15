@@ -56,7 +56,7 @@ public class CookbookService {
   }
 
   /**
-   * Saves the TodoModel to disk. Should be called after each update.
+   * Saves the Recipe to disk. Should be called after each update.
    */
   public void autoSaveCookbook() {
     if (cookbookPersistence != null) {
