@@ -5,10 +5,10 @@ component core {
 	package foodie.json
 }
 
-component JSON.simple {
+component Jackson {
 }
 
-foodie.json ..> JSON.simple
+foodie.json ..> Jackson
 
 component ui {
 	package foodie.ui
@@ -32,25 +32,10 @@ component restapi {
 foodie.restapi ..> foodie.core
 foodie.restapi ..> foodie.json
 
-component spring {
+component SpringBootApplication {	
 }
 
-restapi ..> spring
+foodie.restapi ..> SpringBootApplication
 
-component restserver {
-	package foodie.restserver
-}
-
-foodie.restserver ..> foodie.core
-foodie.restserver ..> foodie.restapi
-
-component jersey {
-}
-
-component grizzly2 {
-}
-
-restserver ..> jersey
-restserver ..> grizzly2
 
 @enduml
