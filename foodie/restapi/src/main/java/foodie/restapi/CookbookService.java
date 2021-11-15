@@ -68,31 +68,22 @@ public class CookbookService {
       }
     }
   }
-  /*
-   * public Recipe getRecipe(String name) { return
-   * cookbook.getRecipes().stream().filter(r ->
-   * r.getName().equals(name)).findFirst() .orElseThrow(() -> new
-   * IllegalArgumentException("No recipe named " + name));
-   * 
-   * }
-   */
 
   public boolean addRecipe(Recipe recipe) {
     cookbook.addRecipe(recipe);
     autoSaveCookbook();
     return true;
   }
-  /*
-   * public void renameRecipe(String name, String newName) { Recipe res =
-   * cookbook.getRecipes().stream().filter(r ->
-   * r.getName().equals(name)).findFirst() .orElseThrow(() -> new
-   * IllegalArgumentException("No recipe named \"" + name + "\""));
-   * 
-   * res.setName(newName); autoSaveCookbook(); }
-   */
 
   public boolean removeRecipe(String name) {
     cookbook.removeRecipe(name);
+    autoSaveCookbook();
+    return true;
+  }
+
+  public boolean editRecipe(String name, Recipe recipe) {
+    cookbook.removeRecipe(name);
+    cookbook.addRecipe(recipe);
     autoSaveCookbook();
     return true;
   }

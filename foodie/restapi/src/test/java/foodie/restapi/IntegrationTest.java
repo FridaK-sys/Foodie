@@ -17,6 +17,7 @@ import core.Cookbook;
 import core.Recipe;
 
 @ContextConfiguration(classes = { CookbookController.class, CookbookService.class, CookbookApplication.class })
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class IntegrationTest {
 
@@ -29,6 +30,4 @@ public class IntegrationTest {
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
   }
-
-  // test get recipe??
 }

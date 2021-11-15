@@ -44,17 +44,6 @@ class CookbookControllerTest {
     assertEquals(2, cookbook.getRecipes().size());
   }
 
-  /*
-   * @Test void getRecipe() throws Exception {
-   * given(service.getCookbook()).willReturn(CookbookService.createDefaultCookbook
-   * ()); MvcResult result =
-   * mvc.perform(MockMvcRequestBuilders.get("/cookbook/recipe1")).andExpect(status
-   * ().isOk()) .andReturn(); Recipe recipe = new
-   * ObjectMapper().registerModule(new CookbookModule())
-   * .readValue(result.getResponse().getContentAsString(StandardCharsets.UTF_8),
-   * Recipe.class); assertEquals(1, recipe.getPortions()); }
-   */
-
   @Test
   void addRecipe() throws Exception {
     Recipe recipe = new Recipe("recipe3", 2);
@@ -63,16 +52,15 @@ class CookbookControllerTest {
         .contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk()).andReturn();
     assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
   }
-  /*
-   * @Test void renameRecipe() throws Exception { Recipe recipe = new
-   * Recipe("recipe1", 2); String json = mapper.writeValueAsString(recipe);
-   * MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/cookbook/" +
-   * recipe.getName() + "/rename")
-   * .contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().
-   * isOk()).andReturn();
-   * assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
-   * }
-   */
+
+  @Test
+  void editRecipe() throws Exception {
+    Recipe recipe = new Recipe("recipe3", 2);
+    String json = mapper.writeValueAsString(recipe);
+    MvcResult result = mvc.perform(MockMvcRequestBuilders.put("/cookbook/" + recipe.getName() + "/edit")
+        .contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk()).andReturn();
+    assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
+  }
 
   @Test
   void removeRecipe() throws Exception {
