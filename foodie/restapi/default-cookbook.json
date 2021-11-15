@@ -1,0 +1,36 @@
+        {
+          "recipes":
+          [{
+            "fav":false,
+            "portions":1,
+            "description":"Recipe for cake",
+            "ingredients":
+            [{
+              "amount":200.0,
+              "unit":"g",
+              "name":"FLour"
+            },
+            {"amount":2.0,
+            "unit":"stk",
+            "name":"Egg"
+          }],
+          "label":"Breakfast",
+          "name":"Cake"
+        },{
+          "fav":true,
+          "portions":1,
+          "description":"Good dessert",
+          "ingredients":
+          [{
+            "amount":1.5,
+            "unit":"dl",
+            "name":"Sugar"
+          },{
+            "amount":1.0,
+            "unit":"dl",
+            "name":"Cocoa"
+          }],
+          "label":"",
+          "name":"Hot chocolate"
+        }],
+        "name":"Cookbook"}

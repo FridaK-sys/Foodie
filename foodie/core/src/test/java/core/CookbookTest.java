@@ -48,7 +48,7 @@ public class CookbookTest {
 
 	@Test
 	public void testEmptyConstructor() {
-		assertEquals(cookbook2.getName(), "Ny kokebok");
+		assertEquals(cookbook2.getName(), "Cookbook");
 		assertEquals(cookbook2.getRecipes(), new ArrayList<>());
 	}
 
