@@ -2,31 +2,19 @@ package foodie.restapi;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Rule;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.util.NestedServletException;
-
 import core.Cookbook;
 import core.Recipe;
 import json.CookbookModule;
@@ -35,24 +23,17 @@ import json.CookbookModule;
 @WebMvcTest(CookbookApplication.class)
 class CookbookControllerTest {
 
-  private CookbookService service;
-
   @Autowired
   private MockMvc mvc;
 
   @Autowired
   private ObjectMapper mapper;
 
-  @BeforeEach
-  public void setUp() {
-    service = new CookbookService();
-  }
-
   @Test
   void getCookbook() throws Exception {
     // GET-request returns OK-status code
-    MvcResult result = mvc.perform(MockMvcRequestBuilders.get(service.COOKBOOK_SERVICE_PATH)).andExpect(status().isOk())
-        .andReturn();
+    MvcResult result = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
+        .andExpect(status().isOk()).andReturn();
 
     // GET-request returns correct data
     Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule())
@@ -72,7 +53,7 @@ class CookbookControllerTest {
     assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
 
     // GET-request returns updated cookbook
-    MvcResult result2 = mvc.perform(MockMvcRequestBuilders.get(service.COOKBOOK_SERVICE_PATH))
+    MvcResult result2 = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
         .andExpect(status().isOk()).andReturn();
     Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule())
         .readValue(result2.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
@@ -94,7 +75,7 @@ class CookbookControllerTest {
     assertEquals(result, result2);
 
     // GET-request returns updated cookbook
-    MvcResult result3 = mvc.perform(MockMvcRequestBuilders.get(service.COOKBOOK_SERVICE_PATH))
+    MvcResult result3 = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
         .andExpect(status().isOk()).andReturn();
     Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule())
         .readValue(result3.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
@@ -113,7 +94,7 @@ class CookbookControllerTest {
     assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
 
     // GET-request returns updated cookbook
-    MvcResult result3 = mvc.perform(MockMvcRequestBuilders.get(service.COOKBOOK_SERVICE_PATH))
+    MvcResult result3 = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
         .andExpect(status().isOk()).andReturn();
     Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule())
         .readValue(result3.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
