@@ -22,9 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import core.Cookbook;
 import core.Recipe;
 import json.CookbookPersistence;
-import restapi.CookbookApplication;
-import restapi.CookbookController;
-import restapi.CookbookService;
+
 /*
  * @AutoConfigureMockMvc
  * 
