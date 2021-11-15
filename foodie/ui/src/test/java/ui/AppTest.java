@@ -63,17 +63,17 @@ public class AppTest extends AbstractAppTest {
         checkRecipesListViewItems(cookbook.getRecipes());
     }
 
-    @Test
-    public void testDeleteButton() {
-        if (referenceBook.getRecipes().size() != 0) {
+    // @Test
+    // public void testDeleteButton() {
+    // if (referenceBook.getRecipes().size() != 0) {
 
-            ListView<Recipe> recipeListView = lookup("#mainListView").query();
-            recipeListView.getSelectionModel().select(cookbook.getRecipes().size() - 1);
-            clickOn("#deleteButton");
-            checkRecipesListViewItems(controller.getCookbook().getRecipes());
-            FileHandler handler = new FileHandler();
-            handler.writeRecipesToFile("src/main/resources/ui/test.txt", referenceBook);
-        }
-    }
+    // ListView<Recipe> recipeListView = lookup("#mainListView").query();
+    // recipeListView.getSelectionModel().select(cookbook.getRecipes().size() - 1);
+    // clickOn("#deleteButton");
+    // checkRecipesListViewItems(controller.getCookbook().getRecipes());
+    // FileHandler handler = new FileHandler();
+    // handler.writeRecipesToFile("src/main/resources/ui/test.txt", referenceBook);
+    // }
+    // }
 
 }

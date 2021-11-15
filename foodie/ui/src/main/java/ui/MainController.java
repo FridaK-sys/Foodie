@@ -1,12 +1,17 @@
 package ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
@@ -17,7 +22,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import json.FileHandler;
 import javafx.fxml.Initializable;
@@ -31,11 +39,24 @@ public class MainController implements Initializable {
   @FXML
   private ListView<Recipe> mainListView;
 
+  @FXML
+  private Button viewButton;
+
+  @FXML
+  private ToggleButton Fav;
+
+  private ToggleGroup group = new ToggleGroup();
+
+  @FXML
+  RadioButton All, Breakfast, Lunch, Dinner, Favorite;
+
   public void initialize(URL url, ResourceBundle rb) {
     fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
 
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
+    setToggleListener();
+    setListViewListener();
   }
 
   public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
@@ -85,12 +106,12 @@ public class MainController implements Initializable {
     stage.show();
   }
 
-  public void deleteRecipeButtonPushed(ActionEvent ae) {
+  @FXML
+  public void deleteRecipeButtonPushed() {
     int index = mainListView.getSelectionModel().getSelectedIndex();
     recipes.remove(index);
     mainBook.removeRecipe(index);
     fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
-    // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
   }
 
   public Cookbook getCookbook() {
@@ -113,5 +134,60 @@ public class MainController implements Initializable {
     fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
   }
 
+  public void setListViewListener() {
+    mainListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recipe>() {
+      @Override
+      public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, Recipe newValue) {
+        viewButton.fire();
+        System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
+      }
+    });
+  }
+
+  public void setToggleListener() {
+    All.setToggleGroup(group);
+    Breakfast.setToggleGroup(group);
+    Lunch.setToggleGroup(group);
+    Dinner.setToggleGroup(group);
+    All.setSelected(true);
+    group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+      @Override
+      public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+        // Has selection.
+        if (group.getSelectedToggle() != null) {
+          RadioButton button = (RadioButton) group.getSelectedToggle();
+
+          sortListview(button.getId(), Fav.isSelected());
+        }
+      }
+    });
+  }
+
+  public void updateListView() {
+
+  }
+
+  @FXML
+  public void toggleFav() {
+    RadioButton button = (RadioButton) group.getSelectedToggle();
+    sortListview(button.getId(), Fav.isSelected());
+  }
+
+  public void sortListview(String label, Boolean fav) {
+    // Cookbook tempBook = new Cookbook();
+    if (label.equals("All")) {
+      if (fav) {
+        recipes.setAll((mainBook.getRecipes()).stream().filter(r -> r.getFav() == true).toList());
+      } else {
+        recipes.setAll(mainBook.getRecipes());
+      }
+    }
+    List<Recipe> recipesWithLabel = mainBook.getRecipesWithLabel(label);
+    if (fav) {
+      recipes.setAll(recipesWithLabel.stream().filter(r -> r.getFav() == true).toList());
+    } else {
+      recipes.setAll(recipesWithLabel);
+    }
+  }
 }
 // mvn -pl ui javafx

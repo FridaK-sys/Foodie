@@ -1,5 +1,5 @@
-module calc.ui {
-  requires transitive calc.core;
+module foodie.ui {
+  requires transitive foodie.core;
   requires javafx.controls;
   requires transitive javafx.base;
   requires javafx.fxml;

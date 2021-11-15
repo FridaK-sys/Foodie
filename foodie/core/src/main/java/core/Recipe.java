@@ -2,21 +2,49 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 /**
- * Lists of ingredients in a recipe.
+ * Recipe containing a name, description, ingredients, portions, favorite tag
+ * and label.
  */
 public class Recipe {
 
+  private @Id @GeneratedValue Long id;
   private String name;
   private String description;
-  private List<Ingredient> ingredients = new ArrayList<>();
+  private @Column @ElementCollection(targetClass = Ingredient.class) List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
   private boolean fav = false;
   private String label = "";
-  static final List<String> allowedLabels = Arrays.asList("Breakfast", "Lunch", "Dinner");
+  public static final List<String> labels = Collections.unmodifiableList(new ArrayList<String>() {
+    {
+      add("Breakfast");
+      add("Lunch");
+      add("Dinner");
+      add("Dessert");
+    }
+  });
 
+  /**
+   * Constructor for recipe with name, description, portions and ingredients.
+   * 
+   * @param name
+   * @param description
+   * @param portions
+   * @param ingredients
+   * 
+   */
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
     setPortions(portions);
@@ -24,21 +52,40 @@ public class Recipe {
     this.ingredients = new ArrayList<>(ingredients);
   }
 
+  /**
+   * Constructor for recipe with name and portions.
+   * 
+   * @param name
+   * @param portions
+   * 
+   */
   public Recipe(String name, int portions) {
     setName(name);
     setPortions(portions);
     this.description = "nothing here...";
   }
 
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
   public String getName() {
     return this.name;
   }
 
+  /**
+   * Sets name of recipe.
+   * 
+   * @param name
+   * @throws IllegalArgumentException if param contains other characters than
+   *                                  letters and numbers
+   */
   public void setName(String name) {
-    if (name.isBlank()) {
-      throw new IllegalArgumentException("Invalid name");
-    }
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]{1,20}$")) {
+    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
       throw new IllegalArgumentException("Invalid name");
     }
     this.name = name;
@@ -56,6 +103,12 @@ public class Recipe {
     return this.portions;
   }
 
+  /**
+   * Sets portions. Updates the amount of each ingredient to fit with portions.
+   * 
+   * @param portions
+   * @throws IllegalArgumentException if param is negative integer
+   */
   public void setPortions(int portions) {
     if (portions <= 0) {
       throw new IllegalArgumentException("Portions must be more than 0");
@@ -68,6 +121,12 @@ public class Recipe {
     return new ArrayList<>(ingredients);
   }
 
+  /**
+   * Add ingredient to recipe.
+   * 
+   * @param ingredient
+   * @throws IllegalArgumentException if list already contains ingredient
+   */
   public void addIngredient(Ingredient ingredient) {
     if (!ingredients.contains(ingredient)) {
       ingredients.add(ingredient);
@@ -76,38 +135,44 @@ public class Recipe {
     }
   }
 
-  public void removeIngredient(Ingredient ingredient) {
-    if (!ingredients.contains(ingredient)) {
-      throw new IllegalArgumentException(this.name + "does not contain this ingredient");
+  /**
+   * Remove ingredient from recipe.
+   * 
+   * @param index
+   * @throws IllegalArgumentException if index is larger than size of
+   *                                  ingredientList
+   */
+  public void removeIngredient(int index) {
+    if (index <= ingredients.size()) {
+      ingredients.remove(index);
+    } else {
+      throw new IllegalArgumentException();
     }
-    ingredients.remove(ingredient);
-  }
-
-  public void removeIngredient(String name) {
-    for (Ingredient i : ingredients) {
-      if (i.getName().equals(name)) {
-        ingredients.remove(i);
-      }
-    }
-  }
-
-  public void setFav() {
-    this.fav = true;
-  }
-
-  public void removeFav() {
-    this.fav = false;
   }
 
   public boolean getFav() {
     return this.fav;
   }
 
+  public void setFav(boolean isFav) {
+    this.fav = isFav;
+  }
+
+  public String getLabel() {
+    return this.label;
+  }
+
+  /**
+   * Sets label for recipe.
+   * 
+   * @param label
+   * @throws IllegalArgumentException if label is not valid
+   */
   public void setLabel(String label) {
-    if (allowedLabels.contains(label)) {
+    if (labels.contains(label)) {
       this.label = label;
     } else {
-      throw new IllegalArgumentException("Label has to be either Breakfast, Lunch or Dinner");
+      throw new IllegalArgumentException("Invalid label");
     }
   }
 
@@ -115,11 +180,9 @@ public class Recipe {
     this.label = "";
   }
 
-  public String getLabel() {
-    return this.label;
-  }
-
   public String toString() {
-    return getName();
+    StringBuilder sb = new StringBuilder();
+    ingredients.stream().forEach(i -> sb.append(i.getName()));
+    return getName() + ": " + sb.toString();
   }
 }

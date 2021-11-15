@@ -44,10 +44,10 @@ public class ViewRecipeController implements Initializable {
 
   public void favorizeRecipeButton(ActionEvent ae) {
     if (selectedRecipe.getFav() == true) {
-      selectedRecipe.removeFav();
+      selectedRecipe.setFav(false);
       faveButton.setText("Add to favorite");
     } else {
-      selectedRecipe.setFav();
+      selectedRecipe.setFav(true);
       faveButton.setText("Remove from favorite");
     }
     fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);
@@ -104,6 +104,21 @@ public class ViewRecipeController implements Initializable {
       labelTag.setText(selectedRecipe.getLabel());
     }
 
+  }
+
+  public void changeToEditRecipe(ActionEvent ae) throws IOException {
+    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+
+    Parent root = fxmlLoader.load();
+    Scene viewRecipesScene = new Scene(root);
+
+    NewRecipeController controller = fxmlLoader.getController();
+    controller.initData(selectedRecipe, index);
+
+    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    stage.setScene(viewRecipesScene);
+    stage.show();
   }
 
   public void changeSceneToMain(ActionEvent ea) throws IOException {
