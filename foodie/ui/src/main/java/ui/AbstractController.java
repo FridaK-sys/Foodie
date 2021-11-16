@@ -62,7 +62,7 @@ public abstract class AbstractController {
   }
 
   public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
+    URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
     Parent root = fxmlLoader.load();
@@ -78,7 +78,7 @@ public abstract class AbstractController {
   }
 
   public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
     Parent root = fxmlLoader.load();
@@ -93,7 +93,7 @@ public abstract class AbstractController {
   }
 
   public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
     Parent root = fxmlLoader.load();
