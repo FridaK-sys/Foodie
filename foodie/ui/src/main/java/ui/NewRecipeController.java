@@ -67,11 +67,10 @@ public class NewRecipeController implements Initializable {
             (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getText()));
         ingredients.add(newIngredient);
       } else {
-        Ingredient newIngredient = new Ingredient(ingredientTitle.getText()); // legge til en konstruktør i ingredient
-                                                                              // slitk at vi kan legge til ingredienser
-                                                                              // uten mengde, eks "salt"
+        Ingredient newIngredient = new Ingredient(ingredientTitle.getText());
         ingredients.add(newIngredient);
       }
+
       ingredientAmount.setText(null);
       ingredientTitle.setText(null);
       ingredientUnit.setText(null);
@@ -104,7 +103,7 @@ public class NewRecipeController implements Initializable {
     try {
       Recipe updatedRecipe = createRecipe();
       fileHandler.replaceRecipeInFile(updatedRecipe, index);
-      changeSceneToViewRecipe();
+      backButton.fire();
 
     } catch (Exception e) {
       errorMessageLabel.setText(e.getMessage());
@@ -237,33 +236,6 @@ public class NewRecipeController implements Initializable {
 
   }
 
-  public void changeSceneToListView(ActionEvent ea) throws IOException {
-    URL fxmlLocation = getClass().getResource("Main.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
-    Parent root = fxmlLoader.load();
-    Scene viewRecipesScene = new Scene(root);
-
-    Stage stage = (Stage) ((Node) ea.getSource()).getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
-  }
-
-  public void changeSceneToViewRecipe() throws IOException {
-    URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
-    Parent root = fxmlLoader.load();
-
-    Scene viewRecipesScene = new Scene(root);
-
-    ViewRecipeController controller = fxmlLoader.getController();
-    controller.initData(newRecipe, index);
-    Stage stage = (Stage) backButton.getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
-  }
-
   public List<Ingredient> getIngredients() {
     return new ArrayList<Ingredient>(ingredients);
   }
@@ -287,6 +259,10 @@ public class NewRecipeController implements Initializable {
       dinnerTag.setStyle("-fx-background-color: white");
 
     }
+  }
+
+  public void setBackButtonTarget(SceneTarget sceneTarget) {
+    backButton.setOnAction(sceneTarget.getActionEventHandler());
   }
 
 }
