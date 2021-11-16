@@ -5,16 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import core.Cookbook;
 import core.Recipe;
 
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
-@ContextConfiguration(classes = { CookbookController.class, CookbookService.class, CookbookApplication.class })
 class CookbookServiceTest {
 
   private CookbookService service;
@@ -23,7 +16,7 @@ class CookbookServiceTest {
   public void setUp() {
     try {
       service = new CookbookService();
-      Cookbook cookbook = service.createDefaultCookbook();
+      Cookbook cookbook = CookbookService.createDefaultCookbook();
       service.setCookbook(cookbook);
     } catch (Exception e) {
       e.printStackTrace();
