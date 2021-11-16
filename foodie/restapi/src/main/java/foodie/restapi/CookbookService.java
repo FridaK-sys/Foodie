@@ -22,14 +22,12 @@ public class CookbookService {
    *
    * @param cookbook
    */
-  public CookbookService(Cookbook cookbook) {
-    this.cookbook = cookbook;
-    this.cookbookPersistence = new CookbookPersistence();
-    cookbookPersistence.setSaveFile("springbootserver-cookbook.json");
-  }
 
-  public CookbookService() {
-    this(createDefaultCookbook());
+  public CookbookService() throws IllegalStateException, IOException {
+    this.cookbookPersistence = new CookbookPersistence();
+    cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
+    this.cookbook = cookbookPersistence.loadCookbook();
+
   }
 
   public Cookbook getCookbook() {
