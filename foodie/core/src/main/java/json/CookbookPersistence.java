@@ -3,6 +3,9 @@ package json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import core.Cookbook;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -60,6 +63,10 @@ public class CookbookPersistence {
     }
     try (Reader reader = new FileReader(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
       return readCookbook(reader);
+    } catch (FileNotFoundException e) {
+      Cookbook cookbook = new Cookbook();
+      saveCookbook(cookbook);
+      return cookbook;
     }
 
   }
@@ -72,9 +79,18 @@ public class CookbookPersistence {
   public void saveCookbook(Cookbook cookbook) throws IOException, IllegalStateException {
     if (saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
-    }
-    try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
-      writeCookbook(cookbook, writer);
+    } else if (saveFilePath.toFile().exists()) {
+      try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
+        writeCookbook(cookbook, writer);
+
+      }
+
+    } else {
+      try (Writer writer = new FileWriter(new File(saveFilePath.toString()), StandardCharsets.UTF_8)) {
+        writeCookbook(cookbook, writer);
+
+      }
+
     }
 
   }
