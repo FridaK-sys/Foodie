@@ -13,12 +13,18 @@ public interface CookbookInterface {
 
   Cookbook getCookbook();
 
+  /**
+   * Edit the recipe.
+   *
+   * @return true if it was edited
+   */
+
   boolean editRecipe(String name, Recipe recipe);
 
   /**
    * Adds the recipe.
    *
-   * @return true if it was added, false if it replaced
+   * @return true if it was added
    */
 
   boolean addRecipe(Recipe recipe);
