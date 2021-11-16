@@ -24,14 +24,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import json.FileHandler;
+// import json.FileHandler;
 import javafx.fxml.Initializable;
 
 public class MainController implements IFoodieController, Initializable {
 
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
-  private FileHandler fileHandler = new FileHandler();
 
   @FXML
   private ListView<Recipe> mainListView;
@@ -71,7 +70,7 @@ public class MainController implements IFoodieController, Initializable {
     SceneTarget sceneTarget = new SceneTarget(Lunch.getScene());
 
     ViewRecipeController controller = fxmlLoader.getController();
-    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget);
+    // controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget);
 
     controller.setBackButtonTarget(sceneTarget);
     viewRecipesScene.setUserData(fxmlLoader);
@@ -89,7 +88,7 @@ public class MainController implements IFoodieController, Initializable {
 
     Scene viewRecipesScene = new Scene(root);
     NewRecipeController controller = fxmlLoader.getController();
-    controller.initData(mainBook);
+    // controller.initData(mainBook);
     controller.setBackButtonTarget(new SceneTarget(Lunch.getScene()));
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
@@ -99,7 +98,7 @@ public class MainController implements IFoodieController, Initializable {
 
   public void update() {
     mainBook = new Cookbook();
-    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
+    // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
     recipes.setAll(mainBook.getRecipes());
     mainListView.getSelectionModel().clearSelection();
   }
@@ -123,7 +122,7 @@ public class MainController implements IFoodieController, Initializable {
   public void setRecipes(Cookbook cookbook) {
     mainBook = new Cookbook("test", cookbook.getRecipes());
     recipes.setAll(mainBook.getRecipes());
-    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
+    // fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
   }
 
   public void sortListview(String label, Boolean fav) {

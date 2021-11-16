@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,16 +28,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import json.FileHandler;
 import ui.utils.CookbookInterface;
 
-public abstract class AbstractController {
+public abstract class AbstractController implements IFoodieController, Initializable {
 
   protected CookbookInterface dataAccess;
 
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
-  private FileHandler fileHandler = new FileHandler();
 
   @FXML
   private ListView<Recipe> mainListView;
@@ -50,11 +49,16 @@ public abstract class AbstractController {
   RadioButton All, Breakfast, Lunch, Dinner;
 
   public void initialize(URL url, ResourceBundle rb) {
-    update();
+    setUpStorage();
+    System.out.println(dataAccess.getCookbook().getRecipes());
+    recipes.setAll(dataAccess.getCookbook().getRecipes());
     mainListView.setItems(recipes);
     setToggleListener();
-    mainListView.getSelectionModel().clearSelection();
     setListViewListener();
+
+    update();
+    mainListView.getSelectionModel().clearSelection();
+
     All.getStyleClass().remove("radio-button");
     All.getStyleClass().add("toggle-button");
     Breakfast.getStyleClass().add("toggle-button");
@@ -76,7 +80,7 @@ public abstract class AbstractController {
     ViewRecipeController controller = fxmlLoader.getController();
     SceneTarget sceneTarget = new SceneTarget(Lunch.getScene());
 
-    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget);
+    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget, dataAccess);
 
     controller.setBackButtonTarget(sceneTarget);
     viewRecipesScene.setUserData(fxmlLoader);
@@ -93,7 +97,7 @@ public abstract class AbstractController {
 
     Scene viewRecipesScene = new Scene(root);
     NewRecipeController controller = fxmlLoader.getController();
-    controller.initData(mainBook);
+    controller.initData(mainBook, dataAccess);
     controller.setBackButtonTarget(new SceneTarget(Lunch.getScene()));
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
@@ -102,10 +106,10 @@ public abstract class AbstractController {
   }
 
   public void update() {
-    mainBook = new Cookbook();
-    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
+    mainBook = dataAccess.getCookbook();
     recipes.setAll(mainBook.getRecipes());
     mainListView.getSelectionModel().clearSelection();
+    group.selectToggle(All);
   }
 
   @FXML
@@ -125,9 +129,7 @@ public abstract class AbstractController {
   }
 
   public void setRecipes(Cookbook cookbook) {
-    mainBook = new Cookbook("test", cookbook.getRecipes());
-    recipes.setAll(mainBook.getRecipes());
-    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
+    recipes.setAll(dataAccess.getCookbook().getRecipes());
   }
 
   public void sortListview(String label, Boolean fav) {
@@ -174,7 +176,6 @@ public abstract class AbstractController {
         // Has selection.
         if (group.getSelectedToggle() != null) {
           RadioButton button = (RadioButton) group.getSelectedToggle();
-
           sortListview(button.getId(), Fav.isSelected());
         }
       }
