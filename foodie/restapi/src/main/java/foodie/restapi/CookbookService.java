@@ -1,7 +1,5 @@
 package foodie.restapi;
 
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import core.Recipe;
 import json.CookbookPersistence;
