@@ -42,7 +42,7 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         
         Scene scene = new Scene(root);
         this.controller = fxmlLoader.getController();
-        controller.initData(recipe1, 1);
+        controller.initData(recipe1, 1, null);
 
         stage.setTitle("Cookbook<3");
 

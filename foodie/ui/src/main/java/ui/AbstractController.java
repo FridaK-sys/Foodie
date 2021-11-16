@@ -32,36 +32,40 @@ import ui.utils.CookbookInterface;
 
 public abstract class AbstractController {
 
+  protected CookbookInterface dataAccess;
+
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
   private FileHandler fileHandler = new FileHandler();
 
-  protected CookbookInterface dataAccess;
+  @FXML
+  private ListView<Recipe> mainListView;
 
   @FXML
-  protected ListView<Recipe> mainListView;
-
-  @FXML
-  private Button viewButton;
-
-  @FXML
-  public ToggleButton Fav;
+  private ToggleButton Fav;
 
   private ToggleGroup group = new ToggleGroup();
 
   @FXML
-  RadioButton All, Breakfast, Lunch, Dinner, Favorite;
+  RadioButton All, Breakfast, Lunch, Dinner;
 
   public void initialize(URL url, ResourceBundle rb) {
-    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
-
-    recipes.setAll(mainBook.getRecipes());
+    update();
     mainListView.setItems(recipes);
     setToggleListener();
+    mainListView.getSelectionModel().clearSelection();
     setListViewListener();
+    All.getStyleClass().remove("radio-button");
+    All.getStyleClass().add("toggle-button");
+    Breakfast.getStyleClass().add("toggle-button");
+    Breakfast.getStyleClass().remove("radio-button");
+    Lunch.getStyleClass().remove("radio-button");
+    Lunch.getStyleClass().add("toggle-button");
+    Dinner.getStyleClass().remove("radio-button");
+    Dinner.getStyleClass().add("toggle-button");
   }
 
-  public void changeSceneToViewRecipe(ActionEvent ae) throws IOException {
+  public void changeSceneToViewRecipe(Recipe recipe) throws IOException {
     URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
@@ -70,9 +74,13 @@ public abstract class AbstractController {
     Scene viewRecipesScene = new Scene(root);
 
     ViewRecipeController controller = fxmlLoader.getController();
-    controller.initData(mainListView.getSelectionModel().getSelectedItem(),
-        mainListView.getSelectionModel().getSelectedIndex());
-    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    SceneTarget sceneTarget = new SceneTarget(Lunch.getScene());
+
+    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget);
+
+    controller.setBackButtonTarget(sceneTarget);
+    viewRecipesScene.setUserData(fxmlLoader);
+    Stage stage = (Stage) (Breakfast.getScene().getWindow());
     stage.setScene(viewRecipesScene);
     stage.show();
   }
@@ -86,38 +94,24 @@ public abstract class AbstractController {
     Scene viewRecipesScene = new Scene(root);
     NewRecipeController controller = fxmlLoader.getController();
     controller.initData(mainBook);
+    controller.setBackButtonTarget(new SceneTarget(Lunch.getScene()));
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
     stage.setScene(viewRecipesScene);
     stage.show();
   }
 
-  public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
-    Parent root = fxmlLoader.load();
-    Scene viewRecipesScene = new Scene(root);
-
-    NewRecipeController controller = fxmlLoader.getController();
-    controller.initData(mainListView.getSelectionModel().getSelectedItem(),
-        mainListView.getSelectionModel().getSelectedIndex(), mainBook);
-
-    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
+  public void update() {
+    mainBook = new Cookbook();
+    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", mainBook);
+    recipes.setAll(mainBook.getRecipes());
+    mainListView.getSelectionModel().clearSelection();
   }
 
   @FXML
-  public void deleteRecipeButtonPushed() {
-    int index = mainListView.getSelectionModel().getSelectedIndex();
-    recipes.remove(index);
-    mainBook.removeRecipe(index);
-    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
-  }
-
-  public Cookbook getCookbook() {
-    return mainBook;
+  public void toggleFav() {
+    RadioButton button = (RadioButton) group.getSelectedToggle();
+    sortListview(button.getId(), Fav.isSelected());
   }
 
   public void addRecipe(Recipe recipe) {
@@ -136,11 +130,33 @@ public abstract class AbstractController {
     fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", mainBook);
   }
 
+  public void sortListview(String label, Boolean fav) {
+    if (label.equals("All")) {
+      if (fav) {
+        recipes.setAll((mainBook.getRecipes()).stream().filter(r -> r.getFav() == true).toList());
+      } else {
+        recipes.setAll(mainBook.getRecipes());
+      }
+    }
+    List<Recipe> recipesWithLabel = mainBook.getRecipesWithLabel(label);
+    if (fav) {
+      recipes.setAll(recipesWithLabel.stream().filter(r -> r.getFav() == true).toList());
+    } else {
+      recipes.setAll(recipesWithLabel);
+    }
+  }
+
   public void setListViewListener() {
     mainListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recipe>() {
       @Override
       public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, Recipe newValue) {
-        viewButton.fire();
+        if (newValue != null) {
+          try {
+            changeSceneToViewRecipe(newValue);
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
         System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
       }
     });
@@ -165,31 +181,8 @@ public abstract class AbstractController {
     });
   }
 
-  public void updateListView() {
-
-  }
-
-  @FXML
-  public void toggleFav() {
-    RadioButton button = (RadioButton) group.getSelectedToggle();
-    sortListview(button.getId(), Fav.isSelected());
-  }
-
-  public void sortListview(String label, Boolean fav) {
-    // Cookbook tempBook = new Cookbook();
-    if (label.equals("All")) {
-      if (fav) {
-        recipes.setAll((mainBook.getRecipes()).stream().filter(r -> r.getFav() == true).toList());
-      } else {
-        recipes.setAll(mainBook.getRecipes());
-      }
-    }
-    List<Recipe> recipesWithLabel = mainBook.getRecipesWithLabel(label);
-    if (fav) {
-      recipes.setAll(recipesWithLabel.stream().filter(r -> r.getFav() == true).toList());
-    } else {
-      recipes.setAll(recipesWithLabel);
-    }
+  public Cookbook getCookbook() {
+    return mainBook;
   }
 
   protected abstract void setUpStorage();
