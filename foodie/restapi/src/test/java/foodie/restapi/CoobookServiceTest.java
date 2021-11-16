@@ -21,7 +21,13 @@ class CookbookServiceTest {
 
   @BeforeEach
   public void setUp() {
-    service = new CookbookService();
+    try {
+      service = new CookbookService();
+      Cookbook cookbook = service.createDefaultCookbook();
+      service.setCookbook(cookbook);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
