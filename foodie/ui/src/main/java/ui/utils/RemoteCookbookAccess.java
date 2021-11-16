@@ -3,13 +3,18 @@ package ui.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
+import java.util.ArrayList;
+import java.util.List;
 import java.net.http.HttpResponse;
 import core.Cookbook;
 import core.Recipe;
+import core.Ingredient;
 import json.CookbookModule;
 
 public class RemoteCookbookAccess implements CookbookInterface {
@@ -23,7 +28,6 @@ public class RemoteCookbookAccess implements CookbookInterface {
     this.mapper = new ObjectMapper().registerModule(new CookbookModule());
 
   }
-  // sjekk om du skal lage ekstra klasse
 
   /**
    * Gets Cookbook. Sends http get request to remote server
@@ -49,8 +53,9 @@ public class RemoteCookbookAccess implements CookbookInterface {
   public boolean editRecipe(String name, Recipe recipe) {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
-      final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", "application/json")
-          .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(jsonVisit)).build();
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + "name" + "/" + "edit"))
+          .header("Accept", "application/json").header("Content-Type", "application/json")
+          .PUT(BodyPublishers.ofString(jsonVisit)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyEdit = mapper.readValue(res.body(), Boolean.class);
       if (successfullyEdit != null && successfullyEdit) {
@@ -69,8 +74,9 @@ public class RemoteCookbookAccess implements CookbookInterface {
   public boolean addRecipe(Recipe recipe) {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
-      final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", "application/json")
-          .header("Content-Type", "application/json").POST(BodyPublishers.ofString(jsonVisit)).build();
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName()))
+          .header("Accept", "application/json").header("Content-Type", "application/json")
+          .POST(BodyPublishers.ofString(jsonVisit)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyAdded = mapper.readValue(res.body(), Boolean.class);
       if (successfullyAdded != null && successfullyAdded) {
@@ -99,6 +105,20 @@ public class RemoteCookbookAccess implements CookbookInterface {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public static void main(String[] args) {
+    /*
+     * List<Ingredient> ings = new ArrayList<>(); List<Recipe> res = new
+     * ArrayList<>(); Ingredient ing = new Ingredient("Potet", 2.0, "stk");
+     * ings.add(ing); Recipe recipe = new Recipe("Stekt potet", "God middag", 2,
+     * ings); res.add(recipe); Cookbook cook = new Cookbook("Middag", res); URI uri
+     * = URI.create("http://localhost:8080/cookbook");
+     * 
+     * RemoteCookbookAccess acc = new RemoteCookbookAccess(uri);
+     * 
+     * System.out.println(acc.getCookbook());
+     */
   }
 
 }
