@@ -13,6 +13,8 @@ public interface CookbookInterface {
 
   Cookbook getCookbook();
 
+  boolean editRecipe(String name, Recipe recipe);
+
   /**
    * Adds the recipe.
    *

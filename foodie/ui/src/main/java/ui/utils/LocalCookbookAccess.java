@@ -35,6 +35,21 @@ public class LocalCookbookAccess implements CookbookInterface {
   }
 
   @Override
+  public boolean editRecipe(String name, Recipe recipe) {
+    cookbook.removeRecipe(name);
+    cookbook.addRecipe(recipe);
+    try {
+      persistence.saveCookbook(cookbook);
+    } catch (IllegalStateException e) {
+
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return true;
+  }
+
+  @Override
   public boolean addRecipe(Recipe recipe) {
     cookbook.addRecipe(recipe);
     try {
