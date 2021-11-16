@@ -32,6 +32,8 @@ import ui.utils.CookbookInterface;
 
 public abstract class AbstractController {
 
+  protected CookbookInterface dataAccess;
+
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
   private FileHandler fileHandler = new FileHandler();
@@ -183,5 +185,7 @@ public abstract class AbstractController {
   public Cookbook getCookbook() {
     return mainBook;
   }
+
+  protected abstract void setUpStorage();
 
 }
