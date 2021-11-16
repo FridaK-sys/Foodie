@@ -24,8 +24,8 @@ class RecipeWriter extends JsonSerializer<Recipe> {
     jsonGen.writeBooleanField("fav", recipe.getFav());
     jsonGen.writeStringField("label", recipe.getLabel());
     jsonGen.writeArrayFieldStart("ingredients");
-    for (Ingredient ing : recipe.getIngredients()) {
-      jsonGen.writeObject(ing);
+    for (Ingredient ingredient : recipe.getIngredients()) {
+      jsonGen.writeObject(ingredient);
     }
     jsonGen.writeEndArray();
     jsonGen.writeEndObject();

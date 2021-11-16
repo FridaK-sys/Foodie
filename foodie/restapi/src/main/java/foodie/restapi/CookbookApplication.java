@@ -1,4 +1,4 @@
-package restapi;
+package foodie.restapi;
 
 import com.fasterxml.jackson.databind.Module;
 import org.springframework.boot.SpringApplication;
