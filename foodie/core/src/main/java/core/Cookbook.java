@@ -45,6 +45,7 @@ public class Cookbook {
    * 
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers.
+   * 
    */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
@@ -125,9 +126,9 @@ public class Cookbook {
    * 
    * @param label recipelabel
    * 
-   * @throws IllegalArgumentException if param is not valid
-   * 
    * @return list of all recipes in recipeList with label = param
+   * 
+   * @throws IllegalArgumentException if param is not valid
    * 
    */
   public List<Recipe> getRecipesWithLabel(String label) {

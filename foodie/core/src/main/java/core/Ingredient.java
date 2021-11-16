@@ -13,7 +13,7 @@ public class Ingredient {
   private String name;
   private double amount;
   private String unit;
-  public static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts"));
+  public static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts", "stk"));
 
   /**
    * Constructor for ingredient with name, amount and unit.

@@ -3,8 +3,6 @@ package core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 
 /**
  * Recipe containing a name, description, ingredients, portions, favorite tag
@@ -17,7 +15,7 @@ public class Recipe {
   private int portions;
   private boolean fav;
   private String label;
-  private @Column @ElementCollection(targetClass = Ingredient.class) List<Ingredient> ingredients = new ArrayList<>();
+  private List<Ingredient> ingredients = new ArrayList<>();
   public static final List<String> labels = Collections.unmodifiableList(new ArrayList<String>() {
     {
       add("Breakfast");
@@ -49,11 +47,9 @@ public class Recipe {
   }
 
   /**
-   * Constructor for a empty recipe
+   * Constructor for a empty recipe.
    * 
-   * @param name     name of revcipe
-   * 
-   * @param portions number of portions
+   * @param name name of recipe
    * 
    */
   public Recipe(String name) {
@@ -182,6 +178,10 @@ public class Recipe {
     this.label = "";
   }
 
+  /**
+   * Writes name of recipe and ingredients to string.
+   * 
+   */
   public String toString() {
     StringBuilder sb = new StringBuilder();
     ingredients.stream().forEach(i -> sb.append(i.getName()));

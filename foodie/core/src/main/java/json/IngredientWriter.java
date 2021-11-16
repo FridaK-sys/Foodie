@@ -3,9 +3,7 @@ package json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import core.Ingredient;
-
 import java.io.IOException;
 
 class IngredientWriter extends JsonSerializer<Ingredient> {
