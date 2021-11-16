@@ -31,6 +31,7 @@ public class Cookbook {
    */
   public Cookbook() {
     this.name = "Cookbook";
+    this.recipes = new ArrayList<>();
   }
 
   public String getName() {
