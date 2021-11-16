@@ -1,18 +1,10 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 /**
  * Recipe containing a name, description, ingredients, portions, favorite tag
@@ -20,13 +12,12 @@ import javax.persistence.OneToMany;
  */
 public class Recipe {
 
-  private @Id @GeneratedValue Long id;
   private String name;
   private String description;
-  private @Column @ElementCollection(targetClass = Ingredient.class) List<Ingredient> ingredients = new ArrayList<>();
   private int portions;
-  private boolean fav = false;
-  private String label = "";
+  private boolean fav;
+  private String label;
+  private @Column @ElementCollection(targetClass = Ingredient.class) List<Ingredient> ingredients = new ArrayList<>();
   public static final List<String> labels = Collections.unmodifiableList(new ArrayList<String>() {
     {
       add("Breakfast");
@@ -49,28 +40,25 @@ public class Recipe {
     setName(name);
     setPortions(portions);
     this.description = description;
-    this.ingredients = new ArrayList<>(ingredients);
+    this.ingredients = new ArrayList<Ingredient>(ingredients);
+    this.fav = false;
+    this.label = "";
   }
 
   /**
-   * Constructor for recipe with name and portions.
+   * Constructor for a empty recipe
    * 
    * @param name
    * @param portions
    * 
    */
-  public Recipe(String name, int portions) {
+  public Recipe(String name) {
     setName(name);
-    setPortions(portions);
+    this.portions = 0;
     this.description = "nothing here...";
-  }
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
+    this.ingredients = new ArrayList<Ingredient>();
+    this.fav = false;
+    this.label = "";
   }
 
   public String getName() {

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import core.Recipe;
 import json.CookbookPersistence;
 import core.Cookbook;
+import core.Ingredient;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +26,6 @@ public class CookbookService {
 
   public CookbookService() throws IllegalStateException, IOException {
     this.cookbookPersistence = new CookbookPersistence();
-
     cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
     this.cookbook = cookbookPersistence.loadCookbook();
 
@@ -53,8 +53,17 @@ public class CookbookService {
       System.out.println("Couldn't read default-cookbook.json, so rigging cookbook manually (" + e + ")");
     }
     Cookbook cookbook = new Cookbook();
-    cookbook.addRecipe(new Recipe("recipe1", 1));
-    cookbook.addRecipe(new Recipe("recipe2", 2));
+    Recipe r1 = new Recipe("Cake", 1);
+    r1.setDescription("Recipe for cake");
+    r1.setLabel("Breakfast");
+    r1.addIngredient(new Ingredient("Flour", 200.0, "g"));
+    r1.addIngredient(new Ingredient("Egg", 2.0, "stk"));
+    Recipe r2 = new Recipe("Hot chocolate", 1);
+    r2.setDescription("Good dessert");
+    r2.addIngredient(new Ingredient("Sugar", 1.5, "dl"));
+    r2.addIngredient(new Ingredient("Cocoa", 1.0, "dl"));
+    cookbook.addRecipe(r1);
+    cookbook.addRecipe(r2);
     return cookbook;
   }
 
