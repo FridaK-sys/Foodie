@@ -4,6 +4,8 @@ module foodie.ui {
   requires transitive javafx.base;
   requires javafx.fxml;
   requires json.simple;
+  requires java.net.http;
+  requires com.fasterxml.jackson.databind;
 
   exports ui;
 
