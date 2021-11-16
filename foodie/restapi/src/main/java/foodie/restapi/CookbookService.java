@@ -25,6 +25,7 @@ public class CookbookService {
 
   public CookbookService() throws IllegalStateException, IOException {
     this.cookbookPersistence = new CookbookPersistence();
+
     cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
     this.cookbook = cookbookPersistence.loadCookbook();
 

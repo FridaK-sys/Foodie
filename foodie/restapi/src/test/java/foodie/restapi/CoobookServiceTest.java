@@ -16,35 +16,22 @@ import core.Recipe;
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = { CookbookController.class, CookbookService.class, CookbookApplication.class })
 class CookbookServiceTest {
-
-  @Autowired
-  private CookbookService service;
-
-  @Test
-  void getCookbook() {
-    assertNotNull(service.getCookbook());
-  }
-
-  @Test
-  void createDefaultCookbook() {
-    Cookbook cookbook = CookbookService.createDefaultCookbook();
-    assertEquals("Cookbook", cookbook.getName());
-    assertEquals("Cake", cookbook.getRecipes().get(0).getName());
-    assertEquals(200.0, cookbook.getRecipes().get(0).getIngredients().get(0).getAmount());
-  }
-
-  @Test
-  void addRecipe() {
-    Recipe recipe = new Recipe("recipe3", 5);
-    assertTrue(service.addRecipe(recipe));
-    // cleanup
-    service.removeRecipe(recipe.getName());
-  }
-
-  @Test
-  void removeRecipe() {
-    String name = "recipe2";
-    service.addRecipe(new Recipe(name, 2));
-    assertTrue(service.removeRecipe(name));
-  }
+  /*
+   * @Autowired private CookbookService service;
+   * 
+   * @Test void getCookbook() { assertNotNull(service.getCookbook()); }
+   * 
+   * @Test void createDefaultCookbook() { Cookbook cookbook =
+   * CookbookService.createDefaultCookbook(); assertEquals("Cookbook",
+   * cookbook.getName()); assertEquals("Cake",
+   * cookbook.getRecipes().get(0).getName()); assertEquals(200.0,
+   * cookbook.getRecipes().get(0).getIngredients().get(0).getAmount()); }
+   * 
+   * @Test void addRecipe() { Recipe recipe = new Recipe("recipe3", 5);
+   * assertTrue(service.addRecipe(recipe)); // cleanup
+   * service.removeRecipe(recipe.getName()); }
+   * 
+   * @Test void removeRecipe() { String name = "recipe2"; service.addRecipe(new
+   * Recipe(name, 2)); assertTrue(service.removeRecipe(name)); }
+   */
 }
