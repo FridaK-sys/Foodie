@@ -15,8 +15,9 @@ public class Cookbook {
   /**
    * Constructor for a cookbook with name and list of recipes.
    * 
-   * @param name
-   * @param recipes
+   * @param name    name of cookbook
+   * 
+   * @param recipes list of recipes
    * 
    */
 
@@ -39,7 +40,8 @@ public class Cookbook {
   /**
    * Sets name of cookbook.
    * 
-   * @param name
+   * @param name name of cookbook
+   * 
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers.
    */
@@ -57,7 +59,8 @@ public class Cookbook {
   /**
    * Adds recipe to cookbook.
    * 
-   * @param recipe
+   * @param recipe recipe to add
+   * 
    * @throws IllegalArgumentException if list already contains recipe
    * 
    */
@@ -68,18 +71,20 @@ public class Cookbook {
   }
 
   /**
-   * Removes recipe from recipeList
+   * Removes recipe from recipeList.
    * 
-   * @param index
+   * @param index index in recipeList of recipe to remove
+   * 
    */
   public void removeRecipe(int index) {
     recipes.remove(index);
   }
 
   /**
-   * Removes recipe from recipeList
+   * Removes recipe from recipeList.
    * 
-   * @param name
+   * @param name name of recipe to remove
+   * 
    */
   public void removeRecipe(String name) {
     Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
@@ -88,19 +93,22 @@ public class Cookbook {
   }
 
   /**
-   * Makes list of all recipes in recipeList with fav = true
+   * Makes list of all recipes in recipeList with fav = true.
    * 
    * @return list of recipes in recipeList with fav = true
+   * 
    */
   public List<Recipe> getFavRecipes() {
     return recipes.stream().filter(r -> r.getFav() == true).toList();
   }
 
   /**
-   * Checks if recipe is in cookbook based on name of recipe
+   * Checks if recipe is in cookbook based on name of recipe.
    * 
-   * @param recipeName
+   * @param recipeName name of recipe
+   * 
    * @return true if recipe is in RecipeList, false if not.
+   * 
    */
   public boolean isInCookbook(String recipeName) {
     for (Recipe r : recipes) {
@@ -112,11 +120,14 @@ public class Cookbook {
   }
 
   /**
-   * Makes list of all recipes in recipeList with label = param
+   * Makes list of all recipes in recipeList with label.
    * 
-   * @param label
+   * @param label recipelabel
+   * 
    * @throws IllegalArgumentException if param is not valid
+   * 
    * @return list of all recipes in recipeList with label = param
+   * 
    */
   public List<Recipe> getRecipesWithLabel(String label) {
     if (!Recipe.labels.contains(label)) {

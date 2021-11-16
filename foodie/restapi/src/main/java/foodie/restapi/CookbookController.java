@@ -1,5 +1,7 @@
 package foodie.restapi;
 
+import core.Cookbook;
+import core.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import core.Recipe;
-import core.Cookbook;
 
+/**
+ * CookbookController with a cookbookService
+ */
 @RestController
 @RequestMapping(CookbookService.COOKBOOK_SERVICE_PATH)
 public class CookbookController {

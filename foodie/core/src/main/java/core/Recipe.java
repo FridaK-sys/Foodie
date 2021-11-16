@@ -39,10 +39,13 @@ public class Recipe {
   /**
    * Constructor for recipe with name, description, portions and ingredients.
    * 
-   * @param name
-   * @param description
-   * @param portions
-   * @param ingredients
+   * @param name        name of recipe
+   * 
+   * @param description description of recipe
+   * 
+   * @param portions    number of portions
+   * 
+   * @param ingredients list of ingredient
    * 
    */
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
@@ -55,8 +58,9 @@ public class Recipe {
   /**
    * Constructor for recipe with name and portions.
    * 
-   * @param name
-   * @param portions
+   * @param name     name of revcipe
+   * 
+   * @param portions number of portions
    * 
    */
   public Recipe(String name, int portions) {
@@ -80,9 +84,11 @@ public class Recipe {
   /**
    * Sets name of recipe.
    * 
-   * @param name
+   * @param name name of recipe
+   * 
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers
+   * 
    */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
@@ -106,8 +112,10 @@ public class Recipe {
   /**
    * Sets portions. Updates the amount of each ingredient to fit with portions.
    * 
-   * @param portions
+   * @param portions number of portions
+   * 
    * @throws IllegalArgumentException if param is negative integer
+   * 
    */
   public void setPortions(int portions) {
     if (portions <= 0) {
@@ -124,8 +132,10 @@ public class Recipe {
   /**
    * Add ingredient to recipe.
    * 
-   * @param ingredient
+   * @param ingredient ingredient to add
+   * 
    * @throws IllegalArgumentException if list already contains ingredient
+   * 
    */
   public void addIngredient(Ingredient ingredient) {
     if (!ingredients.contains(ingredient)) {
@@ -138,9 +148,11 @@ public class Recipe {
   /**
    * Remove ingredient from recipe.
    * 
-   * @param index
+   * @param index index in ingredientList of ingredient to be removed
+   * 
    * @throws IllegalArgumentException if index is larger than size of
    *                                  ingredientList
+   * 
    */
   public void removeIngredient(int index) {
     if (index <= ingredients.size()) {
@@ -165,8 +177,10 @@ public class Recipe {
   /**
    * Sets label for recipe.
    * 
-   * @param label
+   * @param label recipelabel
+   * 
    * @throws IllegalArgumentException if label is not valid
+   * 
    */
   public void setLabel(String label) {
     if (labels.contains(label)) {
