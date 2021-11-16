@@ -12,7 +12,6 @@ import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.scene.control.ListView;
-import json.FileHandler;
 
 public abstract class AbstractAppTest extends ApplicationTest {
 
@@ -43,17 +42,17 @@ public abstract class AbstractAppTest extends ApplicationTest {
 
     }
 
-    public static Cookbook setUpCookBook(){
-        FileHandler handler = new FileHandler();
-        Cookbook referenceBook = new Cookbook();
-        handler.readRecipesFromFile("src/main/resources/ui/test.txt", referenceBook);
-        Recipe recipe1 = new Recipe("Taco", 4);
-        Ingredient ing1 = new Ingredient("Kjøtt", 500, "g");
-        Ingredient ing2 = new Ingredient("Lomper", 3, "stk");
-        recipe1.addIngredient(ing1);
-        recipe1.addIngredient(ing2);
-        recipe1.setDescription("Enkel taco");
-        return referenceBook;
-    }
+    // public static Cookbook setUpCookBook(){
+    //     FileHandler handler = new FileHandler();
+    //     Cookbook referenceBook = new Cookbook();
+    //     handler.readRecipesFromFile("src/main/resources/ui/test.txt", referenceBook);
+    //     Recipe recipe1 = new Recipe("Taco", 4);
+    //     Ingredient ing1 = new Ingredient("Kjøtt", 500, "g");
+    //     Ingredient ing2 = new Ingredient("Lomper", 3, "stk");
+    //     recipe1.addIngredient(ing1);
+    //     recipe1.addIngredient(ing2);
+    //     recipe1.setDescription("Enkel taco");
+    //     return referenceBook;
+    // }
 
 }
