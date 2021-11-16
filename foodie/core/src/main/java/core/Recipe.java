@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -50,6 +49,7 @@ public class Recipe {
     setPortions(portions);
     this.description = description;
     this.ingredients = new ArrayList<>(ingredients);
+    this.fav = false;
   }
 
   /**
