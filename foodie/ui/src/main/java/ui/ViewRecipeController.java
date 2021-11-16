@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -22,13 +23,14 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import json.FileHandler;
 
-public class ViewRecipeController implements Initializable {
+public class ViewRecipeController implements IFoodieController, Initializable {
 
   private Recipe selectedRecipe;
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
   private int index;
   private FileHandler fileHandler = new FileHandler();
+  private SceneTarget sceneTarget;
 
   @FXML
   private Label recipeTitle, labelTag, portions;
@@ -40,7 +42,7 @@ public class ViewRecipeController implements Initializable {
   private TextArea textField;
 
   @FXML
-  private Button faveButton;
+  private Button faveButton, backButton;
 
   public void favorizeRecipeButton(ActionEvent ae) {
     if (selectedRecipe.getFav() == true) {
@@ -72,17 +74,18 @@ public class ViewRecipeController implements Initializable {
     this.portion = portionSize;
   }
 
-  @Override
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setItems(ingredients);
+
     textField.setText("Hmm her var det tomt...");
 
   }
 
-  public void initData(Recipe recipe, int index) {
+  public void initData(Recipe recipe, int index, SceneTarget scene) {
     this.index = index;
     this.selectedRecipe = recipe;
-    this.portion = recipe.getPortions();
+    this.portion = selectedRecipe.getPortions();
+    this.sceneTarget = scene;
     if (selectedRecipe.getName() != null) {
       recipeTitle.setText(selectedRecipe.getName());
     } else {
@@ -90,6 +93,7 @@ public class ViewRecipeController implements Initializable {
     }
     portions.setText(Integer.toString(recipe.getPortions()));
     if (!recipe.getIngredients().isEmpty()) {
+      ingredients.clear();
       ingredients.addAll(recipe.getIngredients());
     }
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
@@ -113,24 +117,28 @@ public class ViewRecipeController implements Initializable {
     Parent root = fxmlLoader.load();
     Scene viewRecipesScene = new Scene(root);
 
+    // viewRecipesScene.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
+
     NewRecipeController controller = fxmlLoader.getController();
     controller.initData(selectedRecipe, index);
+    controller.setBackButtonTarget(new SceneTarget(faveButton.getScene()));
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
     stage.setScene(viewRecipesScene);
     stage.show();
   }
 
-  public void changeSceneToMain(ActionEvent ea) throws IOException {
-    URL fxmlLocation = getClass().getResource("Main.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+  @Override
+  public void update() {
+    Cookbook book = new Cookbook();
+    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", book);
+    Recipe recipe = book.getRecipes().get(index);
+    initData(recipe, this.index, this.sceneTarget);
 
-    Parent root = fxmlLoader.load();
-    Scene viewRecipesScene = new Scene(root);
+  }
 
-    Stage stage = (Stage) ((Node) ea.getSource()).getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
+  public void setBackButtonTarget(SceneTarget sceneTarget) {
+    backButton.setOnAction(sceneTarget.getActionEventHandler());
   }
 
 }
