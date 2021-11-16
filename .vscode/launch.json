@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch CookbookPersistence",
+      "request": "launch",
+      "mainClass": "foodie.core/json.CookbookPersistence",
+      "projectName": "modules-core"
+    },
+    {
+      "type": "java",
       "name": "Launch CookbookApplication",
       "request": "launch",
       "mainClass": "foodie.restapi/restapi.CookbookApplication",

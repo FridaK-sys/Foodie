@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 public class CookbookPersistence {
 
   private ObjectMapper mapper;
-  private Path saveFilePath;
+  private Path saveFilePath = null;
 
   public CookbookPersistence() {
     mapper = createObjectMapper();
@@ -61,6 +61,7 @@ public class CookbookPersistence {
     try (Reader reader = new FileReader(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
       return readCookbook(reader);
     }
+
   }
 
   /**
@@ -75,5 +76,24 @@ public class CookbookPersistence {
     try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
       writeCookbook(cookbook, writer);
     }
+
   }
+  /*
+   * public static void main(String[] args) throws IllegalStateException,
+   * IOException { Cookbook cookbook = new Cookbook(); CookbookPersistence
+   * cookbookPersistence = new CookbookPersistence(); Ingredient ingredient1 = new
+   * Ingredient("tomat", 3, "dl"); Ingredient ingredient2 = new Ingredient("eple",
+   * 2, "stk"); cookbook.addRecipe(new Recipe("recipe1", "lag", 2,
+   * Arrays.asList(ingredient1, ingredient2))); cookbook.addRecipe(new
+   * Recipe("recipe2", 2));
+   * 
+   * cookbookPersistence.setSaveFile("/checkCookbook");
+   * cookbookPersistence.saveCookbook(cookbook);
+   * 
+   * Cookbook cookbook2 = cookbookPersistence.loadCookbook(); Recipe recipe1 =
+   * cookbook2.getRecipes().get(0); Ingredient tomat =
+   * recipe1.getIngredients().get(0); System.out.println(cookbook2.getName());
+   * System.out.println(recipe1.getName()); System.out.println(tomat.getName());
+   * System.out.println(tomat.getUnit()); }
+   */
 }

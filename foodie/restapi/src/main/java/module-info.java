@@ -8,7 +8,8 @@ module foodie.restapi {
   requires spring.boot;
   requires spring.boot.autoconfigure;
   requires spring.core;
+  requires java.net.http;
 
-  opens foodie.restapi to spring.beans, spring.context, spring.web;
+  opens foodie.restapi to spring.beans, spring.context, spring.web, spring.core;
 
 }

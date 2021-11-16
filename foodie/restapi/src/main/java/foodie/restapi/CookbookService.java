@@ -1,13 +1,13 @@
-package restapi;
+package foodie.restapi;
 
 import org.springframework.stereotype.Service;
 import core.Recipe;
 import json.CookbookPersistence;
 import core.Cookbook;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 @Service
@@ -15,6 +15,7 @@ public class CookbookService {
 
   private Cookbook cookbook;
   private CookbookPersistence cookbookPersistence;
+  public static final String COOKBOOK_SERVICE_PATH = "/cookbook";
 
   /**
    * Initializes the service with a specific cookbook.
@@ -39,25 +40,25 @@ public class CookbookService {
     this.cookbook = cookbook;
   }
 
-  private static Cookbook createDefaultCookbook() {
+  /**
+   * Creates a default cookbook. Often used for testing.
+   */
+
+  public static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
-    URL url = CookbookService.class.getResource("default-cookbook.json");
-    if (url != null) {
-      try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
-        return cookbookPersistence.readCookbook(reader);
-      } catch (IOException e) {
-        System.out.println("Couldn't read default-cookbook.json, so rigging cookbook manually (" + e + ")");
-      }
+    try (Reader reader = new FileReader(
+        new File(System.getProperty("user.dir") + File.separator + ("default-cookbook.json")),
+        StandardCharsets.UTF_8)) {
+      return cookbookPersistence.readCookbook(reader);
+    } catch (IOException e) {
+      System.out.println("Couldn't read default-cookbook.json, so rigging cookbook manually (" + e + ")");
     }
     Cookbook cookbook = new Cookbook();
-    cookbook.addRecipe(new Recipe("Recipe1", 1));
-    cookbook.addRecipe(new Recipe("Recipe2", 2));
+    cookbook.addRecipe(new Recipe("recipe1", 1));
+    cookbook.addRecipe(new Recipe("recipe2", 2));
     return cookbook;
   }
 
-  /**
-   * Saves the Recipe to disk. Should be called after each update.
-   */
   public void autoSaveCookbook() {
     if (cookbookPersistence != null) {
       try {
@@ -66,6 +67,25 @@ public class CookbookService {
         System.err.println("Couldn't auto-save cookbook: " + e);
       }
     }
+  }
+
+  public boolean addRecipe(Recipe recipe) {
+    cookbook.addRecipe(recipe);
+    autoSaveCookbook();
+    return true;
+  }
+
+  public boolean removeRecipe(String name) {
+    cookbook.removeRecipe(name);
+    autoSaveCookbook();
+    return true;
+  }
+
+  public boolean editRecipe(String name, Recipe recipe) {
+    cookbook.removeRecipe(name);
+    cookbook.addRecipe(recipe);
+    autoSaveCookbook();
+    return true;
   }
 
 }
