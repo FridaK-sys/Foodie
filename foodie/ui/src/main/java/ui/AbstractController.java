@@ -66,28 +66,27 @@ public abstract class AbstractController {
   }
 
   public void changeSceneToViewRecipe(Recipe recipe) throws IOException {
-    URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
+    URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+
     Parent root = fxmlLoader.load();
+
     Scene viewRecipesScene = new Scene(root);
 
-    // viewRecipesScene.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
-
+    ViewRecipeController controller = fxmlLoader.getController();
     SceneTarget sceneTarget = new SceneTarget(Lunch.getScene());
 
-    ViewRecipeController controller = fxmlLoader.getController();
     controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget);
 
     controller.setBackButtonTarget(sceneTarget);
     viewRecipesScene.setUserData(fxmlLoader);
     Stage stage = (Stage) (Breakfast.getScene().getWindow());
-
     stage.setScene(viewRecipesScene);
     stage.show();
   }
 
   public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
+    URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
     Parent root = fxmlLoader.load();
