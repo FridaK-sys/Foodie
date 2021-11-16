@@ -16,8 +16,12 @@ import core.Cookbook;
 @RequestMapping(CookbookService.COOKBOOK_SERVICE_PATH)
 public class CookbookController {
 
-  @Autowired
   private CookbookService cookbookService;
+
+  @Autowired
+  public CookbookController(final CookbookService cookbookService) {
+    this.cookbookService = cookbookService;
+  }
 
   @GetMapping
   public Cookbook getCookbook() {
