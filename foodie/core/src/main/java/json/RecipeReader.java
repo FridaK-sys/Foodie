@@ -12,9 +12,9 @@ import core.Ingredient;
 import core.Recipe;
 import java.io.IOException;
 
-/*
-   * Deserializer for Recipe-class
-   */
+/**
+ * Deserializer for Recipe-class.
+ */
 class RecipeReader extends JsonDeserializer<Recipe> {
 
   private IngredientReader ingredientReader = new IngredientReader();

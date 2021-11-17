@@ -1,14 +1,15 @@
 package ui;
 
 import javafx.fxml.Initializable;
-
 import ui.utils.CookbookInterface;
 
-public abstract class AbstractController implements IFoodieController, Initializable {
+/**
+ * Interface for RestApp- and LocalAppController
+ */
+public interface AbstractController extends FoodieController, Initializable {
 
-  protected CookbookInterface dataAccess;
+  public CookbookInterface dataAccess;
 
-
-  protected abstract void setUpStorage();
+  public void setUpStorage();
 
 }
