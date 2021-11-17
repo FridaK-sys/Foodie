@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import ui.utils.CookbookInterface;
 import ui.utils.LocalCookbookAccess;
 
 public class LocalAppController extends AbstractController {
@@ -22,8 +23,6 @@ public class LocalAppController extends AbstractController {
   @FXML
   private Pane mainListView;
 
-  @FXML
-  ListViewController mainListViewController;
 
   /**
    * Initializes
@@ -35,19 +34,6 @@ public class LocalAppController extends AbstractController {
     setUpStorage();
     initializeRecipesView();
   }
-
-  /**
-   * Gives mainListViewControll dataAccess to populate listView
-   * 
-   */
-
-  private void initializeRecipesView() {
-    mainListViewController.setCookbookAccess(dataAccess);
-  }
-
-  /**
-   * Updates the mainListViewController
-   */
 
   @Override
   public void update() {
