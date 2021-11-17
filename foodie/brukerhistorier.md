@@ -40,6 +40,8 @@ Brukeren har behov for å fjerne én ingrediens i en oppskrift med angitt navn, 
 - Redigere antall porsjoner på en oppskrift 
 
 
+
+
 # Illustrerende skjermbilder av appen
 
 ![kokebok](kokebok.png)
