@@ -13,6 +13,7 @@ Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. H
 - Design av brukergrensesnittet er laget med JavaFX og kontrollerne ligger i mappen `ui` .. ?
 - Restapiet ligger i rest mappen og er utviklet med Spring Boot. 
 - Dokumentasjonen for hver release ligger i mappen `docs`.
+- Brukerhistorier som viser appens hovedfunksjonalitet ligger i mappen `foodie`. 
 
 ## Bygging og kjøring av prosjektet
 Prosjektet bruker Maven til bygging og kjøring. 
