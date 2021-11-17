@@ -9,9 +9,9 @@ Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. H
 
 ## Oppsett av prosjektet 
 - Selve kodingsprosjektet ligger i mappen `foodie`. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
-- Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen `core`. Logikken er skrevet i Java og tilknyttede tester med JUnit 5. Vi har valgt å bruke Jackson JSON for lesing og skriving til fil. 
+- Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen `core`. Logikken er skrevet i Java og tilknyttede tester med JUnit 5. Vi har valgt å bruke Jackson-biblioteket for å lese og skrive JSON objekter til fil. 
 - Design av brukergrensesnittet er laget med JavaFX og kontrollerne ligger i mappen `ui` .. ?
-- Restapiet er utviklet med Spring Boot ... ?
+- Restapiet ligger i rest mappen og er utviklet med Spring Boot. 
 - Dokumentasjonen for hver release ligger i mappen `docs`.
 
 ## Bygging og kjøring av prosjektet
