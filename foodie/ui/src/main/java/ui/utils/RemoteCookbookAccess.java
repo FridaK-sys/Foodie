@@ -103,8 +103,9 @@ public class RemoteCookbookAccess implements CookbookInterface {
   public boolean addRecipe(Recipe recipe) {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
-      final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", "application/json")
-          .header("Content-Type", "application/json").POST(BodyPublishers.ofString(jsonVisit)).build();
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName()))
+          .header("Accept", "application/json").header("Content-Type", "application/json")
+          .POST(BodyPublishers.ofString(jsonVisit)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyAdded = mapper.readValue(res.body(), Boolean.class);
       if (successfullyAdded != null && successfullyAdded) {
