@@ -16,7 +16,10 @@ Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. H
 
 ## Bygging og kjøring av prosjektet
 Prosjektet bruker Maven til bygging og kjøring. 
-For å kjøre prosjektet, naviger deg til mappen "foodie" med `cd foodie` og skriv `mvn install` etterfulgt av `mvn -pl ui javafx:run`. Dette kjører også alt av tester. 
+For å kjøre prosjektet, skriv følgende kommandoer i terminalen. Dette kjører også alt av tester. 
+- `cd foodie` 
+- `mvn install` 
+- `mvn -pl ui javafx:run`
 
 
 ## Verktøy tilknyttet kodekvalitet
