@@ -4,12 +4,12 @@ import javafx.fxml.Initializable;
 import ui.utils.CookbookInterface;
 
 /**
- * Interface for RestApp- and LocalAppController
+ * Abstract class for RestApp- and LocalAppController
  */
-public interface AbstractController extends FoodieController, Initializable {
+public abstract class AbstractController implements FoodieController, Initializable {
 
-  public CookbookInterface dataAccess;
+  protected CookbookInterface dataAccess;
 
-  public void setUpStorage();
+  protected abstract void setUpStorage();
 
 }
