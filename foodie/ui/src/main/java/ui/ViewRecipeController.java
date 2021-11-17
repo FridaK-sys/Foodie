@@ -21,7 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import json.FileHandler;
+import ui.utils.CookbookInterface;
 
 public class ViewRecipeController implements IFoodieController, Initializable {
 
@@ -29,8 +29,8 @@ public class ViewRecipeController implements IFoodieController, Initializable {
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
   private int index;
-  private FileHandler fileHandler = new FileHandler();
   private SceneTarget sceneTarget;
+  private CookbookInterface dataAccess;
 
   @FXML
   private Label recipeTitle, labelTag, portions;
@@ -52,7 +52,9 @@ public class ViewRecipeController implements IFoodieController, Initializable {
       selectedRecipe.setFav(true);
       faveButton.setText("Remove from favorite");
     }
-    fileHandler.replaceRecipeInFile(this.selectedRecipe, this.index);
+    dataAccess.deleteRecipe(selectedRecipe.getName());
+    dataAccess.addRecipe(selectedRecipe);
+
   }
 
   public void incPortion(ActionEvent event) {
@@ -81,11 +83,12 @@ public class ViewRecipeController implements IFoodieController, Initializable {
 
   }
 
-  public void initData(Recipe recipe, int index, SceneTarget scene) {
+  public void initData(Recipe recipe, int index, SceneTarget scene, CookbookInterface dataAccess) {
     this.index = index;
     this.selectedRecipe = recipe;
     this.portion = selectedRecipe.getPortions();
     this.sceneTarget = scene;
+    this.dataAccess = dataAccess;
     if (selectedRecipe.getName() != null) {
       recipeTitle.setText(selectedRecipe.getName());
     } else {
@@ -120,7 +123,7 @@ public class ViewRecipeController implements IFoodieController, Initializable {
     // viewRecipesScene.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
 
     NewRecipeController controller = fxmlLoader.getController();
-    controller.initData(selectedRecipe, index);
+    controller.initData(selectedRecipe, index, dataAccess);
     controller.setBackButtonTarget(new SceneTarget(faveButton.getScene()));
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
@@ -130,10 +133,9 @@ public class ViewRecipeController implements IFoodieController, Initializable {
 
   @Override
   public void update() {
-    Cookbook book = new Cookbook();
-    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", book);
-    Recipe recipe = book.getRecipes().get(index);
-    initData(recipe, this.index, this.sceneTarget);
+
+    Recipe recipe = dataAccess.getCookbook().getRecipes().get(index);
+    initData(recipe, this.index, this.sceneTarget, dataAccess);
 
   }
 

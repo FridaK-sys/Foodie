@@ -19,7 +19,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import json.FileHandler;
 import ui.MainController;
 
 public class AppTest extends AbstractAppTest {
@@ -46,22 +45,22 @@ public class AppTest extends AbstractAppTest {
         stage.show();
     }
 
-    @BeforeEach
-    public void setupItems() {
-        referenceBook = setUpCookBook();
-    }
+    // @BeforeEach
+    // public void setupItems() {
+    //     referenceBook = setUpCookBook();
+    // }
 
     @Test
     public void testController_MainController() {
         assertNotNull(this.controller);
-        assertNotNull(this.cookbook);
-        testRecipes(this.cookbook.getRecipes(), referenceBook.getRecipes());
+        // assertNotNull(this.cookbook);
+        // testRecipes(this.cookbook.getRecipes(), referenceBook.getRecipes());
     }
 
-    @Test
-    public void testRecipeListView() {
-        checkRecipesListViewItems(cookbook.getRecipes());
-    }
+    // @Test
+    // public void testRecipeListView() {
+    //     checkRecipesListViewItems(cookbook.getRecipes());
+    // }
 
     // @Test
     // public void testDeleteButton() {
