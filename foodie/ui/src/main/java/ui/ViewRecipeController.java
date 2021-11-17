@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -23,7 +22,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import ui.utils.CookbookInterface;
 
-public class ViewRecipeController implements IFoodieController, Initializable {
+public class ViewRecipeController implements FoodieController, Initializable {
 
   private Recipe selectedRecipe;
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();

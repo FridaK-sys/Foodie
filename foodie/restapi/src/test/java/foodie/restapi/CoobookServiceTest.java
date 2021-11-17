@@ -57,7 +57,7 @@ class CookbookServiceTest {
     Recipe recipe = new Recipe(name, 3);
     assertTrue(service.editRecipe(name, recipe));
     assertEquals(3, service.getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findAny()
-        .orElse(new Recipe("r", 1)).getPortions());
+        .orElse(new Recipe("Cake", 1)).getPortions());
   }
 
   @Test

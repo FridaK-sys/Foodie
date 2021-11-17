@@ -8,13 +8,16 @@ public interface CookbookInterface {
   /**
    * Gets recipe.
    *
-   * @return the recipe
+   * @return the cookbook
    */
 
   Cookbook getCookbook();
 
   /**
    * Edit the recipe.
+   * 
+   * @param name   of the recipe to edit
+   * @param recipe the updated recipe
    *
    * @return true if it was edited
    */
@@ -23,6 +26,8 @@ public interface CookbookInterface {
 
   /**
    * Adds the recipe.
+   * 
+   * @param recipe the recipe to add
    *
    * @return true if it was added
    */
@@ -31,8 +36,11 @@ public interface CookbookInterface {
 
   /**
    * Removes the Recipe.
+   * 
    *
-   * @param name the name of the Recipe
+   * @param name the name of the Recipe to delete
+   * @return true if deleted
+   * 
    */
   boolean deleteRecipe(String name);
 
