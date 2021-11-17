@@ -91,11 +91,13 @@ public class NewRecipeController implements Initializable {
 
   public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
+      System.out.println(dataAccess.toString());
       dataAccess.addRecipe(createRecipe());
       backButton.fire();
 
     } catch (Exception e) {
       errorMessageLabel.setText(e.getMessage());
+      System.out.println(e.getMessage());
     }
   }
 
@@ -109,6 +111,7 @@ public class NewRecipeController implements Initializable {
     } catch (Exception e) {
       errorMessageLabel.setText(e.getMessage());
       System.out.println(e.getMessage());
+
     }
   }
 
@@ -187,7 +190,6 @@ public class NewRecipeController implements Initializable {
     ingredients.addAll(recipe.getIngredients());
     this.editing = true;
     this.cookbook = cookbook;
-    // this.index = recipeIndex;
 
     createRecipeButton.setVisible(false);
     saveRecipeButton.setVisible(true);
@@ -236,9 +238,6 @@ public class NewRecipeController implements Initializable {
     ingredientListView.setItems(ingredients);
     setLabelButton("blank");
     hb.setSpacing(20);
-    // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt",
-    // this.cookbook);
-
   }
 
   public List<Ingredient> getIngredients() {
