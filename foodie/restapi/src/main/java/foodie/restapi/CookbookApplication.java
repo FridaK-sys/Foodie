@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 /**
- * CookbookAppication that runs the SpringApplication
+ * CookbookApplication that runs the SpringApplication
  */
 @SpringBootApplication
 public class CookbookApplication {

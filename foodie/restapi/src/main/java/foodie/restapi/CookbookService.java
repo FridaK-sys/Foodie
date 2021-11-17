@@ -83,8 +83,8 @@ public class CookbookService {
   }
 
   /**
-   * Adds recipe and saves coobook.
-   * 
+   * Adds recipe and saves cookbook.
+   *
    * @param recipe recipe to add
    */
   public boolean addRecipe(Recipe recipe) {
@@ -94,8 +94,8 @@ public class CookbookService {
   }
 
   /**
-   * Removes recipe and saves coobook.
-   * 
+   * Removes recipe and saves cookbook.
+   *
    * @param name name of recipe to remove
    */
   public boolean removeRecipe(String name) {
@@ -105,7 +105,7 @@ public class CookbookService {
   }
 
   /**
-   * Edits recipe and saves coobook.
+   * Edits recipe and saves cookbook.
    * 
    * @param name   name of recipe to edit
    * @param recipe edited recipe

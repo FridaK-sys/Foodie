@@ -14,9 +14,9 @@ public class Cookbook {
 
   /**
    * Constructor for a cookbook with name and list of recipes.
-   * 
+   *
    * @param name    name of cookbook
-   * 
+   *
    * @param recipes list of recipes
    */
 
@@ -40,7 +40,7 @@ public class Cookbook {
 
   /**
    * Sets name of cookbook.
-   * 
+   *
    * @param name name of cookbook
    * 
    * @throws IllegalArgumentException if param contains other characters than
@@ -60,9 +60,9 @@ public class Cookbook {
 
   /**
    * Adds recipe to cookbook.
-   * 
+   *
    * @param recipe recipe to add
-   * 
+   *
    * @throws IllegalArgumentException if list already contains recipe
    */
 
@@ -74,7 +74,7 @@ public class Cookbook {
 
   /**
    * Removes recipe from recipeList.
-   * 
+   *
    * @param index index in recipeList of recipe to remove
    * 
    */
@@ -84,7 +84,7 @@ public class Cookbook {
 
   /**
    * Removes recipe from recipeList.
-   * 
+   *
    * @param name name of recipe to remove
    * 
    */
@@ -96,7 +96,7 @@ public class Cookbook {
 
   /**
    * Makes list of all recipes in recipeList with fav = true.
-   * 
+   *
    * @return list of recipes in recipeList with fav = true
    * 
    */
@@ -106,7 +106,7 @@ public class Cookbook {
 
   /**
    * Checks if recipe is in cookbook based on name of recipe.
-   * 
+   *
    * @param recipeName name of recipe
    * 
    * @return true if recipe is in RecipeList, false if not.
@@ -123,11 +123,11 @@ public class Cookbook {
 
   /**
    * Makes list of all recipes in recipeList with label.
-   * 
+   *
    * @param label recipelabel
-   * 
+   *
    * @return list of all recipes in recipeList with label = param
-   * 
+   *
    * @throws IllegalArgumentException if param is not valid
    * 
    */

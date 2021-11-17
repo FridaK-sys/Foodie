@@ -33,7 +33,7 @@ public class CookbookPersistence {
   /**
    * Makes new ObjectMapper registered with CookbookModule. Mostly used for
    * testing.
-   * 
+   *
    * @return new Objectmapper registered with CookbookModule
    */
   public static ObjectMapper createObjectMapper() {
@@ -42,7 +42,7 @@ public class CookbookPersistence {
 
   /**
    * Makes new CookbookModule.
-   * 
+   *
    * @return new CookbookModule
    */
   public static SimpleModule createModule() {
@@ -51,11 +51,11 @@ public class CookbookPersistence {
 
   /**
    * Reads a cookbook from file using reader.
-   * 
+   *
    * @param reader the reader that reads file
-   * 
+   *
    * @return cookbook from file
-   * 
+   *
    * @throws IOException if IOException occured during reading for instance
    *                     FileNotFoundException
    * 
@@ -66,10 +66,10 @@ public class CookbookPersistence {
 
   /**
    * Writes cookbook to file using writer.
-   * 
+   *
    * @param cookbook the cookbook to write to file
    * @param writer   the writer that writes to file
-   * 
+   *
    * @throws IOException if IOException occured during writing for instance
    *                     FileNotFoundException
    */

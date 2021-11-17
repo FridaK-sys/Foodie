@@ -27,13 +27,10 @@ public class Recipe {
 
   /**
    * Constructor for recipe with name, description, portions and ingredients.
-   * 
+   *
    * @param name        name of recipe
-   * 
    * @param description description of recipe
-   * 
    * @param portions    number of portions
-   * 
    * @param ingredients list of ingredient
    * 
    */
@@ -58,7 +55,7 @@ public class Recipe {
 
   /**
    * Constructor for a empty recipe.
-   * 
+   *
    * @param name name of recipe
    * 
    */
@@ -76,7 +73,7 @@ public class Recipe {
 
   /**
    * Sets name of recipe.
-   * 
+   *
    * @param name name of recipe
    * 
    * @throws IllegalArgumentException if param contains other characters than
@@ -104,7 +101,7 @@ public class Recipe {
 
   /**
    * Sets portions. Updates the amount of each ingredient to fit with portions.
-   * 
+   *
    * @param portions number of portions
    * 
    * @throws IllegalArgumentException if param is negative integer
@@ -114,7 +111,8 @@ public class Recipe {
     if (portions < 0) {
       throw new IllegalArgumentException("Portions cannot be negative");
     }
-    ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
+    ingredients.stream().
+      forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
     this.portions = portions;
   }
 
@@ -124,7 +122,7 @@ public class Recipe {
 
   /**
    * Add ingredient to recipe.
-   * 
+   *
    * @param ingredient ingredient to add
    * 
    * @throws IllegalArgumentException if list already contains ingredient
@@ -140,9 +138,9 @@ public class Recipe {
 
   /**
    * Remove ingredient from recipe.
-   * 
+   *
    * @param index index in ingredientList of ingredient to be removed
-   * 
+   *
    * @throws IllegalArgumentException if index is larger than size of
    *                                  ingredientList
    * 
@@ -169,7 +167,7 @@ public class Recipe {
 
   /**
    * Sets label for recipe.
-   * 
+   *
    * @param label recipelabel
    * 
    * @throws IllegalArgumentException if label is not valid
