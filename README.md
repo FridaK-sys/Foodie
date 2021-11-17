@@ -8,12 +8,11 @@ Dette prosjektet er tilknyttet emnet IT1901 Informatikk prosjektarbeid I.
 Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. Hver oppskrift kan redigeres ved å legge til eller fjerne ingredienser, samt skalere antall porsjoner for oppskriften. Appen er ment til å brukes som en digital samling av kokebøker for å bidra til en lettere matlagingsopplevelse i hverdagen. 
 
 ## Oppsett av prosjektet 
-Selve kodingsprosjektet ligger i mappen foodie. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
-Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen `core`. Vi har valgt å bruke JSON for lesing og skriving til fil. 
-Testene av logikken og filbehandlingen er utført med JUnit 5.
-Design av brukergrensesnittet i JavaFX og kontrollerne ligger i mappen `ui`. 
-Restapiet er utviklet med Spring Boot ... ?
-Dokumentasjonen for hver release ligger i mappen `docs`.
+- Selve kodingsprosjektet ligger i mappen `foodie`. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
+- Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen `core`. Logikken er skrevet i Java og tilknyttede tester med JUnit 5. Vi har valgt å bruke Jackson JSON for lesing og skriving til fil. 
+- Design av brukergrensesnittet er laget med JavaFX og kontrollerne ligger i mappen `ui` .. ?
+- Restapiet er utviklet med Spring Boot ... ?
+- Dokumentasjonen for hver release ligger i mappen `docs`.
 
 ## Bygging og kjøring av prosjektet
 Prosjektet bruker Maven til bygging og kjøring. 
