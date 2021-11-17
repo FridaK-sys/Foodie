@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 public class CookbookApp extends Application {
 
   public static void main(String[] args) throws Exception {
-    System.out.println("Hello, World!");
     launch(CookbookApp.class, args);
   }
 
@@ -23,7 +22,7 @@ public class CookbookApp extends Application {
     Scene scene = new Scene(root);
     scene.setUserData(fxmlLoader);
 
-    stage.setTitle("Cookbook<3");
+    stage.setTitle("Foodie<3");
 
     stage.setScene(scene);
     stage.show();

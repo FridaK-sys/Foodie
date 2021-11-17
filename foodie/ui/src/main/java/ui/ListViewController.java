@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import core.Cookbook;
-import core.Ingredient;
 import core.Recipe;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -58,15 +56,8 @@ public class ListViewController implements Initializable {
     // ListViewCell listCell = new ListViewCell();
     // return listCell;
     // });
+    setToggles();
     updateListView();
-    All.getStyleClass().remove("radio-button");
-    All.getStyleClass().add("toggle-button");
-    Breakfast.getStyleClass().add("toggle-button");
-    Breakfast.getStyleClass().remove("radio-button");
-    Lunch.getStyleClass().remove("radio-button");
-    Lunch.getStyleClass().add("toggle-button");
-    Dinner.getStyleClass().remove("radio-button");
-    Dinner.getStyleClass().add("toggle-button");
   }
 
   public void updateListView() {
@@ -80,7 +71,6 @@ public class ListViewController implements Initializable {
   public void changeSceneToViewRecipe(Recipe recipe) throws IOException {
     URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
     Parent root = fxmlLoader.load();
 
     Scene viewRecipesScene = new Scene(root);
@@ -114,8 +104,8 @@ public class ListViewController implements Initializable {
   }
 
   public void update() {
-  mainBook = dataAccess.getCookbook();
-  updateListView();
+    mainBook = dataAccess.getCookbook();
+    updateListView();
   }
 
   @FXML
@@ -170,11 +160,24 @@ public class ListViewController implements Initializable {
     });
   }
 
-  public void setToggleListener() {
+  public void setToggles() {
+    All.getStyleClass().remove("radio-button");
+    All.getStyleClass().add("toggle-button");
+    Breakfast.getStyleClass().add("toggle-button");
+    Breakfast.getStyleClass().remove("radio-button");
+    Lunch.getStyleClass().remove("radio-button");
+    Lunch.getStyleClass().add("toggle-button");
+    Dinner.getStyleClass().remove("radio-button");
+    Dinner.getStyleClass().add("toggle-button");
     All.setToggleGroup(group);
     Breakfast.setToggleGroup(group);
     Lunch.setToggleGroup(group);
     Dinner.setToggleGroup(group);
+
+  }
+
+  public void setToggleListener() {
+
     All.setSelected(true);
     group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
       @Override
