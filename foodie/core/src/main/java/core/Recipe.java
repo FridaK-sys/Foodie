@@ -148,11 +148,7 @@ public class Recipe {
    * 
    */
   public void removeIngredient(int index) {
-    if (index <= ingredients.size()) {
-      ingredients.remove(index);
-    } else {
-      throw new IllegalArgumentException();
-    }
+    ingredients.remove(index);
   }
 
   public boolean getFav() {
