@@ -2,37 +2,60 @@
 
 ## Legge til en oppskrift (us-1)
 
-Som bruker ønsker jeg å kunne legge til mine egne oppskrifter i en kokebok.
+Som bruker ønsker jeg å legge til en ny oppskrift i min kokebok, og angi denne med en merkelapp slik at den kan vises med lignende oppskrifter.  
 
-Brukeren har behov for å opprette en ny kokebok, og legge til en ny oppskrift i denne. Videre må brukeren kunne legge til ingredienser i denne oppskriften med angitt mengde og enhet. 
+Brukeren har behov for å opprette en ny oppskrift. Oppskriften må inneholde navn, en beskrivende framgangsmåte, antall porsjoner og en liste av tilhørende ingredienser. Ingrediensene må kunne angis med navn, mengde og enhet. Brukeren har behov for å legge til en passende merkelapp på oppskriften som det kan filtreres på i kokeboken. 
 
 ### Viktig å kunne se
-- Kokeboken opprettes
-- Oppskriften blir lagt til i kokeboken
+- En ny oppskrift opprettes med angitt navn, framgangsmåte og antall porsjoner 
+- En ingrediens opprettes med angitt navn, mengde og enhet
 - Ingredienser blir lagt til i oppskriften
+- Oppskriften får angitt merkelapp
+- Oppskriften kan filtreres på denne merkelappen
+- Oppskriften blir lagt til i kokeboken
 
 ### Viktig å kunne gjøre
-- Opprette ny kokebok
-- Legge til en ny oppskrift 
-- Legge til ingredienser i en oppskrift
+- Lage en ny oppskrift med navn, framgangsmåte og antall porsjoner
+- Lage en ny ingrediens med navn, mengde og enhet
+- Legge til ingredienser i oppskriften
+- Angi en merkelapp på oppskriften
+- Filtrere oppskrifter i kokeboken basert på denne merkelappen
+- Legge til oppskriften i kokeboken
 
 
-## Endre antall porsjoner (us-2)
+## Redigere oppskrift (us-2)
 
-Som bruker ønsker jeg å endre antall porsjoner på en oppskrift. 
+Som bruker ønsker jeg å redigere en oppskrift ved å fjerne én ingrediens og endre antall porsjoner. 
 
-Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengden av hver ingrediens endres i henhold til dette. 
-
+Brukeren har behov for å fjerne én ingrediens i en oppskrift med angitt navn, mengde og enhet. Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengden av hver ingrediens endres i henhold til dette. 
 
 ### Viktig å kunne se
 
-- At mengden av hver ingrediens endres i henhold til antall porsjoner
+- Ingrediensen fjernes fra oppskriften
+- Mengden av hver ingrediens endres i henhold til antall porsjoner
 
 ### Viktig å kunne gjøre
 
+- Fjerne en ingrediens 
 - Redigere antall porsjoner på en oppskrift 
 
-### Illustrerende skjermbilder av appen
+
+## Angi oppskrift som favoritt (us-3)
+
+Som bruker ønsker jeg å angi et oppskrift som favoritt slik at denne lett kan finnes igjen senere. 
+
+Brukeren har behov for å angi en oppskrift som favoritt. 
+
+### Viktig å kunne se
+
+- Oppskriften blir registert som favoritt
+
+### Viktig å kunne gjøre
+
+- Angi en oppskrift som favoritt 
+
+# Illustrerende skjermbilder av appen
+
 ![kokebok](kokebok.png)
 
 ![oppskrift](oppskrift.png)
