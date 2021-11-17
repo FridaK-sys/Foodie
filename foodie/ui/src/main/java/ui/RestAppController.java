@@ -5,9 +5,17 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import ui.utils.RemoteCookbookAccess;
 
 public class RestAppController extends AbstractController {
+
+  @FXML
+  private Pane mainListView;
+
+  @FXML
+  ListViewController mainListViewController;
 
   private URI uriSetup() {
     URI newUri = null;
@@ -20,19 +28,23 @@ public class RestAppController extends AbstractController {
 
   }
 
+  public void initialize(URL url, ResourceBundle rb) {
+    setUpStorage();
+    initializeRecipesView();
+  }
+
   @Override
   protected void setUpStorage() {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
 
-  @Override
-  public void update() {
-
+  private void initializeRecipesView() {
+    mainListViewController.setCookbookAccess(dataAccess);
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
+  public void update() {
+    mainListViewController.update();
   }
 
 }

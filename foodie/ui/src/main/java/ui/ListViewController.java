@@ -52,10 +52,10 @@ public class ListViewController implements Initializable {
   }
 
   public void initialize(URL url, ResourceBundle rb) {
-    // mainListView.setCellFactory(listView -> {
-    // ListViewCell listCell = new ListViewCell();
-    // return listCell;
-    // });
+    mainListView.setCellFactory(listView -> {
+    ListViewCell listCell = new ListViewCell();
+    return listCell;
+    });
     setToggles();
     updateListView();
   }
