@@ -45,6 +45,7 @@ public class Recipe {
     this.label = "";
   }
 
+  // denne må fjernes
   public Recipe(String name, int portions) {
     setName(name);
     this.portions = 0;
@@ -55,15 +56,13 @@ public class Recipe {
   }
 
   /**
-   * Constructor for a empty recipe
+   * Constructor for a empty recipe.
    * 
    * @param name
-   * @param portions
    * 
    */
   public Recipe(String name) {
     setName(name);
-    this.portions = 0;
     this.description = "nothing here...";
     this.ingredients = new ArrayList<Ingredient>();
     this.fav = false;
@@ -107,8 +106,8 @@ public class Recipe {
    * @throws IllegalArgumentException if param is negative integer
    */
   public void setPortions(int portions) {
-    if (portions <= 0) {
-      throw new IllegalArgumentException("Portions must be more than 0");
+    if (portions < 0) {
+      throw new IllegalArgumentException("Portions cannot be negative");
     }
     ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
     this.portions = portions;
