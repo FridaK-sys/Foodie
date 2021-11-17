@@ -21,15 +21,37 @@ public class CookbookController {
 
   private CookbookService cookbookService;
 
+  /**
+   * Constructor for CookbookController
+   * 
+   * @param cookbookService Initializes cookbookService
+   * 
+   * 
+   */
+
   @Autowired
   public CookbookController(final CookbookService cookbookService) {
     this.cookbookService = cookbookService;
   }
 
+  /**
+   * Gets Cookbook
+   *
+   * @return the cookbook
+   * 
+   */
+
   @GetMapping
   public Cookbook getCookbook() {
     return cookbookService.getCookbook();
   }
+
+  /**
+   * Adds recipe
+   *
+   * @return true if recipe was added
+   * 
+   */
 
   @PostMapping(path = "/{name}")
   public boolean addRecipe(@PathVariable("name") String name, @RequestBody Recipe recipe) {
@@ -37,11 +59,25 @@ public class CookbookController {
     return true;
   }
 
+  /**
+   * Edits recipe
+   *
+   * @return true if recipe was edited
+   * 
+   */
+
   @PutMapping(path = "/{name}/edit")
   public boolean editRecipe(@PathVariable("name") String name, @RequestBody Recipe recipe) {
     cookbookService.editRecipe(name, recipe);
     return true;
   }
+
+  /**
+   * Deletes recipe
+   *
+   * @return true if recipe was deleted
+   * 
+   */
 
   @DeleteMapping(path = "/{name}")
   public boolean removeRecipe(@PathVariable("name") String name) {
