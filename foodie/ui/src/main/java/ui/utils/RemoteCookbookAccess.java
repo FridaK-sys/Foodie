@@ -3,18 +3,12 @@ package ui.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.util.ArrayList;
-import java.util.List;
 import java.net.http.HttpResponse;
 import core.Cookbook;
 import core.Recipe;
-import core.Ingredient;
 import json.CookbookModule;
 
 public class RemoteCookbookAccess implements CookbookInterface {
@@ -49,6 +43,12 @@ public class RemoteCookbookAccess implements CookbookInterface {
     return cookbook;
   }
 
+  /**
+   * Edits recipe. Sends http get request to remote server
+   *
+   * @return true if edited
+   */
+
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
     try {
@@ -70,6 +70,12 @@ public class RemoteCookbookAccess implements CookbookInterface {
 
   }
 
+  /**
+   * Adds Cookbook. Sends http get request to remote server
+   *
+   * @return true if added
+   */
+
   @Override
   public boolean addRecipe(Recipe recipe) {
     try {
@@ -90,6 +96,12 @@ public class RemoteCookbookAccess implements CookbookInterface {
 
   }
 
+  /**
+   * Deletes recipe. Sends http get request to remote server
+   *
+   * @return the cookbook
+   */
+
   @Override
   public boolean deleteRecipe(String name) {
     try {
@@ -105,20 +117,6 @@ public class RemoteCookbookAccess implements CookbookInterface {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static void main(String[] args) {
-    /*
-     * List<Ingredient> ings = new ArrayList<>(); List<Recipe> res = new
-     * ArrayList<>(); Ingredient ing = new Ingredient("Potet", 2.0, "stk");
-     * ings.add(ing); Recipe recipe = new Recipe("Stekt potet", "God middag", 2,
-     * ings); res.add(recipe); Cookbook cook = new Cookbook("Middag", res); URI uri
-     * = URI.create("http://localhost:8080/cookbook");
-     * 
-     * RemoteCookbookAccess acc = new RemoteCookbookAccess(uri);
-     * 
-     * System.out.println(acc.getCookbook());
-     */
   }
 
 }
