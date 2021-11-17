@@ -7,9 +7,9 @@ import core.Cookbook;
 import core.Recipe;
 import java.io.IOException;
 
-/*
-   * Serializer for Cookbook-class
-   */
+/**
+ * Serializer for Cookbook-class.
+ */
 public class CookbookWriter extends JsonSerializer<Cookbook> {
 
   /*

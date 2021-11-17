@@ -27,25 +27,45 @@ public class CookbookPersistence {
    * CookbookModule.
    */
   public CookbookPersistence() {
-    this.mapper = new ObjectMapper().registerModule(new CookbookModule());
+    this.mapper = createObjectMapper();
   }
 
   /**
-   * Reads a cookbook from file using reader
+   * Makes new ObjectMapper registered with CookbookModule. Mostly used for
+   * testing.
+   * 
+   * @return new Objectmapper registered with CookbookModule
+   */
+  public static ObjectMapper createObjectMapper() {
+    return new ObjectMapper().registerModule(createModule());
+  }
+
+  /**
+   * Makes new CookbookModule.
+   * 
+   * @return new CookbookModule
+   */
+  public static SimpleModule createModule() {
+    return new CookbookModule();
+  }
+
+  /**
+   * Reads a cookbook from file using reader.
    * 
    * @param reader the reader that reads file
+   * 
+   * @return cookbook from file
    * 
    * @throws IOException if IOException occured during reading for instance
    *                     FileNotFoundException
    * 
-   * @return cookbook from file
    */
   public Cookbook readCookbook(Reader reader) throws IOException {
     return this.mapper.readValue(reader, Cookbook.class);
   }
 
   /**
-   * Writes cookbook to file using writer
+   * Writes cookbook to file using writer.
    * 
    * @param cookbook the cookbook to write to file
    * @param writer   the writer that writes to file
@@ -71,11 +91,11 @@ public class CookbookPersistence {
   /**
    * Loads a Cookbook from the saved file (saveFilePath) in the user.home folder.
    *
-   * @throws IllegalStateException if saveFilePath is not set
+   * @return the loaded Cookbook
    * 
    * @throws IOException           if IOException occured during reading file
+   * @throws IllegalStateException if saveFilePath is not set
    * 
-   * @return the loaded Cookbook
    */
   public Cookbook loadCookbook() throws IOException, IllegalStateException {
     if (this.saveFilePath == null) {

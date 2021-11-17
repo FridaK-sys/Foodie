@@ -13,7 +13,7 @@ import core.Recipe;
 import java.io.IOException;
 
 /**
- * Deserializer for Cookbook-class
+ * Deserializer for Cookbook-class.
  */
 class CookbookReader extends JsonDeserializer<Cookbook> {
 

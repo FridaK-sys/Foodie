@@ -176,7 +176,9 @@ public class Recipe {
    * 
    */
   public void setLabel(String label) {
-    if (labels.contains(label)) {
+    if (label.isEmpty()) {
+      return;
+    } else if (labels.contains(label)) {
       this.label = label;
     } else {
       throw new IllegalArgumentException("Invalid label");

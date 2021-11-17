@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import core.Ingredient;
 import java.io.IOException;
 
-/*
-   * Serializer for Ingredient-class
-   */
+/**
+ * Serializer for Ingredient-class.
+ */
 class IngredientWriter extends JsonSerializer<Ingredient> {
 
   /*
