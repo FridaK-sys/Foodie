@@ -40,20 +40,6 @@ Brukeren har behov for å fjerne én ingrediens i en oppskrift med angitt navn, 
 - Redigere antall porsjoner på en oppskrift 
 
 
-## Angi oppskrift som favoritt (us-3)
-
-Som bruker ønsker jeg å angi et oppskrift som favoritt slik at denne lett kan finnes igjen senere. 
-
-Brukeren har behov for å angi en oppskrift som favoritt. 
-
-### Viktig å kunne se
-
-- Oppskriften blir registert som favoritt
-
-### Viktig å kunne gjøre
-
-- Angi en oppskrift som favoritt 
-
 # Illustrerende skjermbilder av appen
 
 ![kokebok](kokebok.png)
