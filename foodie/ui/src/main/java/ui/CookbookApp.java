@@ -21,6 +21,7 @@ public class CookbookApp extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
     Parent root = fxmlLoader.load();
     Scene scene = new Scene(root);
+    scene.setUserData(fxmlLoader);
 
     stage.setTitle("Cookbook<3");
 

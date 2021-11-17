@@ -46,6 +46,15 @@ public class Recipe {
     this.label = "";
   }
 
+  public Recipe(String name, int portions) {
+    setName(name);
+    this.portions = 0;
+    this.description = "nothing here...";
+    this.ingredients = new ArrayList<Ingredient>();
+    this.fav = false;
+    this.label = "";
+  }
+
   /**
    * Constructor for a empty recipe.
    * 
