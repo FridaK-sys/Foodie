@@ -91,11 +91,13 @@ public class NewRecipeController implements Initializable {
 
   public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
+      System.out.println(dataAccess.toString());
       dataAccess.addRecipe(createRecipe());
       backButton.fire();
 
     } catch (Exception e) {
       errorMessageLabel.setText(e.getMessage());
+      System.out.println(e.getMessage());
     }
   }
 
@@ -109,6 +111,7 @@ public class NewRecipeController implements Initializable {
     } catch (Exception e) {
       errorMessageLabel.setText(e.getMessage());
       System.out.println(e.getMessage());
+
     }
   }
 
