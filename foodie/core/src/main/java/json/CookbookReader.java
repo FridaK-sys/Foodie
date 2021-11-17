@@ -10,25 +10,19 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import core.Cookbook;
 import core.Recipe;
-
 import java.io.IOException;
 
+/**
+ * Deserializer for Cookbook-class
+ */
 class CookbookReader extends JsonDeserializer<Cookbook> {
 
   private RecipeReader recipeReader = new RecipeReader();
-
-  /*
-   * format: { "lists": [ ... ], "settings": ... }
-   */
 
   @Override
   public Cookbook deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
-    return deserialize((JsonNode) treeNode);
-  }
-
-  Cookbook deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode objectNode) {
       Cookbook cookbook = new Cookbook();
       JsonNode nameNode = objectNode.get("name");

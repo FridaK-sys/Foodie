@@ -7,6 +7,9 @@ import core.Ingredient;
 import core.Recipe;
 import java.io.IOException;
 
+/*
+   * Serializer for Recipe-class
+   */
 class RecipeWriter extends JsonSerializer<Recipe> {
 
   /*

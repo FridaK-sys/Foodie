@@ -18,7 +18,6 @@ public class Cookbook {
    * @param name    name of cookbook
    * 
    * @param recipes list of recipes
-   * 
    */
 
   public Cookbook(String name, List<Recipe> recipes) {
@@ -29,6 +28,7 @@ public class Cookbook {
   /**
    * Constructor for an empty cookbook.
    */
+
   public Cookbook() {
     this.name = "Cookbook";
     this.recipes = new ArrayList<>();
@@ -45,8 +45,8 @@ public class Cookbook {
    * 
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers.
-   * 
    */
+
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
       throw new IllegalArgumentException("Invalid name");
@@ -64,8 +64,8 @@ public class Cookbook {
    * @param recipe recipe to add
    * 
    * @throws IllegalArgumentException if list already contains recipe
-   * 
    */
+
   public void addRecipe(Recipe recipe) {
     if (!recipes.contains(recipe)) {
       recipes.add(recipe);

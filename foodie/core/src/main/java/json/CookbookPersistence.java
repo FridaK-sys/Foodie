@@ -11,56 +11,77 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Wrapper class for JSON serialization, to avoid direct compile dependencies on
- * Jackson for other modules.
+ * Wrapper class for JSON serialization. Uses ObjectMapper with CookbookModule
+ * to write and read from file.
  */
 public class CookbookPersistence {
 
   private ObjectMapper mapper;
-  private Path saveFilePath = null;
+  private String saveFilePath = null;
 
+  /**
+   * Initializes a CookbokPersistence with a mapper registered with a new
+   * CookbookModule.
+   */
   public CookbookPersistence() {
-    mapper = createObjectMapper();
+    this.mapper = new ObjectMapper().registerModule(new CookbookModule());
   }
 
-  public static SimpleModule createModule() {
-    return new CookbookModule();
-  }
-
-  public static ObjectMapper createObjectMapper() {
-    return new ObjectMapper().registerModule(createModule());
-  }
-
+  /**
+   * Reads a cookbook from file using reader
+   * 
+   * @param reader the reader that reads file
+   * 
+   * @throws IOException if IOException occured during reading for instance
+   *                     FileNotFoundException
+   * 
+   * @return cookbook from file
+   */
   public Cookbook readCookbook(Reader reader) throws IOException {
-    return mapper.readValue(reader, Cookbook.class);
+    return this.mapper.readValue(reader, Cookbook.class);
   }
 
+  /**
+   * Writes cookbook to file using writer
+   * 
+   * @param cookbook the cookbook to write to file
+   * @param writer   the writer that writes to file
+   * 
+   * @throws IOException if IOException occured during writing for instance
+   *                     FileNotFoundException
+   */
   public void writeCookbook(Cookbook cookbook, Writer writer) throws IOException {
-    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
+    this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
   }
 
+  /**
+   * Sets saveFile to user.home/saveFile
+   */
   public void setSaveFile(String saveFile) {
-    this.saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+    this.saveFilePath = System.getProperty("user.home") + saveFile;
   }
 
-  public Path getSaveFilePath() {
+  public String getSaveFilePath() {
     return this.saveFilePath;
   }
 
   /**
-   * Loads a TodoModel from the saved file (saveFilePath) in the user.home folder.
+   * Loads a Cookbook from the saved file (saveFilePath) in the user.home folder.
    *
-   * @return the loaded TodoModel
+   * @throws IllegalStateException if saveFilePath is not set
+   * 
+   * @throws IOException           if IOException occured during reading file
+   * 
+   * @return the loaded Cookbook
    */
   public Cookbook loadCookbook() throws IOException, IllegalStateException {
-    if (saveFilePath == null) {
+    if (this.saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
     }
-    try (Reader reader = new FileReader(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
+    try (Reader reader = new FileReader(this.saveFilePath, StandardCharsets.UTF_8)) {
       return readCookbook(reader);
     } catch (FileNotFoundException e) {
       Cookbook cookbook = new Cookbook();
@@ -71,44 +92,27 @@ public class CookbookPersistence {
   }
 
   /**
-   * Saves a TodoModel to the saveFilePath in the user.home folder.
+   * Saves a cookbook to the saveFilePath in the user.home folder.
    *
-   * @param todoModel the TodoModel to save
+   * @param cookbook cookbook to save
+   * 
+   * @throws IllegalStateException if saveFilePath is not set
+   * 
+   * @throws IOException           if IOException occured during writing to file
    */
   public void saveCookbook(Cookbook cookbook) throws IOException, IllegalStateException {
     if (saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
-    } else if (saveFilePath.toFile().exists()) {
-      try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
+    } else if (Paths.get(saveFilePath).toFile().exists()) {
+      try (Writer writer = new FileWriter(saveFilePath, StandardCharsets.UTF_8)) {
         writeCookbook(cookbook, writer);
-
       }
-
     } else {
-      try (Writer writer = new FileWriter(new File(saveFilePath.toString()), StandardCharsets.UTF_8)) {
+      try (Writer writer = new FileWriter(new File(saveFilePath), StandardCharsets.UTF_8)) {
         writeCookbook(cookbook, writer);
-
       }
 
     }
 
   }
-  /*
-   * public static void main(String[] args) throws IllegalStateException,
-   * IOException { Cookbook cookbook = new Cookbook(); CookbookPersistence
-   * cookbookPersistence = new CookbookPersistence(); Ingredient ingredient1 = new
-   * Ingredient("tomat", 3, "dl"); Ingredient ingredient2 = new Ingredient("eple",
-   * 2, "stk"); cookbook.addRecipe(new Recipe("recipe1", "lag", 2,
-   * Arrays.asList(ingredient1, ingredient2))); cookbook.addRecipe(new
-   * Recipe("recipe2", 2));
-   * 
-   * cookbookPersistence.setSaveFile("/checkCookbook");
-   * cookbookPersistence.saveCookbook(cookbook);
-   * 
-   * Cookbook cookbook2 = cookbookPersistence.loadCookbook(); Recipe recipe1 =
-   * cookbook2.getRecipes().get(0); Ingredient tomat =
-   * recipe1.getIngredients().get(0); System.out.println(cookbook2.getName());
-   * System.out.println(recipe1.getName()); System.out.println(tomat.getName());
-   * System.out.println(tomat.getUnit()); }
-   */
 }

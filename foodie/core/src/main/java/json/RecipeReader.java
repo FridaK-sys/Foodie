@@ -11,15 +11,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import core.Ingredient;
 import core.Recipe;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+/*
+   * Deserializer for Recipe-class
+   */
 class RecipeReader extends JsonDeserializer<Recipe> {
 
   private IngredientReader ingredientReader = new IngredientReader();
-  /*
-   * format: { "items": [ ... ] }
-   */
 
   @Override
   public Recipe deserialize(JsonParser parser, DeserializationContext ctxt)
@@ -45,9 +43,7 @@ class RecipeReader extends JsonDeserializer<Recipe> {
       recipe.setDescription(description);
       recipe.setPortions(portions);
       recipe.setFav(fav);
-      if (Recipe.labels.contains(label)) {
-        recipe.setLabel(label);
-      }
+      recipe.setLabel(label);
 
       JsonNode ingredientsNode = objectNode.get("ingredients");
       for (JsonNode i : (ArrayNode) ingredientsNode) {
