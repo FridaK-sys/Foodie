@@ -44,7 +44,16 @@ public class CookbookPersistenceTest {
     cookbook.addRecipe(r1);
     cookbook.addRecipe(r2);
     return cookbook;
+  }
 
+  public void writeCookbook(Cookbook cookbook) {
+    try (Writer writer = new FileWriter(new File(persistence.getSaveFilePath()), StandardCharsets.UTF_8)) {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.registerModule(new CookbookModule());
+      mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
   }
 
   private void checkCookbook(Cookbook defaultCookbook, Cookbook testCookbook) {
@@ -83,16 +92,19 @@ public class CookbookPersistenceTest {
   @Test
   public void writeCookbook() {
     Cookbook cookbook = createDefaultCookbook();
-    try (Writer writer = new FileWriter(new File(System.getProperty("user.home") + "/cookbook"),
-        StandardCharsets.UTF_8)) {
+    persistence.setSaveFile("/cookbook");
+    try (Writer writer = new FileWriter(new File(persistence.getSaveFilePath()), StandardCharsets.UTF_8)) {
       persistence.writeCookbook(cookbook, writer);
-      String writtenFile = Files.readString(Paths.get(System.getProperty("user.home") + "/cookbook"));
+      String writtenFile = Files.readString(Paths.get(persistence.getSaveFilePath()));
       String defaultFile = Files.readString(Paths.get(defaultCookbookPath));
       assertEquals(defaultFile, writtenFile);
 
+      // cleanup
+      Files.delete(Paths.get(persistence.getSaveFilePath()));
     } catch (IOException e) {
       fail(e.getMessage());
     }
+
   }
 
   @Test
@@ -108,11 +120,76 @@ public class CookbookPersistenceTest {
     }
     assertTrue("No exception was thrown even though saveFilePath was not set", thrown);
 
+    // test loading cookbook from existing file
     try {
-      persistence.setSaveFile("");
-      Files.copy(Paths.get(defaultCookbookPath), Paths.get(persistence.getSaveFilePath()));
+      persistence.setSaveFile("/cookbook");
+      writeCookbook(createDefaultCookbook());
       Cookbook testCookbook = persistence.loadCookbook();
       checkCookbook(createDefaultCookbook(), testCookbook);
+
+      // cleanup
+      Files.delete(Paths.get(persistence.getSaveFilePath()));
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+
+    // test loading cookbook from nonexisting file
+    try {
+      persistence.setSaveFile("/cookbook");
+      Cookbook cookbook = persistence.loadCookbook();
+      assertEquals("Cookbook", cookbook.getName());
+      assertEquals(0, cookbook.getRecipes().size());
+
+      // cleanup
+      Files.delete(Paths.get(persistence.getSaveFilePath()));
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  void testSaveCookbook() {
+    Cookbook cookbook = createDefaultCookbook();
+
+    // test not allowed to save cookbook without setting path
+    boolean thrown = false;
+    try {
+      persistence.saveCookbook(cookbook);
+    } catch (IllegalStateException e) {
+      thrown = true;
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+    assertTrue("No exception was thrown even though saveFilePath was not set", thrown);
+
+    // test saving cookbook to existing file
+    try {
+      persistence.setSaveFile("/cookbook");
+      writeCookbook();
+      cookbook.addRecipe(new Recipe("Popcorn"));
+      persistence.saveCookbook(cookbook);
+      ObjectMapper mapper = new ObjectMapper().registerModule(new CookbookModule());
+      Cookbook newCookbook = mapper.readValue(persistence.getSaveFilePath(), Cookbook.class);
+      checkCookbook(cookbook, newCookbook);
+
+      // cleanup
+      Files.delete(Paths.get(persistence.getSaveFilePath()));
+
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+
+    // test saving cookbook to new file
+    try {
+      persistence.setSaveFile("/cookbook");
+      persistence.saveCookbook(createDefaultCookbook());
+      ObjectMapper mapper = new ObjectMapper().registerModule(new CookbookModule());
+      Cookbook newCookbook = mapper.readValue(persistence.getSaveFilePath(), Cookbook.class);
+      checkCookbook(createDefaultCookbook(), newCookbook);
+
+      // cleanup
+      Files.delete(Paths.get(persistence.getSaveFilePath()));
+
     } catch (IOException e) {
       fail(e.getMessage());
     }
