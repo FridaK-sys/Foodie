@@ -3,8 +3,12 @@ package foodie.restapi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.Assert.fail;
 import core.Cookbook;
 import core.Recipe;
 
@@ -18,8 +22,8 @@ class CookbookServiceTest {
       service = new CookbookService();
       Cookbook cookbook = CookbookService.createDefaultCookbook();
       service.setCookbook(cookbook);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (IllegalStateException | IOException e) {
+      fail(e.getMessage());
     }
   }
 
