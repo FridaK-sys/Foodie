@@ -11,6 +11,10 @@ import ui.utils.LocalCookbookAccess;
 
 public class LocalAppController extends AbstractController {
 
+  /**
+   * Makes local CookbookAccess file
+   */
+
   @Override
   protected void setUpStorage() {
     dataAccess = new LocalCookbookAccess("checkCookbookff.json");
@@ -19,6 +23,12 @@ public class LocalAppController extends AbstractController {
   @FXML
   private Pane mainListView;
 
+
+  /**
+   * Initializes
+   * 
+   * @return the new URI
+   */
 
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();

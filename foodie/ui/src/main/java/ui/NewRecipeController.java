@@ -1,31 +1,29 @@
 package ui;
 
+import core.Cookbook;
+import core.Ingredient;
+import core.Recipe;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import ui.utils.CookbookInterface;
 
+/**
+ * Controller for page responsible for creating and editing recipes.
+ */
 public class NewRecipeController implements Initializable {
 
   private Recipe newRecipe;
@@ -59,6 +57,13 @@ public class NewRecipeController implements Initializable {
   @FXML
   private HBox hb;
 
+  /**
+   * Adds ingredient to recipe
+   * 
+   * @param ae when save ingredient-button is clicked
+   * 
+   * @throws IllegalArgumentException if inredient-title is not set
+   */
   public void addIngredientButton(ActionEvent ae) {
     try {
       if (ingredientTitle.getText().isBlank()) {
@@ -89,6 +94,12 @@ public class NewRecipeController implements Initializable {
     }
   }
 
+  /**
+   * Creates a new recipe when create new recipe-button is pushed and saves it.
+   * 
+   * @param ae when create new recipe-button is pushed
+   * 
+   */
   public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
       System.out.println(dataAccess.toString());
@@ -101,6 +112,9 @@ public class NewRecipeController implements Initializable {
     }
   }
 
+  /**
+   * Saves edited recipe to server
+   */
   public void saveRecipe() {
     try {
       Recipe updatedRecipe = createRecipe();
@@ -115,6 +129,9 @@ public class NewRecipeController implements Initializable {
     }
   }
 
+  /**
+   * Creates edited recipe
+   */
   public Recipe createRecipe() {
     if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() || recipePortions.getText() == null) {
       throw new IllegalArgumentException("Missing name or portion size");
@@ -156,6 +173,15 @@ public class NewRecipeController implements Initializable {
 
   }
 
+  /**
+   * Initialises data from another scene
+   * 
+   * @param recipe      ////
+   * 
+   * @param recipeIndex ///
+   * 
+   * @param dataAccess  ///
+   */
   public void initData(Recipe recipe, int recipeIndex, CookbookInterface dataAccess) {
     this.recipeTitle.setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
@@ -177,6 +203,15 @@ public class NewRecipeController implements Initializable {
 
   }
 
+  /**
+   * Initialises data from another scene
+   * 
+   * @param recipe      ////
+   * 
+   * @param recipeIndex ///
+   * 
+   * @param cookbook    ///
+   */
   public void initData(Recipe recipe, int recipeIndex, Cookbook cookbook) {
     this.recipeTitle.setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
@@ -197,6 +232,13 @@ public class NewRecipeController implements Initializable {
 
   }
 
+  /**
+   * Initialises data from another scene
+   * 
+   * @param cookbook   ////
+   * 
+   * @param dataAccess ///
+   */
   public void initData(Cookbook cookbook, CookbookInterface dataAccess) {
     this.cookbook = cookbook;
     this.dataAccess = dataAccess;
@@ -207,6 +249,11 @@ public class NewRecipeController implements Initializable {
 
   }
 
+  /**
+   * Sets label to "breakfast" if breakfastTag is pushed
+   * 
+   * @param ae when breakfast tag is pushed
+   */
   public void breakfastTagPushed(ActionEvent ae) {
     setLabel("Breakfast");
   }

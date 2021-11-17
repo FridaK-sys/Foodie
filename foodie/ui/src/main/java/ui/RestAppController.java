@@ -18,6 +18,12 @@ public class RestAppController extends AbstractController {
   @FXML
   ListViewController mainListViewController;
 
+  /**
+   * Set up the URI
+   * 
+   * @return the new URI
+   */
+
   private URI uriSetup() {
     URI newUri = null;
     try {
@@ -29,10 +35,20 @@ public class RestAppController extends AbstractController {
 
   }
 
+  /**
+   * Initializes
+   * 
+   * @return the new URI
+   */
+
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
   }
+
+  /**
+   * Makes the URI endppoint
+   */
 
   @Override
   protected void setUpStorage() {
@@ -43,6 +59,10 @@ public class RestAppController extends AbstractController {
     this.dataAccess = access;
     initializeRecipesView();
   }
+
+  /**
+   * Updates the mainListViewController
+   */
 
   @Override
   public void update() {

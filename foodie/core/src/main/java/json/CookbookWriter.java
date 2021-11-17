@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import core.Cookbook;
 import core.Recipe;
-
 import java.io.IOException;
 
+/**
+ * Serializer for Cookbook-class.
+ */
 public class CookbookWriter extends JsonSerializer<Cookbook> {
 
   /*
