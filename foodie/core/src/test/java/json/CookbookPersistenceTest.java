@@ -17,8 +17,8 @@ import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import core.Cookbook;
 import core.Ingredient;
@@ -26,9 +26,17 @@ import core.Recipe;
 
 public class CookbookPersistenceTest {
 
-  private CookbookPersistence persistence = new CookbookPersistence();
-  private String defaultCookbookPath = System.getProperty("user.dir") + File.separator
-      + ("/src/test/java/resources/test-cookbook.json");
+  private static CookbookPersistence persistence;
+  private static String defaultCookbookPath;
+  private static ObjectMapper mapper;
+
+  @BeforeEach
+  public void setUp() {
+    persistence = new CookbookPersistence();
+    defaultCookbookPath = System.getProperty("user.dir") + File.separator
+        + ("/src/test/java/resources/test-cookbook.json");
+    mapper = new ObjectMapper().registerModule(new CookbookModule());
+  }
 
   private Cookbook createDefaultCookbook() {
     Recipe r1 = new Recipe("Cake", 1);
@@ -48,8 +56,6 @@ public class CookbookPersistenceTest {
 
   public void writeCookbook(Cookbook cookbook) {
     try (Writer writer = new FileWriter(new File(persistence.getSaveFilePath()), StandardCharsets.UTF_8)) {
-      ObjectMapper mapper = new ObjectMapper();
-      mapper.registerModule(new CookbookModule());
       mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
     } catch (IOException e) {
       fail(e.getMessage());
@@ -148,7 +154,7 @@ public class CookbookPersistenceTest {
   }
 
   @Test
-  void testSaveCookbook() {
+  public void testSaveCookbook() {
     Cookbook cookbook = createDefaultCookbook();
 
     // test not allowed to save cookbook without setting path
@@ -168,8 +174,8 @@ public class CookbookPersistenceTest {
       writeCookbook();
       cookbook.addRecipe(new Recipe("Popcorn"));
       persistence.saveCookbook(cookbook);
-      ObjectMapper mapper = new ObjectMapper().registerModule(new CookbookModule());
-      Cookbook newCookbook = mapper.readValue(persistence.getSaveFilePath(), Cookbook.class);
+      Reader reader = new FileReader(persistence.getSaveFilePath(), StandardCharsets.UTF_8);
+      Cookbook newCookbook = mapper.readValue(reader, Cookbook.class);
       checkCookbook(cookbook, newCookbook);
 
       // cleanup
@@ -183,8 +189,8 @@ public class CookbookPersistenceTest {
     try {
       persistence.setSaveFile("/cookbook");
       persistence.saveCookbook(createDefaultCookbook());
-      ObjectMapper mapper = new ObjectMapper().registerModule(new CookbookModule());
-      Cookbook newCookbook = mapper.readValue(persistence.getSaveFilePath(), Cookbook.class);
+      Reader reader = new FileReader(persistence.getSaveFilePath(), StandardCharsets.UTF_8);
+      Cookbook newCookbook = mapper.readValue(reader, Cookbook.class);
       checkCookbook(createDefaultCookbook(), newCookbook);
 
       // cleanup
