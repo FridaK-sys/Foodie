@@ -10,28 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LocalAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RestAppController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox prefHeight="72.0" prefWidth="600.0">
-               <children>
-                  <RadioButton fx:id="All" mnemonicParsing="false">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="group" />
-                     </toggleGroup></RadioButton>
-                  <RadioButton fx:id="Breakfast" mnemonicParsing="false" toggleGroup="$group" />
-                  <RadioButton fx:id="Lunch" mnemonicParsing="false" toggleGroup="$group" />
-                  <RadioButton fx:id="Dinner" mnemonicParsing="false" toggleGroup="$group" />
-                  <ToggleButton fx:id="Fav" mnemonicParsing="false" onAction="#toggleFav" />
-               </children>
-            </HBox>
-            <ListView fx:id="mainListView" prefHeight="312.0" prefWidth="600.0" />
-            <Pane prefHeight="66.0" prefWidth="600.0">
-               <children>
-                  <Button layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" text="New recipe" />
-               </children></Pane>
-         </children></VBox>
+         <Pane fx:id="todoListsView"/>
    </children>
+   <fx:include fx:id="mainListView" source="ListView.fxml"/>
 </AnchorPane>
+
 
