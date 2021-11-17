@@ -12,12 +12,29 @@ public class LocalCookbookAccess implements CookbookInterface {
   private final CookbookPersistence persistence;
   private final Cookbook cookbook;
 
+  /**
+   * Constructor for LocalCookbookAccess
+   * 
+   * Initializes persistence and cookbook
+   * 
+   * @param path the path that is convertet to a URI
+   * 
+   * 
+   */
+
   public LocalCookbookAccess(String path) {
     persistence = new CookbookPersistence();
     persistence.setSaveFile(path);
     cookbook = getCookbook();
   }
 
+  /**
+   * Gets Cookbook
+   *
+   * @return the cookbook
+   * 
+   * @return null if IllegalStateException or IOException occured
+   */
   @Override
   public Cookbook getCookbook() {
     try {
@@ -34,6 +51,17 @@ public class LocalCookbookAccess implements CookbookInterface {
 
   }
 
+  /**
+   * Edits recipe
+   *
+   * @param name   the name of the recipe to be removed
+   * @param recipe the edited recipe that is added
+   * 
+   * @return true if edited
+   * 
+   * 
+   */
+
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
     cookbook.removeRecipe(name);
@@ -49,6 +77,16 @@ public class LocalCookbookAccess implements CookbookInterface {
     return true;
   }
 
+  /**
+   * Adds recipe
+   * 
+   * @param recipe the recipe that is added
+   *
+   * @return true if added
+   * 
+   * 
+   */
+
   @Override
   public boolean addRecipe(Recipe recipe) {
     cookbook.addRecipe(recipe);
@@ -62,6 +100,16 @@ public class LocalCookbookAccess implements CookbookInterface {
     }
     return true;
   }
+
+  /**
+   * Deletes recipe
+   *
+   * @param name the name of the recipe that is deleted
+   * 
+   * @return true if edited
+   * 
+   * 
+   */
 
   @Override
   public boolean deleteRecipe(String name) {

@@ -7,15 +7,14 @@ import core.Ingredient;
 import core.Recipe;
 
 /**
- * A Jackson module for configuring JSON serialization of TodoModel instances.
+ * A Jackson module for configuring JSON serialization of Cookbook instances.
  */
-@SuppressWarnings("serial")
 public class CookbookModule extends SimpleModule {
 
   private static final String NAME = "CookbookModule";
 
   /**
-   * Initializes this TodoModule with appropriate serializers and deserializers.
+   * Initializes this CookbookModule with the serializers and deserializers.
    */
   public CookbookModule() {
     super(NAME, Version.unknownVersion());
