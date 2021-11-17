@@ -3,12 +3,12 @@ package foodie.restapi;
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
-import json.CookbookPersistence;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import json.CookbookPersistence;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +23,7 @@ public class CookbookService {
 
   /**
    * Initializes the service with a new cookbookPersistence and loads cookbook
-   * from COOKBOOK_SERVICE_PATH
+   * from COOKBOOK_SERVICE_PATH.
    */
 
   public CookbookService() throws IllegalStateException, IOException {
@@ -70,7 +70,7 @@ public class CookbookService {
   }
 
   /**
-   * Saves cookbook to file
+   * Saves cookbook to file.
    */
   public void autoSaveCookbook() {
     if (cookbookPersistence != null) {
@@ -83,11 +83,9 @@ public class CookbookService {
   }
 
   /**
-   * Adds recipe and saves coobook
+   * Adds recipe and saves coobook.
    * 
    * @param recipe recipe to add
-   * 
-   * @return true if recipe was added
    */
   public boolean addRecipe(Recipe recipe) {
     cookbook.addRecipe(recipe);
@@ -96,11 +94,9 @@ public class CookbookService {
   }
 
   /**
-   * Removes recipe and saves coobook
+   * Removes recipe and saves coobook.
    * 
    * @param name name of recipe to remove
-   * 
-   * @return true if recipe was removed
    */
   public boolean removeRecipe(String name) {
     cookbook.removeRecipe(name);
@@ -109,12 +105,10 @@ public class CookbookService {
   }
 
   /**
-   * Edits recipe and saves coobook
+   * Edits recipe and saves coobook.
    * 
    * @param name   name of recipe to edit
-   * @param recipe edited
-   * 
-   * @return true if recipe wad edited
+   * @param recipe edited recipe
    */
   public boolean editRecipe(String name, Recipe recipe) {
     cookbook.removeRecipe(name);
