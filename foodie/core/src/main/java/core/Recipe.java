@@ -48,7 +48,7 @@ public class Recipe {
   // denne må fjernes
   public Recipe(String name, int portions) {
     setName(name);
-    this.portions = 0;
+    this.portions = portions;
     this.description = "nothing here...";
     this.ingredients = new ArrayList<Ingredient>();
     this.fav = false;

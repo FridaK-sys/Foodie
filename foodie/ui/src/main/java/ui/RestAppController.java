@@ -2,6 +2,9 @@ package ui;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import ui.utils.RemoteCookbookAccess;
 
 public class RestAppController extends AbstractController {
@@ -20,6 +23,18 @@ public class RestAppController extends AbstractController {
   @Override
   protected void setUpStorage() {
     dataAccess = new RemoteCookbookAccess(uriSetup());
+  }
+
+  @Override
+  public void update() {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    // TODO Auto-generated method stub
+
   }
 
 }
