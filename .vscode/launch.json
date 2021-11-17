@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch RemoteCookbookAccess",
+      "request": "launch",
+      "mainClass": "foodie.ui/ui.utils.RemoteCookbookAccess",
+      "projectName": "modules-ui"
+    },
+    {
+      "type": "java",
       "name": "Launch CookbookPersistence",
       "request": "launch",
       "mainClass": "foodie.core/json.CookbookPersistence",

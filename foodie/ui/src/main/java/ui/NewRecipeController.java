@@ -24,17 +24,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import json.FileHandler;
+import ui.utils.CookbookInterface;
 
 public class NewRecipeController implements Initializable {
 
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
-  private FileHandler fileHandler = new FileHandler();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private String label = "";
   private boolean editing = false;
-  private int index;
+  // private int index;
+  private String recipeName;
+
+  private CookbookInterface dataAccess;
 
   @FXML
   private TextField ingredientTitle, ingredientAmount, ingredientUnit, recipePortions, recipeTitle;
@@ -67,11 +69,10 @@ public class NewRecipeController implements Initializable {
             (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getText()));
         ingredients.add(newIngredient);
       } else {
-        Ingredient newIngredient = new Ingredient(ingredientTitle.getText()); // legge til en konstruktør i ingredient
-                                                                              // slitk at vi kan legge til ingredienser
-                                                                              // uten mengde, eks "salt"
+        Ingredient newIngredient = new Ingredient(ingredientTitle.getText());
         ingredients.add(newIngredient);
       }
+
       ingredientAmount.setText(null);
       ingredientTitle.setText(null);
       ingredientUnit.setText(null);
@@ -90,9 +91,7 @@ public class NewRecipeController implements Initializable {
 
   public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
-      Recipe createdRecipe = createRecipe();
-      this.cookbook.addRecipe(createdRecipe);
-      fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", this.cookbook);
+      dataAccess.addRecipe(createRecipe());
       backButton.fire();
 
     } catch (Exception e) {
@@ -103,11 +102,13 @@ public class NewRecipeController implements Initializable {
   public void saveRecipe() {
     try {
       Recipe updatedRecipe = createRecipe();
-      fileHandler.replaceRecipeInFile(updatedRecipe, index);
-      changeSceneToViewRecipe();
+      dataAccess.deleteRecipe(recipeName);
+      dataAccess.addRecipe(updatedRecipe);
+      backButton.fire();
 
     } catch (Exception e) {
       errorMessageLabel.setText(e.getMessage());
+      System.out.println(e.getMessage());
     }
   }
 
@@ -152,9 +153,11 @@ public class NewRecipeController implements Initializable {
 
   }
 
-  public void initData(Recipe recipe, int recipeIndex) {
+  public void initData(Recipe recipe, int recipeIndex, CookbookInterface dataAccess) {
     this.recipeTitle.setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    this.dataAccess = dataAccess;
+    this.recipeName = recipe.getName();
     if (!recipe.getDescription().isEmpty()) {
       this.recipeDescription.setText(recipe.getDescription());
     }
@@ -163,7 +166,7 @@ public class NewRecipeController implements Initializable {
     }
     ingredients.addAll(recipe.getIngredients());
     this.editing = true;
-    this.index = recipeIndex;
+    // this.index = recipeIndex;
 
     createRecipeButton.setVisible(false);
     saveRecipeButton.setVisible(true);
@@ -174,6 +177,7 @@ public class NewRecipeController implements Initializable {
   public void initData(Recipe recipe, int recipeIndex, Cookbook cookbook) {
     this.recipeTitle.setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    this.recipeName = recipe.getName();
     if (!recipe.getDescription().isEmpty()) {
       this.recipeDescription.setText(recipe.getDescription());
     }
@@ -183,7 +187,7 @@ public class NewRecipeController implements Initializable {
     ingredients.addAll(recipe.getIngredients());
     this.editing = true;
     this.cookbook = cookbook;
-    this.index = recipeIndex;
+    // this.index = recipeIndex;
 
     createRecipeButton.setVisible(false);
     saveRecipeButton.setVisible(true);
@@ -191,8 +195,9 @@ public class NewRecipeController implements Initializable {
 
   }
 
-  public void initData(Cookbook cookbook) {
+  public void initData(Cookbook cookbook, CookbookInterface dataAccess) {
     this.cookbook = cookbook;
+    this.dataAccess = dataAccess;
 
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
@@ -223,9 +228,7 @@ public class NewRecipeController implements Initializable {
   }
 
   public void deleteRecipe(ActionEvent ea) {
-    cookbook.removeRecipe(index);
-    fileHandler.writeRecipesToFile("src/main/resources/ui/test.txt", cookbook);
-    backButton.fire();
+    dataAccess.deleteRecipe(recipeTitle.getText());
   }
 
   @Override
@@ -233,35 +236,9 @@ public class NewRecipeController implements Initializable {
     ingredientListView.setItems(ingredients);
     setLabelButton("blank");
     hb.setSpacing(20);
-    fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt", this.cookbook);
+    // fileHandler.readRecipesFromFile("src/main/resources/ui/test.txt",
+    // this.cookbook);
 
-  }
-
-  public void changeSceneToListView(ActionEvent ea) throws IOException {
-    URL fxmlLocation = getClass().getResource("Main.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
-    Parent root = fxmlLoader.load();
-    Scene viewRecipesScene = new Scene(root);
-
-    Stage stage = (Stage) ((Node) ea.getSource()).getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
-  }
-
-  public void changeSceneToViewRecipe() throws IOException {
-    URL fxmlLocation = getClass().getResource("ViewRecipe.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
-    Parent root = fxmlLoader.load();
-
-    Scene viewRecipesScene = new Scene(root);
-
-    ViewRecipeController controller = fxmlLoader.getController();
-    controller.initData(newRecipe, index);
-    Stage stage = (Stage) backButton.getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
   }
 
   public List<Ingredient> getIngredients() {
@@ -287,6 +264,10 @@ public class NewRecipeController implements Initializable {
       dinnerTag.setStyle("-fx-background-color: white");
 
     }
+  }
+
+  public void setBackButtonTarget(SceneTarget sceneTarget) {
+    backButton.setOnAction(sceneTarget.getActionEventHandler());
   }
 
 }

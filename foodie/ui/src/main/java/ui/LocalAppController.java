@@ -8,7 +8,7 @@ public class LocalAppController extends AbstractController {
 
   @Override
   protected void setUpStorage() {
-    dataAccess = new LocalCookbookAccess(System.getProperty("user.dir") + File.separator + "cookbook.json");
+    dataAccess = new LocalCookbookAccess("checkCookbookff.json");
   }
 
 }
