@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<!-- <?import ui.ListViewController?> -->
+
+<Pane xmlns:fx="http://javafx.com/fxml" fx:controller="ui.ListViewController">
+     <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="72.0" prefWidth="600.0">
+               <children>
+                  <RadioButton fx:id="All" mnemonicParsing="false">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="Breakfast" mnemonicParsing="false" toggleGroup="$group" />
+                  <RadioButton fx:id="Lunch" mnemonicParsing="false" toggleGroup="$group" />
+                  <RadioButton fx:id="Dinner" mnemonicParsing="false" toggleGroup="$group" />
+                  <ToggleButton fx:id="Fav" mnemonicParsing="false" onAction="#toggleFav" />
+               </children>
+            </HBox>
+            <ListView fx:id="mainListView" prefHeight="312.0" prefWidth="600.0" />
+            <Pane prefHeight="66.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="viewButton" layoutX="392.0" layoutY="18.0" mnemonicParsing="false" text="Show recipe" />
+                  <Button layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" text="New recipe" />
+                  <Button fx:id="deleteButton" layoutX="34.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Delete recipe" />
+                  <Button layoutX="475.0" layoutY="18.0" mnemonicParsing="false"  text="Edit" />
+               </children></Pane>
+            
+         </children></VBox>
+</Pane>

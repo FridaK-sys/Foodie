@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import ui.utils.CookbookInterface;
 import ui.utils.RemoteCookbookAccess;
 
 public class RestAppController extends AbstractController {
@@ -52,13 +53,9 @@ public class RestAppController extends AbstractController {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
 
-  /**
-   * Gives mainListViewControll dataAccess to populate listView.
-   * 
-   */
-
-  private void initializeRecipesView() {
-    mainListViewController.setCookbookAccess(dataAccess);
+  public void setCookbookAccess(CookbookInterface access) {
+    this.dataAccess = access;
+    initializeRecipesView();
   }
 
   /**
