@@ -93,6 +93,13 @@
             <version>20090211</version>
          </dependency>	-->
 
+    <!-- WireMock -->
+    <dependency>
+    <groupId>com.github.tomakehurst</groupId>
+    <artifactId>wiremock</artifactId>
+    <version>2.9.0</version>
+</dependency>
+
 
         
         
