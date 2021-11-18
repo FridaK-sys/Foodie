@@ -30,7 +30,6 @@ public class CookbookService {
     this.cookbookPersistence = new CookbookPersistence();
     cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
     this.cookbook = cookbookPersistence.loadCookbook();
-
   }
 
   public Cookbook getCookbook() {

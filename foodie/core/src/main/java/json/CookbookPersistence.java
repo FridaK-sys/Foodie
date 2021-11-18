@@ -31,9 +31,14 @@ public class CookbookPersistence {
   }
 
   /**
+<<<<<<< HEAD
    * Makes new ObjectMapper registered with CookbookModule. Mostly used for
    * testing.
    *
+=======
+   * Makes new ObjectMapper registered with CookbookModule.
+   * 
+>>>>>>> 2108e780f9e15d36921982cd102c470a6c4cca53
    * @return new Objectmapper registered with CookbookModule
    */
   public static ObjectMapper createObjectMapper() {
