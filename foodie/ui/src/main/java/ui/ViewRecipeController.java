@@ -32,7 +32,9 @@ public class ViewRecipeController implements FoodieController, Initializable {
   private CookbookInterface dataAccess;
 
   @FXML
-  private Label recipeTitle, labelTag, portions;
+  private Label recipeTitle;
+  private Label labelTag;
+  private Label portions;
 
   @FXML
   private ListView<Ingredient> ingredientsListView;

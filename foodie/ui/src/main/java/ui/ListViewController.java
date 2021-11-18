@@ -3,13 +3,10 @@ package ui;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import core.Cookbook;
@@ -53,8 +50,8 @@ public class ListViewController implements Initializable {
 
   public void initialize(URL url, ResourceBundle rb) {
     mainListView.setCellFactory(listView -> {
-    ListViewCell listCell = new ListViewCell();
-    return listCell;
+      ListViewCell listCell = new ListViewCell();
+      return listCell;
     });
     setToggles();
     updateListView();

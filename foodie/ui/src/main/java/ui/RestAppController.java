@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import ui.utils.RemoteCookbookAccess;
@@ -18,7 +17,7 @@ public class RestAppController extends AbstractController {
   ListViewController mainListViewController;
 
   /**
-   * Set up the URI
+   * Set up the URI.
    * 
    * @return the new URI
    */
@@ -35,9 +34,8 @@ public class RestAppController extends AbstractController {
   }
 
   /**
-   * Initializes
-   * 
-   * @return the new URI
+   * Initialize method.
+   *
    */
 
   public void initialize(URL url, ResourceBundle rb) {
@@ -46,7 +44,7 @@ public class RestAppController extends AbstractController {
   }
 
   /**
-   * Makes the URI endppoint
+   * Makes the URI endpoint.
    */
 
   @Override
@@ -55,7 +53,7 @@ public class RestAppController extends AbstractController {
   }
 
   /**
-   * Gives mainListViewControll dataAccess to populate listView
+   * Gives mainListViewControll dataAccess to populate listView.
    * 
    */
 
@@ -64,7 +62,7 @@ public class RestAppController extends AbstractController {
   }
 
   /**
-   * Updates the mainListViewController
+   * Updates the mainListViewController.
    */
 
   @Override

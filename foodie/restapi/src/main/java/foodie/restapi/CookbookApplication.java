@@ -7,18 +7,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 /**
- * CookbookApplication that runs the SpringApplication
+ * CookbookApplication that runs the SpringApplication.
  */
 @SpringBootApplication
 public class CookbookApplication {
 
-	@Bean
-	public Module objectMapperModule() {
-		return CookbookPersistence.createModule();
-	}
+@Bean
+public Module objectMapperModule() {
+	return CookbookPersistence.createModule();
+}
 
-	public static void main(String[] args) {
-		SpringApplication.run(CookbookApplication.class, args);
-	}
+public static void main(String[] args) {
+	SpringApplication.run(CookbookApplication.class, args);
+}
 
 }
