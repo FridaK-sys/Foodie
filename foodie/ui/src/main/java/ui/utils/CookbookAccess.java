@@ -3,7 +3,10 @@ package ui.utils;
 import core.Recipe;
 import core.Cookbook;
 
-public interface CookbookInterface {
+/**
+ * Interface for local and remote CookbookAccess.
+ */
+public interface CookbookAccess {
 
   /**
    * Gets recipe.
@@ -15,7 +18,7 @@ public interface CookbookInterface {
 
   /**
    * Edit the recipe.
-   * 
+   *
    * @param name   of the recipe to edit
    * @param recipe the updated recipe
    *
@@ -26,7 +29,7 @@ public interface CookbookInterface {
 
   /**
    * Adds the recipe.
-   * 
+   *
    * @param recipe the recipe to add
    *
    * @return true if it was added

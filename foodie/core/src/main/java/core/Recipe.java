@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Recipe containing a name, description, ingredients, portions, favorite tag
- * and label.
+ * Recipe containing a name, description, ingredients, portions, favorite tag and label.
  */
 public class Recipe {
 
@@ -28,9 +27,9 @@ public class Recipe {
   /**
    * Constructor for recipe with name, description, portions and ingredients.
    *
-   * @param name        name of recipe
+   * @param name name of recipe
    * @param description description of recipe
-   * @param portions    number of portions
+   * @param portions number of portions
    * @param ingredients list of ingredient
    * 
    */
@@ -76,8 +75,7 @@ public class Recipe {
    *
    * @param name name of recipe
    * 
-   * @throws IllegalArgumentException if param contains other characters than
-   *                                  letters and numbers
+   * @throws IllegalArgumentException if param contains other characters than letters and numbers
    * 
    */
   public void setName(String name) {
@@ -111,8 +109,8 @@ public class Recipe {
     if (portions < 0) {
       throw new IllegalArgumentException("Portions cannot be negative");
     }
-    ingredients.stream()
-         .forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
+    ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions)
+    );
     this.portions = portions;
   }
 
@@ -141,8 +139,7 @@ public class Recipe {
    *
    * @param index index in ingredientList of ingredient to be removed
    *
-   * @throws IllegalArgumentException if index is larger than size of
-   *                                  ingredientList
+   * @throws IllegalArgumentException if index is larger than size of ingredientList
    * 
    */
   public void removeIngredient(int index) {

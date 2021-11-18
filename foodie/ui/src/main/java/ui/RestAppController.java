@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
-import ui.utils.CookbookInterface;
+import ui.utils.CookbookAccess;
 import ui.utils.RemoteCookbookAccess;
 
 public class RestAppController extends AbstractController {
@@ -19,7 +19,7 @@ public class RestAppController extends AbstractController {
 
   /**
    * Set up the URI.
-   * 
+   *
    * @return the new URI
    */
 
@@ -53,7 +53,7 @@ public class RestAppController extends AbstractController {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
 
-  public void setCookbookAccess(CookbookInterface access) {
+  public void setCookbookAccess(CookbookAccess access) {
     this.dataAccess = access;
     initializeRecipesView();
   }

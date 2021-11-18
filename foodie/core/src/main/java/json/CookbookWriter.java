@@ -18,7 +18,7 @@ public class CookbookWriter extends JsonSerializer<Cookbook> {
 
   @Override
   public void serialize(Cookbook cookbook, JsonGenerator jsonGen,
-  SerializerProvider provider) throws IOException {
+      SerializerProvider provider) throws IOException {
     jsonGen.writeStartObject();
     jsonGen.writeStringField("name", cookbook.getName());
     jsonGen.writeArrayFieldStart("recipes");

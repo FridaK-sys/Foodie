@@ -1,24 +1,23 @@
 package ui.utils;
 
+import core.Cookbook;
 import core.Recipe;
+import java.io.IOException;
 import json.CookbookPersistence;
 
-import java.io.IOException;
 
-import core.Cookbook;
-
-public class LocalCookbookAccess implements CookbookInterface {
+/**
+ * Sets a persistence storage file when using the application locally. 
+ */
+public class LocalCookbookAccess implements CookbookAccess {
 
   private final CookbookPersistence persistence;
   private final Cookbook cookbook;
 
   /**
-   * Constructor for LocalCookbookAccess
-   * 
-   * Initializes persistence and cookbook
-   * 
-   * @param path the path that is convertet to a URI
-   * 
+   * Constructor initializes persistence and cookbook.
+   *
+   * @param path the path that is converted to a URI
    * 
    */
 
@@ -29,11 +28,9 @@ public class LocalCookbookAccess implements CookbookInterface {
   }
 
   /**
-   * Gets Cookbook
+   * Gets Cookbook.
    *
-   * @return the cookbook
-   * 
-   * @return null if IllegalStateException or IOException occured
+   * @return the cookbook or null if IllegalStateException or IOException is thrown
    */
   @Override
   public Cookbook getCookbook() {
@@ -52,7 +49,7 @@ public class LocalCookbookAccess implements CookbookInterface {
   }
 
   /**
-   * Edits recipe
+   * Edits recipe.
    *
    * @param name   the name of the recipe to be removed
    * @param recipe the edited recipe that is added
@@ -78,8 +75,8 @@ public class LocalCookbookAccess implements CookbookInterface {
   }
 
   /**
-   * Adds recipe
-   * 
+   * Adds recipe.
+   *
    * @param recipe the recipe that is added
    *
    * @return true if added
@@ -102,10 +99,10 @@ public class LocalCookbookAccess implements CookbookInterface {
   }
 
   /**
-   * Deletes recipe
+   * Deletes recipe. 
    *
    * @param name the name of the recipe that is deleted
-   * 
+   *
    * @return true if edited
    * 
    * 

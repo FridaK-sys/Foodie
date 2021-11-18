@@ -19,7 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import ui.utils.CookbookInterface;
+import ui.utils.CookbookAccess;
 
 /**
  * Controller for page responsible for creating and editing recipes.
@@ -34,11 +34,15 @@ public class NewRecipeController implements Initializable {
   // private int index;
   private String recipeName;
 
-  private CookbookInterface dataAccess;
+  private CookbookAccess dataAccess;
 
   @FXML
-  private TextField ingredientTitle, ingredientAmount, ingredientUnit, recipePortions, recipeTitle;
-
+  private TextField ingredientTitle; 
+  private TextField ingredientAmount;
+  private TextField ingredientUnit;
+  private TextField recipePortions;
+  private TextField recipeTitle;
+  
   @FXML
   private ListView<Ingredient> ingredientListView;
 
@@ -49,10 +53,15 @@ public class NewRecipeController implements Initializable {
   private Label errorMessageLabel;
 
   @FXML
-  private Button backButton, breakfastTag, lunchTag, dinnerTag;
+  private Button backButton;
+  private Button breakfastTag; 
+  private Button lunchTag;
+  private Button dinnerTag;
 
   @FXML
-  private Button saveRecipeButton, deleteRecipeButton, createRecipeButton;
+  private Button saveRecipeButton;
+  private Button deleteRecipeButton;
+  private Button createRecipeButton;
 
   @FXML
   private HBox hb;
@@ -62,7 +71,7 @@ public class NewRecipeController implements Initializable {
    *
    * @param ae when save ingredient-button is clicked
    * 
-   * @throws IllegalArgumentException if inredient-title is not set
+   * @throws IllegalArgumentException if ingredient-title is not set
    */
   public void addIngredientButton(ActionEvent ae) {
     try {
@@ -133,8 +142,7 @@ public class NewRecipeController implements Initializable {
    * Creates edited recipe.
    */
   public Recipe createRecipe() {
-    if (recipeTitle.getText().isBlank() || recipePortions.getText().isBlank() |
-    | recipePortions.getText() == null) {
+    if (recipePortions.getText() == null || recipeTitle.getText().isBlank() || recipePortions.getText().isBlank()) {
       throw new IllegalArgumentException("Missing name or portion size");
     }
     if (!editing) {
@@ -143,8 +151,7 @@ public class NewRecipeController implements Initializable {
       }
     }
     try {
-      this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt
-      (recipePortions.getText()));
+      this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
       if (!(recipeDescription.getText() == null)) {
         this.newRecipe.setDescription(recipeDescription.getText());
       }
@@ -180,7 +187,7 @@ public class NewRecipeController implements Initializable {
    * @param recipeIndex
    * @param dataAccess
    */
-  public void initData(Recipe recipe, int recipeIndex, CookbookInterface dataAccess) {
+  public void initData(Recipe recipe, int recipeIndex, CookbookAccess dataAccess) {
     this.recipeTitle.setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
     this.dataAccess = dataAccess;
@@ -234,7 +241,7 @@ public class NewRecipeController implements Initializable {
    * @param cookbook Cookbook to initialize
    * @param dataAccess CookbookInterface to initialize
    */
-  public void initData(Cookbook cookbook, CookbookInterface dataAccess) {
+  public void initData(Cookbook cookbook, CookbookAccess dataAccess) {
     this.cookbook = cookbook;
     this.dataAccess = dataAccess;
 
@@ -286,6 +293,11 @@ public class NewRecipeController implements Initializable {
     return new ArrayList<Ingredient>(ingredients);
   }
 
+  /**
+   * Changes color based on which label is selected.
+   * 
+   * @param label selected label
+   */
   public void setLabelButton(String label) {
     if (label.equals("Breakfast")) {
       breakfastTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
@@ -307,6 +319,10 @@ public class NewRecipeController implements Initializable {
     }
   }
 
+  /**
+   * Sets the SceneTarget for return button.
+   * @param sceneTarget previous scene. 
+   */
   public void setBackButtonTarget(SceneTarget sceneTarget) {
     backButton.setOnAction(sceneTarget.getActionEventHandler());
   }
