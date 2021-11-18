@@ -1,15 +1,15 @@
 package foodie.restapi;
 
+import core.Cookbook;
+import core.Ingredient;
+import core.Recipe;
+import json.CookbookPersistence;
+import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import org.springframework.stereotype.Service;
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
-import json.CookbookPersistence;
 
 /**
  * Class for handling the business logic
@@ -105,7 +105,7 @@ public class CookbookService {
 
   /**
    * Edits recipe and saves cookbook.
-   * 
+   *
    * @param name name of recipe to edit
    * @param recipe edited recipe
    */

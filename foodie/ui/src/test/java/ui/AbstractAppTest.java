@@ -42,7 +42,7 @@ public abstract class AbstractAppTest extends ApplicationTest {
     }
 
     }
-
+/*
     public static Cookbook setUpCookBook(){
     FileHandler handler = new FileHandler();
     Cookbook referenceBook = new Cookbook();
@@ -54,6 +54,6 @@ public abstract class AbstractAppTest extends ApplicationTest {
     recipe1.addIngredient(ing2);
     recipe1.setDescription("Enkel taco");
     return referenceBook;
-    }
+    }*/
 
 }

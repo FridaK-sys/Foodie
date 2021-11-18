@@ -1,16 +1,10 @@
 package ui;
 
+import core.Cookbook;
+import core.Recipe;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-import core.Cookbook;
-import core.Recipe;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,28 +15,48 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import ui.utils.CookbookInterface;
+import ui.utils.CookbookAccess;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
+/**
+ * Controller for main page in the application.
+ */
 public class ListViewController implements Initializable {
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
   // private AbstractController controller;
-  private CookbookInterface dataAccess;
+  private CookbookAccess dataAccess;
 
   @FXML
   private ListView<Recipe> mainListView;
 
   @FXML
-  private ToggleButton Fav;
+  private ToggleButton fav;
 
   private ToggleGroup group = new ToggleGroup();
 
   @FXML
-  RadioButton All, Breakfast, Lunch, Dinner;
+  RadioButton all;
+  RadioButton breakfast;
+  RadioButton lunch;
+  RadioButton dinner;
 
-  public void setCookbookAccess(CookbookInterface dataAccess) {
+  /**
+   * Sets the CookbookAccess for this controller so the data can come from both remote and local
+   * sources.
+   *
+   * @param dataAccess is LocalCookbookAcess or RemoteCookbookAccess
+   * 
+   */
+
+  public void setCookbookAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
     this.mainBook = dataAccess.getCookbook();
     updateListView();
@@ -65,6 +79,12 @@ public class ListViewController implements Initializable {
     mainListView.getSelectionModel().clearSelection();
   }
 
+  /**
+   * Loads NewRecipeController with selected recipe.
+   * 
+   * @param recipe selected recipe
+   * @throws IOException if file not found or could not be loaded
+   */
   public void changeSceneToViewRecipe(Recipe recipe) throws IOException {
     URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
@@ -73,7 +93,7 @@ public class ListViewController implements Initializable {
     Scene viewRecipesScene = new Scene(root);
 
     ViewRecipeController controller = fxmlLoader.getController();
-    SceneTarget sceneTarget = new SceneTarget(Lunch.getScene());
+    SceneTarget sceneTarget = new SceneTarget(lunch.getScene());
 
     controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget, dataAccess);
 
@@ -84,6 +104,11 @@ public class ListViewController implements Initializable {
     stage.show();
   }
 
+  /**
+   * Loads NewRecipeController.
+   * 
+   * @throws IOException if file not found or could not be loaded
+   */
   public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
     URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
@@ -93,22 +118,28 @@ public class ListViewController implements Initializable {
     Scene viewRecipesScene = new Scene(root);
     NewRecipeController controller = fxmlLoader.getController();
     controller.initData(mainBook, dataAccess);
-    controller.setBackButtonTarget(new SceneTarget(Lunch.getScene()));
+    controller.setBackButtonTarget(new SceneTarget(lunch.getScene()));
 
     Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
     stage.setScene(viewRecipesScene);
     stage.show();
   }
 
+  /**
+   * Loads cookbook from dataAccess and updates view.
+   */
   public void update() {
     mainBook = dataAccess.getCookbook();
     updateListView();
   }
 
+  /**
+   * Displays fav recipies when button is toggled.
+   */
   @FXML
   public void toggleFav() {
     RadioButton button = (RadioButton) group.getSelectedToggle();
-    sortListview(button.getId(), Fav.isSelected());
+    sortListview(button.getId(), fav.isSelected());
   }
 
   public void addRecipe(Recipe recipe) {
@@ -125,8 +156,14 @@ public class ListViewController implements Initializable {
     recipes.setAll(dataAccess.getCookbook().getRecipes());
   }
 
+  /**
+   * Sorts ListView based on label
+   * 
+   * @param label the selected label
+   * @param fav if fav is toggled
+   */
   public void sortListview(String label, Boolean fav) {
-    if (label.equals("All")) {
+    if (label.equals("all")) {
       if (fav) {
         recipes.setAll((mainBook.getRecipes()).stream().filter(r -> r.getFav() == true).toList());
       } else {
@@ -141,6 +178,9 @@ public class ListViewController implements Initializable {
     }
   }
 
+  /**
+   * Listener to open a Recipe from ListView when selected.
+   */
   public void setListViewListener() {
     mainListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recipe>() {
       @Override
@@ -158,31 +198,33 @@ public class ListViewController implements Initializable {
   }
 
   public void setToggles() {
-    All.getStyleClass().remove("radio-button");
-    All.getStyleClass().add("toggle-button");
-    Breakfast.getStyleClass().add("toggle-button");
-    Breakfast.getStyleClass().remove("radio-button");
-    Lunch.getStyleClass().remove("radio-button");
-    Lunch.getStyleClass().add("toggle-button");
-    Dinner.getStyleClass().remove("radio-button");
-    Dinner.getStyleClass().add("toggle-button");
-    All.setToggleGroup(group);
-    Breakfast.setToggleGroup(group);
-    Lunch.setToggleGroup(group);
-    Dinner.setToggleGroup(group);
+    all.getStyleClass().remove("radio-button");
+    all.getStyleClass().add("toggle-button");
+    breakfast.getStyleClass().add("toggle-button");
+    breakfast.getStyleClass().remove("radio-button");
+    lunch.getStyleClass().remove("radio-button");
+    lunch.getStyleClass().add("toggle-button");
+    dinner.getStyleClass().remove("radio-button");
+    dinner.getStyleClass().add("toggle-button");
+    all.setToggleGroup(group);
+    breakfast.setToggleGroup(group);
+    lunch.setToggleGroup(group);
+    dinner.setToggleGroup(group);
 
   }
 
+  /**
+   * Listener to update ListView with selected toggle label.
+   */
   public void setToggleListener() {
-
-    All.setSelected(true);
+    all.setSelected(true);
     group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
       @Override
       public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
         // Has selection.
         if (group.getSelectedToggle() != null) {
           RadioButton button = (RadioButton) group.getSelectedToggle();
-          sortListview(button.getId(), Fav.isSelected());
+          sortListview(button.getId(), fav.isSelected());
         }
       }
     });

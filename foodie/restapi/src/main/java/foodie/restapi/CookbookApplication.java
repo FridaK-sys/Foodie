@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class CookbookApplication {
 
-@Bean
-public Module objectMapperModule() {
-	return CookbookPersistence.createModule();
-}
+	@Bean
+	public Module objectMapperModule() {
+		return CookbookPersistence.createModule();
+	}
 
-public static void main(String[] args) {
-	SpringApplication.run(CookbookApplication.class, args);
-}
+	public static void main(String[] args) {
+		SpringApplication.run(CookbookApplication.class, args);
+	}
 
 }
