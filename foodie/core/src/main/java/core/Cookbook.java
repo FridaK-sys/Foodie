@@ -15,7 +15,7 @@ public class Cookbook {
   /**
    * Constructor for a cookbook with name and list of recipes.
    *
-   * @param name    name of cookbook
+   * @param name name of cookbook
    *
    * @param recipes list of recipes
    */
@@ -43,8 +43,7 @@ public class Cookbook {
    *
    * @param name name of cookbook
    * 
-   * @throws IllegalArgumentException if param contains other characters than
-   *                                  letters and numbers.
+   * @throws IllegalArgumentException if param contains other characters than letters and numbers.
    */
 
   public void setName(String name) {

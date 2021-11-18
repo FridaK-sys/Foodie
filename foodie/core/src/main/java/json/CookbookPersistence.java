@@ -1,8 +1,5 @@
 package json;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import core.Cookbook;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,10 +9,13 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import core.Cookbook;
 
 /**
- * Wrapper class for JSON serialization. Uses ObjectMapper with CookbookModule
- * to write and read from file.
+ * Wrapper class for JSON serialization. Uses ObjectMapper with CookbookModule to write and read
+ * from file.
  */
 public class CookbookPersistence {
 
@@ -23,16 +23,14 @@ public class CookbookPersistence {
   private String saveFilePath = null;
 
   /**
-   * Initializes a CookbokPersistence with a mapper registered with a new
-   * CookbookModule.
+   * Initializes a CookbokPersistence with a mapper registered with a new CookbookModule.
    */
   public CookbookPersistence() {
     this.mapper = createObjectMapper();
   }
 
   /**
-   * Makes new ObjectMapper registered with CookbookModule. Mostly used for
-   * testing.
+   * Makes new ObjectMapper registered with CookbookModule. Mostly used for testing.
    *
    * @return new Objectmapper registered with CookbookModule
    */
@@ -56,8 +54,7 @@ public class CookbookPersistence {
    *
    * @return cookbook from file
    *
-   * @throws IOException if IOException occured during reading for instance
-   *                     FileNotFoundException
+   * @throws IOException if IOException occured during reading for instance FileNotFoundException
    * 
    */
   public Cookbook readCookbook(Reader reader) throws IOException {
@@ -68,10 +65,9 @@ public class CookbookPersistence {
    * Writes cookbook to file using writer.
    *
    * @param cookbook the cookbook to write to file
-   * @param writer   the writer that writes to file
+   * @param writer the writer that writes to file
    *
-   * @throws IOException if IOException occured during writing for instance
-   *                     FileNotFoundException
+   * @throws IOException if IOException occured during writing for instance FileNotFoundException
    */
   public void writeCookbook(Cookbook cookbook, Writer writer) throws IOException {
     this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
@@ -93,7 +89,7 @@ public class CookbookPersistence {
    *
    * @return the loaded Cookbook
    * 
-   * @throws IOException           if IOException occured during reading file
+   * @throws IOException if IOException occured during reading file
    * @throws IllegalStateException if saveFilePath is not set
    * 
    */
@@ -118,7 +114,7 @@ public class CookbookPersistence {
    * 
    * @throws IllegalStateException if saveFilePath is not set
    * 
-   * @throws IOException           if IOException occured during writing to file
+   * @throws IOException if IOException occured during writing to file
    */
   public void saveCookbook(Cookbook cookbook) throws IOException, IllegalStateException {
     if (saveFilePath == null) {
