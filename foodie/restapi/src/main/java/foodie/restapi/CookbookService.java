@@ -1,18 +1,18 @@
 package foodie.restapi;
 
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import json.CookbookPersistence;
 import org.springframework.stereotype.Service;
+import core.Cookbook;
+import core.Ingredient;
+import core.Recipe;
+import json.CookbookPersistence;
 
 /**
- * A CookbookService with cookbook, cookbookPersistence and path.
+ * Class for handling the business logic
  */
 @Service
 public class CookbookService {
@@ -22,8 +22,8 @@ public class CookbookService {
   public static final String COOKBOOK_SERVICE_PATH = "/cookbook";
 
   /**
-   * Initializes the service with a new cookbookPersistence and loads cookbook
-   * from COOKBOOK_SERVICE_PATH.
+   * Initializes the service with a new cookbookPersistence and loads cookbook from
+   * COOKBOOK_SERVICE_PATH.
    */
 
   public CookbookService() throws IllegalStateException, IOException {
@@ -46,9 +46,9 @@ public class CookbookService {
 
   public static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
-    try (Reader reader = new FileReader(
-        new File(System.getProperty("user.dir") + File.separator + ("default-cookbook.json")),
-        StandardCharsets.UTF_8)) {
+    try (Reader reader =
+        new FileReader(new File(System.getProperty("user.dir") + File.separator + ("default-cookbook.json")),
+            StandardCharsets.UTF_8)) {
       return cookbookPersistence.readCookbook(reader);
     } catch (IOException e) {
       System.out.println("Couldn't read default-cookbook.json, so makes cookbook manually (" + e + ")");
@@ -106,7 +106,7 @@ public class CookbookService {
   /**
    * Edits recipe and saves cookbook.
    * 
-   * @param name   name of recipe to edit
+   * @param name name of recipe to edit
    * @param recipe edited recipe
    */
   public boolean editRecipe(String name, Recipe recipe) {
