@@ -64,7 +64,7 @@ public class CookbookPersistenceTest {
 
   private void checkCookbook(Cookbook defaultCookbook, Cookbook testCookbook) {
     assertEquals(defaultCookbook.getName(), testCookbook.getName());
-    assertEquals(defaultCookbook.getRecipes().size(), testCookbook.getRecipes().size());
+    assertEquals(defaultCookbook.getRecipes().toString(), testCookbook.getRecipes().toString());
     assertEquals(defaultCookbook.getRecipes().get(0).getDescription(),
         testCookbook.getRecipes().get(0).getDescription());
   }
@@ -80,12 +80,12 @@ public class CookbookPersistenceTest {
   public void createModule() {
     SimpleModule module = CookbookPersistence.createModule();
     assertNotNull(module);
+    assertEquals(module.getClass(), CookbookModule.class);
   }
 
   @Test
   public void readCookbook() {
     Cookbook cookbook = createDefaultCookbook();
-
     try (Reader reader = new FileReader(defaultCookbookPath, StandardCharsets.UTF_8)) {
       Cookbook readCookbook = persistence.readCookbook(reader);
       checkCookbook(cookbook, readCookbook);
@@ -171,7 +171,7 @@ public class CookbookPersistenceTest {
     // test saving cookbook to existing file
     try {
       persistence.setSaveFile("/cookbook");
-      writeCookbook();
+      writeCookbook(cookbook);
       cookbook.addRecipe(new Recipe("Popcorn"));
       persistence.saveCookbook(cookbook);
       Reader reader = new FileReader(persistence.getSaveFilePath(), StandardCharsets.UTF_8);
