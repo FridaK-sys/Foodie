@@ -10,7 +10,7 @@
 		"editor.formatOnPaste": true,
 		"editor.formatOnSave": true,
 		"editor.codeActionsOnSave": {
-			"source.organizeImports": true
+			"source.organizeImports": false
 		}
 	},
 	"java.completion.importOrder": ["", "javax", "java", "#"]

@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 public class CookbookApplication {
-
 	@Bean
 	public Module objectMapperModule() {
 		return CookbookPersistence.createModule();

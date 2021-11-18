@@ -3,16 +3,16 @@ package foodie.restapi;
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
-import json.CookbookPersistence;
-import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import json.CookbookPersistence;
+import org.springframework.stereotype.Service;
 
 /**
- * Class for handling the business logic
+ * Class for handling the business logic.
  */
 @Service
 public class CookbookService {
