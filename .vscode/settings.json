@@ -6,11 +6,12 @@
 		"editor.tabSize": 2,
 		"editor.defaultFormatter": "redhat.java",
 		"editor.wordWrap": "wordWrapColumn",
-		"editor.wordWrapColumn": 80,
+		"editor.wordWrapColumn": 100,
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
 		"editor.codeActionsOnSave": {
 			"source.organizeImports": true
-		},
-		"editor.formatOnPaste": true,
-		"editor.formatOnSave": true
-	}
+		}
+	},
+	"java.completion.importOrder": ["", "javax", "java", "#"]
 }
