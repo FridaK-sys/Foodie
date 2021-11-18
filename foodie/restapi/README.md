@@ -1,6 +1,6 @@
 # REST-API
 Denne modulen inneholder restserveren og REST-APIet til Foodie. Vi har valgt å bruke spring-boot for å implementere REST-APIet vårt. 
-Spring-boot er et populært rammeverk for web-applikasjoner. Spring-boot gjør setup og konfigureringen av restserveren og REST-API'et enklere.
+Spring-boot er et populært rammeverk for web-applikasjoner. Spring-boot gjør setup og konfigureringen av restserveren og REST-APIet enklere.
 
 
 # Oppsett av restserveren
