@@ -17,6 +17,16 @@ public class RemoteCookbookAccess implements CookbookInterface {
   private final ObjectMapper mapper;
   private Cookbook cookbook;
 
+  /**
+   * Constructor for RemoteCookbookAccess
+   * 
+   * Initializes endpoint and mapper
+   * 
+   * @param path the path that is convertet to a URI
+   * 
+   * 
+   */
+
   public RemoteCookbookAccess(URI endPoint) {
     this.endPoint = endPoint;
     this.mapper = new ObjectMapper().registerModule(new CookbookModule());
@@ -27,6 +37,8 @@ public class RemoteCookbookAccess implements CookbookInterface {
    * Gets Cookbook. Sends http get request to remote server
    *
    * @return the cookbook
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
    */
   @Override
   public Cookbook getCookbook() {
@@ -44,16 +56,23 @@ public class RemoteCookbookAccess implements CookbookInterface {
   }
 
   /**
-   * Edits recipe. Sends http get request to remote server
+   * Edit Recipe. Sends http get request to remote server
    *
-   * @return true if edited
+   * @param name   the name of the recipe will be removed
+   * @param recipe an edited version of the recipe that is added
+   * 
+   * @return true if added
+   * @return false if its not added
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
+   * 
    */
 
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
-      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + "name" + "/" + "edit"))
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + name + "/" + "edit"))
           .header("Accept", "application/json").header("Content-Type", "application/json")
           .PUT(BodyPublishers.ofString(jsonVisit)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
@@ -71,9 +90,14 @@ public class RemoteCookbookAccess implements CookbookInterface {
   }
 
   /**
-   * Adds Cookbook. Sends http get request to remote server
+   * Adds Recipe. Sends http get request to remote server
    *
+   * @param recipe the recipe to add
+   * 
    * @return true if added
+   * @return false if recipe is not added
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
    */
 
   @Override
@@ -98,8 +122,14 @@ public class RemoteCookbookAccess implements CookbookInterface {
 
   /**
    * Deletes recipe. Sends http get request to remote server
+   * 
+   * @param name the name of the recipe you want to delete
    *
-   * @return the cookbook
+   * @return true if succsessfully removed
+   * @return false if recipe is not deleted
+   * 
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
    */
 
   @Override

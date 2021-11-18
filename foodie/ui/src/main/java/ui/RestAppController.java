@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import ui.utils.CookbookInterface;
 import ui.utils.RemoteCookbookAccess;
 
 public class RestAppController extends AbstractController {
@@ -16,6 +17,12 @@ public class RestAppController extends AbstractController {
 
   @FXML
   ListViewController mainListViewController;
+
+  /**
+   * Set up the URI
+   * 
+   * @return the new URI
+   */
 
   private URI uriSetup() {
     URI newUri = null;
@@ -28,19 +35,34 @@ public class RestAppController extends AbstractController {
 
   }
 
+  /**
+   * Initializes
+   * 
+   * @return the new URI
+   */
+
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
   }
+
+  /**
+   * Makes the URI endppoint
+   */
 
   @Override
   protected void setUpStorage() {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
 
-  private void initializeRecipesView() {
-    mainListViewController.setCookbookAccess(dataAccess);
+  public void setCookbookAccess(CookbookInterface access) {
+    this.dataAccess = access;
+    initializeRecipesView();
   }
+
+  /**
+   * Updates the mainListViewController
+   */
 
   @Override
   public void update() {

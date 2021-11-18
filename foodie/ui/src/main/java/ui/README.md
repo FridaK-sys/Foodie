@@ -1,1 +1,3 @@
-Blalala
+## Arkitekturdiagram
+
+![Sekvensdiagram](sequence.png)

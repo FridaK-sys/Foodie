@@ -6,9 +6,14 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import ui.utils.CookbookInterface;
 import ui.utils.LocalCookbookAccess;
 
 public class LocalAppController extends AbstractController {
+
+  /**
+   * Makes local CookbookAccess file
+   */
 
   @Override
   protected void setUpStorage() {
@@ -18,16 +23,16 @@ public class LocalAppController extends AbstractController {
   @FXML
   private Pane mainListView;
 
-  @FXML
-  ListViewController mainListViewController;
+
+  /**
+   * Initializes
+   * 
+   * @return the new URI
+   */
 
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
-  }
-
-  private void initializeRecipesView() {
-    mainListViewController.setCookbookAccess(dataAccess);
   }
 
   @Override

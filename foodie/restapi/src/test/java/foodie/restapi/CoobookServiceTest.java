@@ -1,10 +1,13 @@
 package foodie.restapi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.Assert.fail;
 import core.Cookbook;
 import core.Recipe;
 
@@ -16,16 +19,10 @@ class CookbookServiceTest {
   public void setUp() {
     try {
       service = new CookbookService();
-      Cookbook cookbook = CookbookService.createDefaultCookbook();
-      service.setCookbook(cookbook);
-    } catch (Exception e) {
-      e.printStackTrace();
+      service.setCookbook(CookbookService.createDefaultCookbook());
+    } catch (IllegalStateException | IOException e) {
+      fail(e.getMessage());
     }
-  }
-
-  @Test
-  void getCookbook() {
-    assertNotNull(service.getCookbook());
   }
 
   @Test
@@ -57,16 +54,7 @@ class CookbookServiceTest {
     Recipe recipe = new Recipe(name, 3);
     assertTrue(service.editRecipe(name, recipe));
     assertEquals(3, service.getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findAny()
-        .orElse(new Recipe("r", 1)).getPortions());
-  }
-
-  @Test
-  void autoSaveCookbook() {
-    Cookbook cookbook = new Cookbook();
-    cookbook.setName("New");
-    service.setCookbook(cookbook);
-    service.autoSaveCookbook();
-    assertEquals("New", service.getCookbook().getName());
+        .orElse(new Recipe("Cake", 1)).getPortions());
   }
 
 }

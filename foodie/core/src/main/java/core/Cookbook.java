@@ -15,9 +15,9 @@ public class Cookbook {
   /**
    * Constructor for a cookbook with name and list of recipes.
    * 
-   * @param name
-   * @param recipes
+   * @param name    name of cookbook
    * 
+   * @param recipes list of recipes
    */
 
   public Cookbook(String name, List<Recipe> recipes) {
@@ -28,6 +28,7 @@ public class Cookbook {
   /**
    * Constructor for an empty cookbook.
    */
+
   public Cookbook() {
     this.name = "Cookbook";
     this.recipes = new ArrayList<>();
@@ -40,10 +41,12 @@ public class Cookbook {
   /**
    * Sets name of cookbook.
    * 
-   * @param name
+   * @param name name of cookbook
+   * 
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers.
    */
+
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
       throw new IllegalArgumentException("Invalid name");
@@ -58,10 +61,11 @@ public class Cookbook {
   /**
    * Adds recipe to cookbook.
    * 
-   * @param recipe
-   * @throws IllegalArgumentException if list already contains recipe
+   * @param recipe recipe to add
    * 
+   * @throws IllegalArgumentException if list already contains recipe
    */
+
   public void addRecipe(Recipe recipe) {
     if (!recipes.contains(recipe)) {
       recipes.add(recipe);
@@ -69,18 +73,20 @@ public class Cookbook {
   }
 
   /**
-   * Removes recipe from recipeList
+   * Removes recipe from recipeList.
    * 
-   * @param index
+   * @param index index in recipeList of recipe to remove
+   * 
    */
   public void removeRecipe(int index) {
     recipes.remove(index);
   }
 
   /**
-   * Removes recipe from recipeList
+   * Removes recipe from recipeList.
    * 
-   * @param name
+   * @param name name of recipe to remove
+   * 
    */
   public void removeRecipe(String name) {
     Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
@@ -89,27 +95,13 @@ public class Cookbook {
   }
 
   /**
-   * Makes list of all recipes in recipeList with fav = true
+   * Makes list of all recipes in recipeList with fav = true.
    * 
    * @return list of recipes in recipeList with fav = true
+   * 
    */
   public List<Recipe> getFavRecipes() {
     return recipes.stream().filter(r -> r.getFav() == true).toList();
-  }
-
-  /**
-   * Checks if recipe is in cookbook based on name of recipe
-   * 
-   * @param recipeName
-   * @return true if recipe is in RecipeList, false if not.
-   */
-  public boolean isInCookbook(String recipeName) {
-    for (Recipe r : recipes) {
-      if (r.getName().equals(recipeName)) {
-        return true;
-      }
-    }
-    return false;
   }
 
   /**
@@ -124,6 +116,21 @@ public class Cookbook {
       throw new IllegalArgumentException("Label is not valid");
     }
     return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
+  }
+
+  /**
+   * Checks if recipe is in cookbook based on name of recipe
+   * 
+   * @return true if recipe is in RecipeList, false if not.
+   * 
+   */
+  public boolean isInCookbook(String recipeName) {
+    for (Recipe r : recipes) {
+      if (r.getName().equals(recipeName)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public String toString() {

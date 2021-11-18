@@ -100,6 +100,12 @@ public class RecipeTest {
 	}
 
 	@Test
+	public void testRemoveIngredient() {
+		recipe1.removeIngredient(0);
+		assertEquals(recipe1.getIngredients(), Arrays.asList(ingredient2));
+	}
+
+	@Test
 	public void testFavorite() {
 		assertEquals(recipe1.getFav(), false);
 		recipe1.setFav(true);
