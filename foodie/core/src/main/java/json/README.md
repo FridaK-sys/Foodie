@@ -1,7 +1,7 @@
 # Kildekode for JSON
 
 Vi bruker Jackson biblioteket for å implementere serialisering og deserialisering klasser.
-Jackson er et rammeverk for å skrive og lese JSON objekter. Serialiseringsklassene brukes for å serialisere objekter til JSON. Det betyr å konvertere et objekt til en JSON string. Deserialiseringsklassene er den inverse operasjonen, altså å konvertere en JSON string til det opprinnelige objektet. 
+Jackson er et rammeverk for å skrive og lese JSON objekter. Serialiseringsklassene brukes for å serialisere objekter til JSON. Serialisering betyr å konvertere et objekt til en JSON string. Deserialiseringsklassene er den inverse operasjonen, altså å konvertere en JSON string til det opprinnelige objektet. 
 
 CookbookModule er en SimpleModule som inneholder serialisering og deserialisering klassene. CookbookPersictence bruker igjen CookbookModule til å skrive til fil. 
 
