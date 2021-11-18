@@ -17,6 +17,7 @@ component ui {
 foodie.ui ..> foodie.core
 foodie.ui ..> foodie.json
 
+
 component javafx {
 	component fxml {
 	}
@@ -25,17 +26,17 @@ component javafx {
 ui ..> javafx
 ui ..> fxml
 
-component restapi {
-	package foodie.restapi
+component rest {
+	package foodie.rest
 }
 
-foodie.restapi ..> foodie.core
-foodie.restapi ..> foodie.json
+foodie.rest ..> foodie.core
+foodie.rest ..> foodie.json
 
-component SpringBootApplication {	
+component Springboot {	
 }
 
-foodie.restapi ..> SpringBootApplication
-
+foodie.rest ..> Springboot
+foodie.ui ..> foodie.rest
 
 @enduml
