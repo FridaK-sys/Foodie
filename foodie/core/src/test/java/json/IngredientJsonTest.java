@@ -1,11 +1,14 @@
 package json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import core.Ingredient;
 
+/**
+ * Test class for IngredientDeserializer and IngredientSerializer
+ */
 public class IngredientJsonTest extends AbstractJsonTest {
 
   final static String ingredientJson = """

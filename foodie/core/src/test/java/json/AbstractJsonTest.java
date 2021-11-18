@@ -1,9 +1,11 @@
 package json;
 
 import static org.junit.Assert.assertEquals;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Abstract class for JsonTests
+ */
 public abstract class AbstractJsonTest {
   protected static ObjectMapper mapper = new ObjectMapper().registerModule(new CookbookModule());
 
