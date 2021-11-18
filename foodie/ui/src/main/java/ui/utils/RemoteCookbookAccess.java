@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import core.Cookbook;
@@ -18,17 +17,28 @@ public class RemoteCookbookAccess implements CookbookInterface {
   private final ObjectMapper mapper;
   private Cookbook cookbook;
 
+  /**
+   * Constructor for RemoteCookbookAccess
+   * 
+   * Initializes endpoint and mapper
+   * 
+   * @param path the path that is convertet to a URI
+   * 
+   * 
+   */
+
   public RemoteCookbookAccess(URI endPoint) {
     this.endPoint = endPoint;
     this.mapper = new ObjectMapper().registerModule(new CookbookModule());
 
   }
-  // sjekk om du skal lage ekstra klasse
 
   /**
    * Gets Cookbook. Sends http get request to remote server
    *
    * @return the cookbook
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
    */
   @Override
   public Cookbook getCookbook() {
@@ -45,12 +55,26 @@ public class RemoteCookbookAccess implements CookbookInterface {
     return cookbook;
   }
 
+  /**
+   * Edit Recipe. Sends http get request to remote server
+   *
+   * @param name   the name of the recipe will be removed
+   * @param recipe an edited version of the recipe that is added
+   * 
+   * @return true if added
+   * @return false if its not added
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
+   * 
+   */
+
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
-      final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", "application/json")
-          .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(jsonVisit)).build();
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + name + "/" + "edit"))
+          .header("Accept", "application/json").header("Content-Type", "application/json")
+          .PUT(BodyPublishers.ofString(jsonVisit)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyEdit = mapper.readValue(res.body(), Boolean.class);
       if (successfullyEdit != null && successfullyEdit) {
@@ -65,12 +89,24 @@ public class RemoteCookbookAccess implements CookbookInterface {
 
   }
 
+  /**
+   * Adds Recipe. Sends http get request to remote server
+   *
+   * @param recipe the recipe to add
+   * 
+   * @return true if added
+   * @return false if recipe is not added
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
+   */
+
   @Override
   public boolean addRecipe(Recipe recipe) {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
-      final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", "application/json")
-          .header("Content-Type", "application/json").POST(BodyPublishers.ofString(jsonVisit)).build();
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName()))
+          .header("Accept", "application/json").header("Content-Type", "application/json")
+          .POST(BodyPublishers.ofString(jsonVisit)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyAdded = mapper.readValue(res.body(), Boolean.class);
       if (successfullyAdded != null && successfullyAdded) {
@@ -83,6 +119,18 @@ public class RemoteCookbookAccess implements CookbookInterface {
     }
 
   }
+
+  /**
+   * Deletes recipe. Sends http get request to remote server
+   * 
+   * @param name the name of the recipe you want to delete
+   *
+   * @return true if succsessfully removed
+   * @return false if recipe is not deleted
+   * 
+   * 
+   * @throws RuntimeException if IOException or InterruptedException occured
+   */
 
   @Override
   public boolean deleteRecipe(String name) {

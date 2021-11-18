@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import core.Ingredient;
 import java.io.IOException;
 
+/**
+ * Deserializer for Ingredient-class.
+ */
 class IngredientReader extends JsonDeserializer<Ingredient> {
 
   @Override
