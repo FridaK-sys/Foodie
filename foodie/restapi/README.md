@@ -16,7 +16,7 @@ Vårt base endpoint er "/cookbook" og metodene i CookbookController er:
 - DELETE: Sletter en oppskrift i kokeboken("/cookbook/{name}")
 
 # Hvordan starte restserveren
-For å starte restserveren kjører du først `mvn install` på hele foodie mappen. Deretter går du inn i rest mappen (`cd rest`) og kjører kommandoen `mvn spring-boot:run`. Da er serveren skurdd på. For å terminere serveren holder du inne `ctrl + C`.
+For å starte restserveren kjører du først `mvn install` på hele foodie mappen. Deretter går du inn i rest mappen (`cd rest`) og kjører kommandoen `mvn spring-boot:run`. Da er serveren skrudd på. For å terminere serveren holder du inne `ctrl + C`.
 
 # Testing
 Vi har tre tester for å teste funkjsonaliteten i REST-API klassene:
