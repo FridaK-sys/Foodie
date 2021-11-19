@@ -29,8 +29,8 @@ public class AppTest extends AbstractAppTest {
 
     @Test
     public void testController() {
-        assertNotNull(this.controller);
-        assertNotNull(this.controller.getCookbook());
+        assertNotNull(this.controller, "Error loading controller");
+        assertNotNull(this.controller.getCookbook(), "Error accessing data");
     }
 
 }

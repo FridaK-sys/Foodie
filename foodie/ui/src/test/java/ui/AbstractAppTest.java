@@ -26,14 +26,14 @@ public abstract class AbstractAppTest extends ApplicationTest {
     protected Ingredient ing1;
     protected List<Ingredient> ingredients = new ArrayList<>();
 
-
     protected CookbookInterface dataAccess;
 
     protected void setTestData() {
+        this.cookbook = null;
         dataAccess = new LocalCookbookAccess("/foodie-test.json");
         this.cookbook = dataAccess.getCookbook();
-        assertNotNull(cookbook.getRecipes().get(0));
-        // assertEquals(3, cookbook.getRecipes().size());
+        assertNotNull(this.cookbook, "Could not load Cookbook from DataAccess");
+        assertTrue(3 <= cookbook.getRecipes().size());
         recipe1 = cookbook.getRecipes().get(0);
         recipe2 = cookbook.getRecipes().get(1);
         recipe3 = cookbook.getRecipes().get(2);
@@ -41,19 +41,22 @@ public abstract class AbstractAppTest extends ApplicationTest {
         recipe4 = new Recipe("Eple", 2);
         ing1 = new Ingredient("Eple", 3, "stk");
         ingredients.add(ing1);
-
         recipe4.addIngredient(ing1);
         recipe4.setDescription("Epler...");
     }
 
     public void checkIngredient(Ingredient ingredient, Ingredient compIng) {
-        assertEquals(ingredient.getAmount(), compIng.getAmount());
-        assertEquals(ingredient.getName(), compIng.getName());
-        assertEquals(ingredient.getUnit(), compIng.getUnit());
+        assertEquals(ingredient.getAmount(), compIng.getAmount(),
+                "Expected amount: " + compIng.getAmount() + ", was: " + ingredient.getAmount());
+        assertEquals(ingredient.getName(), compIng.getName(),
+                "Expected name: " + compIng.getAmount() + ", was: " + ingredient.getAmount());
+        assertEquals(ingredient.getUnit(), compIng.getUnit(),
+                "Expected unit: " + compIng.getAmount() + ", was: " + ingredient.getAmount());
     }
 
-    public void checkRecipe(Recipe recipe, Recipe compareRecipe, String testString) {
-        assertEquals(recipe.getPortions(), compareRecipe.getPortions(), testString);
+    public void checkRecipe(Recipe recipe, Recipe compareRecipe, int num) {
+        assertEquals(recipe.getPortions(), compareRecipe.getPortions(), "Failed for recipe number: " + num
+                + ", expected value: " + compareRecipe.getPortions() + ", was: " + recipe.getPortions());
         assertEquals(recipe.getName(), compareRecipe.getName());
 
         for (int i = 0; i < recipe.getIngredients().size(); i++) {
@@ -69,11 +72,11 @@ public abstract class AbstractAppTest extends ApplicationTest {
     public void testRecipes(List<Recipe> re, Recipe... recipes) {
         int i = 0;
         for (Recipe r : re) {
-            assertTrue(i < recipes.length, "hello");
-            checkRecipe(r, recipes[i], "failed for recipe:" + i);
+            assertTrue(i < recipes.length, "Too many recipes in list");
+            checkRecipe(r, recipes[i], i);
             i++;
         }
-        assertTrue(i == recipes.length, "nottrue, value is: " + i + " , should be: " + recipes.length);
+        assertTrue(i == recipes.length, "Incorrect value, was: " + i + " , should be: " + recipes.length);
         System.out.println(re.toString());
     }
 
