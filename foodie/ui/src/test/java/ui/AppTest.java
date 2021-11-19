@@ -27,15 +27,6 @@ import ui.utils.LocalCookbookAccess;
 
 public class AppTest extends AbstractAppTest {
 
-    // @BeforeAll
-    // public static void setupHeadless() {
-    // TodoApp.supportHeadless();
-    // }
-    @BeforeAll
-    public static void setupHeadless() {
-        CookbookApp.supportHeadless();
-    }
-
     private AbstractController controller;
 
     @Override
@@ -43,21 +34,18 @@ public class AppTest extends AbstractAppTest {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("Main_test.fxml"));
         final Parent root = loader.load();
         this.controller = loader.getController();
-        LocalCookbookAccess dataAccess = new LocalCookbookAccess("test-todomodel.json");
+        LocalCookbookAccess dataAccess = new LocalCookbookAccess("/foodie-test.json");
         this.controller.setCookbookAccess(dataAccess);
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     @Test
-    public void testController_initial() {
+    public void testController() {
         assertNotNull(this.controller);
-    }
-
-    @Test
-    public void testSelectedTodoList_initial() {
         assertNotNull(this.controller.getCookbook());
     }
+
 
     // private AbstractController controller;
     // private Cookbook cookbook;
