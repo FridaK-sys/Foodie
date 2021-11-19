@@ -47,9 +47,9 @@ public class IntegrationTest {
                         Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                         result.getResponse().getContentAsString(StandardCharsets.UTF_8),
                                         Cookbook.class);
-                        assertEquals(2, cookbook.getRecipes().size());
-                        assertNotNull(cookbook);
-                        assertEquals("Cookbook", cookbook.getName());
+                        assertNotNull("Cookbook was null", cookbook);
+                        assertEquals("Cookbook", cookbook.getName(), "Name of Cookbook was not default name");
+                        assertEquals(2, cookbook.getRecipes().size(), "Cookbook did not have default amout of recipes");
                 } catch (Exception e) {
                         fail(e.getMessage());
                 }
@@ -65,7 +65,8 @@ public class IntegrationTest {
                                         .perform(MockMvcRequestBuilders.post("/cookbook/" + recipe.getName())
                                                         .contentType(MediaType.APPLICATION_JSON).content(json))
                                         .andExpect(status().isOk()).andReturn();
-                        assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
+                        assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()),
+                                        "Response was not true");
 
                         // GET-request returns updated cookbook
                         MvcResult result2 =
@@ -74,7 +75,8 @@ public class IntegrationTest {
                         Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                         result2.getResponse().getContentAsString(StandardCharsets.UTF_8),
                                         Cookbook.class);
-                        assertTrue(cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("recipe3")));
+                        assertTrue(cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("recipe3")),
+                                        "Recipe was not added");
 
                         // cleanup
                         MvcResult result3 = mvc.perform(MockMvcRequestBuilders.delete("/cookbook/recipe3")).andReturn();
@@ -96,7 +98,8 @@ public class IntegrationTest {
                                         .perform(MockMvcRequestBuilders.put("/cookbook/" + recipe.getName() + "/edit")
                                                         .contentType(MediaType.APPLICATION_JSON).content(json))
                                         .andExpect(status().isOk()).andReturn();
-                        assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
+                        assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()),
+                                        "Response was not true");
 
                         // Repeatedly calling PUT-requests will always return the same result
                         MvcResult result2 = mvc
@@ -104,7 +107,7 @@ public class IntegrationTest {
                                                         .contentType(MediaType.APPLICATION_JSON).content(json))
                                         .andExpect(status().isOk()).andReturn();
                         assertEquals(result.getResponse().getContentAsString(),
-                                        result2.getResponse().getContentAsString());
+                                        result2.getResponse().getContentAsString(), "Response was not the same");
 
                         // GET-request returns updated cookbook
                         MvcResult result3 =
@@ -115,7 +118,7 @@ public class IntegrationTest {
                                         Cookbook.class);
                         Recipe res = cookbook.getRecipes().stream().filter(r -> r.getName().equals("Cake")).findAny()
                                         .orElse(new Recipe("New", 1));
-                        assertEquals(2, res.getPortions());
+                        assertEquals(2, res.getPortions(), "Recipe was not edited");
 
                         // cleanup
                         Recipe recipe1 = new Recipe("Cake", 1);
@@ -138,7 +141,8 @@ public class IntegrationTest {
                         // DELETE-request returns OK-status code and true
                         MvcResult result = mvc.perform(MockMvcRequestBuilders.delete("/cookbook/" + name))
                                         .andExpect(status().isOk()).andReturn();
-                        assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
+                        assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()),
+                                        "Response was not true");
 
                         // GET-request returns updated cookbook
                         MvcResult result2 =
@@ -147,7 +151,8 @@ public class IntegrationTest {
                         Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                         result2.getResponse().getContentAsString(StandardCharsets.UTF_8),
                                         Cookbook.class);
-                        assertTrue(!cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("Cake")));
+                        assertTrue(!cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("Cake")),
+                                        "Recipe was not removed");
 
                         // Several DELETE-requests to same file will throw exception
                         boolean thrown = false;
@@ -156,7 +161,7 @@ public class IntegrationTest {
                         } catch (Exception e) {
                                 thrown = true;
                         }
-                        assertTrue(thrown);
+                        assertTrue(thrown, "Exception was not thrown");
 
                         // cleanup
                         Recipe r1 = new Recipe("Cake", 1);

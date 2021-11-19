@@ -58,6 +58,23 @@ public class Cookbook {
   }
 
   /**
+   * Adds recipe to cookbook at certain index
+   *
+   * @param recipe recipe to add
+   * 
+   * @param index index of where to put recipe in recipeList
+   *
+   * @throws IllegalArgumentException if list already contains recipe
+   */
+
+  public void addRecipe(int index, Recipe recipe) {
+    if (!recipes.contains(recipe)) {
+      recipes.add(index, recipe);
+    }
+  }
+
+
+  /**
    * Adds recipe to cookbook.
    *
    * @param recipe recipe to add
@@ -96,7 +113,7 @@ public class Cookbook {
   /**
    * Replaces a recipe in list with param
    * 
-   * @param name   name of recipe to remove
+   * @param name name of recipe to remove
    * 
    * @param recipe recipe to put in
    * 
@@ -106,11 +123,10 @@ public class Cookbook {
     for (Recipe r : this.getRecipes()) {
       if (r.getName().equals(name)) {
         this.removeRecipe(name);
-        return;
       }
       index++;
     }
-    this.getRecipes().add(index, recipe);
+    this.addRecipe(index, recipe);
   }
 
   /**
