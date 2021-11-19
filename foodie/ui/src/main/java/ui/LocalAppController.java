@@ -27,6 +27,7 @@ public class LocalAppController extends AbstractController {
    * Initialize method. 
    */
 
+  @Override
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();

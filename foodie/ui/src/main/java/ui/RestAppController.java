@@ -38,7 +38,7 @@ public class RestAppController extends AbstractController {
    * Initialize method.
    *
    */
-
+  @Override
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
