@@ -7,6 +7,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * ListCell for Recipe. 
+ * Displays Recipe.
+ */
 public class ListViewCell extends ListCell<Recipe> {
 
   private HBox hBox = null;

@@ -1,13 +1,17 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "java.format.settings.url": "todolist/config/checkstyle/eclipse-java-google-style.xml",
-  "[java]": {
-    "editor.tabSize": 2,
-    "editor.defaultFormatter": "redhat.java"
-  },
-  "java.dependency.packagePresentation": "hierarchical",
-  "editor.tabSize": 2,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"java.format.settings.url": "foodie/config/checkstyle/eclipse-java-google-style.xml",
+	"java.dependency.packagePresentation": "hierarchical",
+	"[java]": {
+		"editor.tabSize": 2,
+		"editor.defaultFormatter": "redhat.java",
+		"editor.wordWrap": "wordWrapColumn",
+		"editor.wordWrapColumn": 100,
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": false
+		}
+	},
+	"java.completion.importOrder": ["", "javax", "java", "#"]
 }

@@ -12,7 +12,7 @@ import json.CookbookPersistence;
 import org.springframework.stereotype.Service;
 
 /**
- * A CookbookService with cookbook, cookbookPersistence and path.
+ * Class for handling the business logic.
  */
 @Service
 public class CookbookService {
@@ -22,14 +22,17 @@ public class CookbookService {
   public static final String COOKBOOK_SERVICE_PATH = "/cookbook";
 
   /**
-   * Initializes the service with a new cookbookPersistence and loads cookbook
-   * from COOKBOOK_SERVICE_PATH.
+   * Initializes the service with a new cookbookPersistence and loads cookbook from
+   * COOKBOOK_SERVICE_PATH.
    */
-
   public CookbookService() throws IllegalStateException, IOException {
     this.cookbookPersistence = new CookbookPersistence();
     cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
     this.cookbook = cookbookPersistence.loadCookbook();
+  }
+
+  public CookbookPersistence getPersistence() {
+    return this.cookbookPersistence;
   }
 
   public Cookbook getCookbook() {
@@ -46,9 +49,9 @@ public class CookbookService {
 
   public static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
-    try (Reader reader = new FileReader(
-        new File(System.getProperty("user.dir") + File.separator + ("default-cookbook.json")),
-        StandardCharsets.UTF_8)) {
+    try (Reader reader =
+        new FileReader(new File(System.getProperty("user.dir") + File.separator + ("default-cookbook.json")),
+            StandardCharsets.UTF_8)) {
       return cookbookPersistence.readCookbook(reader);
     } catch (IOException e) {
       System.out.println("Couldn't read default-cookbook.json, so makes cookbook manually (" + e + ")");
@@ -82,8 +85,8 @@ public class CookbookService {
   }
 
   /**
-   * Adds recipe and saves coobook.
-   * 
+   * Adds recipe and saves cookbook.
+   *
    * @param recipe recipe to add
    */
   public boolean addRecipe(Recipe recipe) {
@@ -93,8 +96,8 @@ public class CookbookService {
   }
 
   /**
-   * Removes recipe and saves coobook.
-   * 
+   * Removes recipe and saves cookbook.
+   *
    * @param name name of recipe to remove
    */
   public boolean removeRecipe(String name) {
@@ -104,9 +107,9 @@ public class CookbookService {
   }
 
   /**
-   * Edits recipe and saves coobook.
-   * 
-   * @param name   name of recipe to edit
+   * Edits recipe and saves cookbook.
+   *
+   * @param name name of recipe to edit
    * @param recipe edited recipe
    */
   public boolean editRecipe(String name, Recipe recipe) {

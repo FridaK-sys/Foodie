@@ -1,13 +1,15 @@
 package ui;
 
-import java.net.URL;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.net.URL;
 
+/**
+ * Launches the application.
+ */
 public class CookbookApp extends Application {
 
   public static void main(String[] args) throws Exception {

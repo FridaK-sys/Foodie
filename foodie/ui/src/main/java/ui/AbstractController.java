@@ -3,21 +3,21 @@ package ui;
 import core.Cookbook;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import ui.utils.CookbookInterface;
+import ui.utils.CookbookAccess;
 
 /**
- * Abstract class for RestApp- and LocalAppController
+ * Abstract class for RestApp- and LocalAppController.
  */
 public abstract class AbstractController implements FoodieController, Initializable {
 
-  protected CookbookInterface dataAccess;
+  protected CookbookAccess dataAccess;
 
   @FXML
   ListViewController mainListViewController;
 
   protected abstract void setUpStorage();
 
-  public void setCookbookAccess(CookbookInterface access) {
+  public void setCookbookAccess(CookbookAccess access) {
     this.dataAccess = access;
     initializeRecipesView();
   }

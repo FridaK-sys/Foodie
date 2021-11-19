@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import core.Cookbook;
 import core.Recipe;
 
+/**
+ * Unit test for CookbookController
+ */
 class CookbookControllerTest {
 
   private CookbookController controller;
@@ -15,8 +18,7 @@ class CookbookControllerTest {
   @BeforeEach
   void setUp() {
     try {
-      CookbookService service = new CookbookService();
-      controller = new CookbookController(service);
+      controller = new CookbookController();
     } catch (Exception e) {
       e.printStackTrace();
     }

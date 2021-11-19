@@ -1,9 +1,5 @@
 package ui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
@@ -15,13 +11,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import ui.utils.CookbookInterface;
+import ui.utils.CookbookAccess;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+/**
+ * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
+ */
 public class ViewRecipeController implements FoodieController, Initializable {
 
   private Recipe selectedRecipe;
@@ -29,10 +31,12 @@ public class ViewRecipeController implements FoodieController, Initializable {
   private int portion;
   private int index;
   private SceneTarget sceneTarget;
-  private CookbookInterface dataAccess;
+  private CookbookAccess dataAccess;
 
   @FXML
-  private Label recipeTitle, labelTag, portions;
+  private Label recipeTitle;
+  private Label labelTag;
+  private Label portions;
 
   @FXML
   private ListView<Ingredient> ingredientsListView;
@@ -41,9 +45,13 @@ public class ViewRecipeController implements FoodieController, Initializable {
   private TextArea textField;
 
   @FXML
-  private Button faveButton, backButton;
+  private Button faveButton;
+  private Button backButton;
 
-  public void favorizeRecipeButton(ActionEvent ae) {
+  /**
+   * Sets or removes favorite for Recipe.
+   */
+  public void favoriseRecipeButton(ActionEvent ae) {
     if (selectedRecipe.getFav() == true) {
       selectedRecipe.setFav(false);
       faveButton.setText("Add to favorite");
@@ -56,18 +64,29 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   }
 
+  /**
+   * Increments portion size in IngredientListView.
+   */
   public void incPortion(ActionEvent event) {
     if (this.portion > 0) {
       alterPortions(portion + 1);
     }
   }
 
+  /**
+   * Decreases portions size in IngredientListView.
+   */
   public void decPortion(ActionEvent event) {
     if (this.portion != 1 && portion != 0) {
       alterPortions(portion - 1);
     }
   }
 
+  /**
+   * Alters portions and updated IngredientListView.
+   * 
+   * @param portionSize new portion size
+   */
   public void alterPortions(int portionSize) {
     selectedRecipe.setPortions(portionSize);
     ingredients.setAll(selectedRecipe.getIngredients());
@@ -82,7 +101,15 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   }
 
-  public void initData(Recipe recipe, int index, SceneTarget scene, CookbookInterface dataAccess) {
+  /**
+   * Passes information when switching scene. Updates page with selected params.
+   * 
+   * @param recipe selected Recipe
+   * @param index index for the selected Recipe in mainListView
+   * @param scene scene target for main page
+   * @param dataAccess access to Cookbook
+   */
+  public void initData(Recipe recipe, int index, SceneTarget scene, CookbookAccess dataAccess) {
     this.index = index;
     this.selectedRecipe = recipe;
     this.portion = selectedRecipe.getPortions();
@@ -112,6 +139,12 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   }
 
+  /**
+   * Loads new RecipeController with selected recipe for editing and sets page to edit recipe.
+   * 
+   * @param ae
+   * @throws IOException if failed or interrupted I/O operations
+   */
   public void changeToEditRecipe(ActionEvent ae) throws IOException {
     URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
@@ -130,14 +163,20 @@ public class ViewRecipeController implements FoodieController, Initializable {
     stage.show();
   }
 
+  /**
+   * Updates page when switching back to scene.
+   */
   @Override
   public void update() {
-
     Recipe recipe = dataAccess.getCookbook().getRecipes().get(index);
     initData(recipe, this.index, this.sceneTarget, dataAccess);
-
   }
 
+  /**
+   * Sets the SceneTarget for return button.
+   * 
+   * @param sceneTarget previous scene.
+   */
   public void setBackButtonTarget(SceneTarget sceneTarget) {
     backButton.setOnAction(sceneTarget.getActionEventHandler());
   }
