@@ -25,11 +25,14 @@ public class CookbookService {
    * Initializes the service with a new cookbookPersistence and loads cookbook from
    * COOKBOOK_SERVICE_PATH.
    */
-
   public CookbookService() throws IllegalStateException, IOException {
     this.cookbookPersistence = new CookbookPersistence();
     cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
     this.cookbook = cookbookPersistence.loadCookbook();
+  }
+
+  public CookbookPersistence getPersistence() {
+    return this.cookbookPersistence;
   }
 
   public Cookbook getCookbook() {
