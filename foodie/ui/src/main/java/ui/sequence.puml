@@ -1,0 +1,15 @@
+@startuml
+actor User
+User -> "~#mainListView: ListView<Recipe>" as mainListView: click
+mainListView -> ViewRecipeController: changeSceneToRecipe(recipe)
+ViewRecipeController -> "~#editRecipe: Button" as editRecipe: click
+editRecipe -> NewRecipeController: changeSceneToEditRecipe(recipe)
+NewRecipeController -> "~#ingredientTitle: TextField" as ingredientTitle: getText
+NewRecipeController -> "~#ingredientAmount: TextField" as ingredientAmount: getText
+NewRecipeController -> "~#ingredientUnit: TextField" as ingredientUnit: getText
+NewRecipeController -> "~#addIngredient: Button" as addIngredient: click
+addIngredient -> NewRecipeController: addIngredientButtonPushed
+NewRecipeController -> "~#saveRecipe: Button" as saveRecipe: click
+saveRecipe -> NewRecipeController: saveRecipe
+NewRecipeController -> ViewRecipeController: backButton.fire
+@enduml

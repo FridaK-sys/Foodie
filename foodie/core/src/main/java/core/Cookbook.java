@@ -94,6 +94,26 @@ public class Cookbook {
   }
 
   /**
+   * Replaces a recipe in list with param
+   * 
+   * @param name   name of recipe to remove
+   * 
+   * @param recipe recipe to put in
+   * 
+   */
+  public void replaceRecipe(String name, Recipe recipe) {
+    int index = 0;
+    for (Recipe r : this.getRecipes()) {
+      if (r.getName().equals(name)) {
+        this.removeRecipe(name);
+        return;
+      }
+      index++;
+    }
+    this.getRecipes().add(index, recipe);
+  }
+
+  /**
    * Makes list of all recipes in recipeList with fav = true.
    *
    * @return list of recipes in recipeList with fav = true

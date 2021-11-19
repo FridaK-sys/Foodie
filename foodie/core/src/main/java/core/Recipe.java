@@ -175,7 +175,10 @@ public class Recipe {
       throw new IllegalArgumentException("Invalid label");
     }
   }
-
+  
+  /** 
+   * Removes label from recipe.
+   */
   public void removeLabel() {
     this.label = "";
   }

@@ -25,18 +25,18 @@ Brukeren har behov for å opprette en ny oppskrift. Oppskriften må inneholde na
 
 ## Redigere oppskrift (us-2)
 
-Som bruker ønsker jeg å redigere en oppskrift ved å fjerne én ingrediens og endre antall porsjoner. 
+Som bruker ønsker jeg å redigere en oppskrift ved å legge til én ingrediens og endre antall porsjoner. 
 
-Brukeren har behov for å fjerne én ingrediens i en oppskrift med angitt navn, mengde og enhet. Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengden av hver ingrediens endres i henhold til dette. 
+Brukeren har behov for å legge til én ingrediens i en oppskrift med angitt navn, mengde og enhet. Brukeren har behov for å endre antall porsjoner på en oppskrift, slik at mengden av hver ingrediens endres i henhold til dette. 
 
 ### Viktig å kunne se
 
-- Ingrediensen fjernes fra oppskriften
+- Ingrediensen legges til i oppskriften
 - Mengden av hver ingrediens endres i henhold til antall porsjoner
 
 ### Viktig å kunne gjøre
 
-- Fjerne en ingrediens 
+- Legge til en ingrediens
 - Redigere antall porsjoner på en oppskrift 
 
 

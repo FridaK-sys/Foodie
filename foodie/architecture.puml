@@ -1,0 +1,42 @@
+@startuml architecture
+
+component core {
+	package foodie.core
+	package foodie.json
+}
+
+component Jackson {
+}
+
+foodie.json ..> Jackson
+
+component ui {
+	package foodie.ui
+}
+
+foodie.ui ..> foodie.core
+foodie.ui ..> foodie.json
+
+
+component javafx {
+	component fxml {
+	}
+}
+
+ui ..> javafx
+ui ..> fxml
+
+component rest {
+	package foodie.rest
+}
+
+foodie.rest ..> foodie.core
+foodie.rest ..> foodie.json
+
+component Springboot {	
+}
+
+foodie.rest ..> Springboot
+foodie.ui ..> foodie.rest
+
+@enduml
