@@ -30,7 +30,6 @@ public class CookbookService {
     this.cookbookPersistence = new CookbookPersistence();
     cookbookPersistence.setSaveFile(COOKBOOK_SERVICE_PATH);
     this.cookbook = cookbookPersistence.loadCookbook();
-
   }
 
   public Cookbook getCookbook() {
@@ -111,8 +110,7 @@ public class CookbookService {
    * @param recipe edited recipe
    */
   public boolean editRecipe(String name, Recipe recipe) {
-    cookbook.removeRecipe(name);
-    cookbook.addRecipe(recipe);
+    cookbook.replaceRecipe(name, recipe);
     autoSaveCookbook();
     return true;
   }

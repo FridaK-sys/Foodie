@@ -37,8 +37,7 @@ public class IntegrationTest {
         public void setUp() {
                 try {
                         service = new CookbookService();
-                        Cookbook cookbook = service.createDefaultCookbook();
-                        service.setCookbook(cookbook);
+                        service.setCookbook(CookbookService.createDefaultCookbook());
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
@@ -62,7 +61,7 @@ public class IntegrationTest {
         void addRecipe() throws Exception {
                 Recipe recipe = new Recipe("recipe3", 2);
                 String json = mapper.writeValueAsString(recipe);
-                // POST-request returns OK-status code
+                // POST-request returns OK-status code and response = true
                 MvcResult result = mvc
                                 .perform(MockMvcRequestBuilders.post("/cookbook/" + recipe.getName())
                                                 .contentType(MediaType.APPLICATION_JSON).content(json))
@@ -71,7 +70,7 @@ public class IntegrationTest {
 
                 // GET-request returns updated cookbook
                 MvcResult result2 = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
-                                .andExpect(status().isOk()).andReturn();
+                                .andReturn();
                 Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                 result2.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
                 assertTrue(cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("recipe3")));
@@ -101,7 +100,7 @@ public class IntegrationTest {
 
                 // GET-request returns updated cookbook
                 MvcResult result3 = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
-                                .andExpect(status().isOk()).andReturn();
+                                .andReturn();
                 Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                 result3.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
                 Recipe res = cookbook.getRecipes().stream().filter(r -> r.getName().equals("Cake")).findAny()
@@ -126,7 +125,7 @@ public class IntegrationTest {
 
                 // GET-request returns updated cookbook
                 MvcResult result2 = mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
-                                .andExpect(status().isOk()).andReturn();
+                                .andReturn();
                 Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                 result2.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
                 assertTrue(!cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("Cake")));

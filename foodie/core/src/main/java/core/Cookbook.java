@@ -95,6 +95,26 @@ public class Cookbook {
   }
 
   /**
+   * Replaces a recipe in list with param
+   * 
+   * @param name   name of recipe to remove
+   * 
+   * @param recipe recipe to put in
+   * 
+   */
+  public void replaceRecipe(String name, Recipe recipe) {
+    int index = 0;
+    for (Recipe r : this.getRecipes()) {
+      if (r.getName().equals(name)) {
+        this.removeRecipe(name);
+        return;
+      }
+      index++;
+    }
+    this.getRecipes().add(index, recipe);
+  }
+
+  /**
    * Makes list of all recipes in recipeList with fav = true.
    * 
    * @return list of recipes in recipeList with fav = true
@@ -105,9 +125,21 @@ public class Cookbook {
   }
 
   /**
-   * Checks if recipe is in cookbook based on name of recipe.
+   * Makes list of all recipes in recipeList with label = param
    * 
-   * @param recipeName name of recipe
+   * @param label
+   * @throws IllegalArgumentException if param is not valid
+   * @return list of all recipes in recipeList with label = param
+   */
+  public List<Recipe> getRecipesWithLabel(String label) {
+    if (!Recipe.labels.contains(label)) {
+      throw new IllegalArgumentException("Label is not valid");
+    }
+    return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
+  }
+
+  /**
+   * Checks if recipe is in cookbook based on name of recipe
    * 
    * @return true if recipe is in RecipeList, false if not.
    * 
@@ -119,23 +151,6 @@ public class Cookbook {
       }
     }
     return false;
-  }
-
-  /**
-   * Makes list of all recipes in recipeList with label.
-   * 
-   * @param label recipelabel
-   * 
-   * @return list of all recipes in recipeList with label = param
-   * 
-   * @throws IllegalArgumentException if param is not valid
-   * 
-   */
-  public List<Recipe> getRecipesWithLabel(String label) {
-    if (!Recipe.labels.contains(label)) {
-      throw new IllegalArgumentException("Label is not valid");
-    }
-    return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
   }
 
   public String toString() {

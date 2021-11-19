@@ -31,8 +31,7 @@ public class CookbookPersistence {
   }
 
   /**
-   * Makes new ObjectMapper registered with CookbookModule. Mostly used for
-   * testing.
+   * Makes new ObjectMapper registered with CookbookModule.
    * 
    * @return new Objectmapper registered with CookbookModule
    */
