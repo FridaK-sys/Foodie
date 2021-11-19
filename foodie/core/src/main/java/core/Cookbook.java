@@ -119,13 +119,10 @@ public class Cookbook {
    * 
    */
   public void replaceRecipe(String name, Recipe recipe) {
-    int index = 0;
-    for (Recipe r : this.getRecipes()) {
-      if (r.getName().equals(name)) {
-        this.removeRecipe(name);
-      }
-      index++;
-    }
+    Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
+        .orElseThrow(() -> new IllegalArgumentException("No recipe with the name " + name));
+    int index = this.getRecipes().indexOf(res);
+    this.removeRecipe(name);
     this.addRecipe(index, recipe);
   }
 
