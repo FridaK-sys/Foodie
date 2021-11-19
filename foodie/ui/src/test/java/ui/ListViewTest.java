@@ -1,27 +1,16 @@
 package ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 
-
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import json.CookbookPersistence;
-import ui.utils.LocalCookbookAccess;
 
 public class ListViewTest extends AbstractAppTest {
 
@@ -40,16 +29,11 @@ public class ListViewTest extends AbstractAppTest {
     
   }
 
-
-
   @BeforeEach
   public void setupItems() {
-    // Cookbook cookbook = null;
     setTestData();
     this.controller.setRecipes(cookbook);
-    assertNotNull(cookbook);
-
-    
+    // assertNotNull(cookbook);
   }
 
   @Test
