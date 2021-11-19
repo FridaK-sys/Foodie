@@ -13,16 +13,15 @@ public class Ingredient {
   private String name;
   private double amount;
   private String unit;
-  public static final List<String> units = new ArrayList<>(Arrays.asList("g", "kg", "dl", "tbs", "ts", "stk"));
+  public static final List<String> units = new ArrayList<>(
+      Arrays.asList("g", "kg", "dl", "tbs", "ts", "stk"));
 
   /**
    * Constructor for ingredient with name, amount and unit.
-   * 
+   *
    * @param name   name of ingredient
-   * 
    * @param amount amount of ingredient
-   * 
-   * @param unit   amountunit
+   * @param unit   unit of ingredient
    * 
    */
   public Ingredient(String name, double amount, String unit) {
@@ -33,7 +32,7 @@ public class Ingredient {
 
   /**
    * Constructor for ingredient with name.
-   * 
+   *
    * @param name name of ingredient
    * 
    */
@@ -49,9 +48,9 @@ public class Ingredient {
 
   /**
    * Sets name of ingredient.
-   * 
+   *
    * @param name name of ingredient
-   * 
+   *
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers
    * 
@@ -69,7 +68,7 @@ public class Ingredient {
 
   /**
    * Sets amount of ingredient.
-   * 
+   *
    * @param amount amount of ingredient
    * 
    * @throws IllegalArgumentException if param is a negative integer or zero

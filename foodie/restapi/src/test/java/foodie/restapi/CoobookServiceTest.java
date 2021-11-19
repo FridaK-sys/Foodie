@@ -11,6 +11,9 @@ import static org.junit.Assert.fail;
 import core.Cookbook;
 import core.Recipe;
 
+/**
+ * Unit test for CookbookService
+ */
 class CookbookServiceTest {
 
   private CookbookService service;

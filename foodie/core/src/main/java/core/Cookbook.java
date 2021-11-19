@@ -14,9 +14,9 @@ public class Cookbook {
 
   /**
    * Constructor for a cookbook with name and list of recipes.
-   * 
-   * @param name    name of cookbook
-   * 
+   *
+   * @param name name of cookbook
+   *
    * @param recipes list of recipes
    */
 
@@ -40,11 +40,10 @@ public class Cookbook {
 
   /**
    * Sets name of cookbook.
-   * 
+   *
    * @param name name of cookbook
    * 
-   * @throws IllegalArgumentException if param contains other characters than
-   *                                  letters and numbers.
+   * @throws IllegalArgumentException if param contains other characters than letters and numbers.
    */
 
   public void setName(String name) {
@@ -60,9 +59,9 @@ public class Cookbook {
 
   /**
    * Adds recipe to cookbook.
-   * 
+   *
    * @param recipe recipe to add
-   * 
+   *
    * @throws IllegalArgumentException if list already contains recipe
    */
 
@@ -74,7 +73,7 @@ public class Cookbook {
 
   /**
    * Removes recipe from recipeList.
-   * 
+   *
    * @param index index in recipeList of recipe to remove
    * 
    */
@@ -84,7 +83,7 @@ public class Cookbook {
 
   /**
    * Removes recipe from recipeList.
-   * 
+   *
    * @param name name of recipe to remove
    * 
    */
@@ -116,7 +115,7 @@ public class Cookbook {
 
   /**
    * Makes list of all recipes in recipeList with fav = true.
-   * 
+   *
    * @return list of recipes in recipeList with fav = true
    * 
    */
@@ -125,21 +124,9 @@ public class Cookbook {
   }
 
   /**
-   * Makes list of all recipes in recipeList with label = param
-   * 
-   * @param label
-   * @throws IllegalArgumentException if param is not valid
-   * @return list of all recipes in recipeList with label = param
-   */
-  public List<Recipe> getRecipesWithLabel(String label) {
-    if (!Recipe.labels.contains(label)) {
-      throw new IllegalArgumentException("Label is not valid");
-    }
-    return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
-  }
-
-  /**
-   * Checks if recipe is in cookbook based on name of recipe
+   * Checks if recipe is in cookbook based on name of recipe.
+   *
+   * @param recipeName name of recipe
    * 
    * @return true if recipe is in RecipeList, false if not.
    * 
@@ -151,6 +138,23 @@ public class Cookbook {
       }
     }
     return false;
+  }
+
+  /**
+   * Makes list of all recipes in recipeList with label.
+   *
+   * @param label recipelabel
+   *
+   * @return list of all recipes in recipeList with label = param
+   *
+   * @throws IllegalArgumentException if param is not valid
+   * 
+   */
+  public List<Recipe> getRecipesWithLabel(String label) {
+    if (!Recipe.labels.contains(label)) {
+      throw new IllegalArgumentException("Label is not valid");
+    }
+    return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
   }
 
   public String toString() {
