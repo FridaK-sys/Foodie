@@ -110,8 +110,7 @@ public class CookbookService {
    * @param recipe edited recipe
    */
   public boolean editRecipe(String name, Recipe recipe) {
-    cookbook.removeRecipe(name);
-    cookbook.addRecipe(recipe);
+    cookbook.replaceRecipe(name, recipe);
     autoSaveCookbook();
     return true;
   }
