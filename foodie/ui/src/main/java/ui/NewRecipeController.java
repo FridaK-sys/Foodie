@@ -37,12 +37,20 @@ public class NewRecipeController implements Initializable {
   private CookbookAccess dataAccess;
 
   @FXML
-  private TextField ingredientTitle; 
+  private TextField ingredientTitle;
+
+  @FXML
   private TextField ingredientAmount;
+
+  @FXML
   private TextField ingredientUnit;
+
+  @FXML
   private TextField recipePortions;
+
+  @FXML
   private TextField recipeTitle;
-  
+
   @FXML
   private ListView<Ingredient> ingredientListView;
 
@@ -54,13 +62,18 @@ public class NewRecipeController implements Initializable {
 
   @FXML
   private Button backButton;
-  private Button breakfastTag; 
+  @FXML
+  private Button breakfastTag;
+  @FXML
   private Button lunchTag;
+  @FXML
   private Button dinnerTag;
 
   @FXML
   private Button saveRecipeButton;
+  @FXML
   private Button deleteRecipeButton;
+  @FXML
   private Button createRecipeButton;
 
   @FXML
@@ -321,7 +334,8 @@ public class NewRecipeController implements Initializable {
 
   /**
    * Sets the SceneTarget for return button.
-   * @param sceneTarget previous scene. 
+   * 
+   * @param sceneTarget previous scene.
    */
   public void setBackButtonTarget(SceneTarget sceneTarget) {
     backButton.setOnAction(sceneTarget.getActionEventHandler());

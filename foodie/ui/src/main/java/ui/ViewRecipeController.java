@@ -35,7 +35,11 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   @FXML
   private Label recipeTitle;
+
+  @FXML
   private Label labelTag;
+
+  @FXML
   private Label portions;
 
   @FXML
@@ -46,6 +50,8 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   @FXML
   private Button faveButton;
+
+  @FXML
   private Button backButton;
 
   /**
