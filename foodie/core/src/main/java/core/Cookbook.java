@@ -94,9 +94,9 @@ public class Cookbook {
   }
 
   /**
-   * Replaces a recipe in list with param
-   * 
-   * @param name name of recipe to remove
+   * Replaces a recipe in list with param.
+   *
+   * @param name   name of recipe to remove
    * 
    * @param recipe recipe to put in
    * 

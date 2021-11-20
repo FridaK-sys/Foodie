@@ -1,8 +1,8 @@
 package ui.utils;
 
-import core.Recipe;
-import java.util.List;
 import core.Cookbook;
+import core.Recipe;
+
 
 /**
  * Interface for local and remote CookbookAccess.

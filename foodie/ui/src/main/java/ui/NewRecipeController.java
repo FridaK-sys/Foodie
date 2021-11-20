@@ -155,7 +155,8 @@ public class NewRecipeController implements Initializable {
    * Creates edited recipe.
    */
   public Recipe createRecipe() {
-    if (recipePortions.getText() == null || recipeTitle.getText().isBlank() || recipePortions.getText().isBlank()) {
+    if (recipePortions.getText() == null || recipeTitle.getText().isBlank() || recipePortions
+        .getText().isBlank()) {
       throw new IllegalArgumentException("Missing name or portion size");
     }
     if (!editing) {
@@ -165,7 +166,8 @@ public class NewRecipeController implements Initializable {
       }
     }
     try {
-      this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()));
+      this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()))
+      ;
       if (!(recipeDescription.getText() == null)) {
         this.newRecipe.setDescription(recipeDescription.getText());
       }
@@ -197,7 +199,7 @@ public class NewRecipeController implements Initializable {
   /**
    * Initialises data from another scene.
    *
-   * @param recipe
+   * @param recipe 
    * @param recipeIndex
    * @param dataAccess
    */
@@ -266,7 +268,7 @@ public class NewRecipeController implements Initializable {
   }
 
   /**
-   * Sets label to "breakfast" if breakfastTag is pushed
+   * Sets label to "breakfast" if breakfastTag is pushed.
    *
    * @param ae when breakfast tag is pushed
    */
@@ -282,6 +284,11 @@ public class NewRecipeController implements Initializable {
     setLabel("dinner");
   }
 
+  /**
+   * Sets new label.
+   *
+   * @param label label to be set
+   */
   public void setLabel(String label) {
     if (!this.label.equals(label)) {
       this.label = label;
@@ -309,7 +316,7 @@ public class NewRecipeController implements Initializable {
 
   /**
    * Changes color based on which label is selected.
-   * 
+   *
    * @param label selected label
    */
   public void setLabelButton(String label) {
@@ -335,7 +342,7 @@ public class NewRecipeController implements Initializable {
 
   /**
    * Sets the SceneTarget for return button.
-   * 
+   *
    * @param sceneTarget previous scene.
    */
   public void setBackButtonTarget(SceneTarget sceneTarget) {

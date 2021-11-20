@@ -110,7 +110,8 @@ public class Recipe {
     if (portions < 0) {
       throw new IllegalArgumentException("Portions cannot be negative");
     }
-    ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
+    ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions)
+    );
     this.portions = portions;
   }
 
