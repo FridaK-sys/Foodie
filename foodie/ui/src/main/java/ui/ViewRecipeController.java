@@ -16,10 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import ui.utils.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import ui.utils.CookbookAccess;
 
 /**
  * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
@@ -90,7 +90,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   /**
    * Alters portions and updated IngredientListView.
-   * 
+   *
    * @param portionSize new portion size
    */
   public void alterPortions(int portionSize) {
@@ -109,7 +109,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   /**
    * Passes information when switching scene. Updates page with selected params.
-   * 
+   *
    * @param recipe selected Recipe
    * @param index index for the selected Recipe in mainListView
    * @param scene scene target for main page
@@ -147,7 +147,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   /**
    * Loads new RecipeController with selected recipe for editing and sets page to edit recipe.
-   * 
+   *
    * @param ae
    * @throws IOException if failed or interrupted I/O operations
    */
@@ -180,7 +180,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   /**
    * Sets the SceneTarget for return button.
-   * 
+   *
    * @param sceneTarget previous scene.
    */
   public void setBackButtonTarget(SceneTarget sceneTarget) {

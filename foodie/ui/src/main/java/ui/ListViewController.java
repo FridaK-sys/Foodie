@@ -2,6 +2,10 @@ package ui;
 
 import core.Cookbook;
 import core.Recipe;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,10 +24,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Controller for main page in the application.
@@ -75,6 +75,9 @@ public class ListViewController implements Initializable {
     updateListView();
   }
 
+  /**
+   * Updates the list view.
+   */
   public void updateListView() {
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
@@ -86,7 +89,7 @@ public class ListViewController implements Initializable {
 
   /**
    * Loads NewRecipeController with selected recipe.
-   * 
+   *
    * @param recipe selected recipe
    * @throws IOException if file not found or could not be loaded
    */
@@ -100,7 +103,8 @@ public class ListViewController implements Initializable {
     ViewRecipeController controller = fxmlLoader.getController();
     SceneTarget sceneTarget = new SceneTarget(lunch.getScene());
 
-    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget, dataAccess);
+    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget, 
+    dataAccess);
 
     controller.setBackButtonTarget(sceneTarget);
     viewRecipesScene.setUserData(fxmlLoader);
@@ -111,7 +115,7 @@ public class ListViewController implements Initializable {
 
   /**
    * Loads NewRecipeController.
-   * 
+   *
    * @throws IOException if file not found or could not be loaded
    */
   public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
@@ -163,8 +167,8 @@ public class ListViewController implements Initializable {
   }
 
   /**
-   * Sorts ListView based on label
-   * 
+   * Sorts ListView based on label.
+   *
    * @param label the selected label
    * @param fav if fav is toggled
    */
@@ -189,9 +193,11 @@ public class ListViewController implements Initializable {
    * Listener to open a Recipe from ListView when selected.
    */
   public void setListViewListener() {
-    mainListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recipe>() {
+    mainListView.getSelectionModel().selectedItemProperty().addListener(
+      new ChangeListener<Recipe>() {
       @Override
-      public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, Recipe newValue) {
+      public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
+        Recipe newValue) {
         if (newValue != null) {
           try {
             changeSceneToViewRecipe(newValue);
@@ -199,7 +205,8 @@ public class ListViewController implements Initializable {
             e.printStackTrace();
           }
         }
-        System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
+        System.out.println("ListView selection changed from oldValue = " + oldValue 
+          + " to newValue = " + newValue);
       }
     });
   }
@@ -226,8 +233,10 @@ public class ListViewController implements Initializable {
   public void setToggleListener() {
     all.setSelected(true);
     group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
       @Override
-      public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+      public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle 
+      new_toggle) {
         // Has selection.
         if (group.getSelectedToggle() != null) {
           RadioButton button = (RadioButton) group.getSelectedToggle();
