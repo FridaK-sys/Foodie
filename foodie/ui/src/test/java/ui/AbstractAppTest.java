@@ -16,7 +16,7 @@ import core.Ingredient;
 import core.Recipe;
 import javafx.scene.control.ListView;
 import json.CookbookPersistence;
-import ui.utils.CookbookInterface;
+import ui.utils.CookbookAccess;
 import ui.utils.LocalCookbookAccess;
 
 public abstract class AbstractAppTest extends ApplicationTest {
@@ -26,7 +26,7 @@ public abstract class AbstractAppTest extends ApplicationTest {
     protected Ingredient ing1;
     protected List<Ingredient> ingredients = new ArrayList<>();
 
-    protected CookbookInterface dataAccess;
+    protected CookbookAccess dataAccess;
 
     protected void setTestData() {
         this.cookbook = null;

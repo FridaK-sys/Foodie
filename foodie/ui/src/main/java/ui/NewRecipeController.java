@@ -188,7 +188,7 @@ public class NewRecipeController implements Initializable {
    * @param recipeIndex
    * @param dataAccess
    */
-  public void initData(Recipe recipe, int recipeIndex, CookbookInterface dataAccess) {
+  public void initData(Recipe recipe, int recipeIndex, CookbookAccess dataAccess) {
     (this.recipeTitle).setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
     this.dataAccess = dataAccess;
