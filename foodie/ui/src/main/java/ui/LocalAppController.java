@@ -16,7 +16,7 @@ public class LocalAppController extends AbstractController {
 
   @Override
   protected void setUpStorage() {
-    dataAccess = new LocalCookbookAccess("checkCookbookff.json");
+    dataAccess = new LocalCookbookAccess("/checkCookbookff.json");
   }
 
   @FXML
