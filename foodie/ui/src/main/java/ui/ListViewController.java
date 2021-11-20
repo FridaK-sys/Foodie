@@ -147,18 +147,19 @@ public class ListViewController implements Initializable {
     sortListview(button.getId(), fav.isSelected());
   }
 
-  public void addRecipe(Recipe recipe) {
-    mainBook.addRecipe(recipe);
-    recipes.setAll(mainBook.getRecipes());
-  }
+  // public void addRecipe(Recipe recipe) {
+  //   mainBook.addRecipe(recipe);
+  //   recipes.setAll(mainBook.getRecipes());
+  // }
 
-  public void removeRecipe(int index) {
-    mainBook.removeRecipe(index);
-    recipes.setAll(mainBook.getRecipes());
-  }
+  // public void removeRecipe(int index) {
+  //   mainBook.removeRecipe(index);
+  //   recipes.setAll(mainBook.getRecipes());
+  // }
 
   public void setRecipes(Cookbook cookbook) {
-    recipes.setAll(dataAccess.getCookbook().getRecipes());
+    this.mainBook = cookbook;
+    recipes.setAll(cookbook.getRecipes());
   }
 
   /**
@@ -174,12 +175,13 @@ public class ListViewController implements Initializable {
       } else {
         recipes.setAll(mainBook.getRecipes());
       }
-    }
-    List<Recipe> recipesWithLabel = mainBook.getRecipesWithLabel(label);
-    if (fav) {
-      recipes.setAll(recipesWithLabel.stream().filter(r -> r.getFav() == true).toList());
     } else {
-      recipes.setAll(recipesWithLabel);
+      List<Recipe> recipesWithLabel = mainBook.getRecipesWithLabel(label);
+      if (fav) {
+        recipes.setAll(recipesWithLabel.stream().filter(r -> r.getFav() == true).toList());
+      } else {
+        recipes.setAll(recipesWithLabel);
+      }
     }
   }
 

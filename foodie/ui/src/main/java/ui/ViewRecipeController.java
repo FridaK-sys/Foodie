@@ -103,7 +103,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setItems(ingredients);
 
-    textField.setText("Hmm her var det tomt...");
+    // textField.setText("Hmm her var det tomt...");
 
   }
 

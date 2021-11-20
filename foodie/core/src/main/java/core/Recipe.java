@@ -60,6 +60,7 @@ public class Recipe {
    */
   public Recipe(String name) {
     setName(name);
+    this.portions = 0;
     this.description = "nothing here...";
     this.ingredients = new ArrayList<Ingredient>();
     this.fav = false;

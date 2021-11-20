@@ -160,6 +160,7 @@ public class NewRecipeController implements Initializable {
     }
     if (!editing) {
       if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
+        (this.recipeTitle).setText("");
         throw new IllegalArgumentException("This recipe title already exists");
       }
     }
@@ -201,7 +202,7 @@ public class NewRecipeController implements Initializable {
    * @param dataAccess
    */
   public void initData(Recipe recipe, int recipeIndex, CookbookAccess dataAccess) {
-    this.recipeTitle.setText(recipe.getName());
+    (this.recipeTitle).setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
     this.dataAccess = dataAccess;
     this.recipeName = recipe.getName();
