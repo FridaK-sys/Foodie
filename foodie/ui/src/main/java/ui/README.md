@@ -9,5 +9,6 @@ Merk at for å kjøre varianten som bruker REST-APIet så må rest serveren star
 
 
 ## Arkitekturdiagram
+Følgende diagram viser samspillet mellom kontrollerne, datatilgangsobjektet, REST-tjenesten og diverse hjelpeobjekter ?? når man skal redigere en oppskrift i brukergrensesnittet ? 
 
 ![Sekvensdiagram](sequence.png)
