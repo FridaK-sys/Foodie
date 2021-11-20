@@ -19,12 +19,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 
 /**
  * Controller for page responsible for creating and editing recipes.
  */
-public class NewRecipeController implements Initializable {
+public class NewRecipeController implements Initializable, FoodieController {
 
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
@@ -33,6 +34,7 @@ public class NewRecipeController implements Initializable {
   private boolean editing = false;
   // private int index;
   private String recipeName;
+  private Stage stage;
 
   private CookbookAccess dataAccess;
 
@@ -339,7 +341,22 @@ public class NewRecipeController implements Initializable {
    * @param sceneTarget previous scene.
    */
   public void setBackButtonTarget(SceneTarget sceneTarget) {
-    backButton.setOnAction(sceneTarget.getActionEventHandler());
+    // backButton.setOnAction(sceneTarget.getActionEventHandler());
+  }
+
+  public void handleBackButtonPushed(ActionEvent ae) {
+    stage.setScene(CookbookApp.getScenes().get(SceneName.MAIN).getScene());
+  }
+
+  @Override
+  public void update() {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setStage(Stage stage) {
+    this.stage = stage;
   }
 
 }

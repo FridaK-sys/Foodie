@@ -28,11 +28,13 @@ import java.util.ResourceBundle;
 /**
  * Controller for main page in the application.
  */
-public class ListViewController implements Initializable {
+public class ListViewController implements FoodieController {
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
   // private AbstractController controller;
   private CookbookAccess dataAccess;
+  private Stage stage;
+  private LocalAppController master;
 
   @FXML
   private ListView<Recipe> mainListView;
@@ -65,7 +67,6 @@ public class ListViewController implements Initializable {
     updateListView();
   }
 
-  @Override
   public void initialize(URL url, ResourceBundle rb) {
     mainListView.setCellFactory(listView -> {
       ListViewCell listCell = new ListViewCell();
@@ -91,22 +92,24 @@ public class ListViewController implements Initializable {
    * @throws IOException if file not found or could not be loaded
    */
   public void changeSceneToViewRecipe(Recipe recipe) throws IOException {
-    URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-    Parent root = fxmlLoader.load();
+    // URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
+    // FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+    // Parent root = fxmlLoader.load();
 
-    Scene viewRecipesScene = new Scene(root);
+    // Scene viewRecipesScene = new Scene(root);
 
-    ViewRecipeController controller = fxmlLoader.getController();
-    SceneTarget sceneTarget = new SceneTarget(lunch.getScene());
+    // ViewRecipeController controller = fxmlLoader.getController();
+    // SceneTarget sceneTarget = new SceneTarget(lunch.getScene());
 
-    controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget, dataAccess);
+    // controller.initData(recipe, mainListView.getSelectionModel().getSelectedIndex(), sceneTarget,
+    // dataAccess);
 
-    controller.setBackButtonTarget(sceneTarget);
-    viewRecipesScene.setUserData(fxmlLoader);
-    Stage stage = (Stage) mainListView.getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
+    // controller.setBackButtonTarget(sceneTarget);
+    // viewRecipesScene.setUserData(fxmlLoader);
+    // Stage stage = (Stage) mainListView.getScene().getWindow();
+    // stage.setScene(viewRecipesScene);
+    // stage.show();
+    stage.setScene(CookbookApp.getScenes().get(SceneName.NEWRECIPE).getScene());
   }
 
   /**
@@ -115,19 +118,20 @@ public class ListViewController implements Initializable {
    * @throws IOException if file not found or could not be loaded
    */
   public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+    notifyMaster();
+    // URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
+    // FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
-    Parent root = fxmlLoader.load();
+    // Parent root = fxmlLoader.load();
 
-    Scene viewRecipesScene = new Scene(root);
-    NewRecipeController controller = fxmlLoader.getController();
-    controller.initData(mainBook, dataAccess);
-    controller.setBackButtonTarget(new SceneTarget(lunch.getScene()));
+    // Scene viewRecipesScene = new Scene(root);
+    // NewRecipeController controller = fxmlLoader.getController();
+    // controller.initData(mainBook, dataAccess);
+    // controller.setBackButtonTarget(new SceneTarget(lunch.getScene()));
 
-    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
+    // Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+    // stage.setScene(viewRecipesScene);
+    // stage.show();
   }
 
   /**
@@ -239,6 +243,19 @@ public class ListViewController implements Initializable {
 
   public Cookbook getCookbook() {
     return mainBook;
+  }
+
+  @Override
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
+
+  public void setMaster(LocalAppController master) {
+    this.master = master;
+  }
+
+  public void notifyMaster() {
+    master.ping();
   }
 
 }

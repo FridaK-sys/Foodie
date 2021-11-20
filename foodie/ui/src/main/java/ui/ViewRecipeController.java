@@ -187,4 +187,10 @@ public class ViewRecipeController implements FoodieController, Initializable {
     backButton.setOnAction(sceneTarget.getActionEventHandler());
   }
 
+  @Override
+  public void setStage(Stage stage) {
+    // TODO Auto-generated method stub
+    
+  }
+
 }
