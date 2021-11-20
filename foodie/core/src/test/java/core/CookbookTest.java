@@ -43,8 +43,9 @@ public class CookbookTest {
 
 	@Test
 	public void testConstructor() {
-		assertEquals(cookbook1.getName(), "Mine oppskrifter");
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2));
+		assertEquals(cookbook1.getName(), "Mine oppskrifter", "Name does not match value set in constructor");
+		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2),
+				"List of recipes does not match value set in constructor");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Cookbook("$~@", recipes);
@@ -53,14 +54,14 @@ public class CookbookTest {
 
 	@Test
 	public void testEmptyConstructor() {
-		assertEquals(cookbook2.getName(), "Cookbook");
-		assertEquals(cookbook2.getRecipes(), new ArrayList<>());
+		assertEquals(cookbook2.getName(), "Cookbook", "Name does not match value set in constructor");
+		assertEquals(cookbook2.getRecipes(), new ArrayList<>(), "List should be empty");
 	}
 
 	@Test
 	public void testSetName() {
 		cookbook1.setName("Vegetar");
-		assertEquals(cookbook1.getName(), "Vegetar");
+		assertEquals(cookbook1.getName(), "Vegetar", "Incorrect name");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			cookbook1.setName("$~@");
@@ -70,36 +71,36 @@ public class CookbookTest {
 	@Test
 	public void testAddRecipe() {
 		cookbook1.addRecipe(recipe3);
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2, recipe3));
+		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2, recipe3), "Incorrect list of recipes");
 	}
 
 	@Test
 	public void testRemoveRecipeInt() {
 		cookbook1.removeRecipe(0);
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
+		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2), "Incorrect list of recipes");
 	}
 
-	@Test 
-	public void testRemoveRecipeString(){
+	@Test
+	public void testRemoveRecipeString() {
 		cookbook1.removeRecipe("Bløtkake");
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
+		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2), "Incorrect list of recipes");
 	}
 
 	@Test
 	public void testGetFavRecipes() {
-		assertEquals(cookbook1.getFavRecipes(), Arrays.asList(recipe1));
+		assertEquals(cookbook1.getFavRecipes(), Arrays.asList(recipe1), "Incorrect list of recipes");
 		recipe1.setFav(false);
-		assertTrue(cookbook1.getFavRecipes().isEmpty());
+		assertTrue(cookbook1.getFavRecipes().isEmpty(), "List should be empty");
 	}
 
 	@Test
 	public void testGetRecipesWithLabel() {
-		assertEquals(cookbook1.getRecipesWithLabel("Dinner"), Arrays.asList(recipe2));
-		assertTrue(cookbook1.getRecipesWithLabel("Breakfast").isEmpty());
+		assertEquals(cookbook1.getRecipesWithLabel("Dinner"), Arrays.asList(recipe2), "Incorrect list of recipes");
+		assertTrue(cookbook1.getRecipesWithLabel("Breakfast").isEmpty(), "List should be empty");
 		assertThrows(IllegalArgumentException.class, () -> {
 			cookbook1.getRecipesWithLabel("Snacks");
 		}, "Invalid label");
-		
+
 	}
 
 	@Test
