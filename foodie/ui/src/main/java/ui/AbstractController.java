@@ -3,6 +3,7 @@ package ui;
 import core.Cookbook;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 
 /**
@@ -11,6 +12,8 @@ import ui.utils.CookbookAccess;
 public abstract class AbstractController implements FoodieController, Initializable {
 
   protected CookbookAccess dataAccess;
+
+  protected Stage stage;
 
   @FXML
   ListViewController mainListViewController;
