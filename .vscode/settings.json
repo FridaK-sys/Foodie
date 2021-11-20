@@ -4,14 +4,9 @@
 	"java.dependency.packagePresentation": "hierarchical",
 	"[java]": {
 		"editor.tabSize": 2,
-		"editor.defaultFormatter": "redhat.java",
 		"editor.wordWrap": "wordWrapColumn",
 		"editor.wordWrapColumn": 100,
-		"editor.formatOnPaste": true,
-		"editor.formatOnSave": true,
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": false
-		}
+		"editor.formatOnPaste": true
 	},
-	"java.completion.importOrder": ["", "javax", "java", "#"]
+	"java.completion.importOrder": ["", "java", "javax", "#"]
 }

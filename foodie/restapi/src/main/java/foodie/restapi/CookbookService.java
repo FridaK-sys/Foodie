@@ -50,11 +50,12 @@ public class CookbookService {
   public static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
     try (Reader reader =
-        new FileReader(new File(System.getProperty("user.dir") + File.separator + ("default-cookbook.json")),
-            StandardCharsets.UTF_8)) {
+        new FileReader(new File(System.getProperty("user.dir") + File.separator 
+        + ("default-cookbook.json")), StandardCharsets.UTF_8)) {
       return cookbookPersistence.readCookbook(reader);
     } catch (IOException e) {
-      System.out.println("Couldn't read default-cookbook.json, so makes cookbook manually (" + e + ")");
+      System.out.println("Couldn't read default-cookbook.json, so makes cookbook manually (" 
+          + e + ")");
     }
     Recipe r1 = new Recipe("Cake", 1);
     r1.setDescription("Recipe for cake");

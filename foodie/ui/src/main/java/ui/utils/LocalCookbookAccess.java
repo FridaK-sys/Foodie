@@ -3,11 +3,12 @@ package ui.utils;
 import core.Cookbook;
 import core.Recipe;
 import java.io.IOException;
+import java.util.List;
 import json.CookbookPersistence;
 
 
 /**
- * Sets a persistence storage file when using the application locally. 
+ * Sets a persistence storage file when using the application locally.
  */
 public class LocalCookbookAccess implements CookbookAccess {
 
@@ -51,7 +52,7 @@ public class LocalCookbookAccess implements CookbookAccess {
   /**
    * Edits recipe.
    *
-   * @param name   the name of the recipe to be removed
+   * @param name the name of the recipe to be removed
    * @param recipe the edited recipe that is added
    * 
    * @return true if edited
@@ -99,7 +100,7 @@ public class LocalCookbookAccess implements CookbookAccess {
   }
 
   /**
-   * Deletes recipe. 
+   * Deletes recipe.
    *
    * @param name the name of the recipe that is deleted
    *
@@ -111,6 +112,29 @@ public class LocalCookbookAccess implements CookbookAccess {
   @Override
   public boolean deleteRecipe(String name) {
     cookbook.removeRecipe(name);
+    try {
+      persistence.saveCookbook(cookbook);
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return true;
+  }
+
+  /**
+   * Sets list of recipes
+   *
+   * @param cookbook the cookbook with recipes
+   *
+   * @return true if edited
+   * 
+   * 
+   */
+
+  @Override
+  public boolean setRecipes(List<Recipe> recipes) {
+    cookbook.setRecipes(recipes);
     try {
       persistence.saveCookbook(cookbook);
     } catch (IllegalStateException e) {
