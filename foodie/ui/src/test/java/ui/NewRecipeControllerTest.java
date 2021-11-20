@@ -3,10 +3,12 @@ package ui;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
-
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import core.Ingredient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -77,21 +79,19 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
   }
 
-  // @Test
-  // public void testEditRecipe() {
+  @Test
+  public void testEditRecipe() {
+    this.controller.initData(recipe4, 1, dataAccess);
+    TextField nrecipeTitle = lookup("#recipeTitle").query();
+    TextField portions = lookup("#recipePortions").query();
+    // assertEquals(recipe4.getName(), recipeTitle.getText());
+    assertEquals(recipe4.getName(), nrecipeTitle.getText());
+    assertEquals(recipe4.getPortions(), Integer.parseInt(portions.getText()));
+    ListView<Ingredient> ingListView = lookup("#ingredientListView").query();
+    for (int i = 0; i < ingredients.size(); i++) {
+      checkIngredient(ingListView.getItems().get(i), ingredients.get(i));
+    }
 
-  // clickOn("#recipeTitle");
-  // // TextField textField5 = ;
-  // // assertEquals(recipe1.getName(), lookup("#recipeTitle").query());
-  // recipeTitle.setText("test");
-  // assertEquals(recipe4.getName(), recipeTitle.getText());
-  // assertEquals(recipe4.getPortions(),
-  // Integer.parseInt(recipePortions.getText()));
-  // for (int i = 0; i < ingredients.size(); i++) {
-  // checkIngredient((Ingredient) ingredientListView.getItems().get(i),
-  // ingredients.get(i));
-  // }
-
-  // }
+  }
 
 }
