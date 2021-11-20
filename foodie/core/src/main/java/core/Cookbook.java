@@ -160,4 +160,15 @@ public class Cookbook {
   public String toString() {
     return getName();
   }
+
+  /**
+   * Sets new recipes in cookbook.
+   *
+   * @param recipes recipes to add
+   *
+   * 
+   */
+  public void setRecipes(List<Recipe> recipes) {
+    this.recipes = recipes;
+  }
 }

@@ -6,14 +6,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import core.Cookbook;
 import core.Ingredient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ui.NewRecipeController;
@@ -21,12 +26,16 @@ import ui.NewRecipeController;
 public class NewRecipeControllerTest extends AbstractAppTest {
 
   private NewRecipeController controller;
+  private Cookbook originalData;
 
   @FXML
   private TextField recipeTitle, recipePortions, ingredientTitle;
 
   @FXML
-  private ListView ingredientListView;
+  private TextArea recipeDescription;
+
+  @FXML
+  private ListView<Ingredient> ingredientListView;
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -46,7 +55,6 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   public void setupItems() {
     setTestData();
     this.controller.initData(cookbook, dataAccess);
-
   }
 
   @Test
@@ -73,25 +81,35 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   }
 
   @Test
-  public void testDeleteRecipe() throws FileNotFoundException {
-    this.controller.initData(recipe4, 1, dataAccess);
-    clickOn("#deleteRecipeButton");
-    testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
-  }
-
-  @Test
   public void testEditRecipe() {
+    dataAccess.addRecipe(recipe4);
     this.controller.initData(recipe4, 1, dataAccess);
     TextField nrecipeTitle = lookup("#recipeTitle").query();
     TextField portions = lookup("#recipePortions").query();
-    // assertEquals(recipe4.getName(), recipeTitle.getText());
-    assertEquals(recipe4.getName(), nrecipeTitle.getText());
-    assertEquals(recipe4.getPortions(), Integer.parseInt(portions.getText()));
+
+    assertEquals(recipe4.getName(), nrecipeTitle.getText(), "The displayed title did not match the expected output");
+    assertEquals(recipe4.getPortions(), Integer.parseInt(portions.getText()),
+        "The displayed portion-size did not match the expected output");
     ListView<Ingredient> ingListView = lookup("#ingredientListView").query();
     for (int i = 0; i < ingredients.size(); i++) {
       checkIngredient(ingListView.getItems().get(i), ingredients.get(i));
     }
 
+    clickOn("#recipeDescription").write(" er godt!");
+    clickOn("#saveRecipeButton");
+
+    recipe4.setDescription("Epler... er godt!");
+    testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3, this.recipe4);
+
+  }
+
+  @Test
+  public void testDeleteButton() {
+    dataAccess.addRecipe(recipe4);
+    assertTrue(dataAccess.getCookbook().getRecipes().size() == 4);
+    this.controller.initData(recipe4, 1, dataAccess);
+    clickOn("#deleteRecipeButton");
+    testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
   }
 
 }
