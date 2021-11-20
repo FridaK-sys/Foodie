@@ -1,6 +1,7 @@
 package ui.utils;
 
 import core.Recipe;
+import java.util.List;
 import core.Cookbook;
 
 /**
@@ -19,7 +20,7 @@ public interface CookbookAccess {
   /**
    * Edit the recipe.
    *
-   * @param name   of the recipe to edit
+   * @param name of the recipe to edit
    * @param recipe the updated recipe
    *
    * @return true if it was edited
@@ -47,4 +48,13 @@ public interface CookbookAccess {
    */
   boolean deleteRecipe(String name);
 
+  /**
+   * Sets the cookbook
+   * 
+   *
+   * @param cookbook the new cookbook
+   * @return true if set
+   * 
+   */
+  boolean setRecipes(List<Recipe> recipes);
 }

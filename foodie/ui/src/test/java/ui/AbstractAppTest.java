@@ -25,12 +25,14 @@ public abstract class AbstractAppTest extends ApplicationTest {
     protected Recipe recipe1, recipe2, recipe3, recipe4;
     protected Ingredient ing1;
     protected List<Ingredient> ingredients = new ArrayList<>();
+    protected Cookbook testCookbook = populationData();
 
     protected CookbookAccess dataAccess;
 
     protected void setTestData() {
         this.cookbook = null;
         dataAccess = new LocalCookbookAccess("/foodie-test.json");
+        dataAccess.setRecipes(testCookbook.getRecipes());
         this.cookbook = dataAccess.getCookbook();
         assertNotNull(this.cookbook, "Could not load Cookbook from DataAccess");
         assertTrue(3 <= cookbook.getRecipes().size());
@@ -56,8 +58,9 @@ public abstract class AbstractAppTest extends ApplicationTest {
 
     public void checkRecipe(Recipe recipe, Recipe compareRecipe, int num) {
         assertEquals(recipe.getPortions(), compareRecipe.getPortions(), "Failed for recipe number: " + num
-                + ", expected value: " + compareRecipe.getPortions() + ", was: " + recipe.getPortions());
-        assertEquals(recipe.getName(), compareRecipe.getName());
+                + ", expected portion size: " + compareRecipe.getPortions() + ", was: " + recipe.getPortions());
+        assertEquals(recipe.getName(), compareRecipe.getName(), "Failed for recipe number: " + num + ", expected name: "
+                + compareRecipe.getName() + ", was: " + recipe.getName());
 
         for (int i = 0; i < recipe.getIngredients().size(); i++) {
             checkIngredient(recipe.getIngredients().get(i), compareRecipe.getIngredients().get(i));
@@ -76,8 +79,32 @@ public abstract class AbstractAppTest extends ApplicationTest {
             checkRecipe(r, recipes[i], i);
             i++;
         }
-        assertTrue(i == recipes.length, "Incorrect value, was: " + i + " , should be: " + recipes.length);
+        assertTrue(i == recipes.length, ("Incorrect length of recipes, was: " + i + " , should be: " + recipes.length));
         System.out.println(re.toString());
+    }
+
+    private Cookbook populationData() {
+        Recipe testRecipe1 = new Recipe("KakeKake");
+        testRecipe1.addIngredient(new Ingredient("Mel", 200, "g"));
+
+
+        Recipe testRecipe2 = new Recipe("EpleKake");
+        testRecipe2.setLabel("breakfast");
+        testRecipe2.addIngredient(new Ingredient("Epler", 200, "gram"));
+
+        Recipe testRecipe3 = new Recipe("Fiskeake");
+        testRecipe3.setLabel("dinner");
+        testRecipe3.setFav(true);
+        testRecipe3.addIngredient(new Ingredient("Fisk", 400, "g"));
+        testRecipe3.addIngredient(new Ingredient("Mel", 3, "ss"));
+
+
+        Cookbook testCookbook = new Cookbook();
+        testCookbook.addRecipe(testRecipe1);
+        testCookbook.addRecipe(testRecipe2);
+        testCookbook.addRecipe(testRecipe3);
+
+        return testCookbook;
     }
 
 }

@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
+import java.util.List;
 import java.net.http.HttpResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.Cookbook;
@@ -12,8 +13,7 @@ import core.Recipe;
 import json.CookbookModule;
 
 /**
- * Allows server side persistence. 
- * Uses GET, POST, PUT and DELETE methods to modify a recipe. 
+ * Allows server side persistence. Uses GET, POST, PUT and DELETE methods to modify a recipe.
  */
 public class RemoteCookbookAccess implements CookbookAccess {
 
@@ -139,6 +139,29 @@ public class RemoteCookbookAccess implements CookbookAccess {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  /**
+   * Sets list of recipes
+   *
+   * @param cookbook the cookbook with recipes
+   *
+   * @return true if edited
+   * 
+   * 
+   */
+
+  @Override
+  public boolean setRecipes(List<Recipe> recipes) {
+    // cookbook.setRecipes(recipes);
+    // try {
+    // persistence.saveCookbook(cookbook);
+    // } catch (IllegalStateException e) {
+    // e.printStackTrace();
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // }
+    return true;
   }
 
 }
