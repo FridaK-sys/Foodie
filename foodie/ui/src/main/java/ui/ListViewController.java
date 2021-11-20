@@ -43,10 +43,13 @@ public class ListViewController implements Initializable {
   private ToggleGroup group = new ToggleGroup();
 
   @FXML
-  RadioButton all;
-  RadioButton breakfast;
-  RadioButton lunch;
-  RadioButton dinner;
+  private RadioButton all;
+  @FXML
+  private RadioButton breakfast;
+  @FXML
+  private RadioButton lunch;
+  @FXML
+  private RadioButton dinner;
 
   /**
    * Sets the CookbookAccess for this controller so the data can come from both remote and local
@@ -62,6 +65,7 @@ public class ListViewController implements Initializable {
     updateListView();
   }
 
+  @Override
   public void initialize(URL url, ResourceBundle rb) {
     mainListView.setCellFactory(listView -> {
       ListViewCell listCell = new ListViewCell();
@@ -74,6 +78,7 @@ public class ListViewController implements Initializable {
   public void updateListView() {
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
+    setToggles();
     setToggleListener();
     setListViewListener();
     mainListView.getSelectionModel().clearSelection();
@@ -143,13 +148,13 @@ public class ListViewController implements Initializable {
   }
 
   // public void addRecipe(Recipe recipe) {
-  //   mainBook.addRecipe(recipe);
-  //   recipes.setAll(mainBook.getRecipes());
+  // mainBook.addRecipe(recipe);
+  // recipes.setAll(mainBook.getRecipes());
   // }
 
   // public void removeRecipe(int index) {
-  //   mainBook.removeRecipe(index);
-  //   recipes.setAll(mainBook.getRecipes());
+  // mainBook.removeRecipe(index);
+  // recipes.setAll(mainBook.getRecipes());
   // }
 
   public void setRecipes(Cookbook cookbook) {

@@ -17,10 +17,10 @@ public class Recipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   public static final List<String> labels = Collections.unmodifiableList(new ArrayList<String>() {
     {
-      add("Breakfast");
-      add("Lunch");
-      add("Dinner");
-      add("Dessert");
+      add("breakfast");
+      add("lunch");
+      add("dinner");
+      add("dessert");
     }
   });
 
@@ -110,8 +110,7 @@ public class Recipe {
     if (portions < 0) {
       throw new IllegalArgumentException("Portions cannot be negative");
     }
-    ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions)
-    );
+    ingredients.stream().forEach(i -> i.setAmount((double) i.getAmount() / this.portions * portions));
     this.portions = portions;
   }
 
@@ -176,8 +175,8 @@ public class Recipe {
       throw new IllegalArgumentException("Invalid label");
     }
   }
-  
-  /** 
+
+  /**
    * Removes label from recipe.
    */
   public void removeLabel() {

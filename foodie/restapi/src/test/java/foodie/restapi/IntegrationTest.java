@@ -161,7 +161,7 @@ public class IntegrationTest {
                         // cleanup
                         Recipe r1 = new Recipe("Cake", 1);
                         r1.setDescription("Recipe for cake");
-                        r1.setLabel("Breakfast");
+                        r1.setLabel("breakfast");
                         r1.addIngredient(new Ingredient("Flour", 200.0, "g"));
                         r1.addIngredient(new Ingredient("Egg", 2.0, "stk"));
                         String json = mapper.writeValueAsString(r1);

@@ -17,14 +17,14 @@
          <children>
             <HBox prefHeight="72.0" prefWidth="600.0">
                <children>
-                  <RadioButton fx:id="All" mnemonicParsing="false">
+                  <RadioButton fx:id="all" mnemonicParsing="false">
                      <toggleGroup>
                         <ToggleGroup fx:id="group" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="Breakfast" mnemonicParsing="false" toggleGroup="$group" />
-                  <RadioButton fx:id="Lunch" mnemonicParsing="false" toggleGroup="$group" />
-                  <RadioButton fx:id="Dinner" mnemonicParsing="false" toggleGroup="$group" />
-                  <ToggleButton fx:id="Fav" mnemonicParsing="false" onAction="#toggleFav" />
+                  <RadioButton fx:id="breakfast" mnemonicParsing="false" toggleGroup="$group" />
+                  <RadioButton fx:id="lunch" mnemonicParsing="false" toggleGroup="$group" />
+                  <RadioButton fx:id="dinner" mnemonicParsing="false" toggleGroup="$group" />
+                  <ToggleButton fx:id="fav" mnemonicParsing="false" onAction="#toggleFav" />
                </children>
             </HBox>
             <ListView fx:id="mainListView" prefHeight="312.0" prefWidth="600.0" />

@@ -37,12 +37,20 @@ public class NewRecipeController implements Initializable {
   private CookbookAccess dataAccess;
 
   @FXML
-  private TextField ingredientTitle; 
+  private TextField ingredientTitle;
+
+  @FXML
   private TextField ingredientAmount;
+
+  @FXML
   private TextField ingredientUnit;
+
+  @FXML
   private TextField recipePortions;
+
+  @FXML
   private TextField recipeTitle;
-  
+
   @FXML
   private ListView<Ingredient> ingredientListView;
 
@@ -54,13 +62,18 @@ public class NewRecipeController implements Initializable {
 
   @FXML
   private Button backButton;
-  private Button breakfastTag; 
+  @FXML
+  private Button breakfastTag;
+  @FXML
   private Button lunchTag;
+  @FXML
   private Button dinnerTag;
 
   @FXML
   private Button saveRecipeButton;
+  @FXML
   private Button deleteRecipeButton;
+  @FXML
   private Button createRecipeButton;
 
   @FXML
@@ -258,15 +271,15 @@ public class NewRecipeController implements Initializable {
    * @param ae when breakfast tag is pushed
    */
   public void breakfastTagPushed(ActionEvent ae) {
-    setLabel("Breakfast");
+    setLabel("breakfast");
   }
 
   public void lunchTagPushed(ActionEvent ae) {
-    setLabel("Lunch");
+    setLabel("lunch");
   }
 
   public void dinnerTagPushed(ActionEvent ae) {
-    setLabel("Dinner");
+    setLabel("dinner");
   }
 
   public void setLabel(String label) {
@@ -300,15 +313,15 @@ public class NewRecipeController implements Initializable {
    * @param label selected label
    */
   public void setLabelButton(String label) {
-    if (label.equals("Breakfast")) {
+    if (label.equals("breakfast")) {
       breakfastTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
       dinnerTag.setStyle("-fx-background-color: white");
       lunchTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("Lunch")) {
+    } else if (label.equals("lunch")) {
       lunchTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
       dinnerTag.setStyle("-fx-background-color: white");
       breakfastTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("Dinner")) {
+    } else if (label.equals("dinner")) {
       dinnerTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
       breakfastTag.setStyle("-fx-background-color: white");
       lunchTag.setStyle("-fx-background-color: white");
@@ -322,7 +335,8 @@ public class NewRecipeController implements Initializable {
 
   /**
    * Sets the SceneTarget for return button.
-   * @param sceneTarget previous scene. 
+   * 
+   * @param sceneTarget previous scene.
    */
   public void setBackButtonTarget(SceneTarget sceneTarget) {
     backButton.setOnAction(sceneTarget.getActionEventHandler());

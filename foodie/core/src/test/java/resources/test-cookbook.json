@@ -5,7 +5,7 @@
     "description" : "Recipe for cake",
     "portions" : 1,
     "fav" : false,
-    "label" : "Breakfast",
+    "label" : "breakfast",
     "ingredients" : [ {
       "name" : "Flour",
       "amount" : 200.0,

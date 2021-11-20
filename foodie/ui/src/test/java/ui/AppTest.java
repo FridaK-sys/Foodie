@@ -21,7 +21,7 @@ public class AppTest extends AbstractAppTest {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("Main_test.fxml"));
         final Parent root = loader.load();
         this.controller = loader.getController();
-        LocalCookbookAccess dataAccess = new LocalCookbookAccess("/foodie-test.json");
+        setTestData();
         this.controller.setCookbookAccess(dataAccess);
         stage.setScene(new Scene(root));
         stage.show();
