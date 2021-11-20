@@ -271,15 +271,15 @@ public class NewRecipeController implements Initializable {
    * @param ae when breakfast tag is pushed
    */
   public void breakfastTagPushed(ActionEvent ae) {
-    setLabel("Breakfast");
+    setLabel("breakfast");
   }
 
   public void lunchTagPushed(ActionEvent ae) {
-    setLabel("Lunch");
+    setLabel("lunch");
   }
 
   public void dinnerTagPushed(ActionEvent ae) {
-    setLabel("Dinner");
+    setLabel("dinner");
   }
 
   public void setLabel(String label) {
@@ -313,15 +313,15 @@ public class NewRecipeController implements Initializable {
    * @param label selected label
    */
   public void setLabelButton(String label) {
-    if (label.equals("Breakfast")) {
+    if (label.equals("breakfast")) {
       breakfastTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
       dinnerTag.setStyle("-fx-background-color: white");
       lunchTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("Lunch")) {
+    } else if (label.equals("lunch")) {
       lunchTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
       dinnerTag.setStyle("-fx-background-color: white");
       breakfastTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("Dinner")) {
+    } else if (label.equals("dinner")) {
       dinnerTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
       breakfastTag.setStyle("-fx-background-color: white");
       lunchTag.setStyle("-fx-background-color: white");

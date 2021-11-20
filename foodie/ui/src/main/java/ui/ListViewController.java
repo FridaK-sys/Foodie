@@ -148,13 +148,13 @@ public class ListViewController implements Initializable {
   }
 
   // public void addRecipe(Recipe recipe) {
-  //   mainBook.addRecipe(recipe);
-  //   recipes.setAll(mainBook.getRecipes());
+  // mainBook.addRecipe(recipe);
+  // recipes.setAll(mainBook.getRecipes());
   // }
 
   // public void removeRecipe(int index) {
-  //   mainBook.removeRecipe(index);
-  //   recipes.setAll(mainBook.getRecipes());
+  // mainBook.removeRecipe(index);
+  // recipes.setAll(mainBook.getRecipes());
   // }
 
   public void setRecipes(Cookbook cookbook) {

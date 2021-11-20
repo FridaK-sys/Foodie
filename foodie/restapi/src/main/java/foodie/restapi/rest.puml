@@ -1,12 +1,12 @@
 @startuml
 client -> CookbookService: GET /cookbook
 CookbookService --> client: {"name":"Cookbook","recipes": []}
-client -> CookbookService: POST /cookbook/Pizza ~{"name":"Pizza","description":"The best homemade pizza","portions":2,"fav":false,"label":"Dinner","ingredients":[{"name":"Grandis","amount":2.0,"unit":"stk"},{"name":"Cola","amount":2.0,"unit":"stk"}
+client -> CookbookService: POST /cookbook/Pizza ~{"name":"Pizza","description":"The best homemade pizza","portions":2,"fav":false,"label":"dinner","ingredients":[{"name":"Grandis","amount":2.0,"unit":"stk"},{"name":"Cola","amount":2.0,"unit":"stk"}
 CookbookService --> client: true
 client -> CookbookService: GET /cookbook
-CookbookService --> client: {"name":"Cookbook","recipes":[{"name":"Pizza","description":"The best homemade pizza","portions":2,"fav":false,"label":"Dinner","ingredients":[{"name":"Grandis","amount":2.0,"unit":"stk"},{"name":"Cola","amount":2.0,"unit":"stk"}]}
-client -> CookbookService: PUT /cookbook/Pizza/edit {"name":"Pizza","description":"The best pizza","portions":2,"fav":false,"label":"Dinner","ingredients":[{"name":"BigOne","amount":2.0,"unit":"stk"},{"name":"Pepsi","amount":2.0,"unit":"stk"}
+CookbookService --> client: {"name":"Cookbook","recipes":[{"name":"Pizza","description":"The best homemade pizza","portions":2,"fav":false,"label":"dinner","ingredients":[{"name":"Grandis","amount":2.0,"unit":"stk"},{"name":"Cola","amount":2.0,"unit":"stk"}]}
+client -> CookbookService: PUT /cookbook/Pizza/edit {"name":"Pizza","description":"The best pizza","portions":2,"fav":false,"label":"dinner","ingredients":[{"name":"BigOne","amount":2.0,"unit":"stk"},{"name":"Pepsi","amount":2.0,"unit":"stk"}
 CookbookService --> client: true
 client -> CookbookService: GET /cookbook
-CookbookService --> client: {"name":"Cookbook","recipes":[{"name":"Pizza","description":"The best pizza","portions":2,"fav":false,"label":"Dinner","ingredients":[{"name":"BigOne","amount":2.0,"unit":"stk"},{"name":"Pepsi","amount":2.0,"unit":"stk"}]}
+CookbookService --> client: {"name":"Cookbook","recipes":[{"name":"Pizza","description":"The best pizza","portions":2,"fav":false,"label":"dinner","ingredients":[{"name":"BigOne","amount":2.0,"unit":"stk"},{"name":"Pepsi","amount":2.0,"unit":"stk"}]}
 @enduml

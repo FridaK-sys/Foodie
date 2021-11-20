@@ -29,11 +29,11 @@ public class CookbookTest {
 
 		recipe1 = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredientList1);
 		recipe2 = new Recipe("Kjøttkaker", "Mormor sin oppskrift", 4, ingredientList1);
-		recipe1.setLabel("Dessert");
-		recipe2.setLabel("Dinner");
+		recipe1.setLabel("dessert");
+		recipe2.setLabel("dinner");
 		recipe1.setFav(true);
 		recipe3 = new Recipe("Wok", "Rask middag", 5, ingredientList1);
-		recipe3.setLabel("Dinner");
+		recipe3.setLabel("dinner");
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 
@@ -79,8 +79,8 @@ public class CookbookTest {
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
 	}
 
-	@Test 
-	public void testRemoveRecipeString(){
+	@Test
+	public void testRemoveRecipeString() {
 		cookbook1.removeRecipe("Bløtkake");
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
 	}
@@ -94,12 +94,12 @@ public class CookbookTest {
 
 	@Test
 	public void testGetRecipesWithLabel() {
-		assertEquals(cookbook1.getRecipesWithLabel("Dinner"), Arrays.asList(recipe2));
-		assertTrue(cookbook1.getRecipesWithLabel("Breakfast").isEmpty());
+		assertEquals(cookbook1.getRecipesWithLabel("dinner"), Arrays.asList(recipe2));
+		assertTrue(cookbook1.getRecipesWithLabel("breakfast").isEmpty());
 		assertThrows(IllegalArgumentException.class, () -> {
 			cookbook1.getRecipesWithLabel("Snacks");
 		}, "Invalid label");
-		
+
 	}
 
 	@Test

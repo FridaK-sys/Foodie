@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class ListViewTest extends AbstractAppTest {
 
   private ListViewController controller;
-  
+
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -26,7 +26,7 @@ public class ListViewTest extends AbstractAppTest {
     this.controller = fxmlLoader.getController();
     stage.setScene(scene);
     stage.show();
-    
+
   }
 
   @BeforeEach
@@ -49,27 +49,27 @@ public class ListViewTest extends AbstractAppTest {
 
   @Test
   public void testToggleButtons() {
-    clickOn("#Breakfast");
+    clickOn("#breakfast");
     checkRecipesListViewItems(recipe2);
-    clickOn("#All");
+    clickOn("#all");
     checkRecipesListViewItems(recipe1, recipe2, recipe3);
-    clickOn("#Fav");
+    clickOn("#fav");
     checkRecipesListViewItems(recipe3);
-    clickOn("#Breakfast");
+    clickOn("#breakfast");
     checkRecipesListViewItems();
-    clickOn("#Fav");
-    clickOn("#Lunch");
+    clickOn("#fav");
+    clickOn("#lunch");
     checkRecipesListViewItems();
-    clickOn("#Dinner");
+    clickOn("#dinner");
     checkRecipesListViewItems(recipe3);
-    clickOn("#All");
+    clickOn("#all");
     checkRecipesListViewItems(recipe1, recipe2, recipe3);
   }
 
 
 
   @Test
-  public void testChangeSceneToNewRecipeButtonPushed(){
+  public void testChangeSceneToNewRecipeButtonPushed() {
     clickOn("#newButton");
   }
 
