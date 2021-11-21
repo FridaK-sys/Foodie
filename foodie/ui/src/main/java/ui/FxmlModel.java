@@ -1,5 +1,6 @@
 package ui;
 
+import core.Recipe;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,6 +11,8 @@ public class FxmlModel {
   private SceneName sceneName;
   private Stage stage;
   private Scene scene;
+  private Recipe recipe;
+  private FoodieController controller;
 
   /**
    * Construct an FxmlModel object
@@ -22,6 +25,7 @@ public class FxmlModel {
     this.resourceName = resourceName;
     this.sceneName = sceneName;
     this.stage = stage;
+    // this. controller = controller;
   }
 
   /** @return the resource name for this FXML file */
@@ -62,6 +66,22 @@ public class FxmlModel {
   /** @return the primary stage for this Scene */
   public Stage getStage() {
     return stage;
+  }
+
+  public void setRecipe(Recipe recipe){
+    this.recipe = recipe;
+  }
+
+  public Recipe getRecipe() {
+      return recipe;
+  }
+
+  public FoodieController getController(){
+    return controller;
+  }
+
+  public void setController(FoodieController controller) {
+    this.controller = controller;
   }
 
 }
