@@ -1,11 +1,13 @@
 package ui;
 
 import java.net.URL;
+import core.Recipe;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui.utils.CookbookAccess;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,9 @@ import java.util.Map;
  * Launches the application.
  */
 public class CookbookApp extends Application {
+
+  private static CookbookAccess DATA_ACCESS;
+  private static Recipe SELECTED_RECIPE;
 
   private static final String MAIN_FXML = "Main.fxml";
   private static final String VIEW_RECIPE_FXML = "ViewRecipe.fxml";
@@ -39,18 +44,6 @@ public class CookbookApp extends Application {
     stage.setScene(scenes.get(SceneName.MAIN).getScene());
     stage.setTitle("Multi-Scene Demo");
     stage.show();
-
-
-    // URL fxmlLocation = getClass().getResource("Main.fxml");
-    // FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-    // Parent root = fxmlLoader.load();
-    // Scene scene = new Scene(root);
-    // scene.setUserData(fxmlLoader);
-
-    // stage.setTitle("Foodie<3");
-
-    // stage.setScene(scene);
-    // stage.show();
   }
 
   /** @return a Map of the {@link FxmlInfo} by {@link SceneName} */
@@ -66,6 +59,23 @@ public class CookbookApp extends Application {
    */
   public static void updateScenes(SceneName name, FxmlModel info) {
     scenes.put(name, info);
+  }
+
+  public static void setAccess(CookbookAccess access){
+    CookbookApp.DATA_ACCESS = access;
+  }
+
+  public static CookbookAccess getAccess() {
+    return CookbookApp.DATA_ACCESS;
+  }
+
+
+  public static void setRecipe(Recipe recipe) {
+    CookbookApp.SELECTED_RECIPE = recipe;
+  }
+
+  public static Recipe getRecipe() {
+    return CookbookApp.SELECTED_RECIPE;
   }
 
 }
