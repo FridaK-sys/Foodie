@@ -51,7 +51,6 @@ public class FxmlHandler {
 		fxmlModel.setController(controller);
 		
 		if (controller != null) {
-			
 			controller.setStage(fxmlModel.getStage());
 			
 		}
