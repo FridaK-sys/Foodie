@@ -13,6 +13,10 @@ import ui.utils.LocalCookbookAccess;
 
 public class LocalAppController extends AbstractController {
 
+  @FXML
+  private Pane mainListView;
+
+
   /**
    * Makes local CookbookAccess file.
    */
@@ -20,11 +24,10 @@ public class LocalAppController extends AbstractController {
   @Override
   protected void setUpStorage() {
     dataAccess = new LocalCookbookAccess("/checkCookbookff.json");
+    CookbookApp.setAccess(dataAccess);
   }
 
-  @FXML
-  private Pane mainListView;
-
+  
 
   /**
    * Initialize method.
@@ -41,19 +44,6 @@ public class LocalAppController extends AbstractController {
   @Override
   public void update() {
     mainListViewController.update();
-  }
-
- 
-
-  public void pingMainPage() {
-    stage.setScene(CookbookApp.getScenes().get(SceneName.NEWRECIPE).getScene());
-  }
-  
-  public void pingViewPage(Recipe recipe) {
-    CookbookApp.getScenes().get(SceneName.VIEWRECIPE).setRecipe(recipe);
-    // System.out.println(newScene.toString());
-    // newScene.setUserData(recipe);
-    stage.setScene(CookbookApp.getScenes().get(SceneName.VIEWRECIPE).getScene());
   }
 
 }
