@@ -12,19 +12,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 
 /**
  * Controller for page responsible for creating and editing recipes.
  */
-public class NewRecipeController implements Initializable {
+public class NewRecipeController extends AbstractController {
+
 
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
@@ -33,8 +34,9 @@ public class NewRecipeController implements Initializable {
   private boolean editing = false;
   // private int index;
   private String recipeName;
+  private Stage stage;
 
-  private CookbookAccess dataAccess;
+  private CookbookAccess dataAccess = CookbookApp.getAccess();
 
   @FXML
   private TextField ingredientTitle;
@@ -140,8 +142,10 @@ public class NewRecipeController implements Initializable {
   public void saveRecipe() {
     try {
       Recipe updatedRecipe = createRecipe();
-      dataAccess.deleteRecipe(recipeName);
-      dataAccess.addRecipe(updatedRecipe);
+      setSelectedRecipe(updatedRecipe);
+      dataAccess.editRecipe(recipeName, updatedRecipe);
+      // dataAccess.deleteRecipe(recipeName);
+      // dataAccess.addRecipe(updatedRecipe);
       backButton.fire();
 
     } catch (Exception e) {
@@ -203,10 +207,10 @@ public class NewRecipeController implements Initializable {
    * @param recipeIndex
    * @param dataAccess
    */
-  public void initData(Recipe recipe, int recipeIndex, CookbookAccess dataAccess) {
+  public void initData(Recipe recipe, int recipeIndex) {
     (this.recipeTitle).setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
-    this.dataAccess = dataAccess;
+    // this.dataAccess = dataAccess;
     this.recipeName = recipe.getName();
     if (!recipe.getDescription().isEmpty()) {
       this.recipeDescription.setText(recipe.getDescription());
@@ -231,7 +235,7 @@ public class NewRecipeController implements Initializable {
    * @param cookbook Cookbook to initialize
    * 
    */
-  public void initData(Recipe recipe, Cookbook cookbook) {
+  public void initData(Recipe recipe) {
     this.recipeTitle.setText(recipe.getName());
     this.recipePortions.setText(String.valueOf(recipe.getPortions()));
     this.recipeName = recipe.getName();
@@ -243,7 +247,7 @@ public class NewRecipeController implements Initializable {
     }
     ingredients.addAll(recipe.getIngredients());
     this.editing = true;
-    this.cookbook = cookbook;
+    // this.cookbook = cookbook;
 
     createRecipeButton.setVisible(false);
     saveRecipeButton.setVisible(true);
@@ -251,21 +255,36 @@ public class NewRecipeController implements Initializable {
 
   }
 
-  /**
-   * Initialises data from another scene.
-   *
-   * @param cookbook Cookbook to initialize
-   * @param dataAccess CookbookInterface to initialize
-   */
-  public void initData(Cookbook cookbook, CookbookAccess dataAccess) {
-    this.cookbook = cookbook;
-    this.dataAccess = dataAccess;
+  public void clear() {
+    this.recipeTitle.clear();;
+    this.recipePortions.clear();;
+    this.recipeName = "";
+    this.recipeDescription.clear();
+    setLabel("");
+    
+    ingredients.clear();
+    this.editing = false;
 
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
-    deleteRecipeButton.setVisible(false);
+    deleteRecipeButton.setVisible(true);
 
   }
+
+  // /**
+  //  * Initialises data from another scene.
+  //  *
+  //  * @param cookbook Cookbook to initialize
+  //  * @param dataAccess CookbookInterface to initialize
+  //  */
+  // public void initData(Cookbook cookbook, CookbookAccess dataAccess) {
+  //   this.cookbook = cookbook;
+
+  //   createRecipeButton.setVisible(true);
+  //   saveRecipeButton.setVisible(false);
+  //   deleteRecipeButton.setVisible(false);
+
+  // }
 
   /**
    * Sets label to "breakfast" if breakfastTag is pushed.
@@ -305,6 +324,8 @@ public class NewRecipeController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
+    clear();
     ingredientListView.setItems(ingredients);
     setLabelButton("blank");
     hb.setSpacing(20);
@@ -312,6 +333,30 @@ public class NewRecipeController implements Initializable {
 
   public List<Ingredient> getIngredients() {
     return new ArrayList<Ingredient>(ingredients);
+  }
+
+  /**
+   * Sets the SceneTarget for return button.
+   *
+   * @param sceneTarget previous scene.
+   */
+  public void setBackButtonTarget(FxmlModel model) {
+    backButton.setOnAction(ea -> {
+      model.getController().update();
+      stage.setScene(model.getScene());
+    });
+  }
+
+  @Override
+  public void update() {
+    if (getSelectedrecipe() != null) {
+      initData(selectedRecipe);
+      setBackButtonTarget(CookbookApp.getScenes().get(SceneName.VIEWRECIPE));
+    } else {
+      clear();
+      setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
+    }
+
   }
 
   /**
@@ -340,13 +385,15 @@ public class NewRecipeController implements Initializable {
     }
   }
 
-  /**
-   * Sets the SceneTarget for return button.
-   *
-   * @param sceneTarget previous scene.
-   */
-  public void setBackButtonTarget(SceneTarget sceneTarget) {
-    backButton.setOnAction(sceneTarget.getActionEventHandler());
+
+
+  @Override
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
+
+  @Override
+  protected void setUpStorage() {
   }
 
 }
