@@ -95,6 +95,7 @@ public class ListViewController implements FoodieController {
    * @throws IOException if file not found or could not be loaded
    */
   public void changeSceneToViewRecipe(Recipe recipe) throws IOException {
+    notifyMasterViewPage(recipe);
     // URL fxmlLocation = AbstractController.class.getResource("ViewRecipe.fxml");
     // FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
     // Parent root = fxmlLoader.load();
@@ -112,7 +113,7 @@ public class ListViewController implements FoodieController {
     // Stage stage = (Stage) mainListView.getScene().getWindow();
     // stage.setScene(viewRecipesScene);
     // stage.show();
-    stage.setScene(CookbookApp.getScenes().get(SceneName.NEWRECIPE).getScene());
+    // stage.setScene(CookbookApp.getScenes().get(SceneName.NEWRECIPE).getScene());
   }
 
   /**
@@ -121,7 +122,7 @@ public class ListViewController implements FoodieController {
    * @throws IOException if file not found or could not be loaded
    */
   public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
-    notifyMaster();
+    notifyMasterMainPage();
     // URL fxmlLocation = AbstractController.class.getResource("NewRecipe.fxml");
     // FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
 
@@ -202,11 +203,11 @@ public class ListViewController implements FoodieController {
       public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
         Recipe newValue) {
         if (newValue != null) {
-          try {
-            changeSceneToViewRecipe(newValue);
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
+          // try {
+          notifyMasterViewPage(newValue);
+          // } catch (IOException e) {
+          //   e.printStackTrace();
+          // }
         }
         System.out.println("ListView selection changed from oldValue = " + oldValue 
           + " to newValue = " + newValue);
@@ -262,8 +263,12 @@ public class ListViewController implements FoodieController {
     this.master = master;
   }
 
-  public void notifyMaster() {
-    master.ping();
+  public void notifyMasterMainPage() {
+    master.pingMainPage();
+  }
+
+  public void notifyMasterViewPage(Recipe recipe) {
+    master.pingViewPage(recipe);
   }
 
 }
