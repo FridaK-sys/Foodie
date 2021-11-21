@@ -29,10 +29,6 @@ public class FxmlHandler {
 
 		if (url == null) {
 			System.out.println("error");
-			// logger.error("The URL for the resource \"{}\" was not found", fxmlInfo.getResourceName());
-			// debugInfo(fxmlInfo.getResourceName()); // not required
-			// Platform.exit();
-			// return null;
 		}
 
 		FXMLLoader loader = new FXMLLoader(url);
@@ -52,8 +48,12 @@ public class FxmlHandler {
 		CookbookApp.updateScenes(fxmlModel.getSceneName(), fxmlModel);
 
 		FoodieController controller = loader.getController();
+		fxmlModel.setController(controller);
+		
 		if (controller != null) {
+			
 			controller.setStage(fxmlModel.getStage());
+			
 		}
 
 		return scene;
