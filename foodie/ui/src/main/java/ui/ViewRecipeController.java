@@ -33,6 +33,8 @@ public class ViewRecipeController implements FoodieController, Initializable {
   private SceneTarget sceneTarget;
   private CookbookAccess dataAccess;
 
+  private Stage stage;
+
   @FXML
   private Label recipeTitle;
 
@@ -102,7 +104,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setItems(ingredients);
-
+    
     // textField.setText("Hmm her var det tomt...");
 
   }
@@ -145,6 +147,32 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   }
 
+  public void initData(Recipe recipe) {
+    this.selectedRecipe = recipe;
+    this.portion = recipe.getPortions();
+    if (recipe.getName() != null) {
+      recipeTitle.setText(selectedRecipe.getName());
+    } else {
+      recipeTitle.setText("oppskrift");
+    }
+    portions.setText(Integer.toString(recipe.getPortions()));
+    if (!recipe.getIngredients().isEmpty()) {
+      ingredients.clear();
+      ingredients.addAll(recipe.getIngredients());
+    }
+    if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
+      textField.setText(recipe.getDescription());
+    }
+    if (selectedRecipe.getFav() == true) {
+      faveButton.setText("Remove from favorite");
+    } else {
+      faveButton.setText("Add to favorite");
+    }
+    if (!selectedRecipe.getLabel().isBlank()) {
+      labelTag.setText(selectedRecipe.getLabel());
+    }
+
+  }
   /**
    * Loads new RecipeController with selected recipe for editing and sets page to edit recipe.
    *
@@ -175,22 +203,23 @@ public class ViewRecipeController implements FoodieController, Initializable {
   @Override
   public void update() {
     Recipe recipe = dataAccess.getCookbook().getRecipes().get(index);
-    initData(recipe, this.index, this.sceneTarget, dataAccess);
+    initData(recipe);
   }
 
-  /**
-   * Sets the SceneTarget for return button.
-   *
-   * @param sceneTarget previous scene.
-   */
-  public void setBackButtonTarget(SceneTarget sceneTarget) {
-    backButton.setOnAction(sceneTarget.getActionEventHandler());
+  @FXML
+  private void handleBackbutton(){
+    FxmlModel model = CookbookApp.getScenes().get(SceneName.MAIN);
+    model.getController().update();
+    stage.setScene(model.getScene());
+    
   }
 
   @Override
   public void setStage(Stage stage) {
-    // TODO Auto-generated method stub
-    
+    this.stage = stage;
+    Recipe temptrecipe = null;
+    temptrecipe = CookbookApp.getScenes().get(SceneName.VIEWRECIPE).getRecipe();
+    initData(temptrecipe);
   }
 
 }
