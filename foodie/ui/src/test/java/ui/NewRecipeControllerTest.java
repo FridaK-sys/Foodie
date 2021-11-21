@@ -1,86 +1,115 @@
-// package ui;
+package ui;
 
-// import java.io.FileNotFoundException;
-// import java.net.URL;
-// import java.util.ArrayList;
-// import java.util.List;
 
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import org.testfx.framework.junit5.ApplicationTest;
+import java.io.FileNotFoundException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import core.Cookbook;
+import core.Ingredient;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import ui.NewRecipeController;
 
-// import core.Cookbook;
-// import core.Ingredient;
-// import core.Recipe;
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.stage.Stage;
-// import ui.NewRecipeController;
+public class NewRecipeControllerTest extends AbstractAppTest {
 
-// public class NewRecipeControllerTest extends AbstractAppTest {
+  private NewRecipeController controller;
+  private Cookbook originalData;
 
-// private NewRecipeController controller;
-// private Recipe recipe1;
-// private Ingredient ing1, ing2;
-// private List<Ingredient> ingredients = new ArrayList<>();
-// private Cookbook cookbook = new Cookbook();
-// private Cookbook originalCookbook = new Cookbook();
+  @FXML
+  private TextField recipeTitle, recipePortions, ingredientTitle;
 
-// @Override
-// public void start(final Stage stage) throws Exception {
+  @FXML
+  private TextArea recipeDescription;
 
-// URL fxmlLocation = getClass().getResource("NewRecipe_test.fxml");
-// FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-// Parent root = fxmlLoader.load();
-// this.controller = fxmlLoader.getController();
-// controller.initData(cookbook, null);
-// // this.cookbook = this.controller.getCookbook();
-// Scene scene = new Scene(root);
+  @FXML
+  private ListView<Ingredient> ingredientListView;
 
-// stage.setTitle("Cookbook<3");
+  @Override
+  public void start(final Stage stage) throws Exception {
 
-// stage.setScene(scene);
-// stage.show();
-// }
+    URL fxmlLocation = getClass().getResource("NewRecipe_test.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+    Parent root = fxmlLoader.load();
+    this.controller = fxmlLoader.getController();
 
-// @BeforeEach
-// public void setupItems() {
-// recipe1 = new Recipe("Eple", 2);
-// ing1 = new Ingredient("Eple", 3, "stk");
-// ingredients.add(ing1);
+    Scene scene = new Scene(root);
 
-// recipe1.addIngredient(ing1);
-// recipe1.setDescription("Epler...");
-// // originalCookbook = setUpCookBook();
-// }
+    stage.setScene(scene);
+    stage.show();
+  }
 
-// @Test
-// public void testNewIngredient() {
-// clickOn("#ingredientTitle").write("Eple");
-// clickOn("#ingredientAmount").write("3");
-// clickOn("#ingredientUnit").write("stk");
-// clickOn("#addIngredient");
-// checkIngredient(controller.getIngredients().get(0), ing1);
-// }
+  @BeforeEach
+  public void setupItems() {
+    setTestData();
+    this.controller.initData(cookbook, dataAccess);
+  }
 
-// @Test
-// public void testNewRecipe() throws FileNotFoundException {
-// handler.readRecipesFromFile("src/main/resources/ui/test.txt",
-// originalCookbook);
-// clickOn("#recipeTitle").write("Eple");
-// clickOn("#recipePortions").write("2");
-// clickOn("#ingredientTitle").write("Eple");
-// clickOn("#ingredientAmount").write("3");
-// clickOn("#ingredientUnit").write("stk");
-// clickOn("#addIngredient");
-// clickOn("#recipeDescription").write("Epler...");
-// clickOn("#createRecipeButton");
-// Cookbook temp = new Cookbook();
-// handler.readRecipesFromFile("src/main/resources/ui/test.txt", temp);
-// checkRecipe(temp.getRecipes().get(temp.getRecipes().size() - 1), recipe1);
-// handler.writeRecipesToFile("src/main/resources/ui/test.txt",
-// originalCookbook);
-// }
+  @Test
+  public void testNewIngredient() {
+    clickOn("#ingredientTitle").write("Eple");
+    clickOn("#ingredientAmount").write("3");
+    clickOn("#ingredientUnit").write("stk");
+    clickOn("#addIngredient");
+    checkIngredient(controller.getIngredients().get(0), ing1);
+  }
 
-// }
+
+  @Test
+  public void testNewRecipe() throws FileNotFoundException {
+    clickOn("#recipeTitle").write("Eple");
+    clickOn("#recipePortions").write("2");
+    clickOn("#ingredientTitle").write("Eple");
+    clickOn("#ingredientAmount").write("3");
+    clickOn("#ingredientUnit").write("stk");
+    clickOn("#addIngredient");
+    clickOn("#recipeDescription").write("Epler...");
+    clickOn("#createRecipeButton");
+    testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3, recipe4);
+  }
+
+  @Test
+  public void testEditRecipe() {
+    dataAccess.addRecipe(recipe4);
+    this.controller.initData(recipe4, 1, dataAccess);
+    TextField nrecipeTitle = lookup("#recipeTitle").query();
+    TextField portions = lookup("#recipePortions").query();
+
+    assertEquals(recipe4.getName(), nrecipeTitle.getText(), "The displayed title did not match the expected output");
+    assertEquals(recipe4.getPortions(), Integer.parseInt(portions.getText()),
+        "The displayed portion-size did not match the expected output");
+    ListView<Ingredient> ingListView = lookup("#ingredientListView").query();
+    for (int i = 0; i < ingredients.size(); i++) {
+      checkIngredient(ingListView.getItems().get(i), ingredients.get(i));
+    }
+
+    clickOn("#recipeDescription").write(" er godt!");
+    clickOn("#saveRecipeButton");
+
+    recipe4.setDescription("Epler... er godt!");
+    testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3, this.recipe4);
+
+  }
+
+  @Test
+  public void testDeleteButton() {
+    dataAccess.addRecipe(recipe4);
+    assertTrue(dataAccess.getCookbook().getRecipes().size() == 4);
+    this.controller.initData(recipe4, 1, dataAccess);
+    clickOn("#deleteRecipeButton");
+    testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
+  }
+
+}

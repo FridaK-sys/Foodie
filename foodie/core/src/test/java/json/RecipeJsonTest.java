@@ -1,14 +1,17 @@
 package json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import core.Ingredient;
 import core.Recipe;
 
+/**
+ * Test class for RecipeDeserializer and RecipeSerializer
+ */
 public class RecipeJsonTest extends AbstractJsonTest {
 
   final static String recipeJson = """
@@ -17,7 +20,7 @@ public class RecipeJsonTest extends AbstractJsonTest {
         "description": "Den beste oppskriften på brownies!",
         "portions": 1,
         "fav": true,
-        "label": "Dessert",
+        "label": "dessert",
         "ingredients" :[
           {
             "name": "Egg",
@@ -40,7 +43,7 @@ public class RecipeJsonTest extends AbstractJsonTest {
     ingredients.add(ingredient1);
     ingredients.add(ingredient2);
     Recipe recipe = new Recipe("Brownies", "Den beste oppskriften på brownies!", 1, ingredients);
-    recipe.setLabel("Dessert");
+    recipe.setLabel("dessert");
     recipe.setFav(true);
     return recipe;
   }

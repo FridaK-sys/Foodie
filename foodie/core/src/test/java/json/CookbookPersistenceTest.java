@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,16 +13,17 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 
+/**
+ * Test class for CookbookPersistence-class. Works as integration test.
+ */
 public class CookbookPersistenceTest {
 
   private static CookbookPersistence persistence;
@@ -33,15 +33,15 @@ public class CookbookPersistenceTest {
   @BeforeEach
   public void setUp() {
     persistence = new CookbookPersistence();
-    defaultCookbookPath = System.getProperty("user.dir") + File.separator
-        + ("/src/test/java/resources/test-cookbook.json");
+    defaultCookbookPath =
+        System.getProperty("user.dir") + File.separator + ("/src/test/java/resources/test-cookbook.json");
     mapper = new ObjectMapper().registerModule(new CookbookModule());
   }
 
   private Cookbook createDefaultCookbook() {
     Recipe r1 = new Recipe("Cake", 1);
     r1.setDescription("Recipe for cake");
-    r1.setLabel("Breakfast");
+    r1.setLabel("breakfast");
     r1.addIngredient(new Ingredient("Flour", 200.0, "g"));
     r1.addIngredient(new Ingredient("Egg", 2.0, "stk"));
     Recipe r2 = new Recipe("Hot chocolate", 1);

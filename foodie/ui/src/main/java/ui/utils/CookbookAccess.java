@@ -1,9 +1,13 @@
 package ui.utils;
 
-import core.Recipe;
 import core.Cookbook;
+import core.Recipe;
 
-public interface CookbookInterface {
+
+/**
+ * Interface for local and remote CookbookAccess.
+ */
+public interface CookbookAccess {
 
   /**
    * Gets recipe.
@@ -15,8 +19,8 @@ public interface CookbookInterface {
 
   /**
    * Edit the recipe.
-   * 
-   * @param name   of the recipe to edit
+   *
+   * @param name of the recipe to edit
    * @param recipe the updated recipe
    *
    * @return true if it was edited
@@ -26,7 +30,7 @@ public interface CookbookInterface {
 
   /**
    * Adds the recipe.
-   * 
+   *
    * @param recipe the recipe to add
    *
    * @return true if it was added
@@ -44,4 +48,13 @@ public interface CookbookInterface {
    */
   boolean deleteRecipe(String name);
 
+  /**
+   * Sets the cookbook
+   * 
+   *
+   * @param cookbook the new cookbook
+   * @return true if set
+   * 
+   */
+  boolean setRecipes(List<Recipe> recipes);
 }
