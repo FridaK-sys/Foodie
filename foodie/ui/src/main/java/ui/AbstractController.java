@@ -33,4 +33,9 @@ public abstract class AbstractController implements FoodieController, Initializa
     return mainListViewController.getCookbook();
   }
 
+  @Override
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
+  
 }
