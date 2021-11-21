@@ -12,12 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import core.Cookbook;
+import core.Ingredient;
 import core.Recipe;
 import ui.utils.RemoteCookbookAccess;
 
@@ -69,14 +71,34 @@ public class RemoteCookbookAccessTest {
 
   }
 
-  // @Test
-  // public void testAddRecipe(){
-  // stubFor(get(urlEqualTo("/cookbook")).withHeader("Accept",
-  // equalTo("application/json")).willReturn(
-  // aResponse().withStatus(200).withHeader("Content-Type",
-  // "application/json").withBody(GET_COOKBOOK_RESPONSE)));
+  private void addRecipe() {
+    List<Ingredient> ings = new ArrayList<>();
+    Ingredient ing = new Ingredient("Mel", 200, "g");
+    ings.add(ing);
 
-  // }
+    Recipe recipe = new Recipe("Mel", "Vikig ingrediens", 1, ings);
+    cookbookAccess.addRecipe(recipe);
+
+  }
+
+  @Test
+  public void testAddRecipe() {
+    List<Ingredient> ings = new ArrayList<>();
+    Ingredient ing = new Ingredient("Mel", 200, "g");
+    ings.add(ing);
+
+    Recipe recipe = new Recipe("Mel", "Vikig ingrediens", 1, ings);
+    cookbookAccess.addRecipe(recipe);
+    assertEquals(true, cookbookAccess.addRecipe(recipe));
+    // stubFor(get(urlEqualTo("/cookbook")).withHeader("Accept",
+    // equalTo("application/json")).willReturn(
+    // aResponse().withStatus(200).withHeader("Content-Type",
+    // "application/json").withBody(GET_COOKBOOK_RESPONSE)));
+
+    // List<Recipe> recipes = cookbookAccess.getCookbook().getRecipes();
+    // assertEquals(2, recipes.size());
+
+  }
 
   @AfterEach
   public void stopWireMockServer() {
