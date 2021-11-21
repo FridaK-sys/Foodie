@@ -46,7 +46,7 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
 
         Scene scene = new Scene(root);
         this.controller = fxmlLoader.getController();
-        controller.initData(recipe3, 1, null, dataAccess);
+        controller.initData(recipe3);
 
         stage.setScene(scene);
         stage.show();
