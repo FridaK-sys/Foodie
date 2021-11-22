@@ -7,9 +7,6 @@ Spring-boot er et populært rammeverk for web-applikasjoner som gjør setup og k
 - `CookbookApplication` - Starter restserveren, ved å kalle på SpringApplication.run
 - `CookbookController` - Håndterer innkommende RESTAPI-forespørsler (GET, POST, PUT og DELETE)
 - `CookbookService` - Håndterer business logikken (informasjonsutvekslingen mellom restserveren og appen) 
-- `CookbookApplication` - Starter restserveren, ved å kalle på SpringApplication.run
-- `CookbookController` - Har metoder for GET, POST, PUT OG DELETE.
-- `CookbookService` - Definerer pathen vår. Håndterer operasjonene vi bruker i kontrolleren ved å kalle på funksjonene i core.
 
 Vårt base endpoint er "/cookbook" og metodene i CookbookController er:
 
