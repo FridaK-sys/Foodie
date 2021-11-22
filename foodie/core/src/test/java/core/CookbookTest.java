@@ -1,7 +1,10 @@
 package core;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,9 +29,11 @@ public class CookbookTest {
 
 		recipe1 = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredientList1);
 		recipe2 = new Recipe("Kjøttkaker", "Mormor sin oppskrift", 4, ingredientList1);
-		recipe2.setLabel("Dinner");
-		recipe3 = new Recipe("Wok", "Rask Dinner", 5, ingredientList1);
-		recipe3.setLabel("Dinner");
+		recipe1.setLabel("dessert");
+		recipe2.setLabel("dinner");
+		recipe1.setFav(true);
+		recipe3 = new Recipe("Wok", "Rask middag", 5, ingredientList1);
+		recipe3.setLabel("dinner");
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 
@@ -75,23 +80,32 @@ public class CookbookTest {
 	}
 
 	@Test
-	public void testGetFavRecipes() {
-		recipe1.setFav(true);
-		List<Recipe> favs = new ArrayList<>();
-		favs.add(recipe1);
-		assertEquals(cookbook1.getFavRecipes(), favs);
-		recipe1.setFav(false);
-		favs.remove(recipe1);
-		// assertEquals(cookbook1.getFavRecipes(), favs);
+	public void testRemoveRecipeString() {
+		cookbook1.removeRecipe("Bløtkake");
+		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2));
 	}
 
+	@Test
+	public void testGetFavRecipes() {
+		assertEquals(cookbook1.getFavRecipes(), Arrays.asList(recipe1));
+		recipe1.setFav(false);
+		assertTrue(cookbook1.getFavRecipes().isEmpty());
+	}
+
+	@Test
 	public void testGetRecipesWithLabel() {
-		assertThrows(IllegalArgumentException.class, () -> cookbook1.getRecipesWithLabel("Dessert"));
+		assertEquals(cookbook1.getRecipesWithLabel("dinner"), Arrays.asList(recipe2));
+		assertTrue(cookbook1.getRecipesWithLabel("breakfast").isEmpty());
+		assertThrows(IllegalArgumentException.class, () -> {
+			cookbook1.getRecipesWithLabel("Snacks");
+		}, "Invalid label");
 
-		cookbook1.addRecipe(recipe3);
-		List<Recipe> labeled = Arrays.asList(recipe2, recipe3);
-		assertEquals(labeled, cookbook1.getRecipesWithLabel("Dinner"));
+	}
 
+	@Test
+	public void isInCookbook() {
+		assertTrue(cookbook1.isInCookbook("Bløtkake"));
+		assertFalse(cookbook1.isInCookbook("Pannekaker"));
 	}
 
 }

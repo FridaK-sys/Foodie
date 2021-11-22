@@ -100,6 +100,12 @@ public class RecipeTest {
 	}
 
 	@Test
+	public void testRemoveIngredient() {
+		recipe1.removeIngredient(0);
+		assertEquals(recipe1.getIngredients(), Arrays.asList(ingredient2));
+	}
+
+	@Test
 	public void testFavorite() {
 		assertEquals(recipe1.getFav(), false);
 		recipe1.setFav(true);
@@ -111,13 +117,13 @@ public class RecipeTest {
 	@Test
 	public void testSetLabel() {
 		assertThrows(IllegalArgumentException.class, () -> recipe1.setLabel("Vegetar"), "Vegetar is not a valid label");
-		recipe1.setLabel("Dinner");
-		assertEquals("Dinner", recipe1.getLabel());
+		recipe1.setLabel("dinner");
+		assertEquals("dinner", recipe1.getLabel());
 	}
 
 	@Test
 	public void testRemoveLabel() {
-		recipe1.setLabel("Dinner");
+		recipe1.setLabel("dinner");
 		recipe1.removeLabel();
 		assertEquals("", recipe1.getLabel());
 	}

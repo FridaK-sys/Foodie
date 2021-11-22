@@ -1,12 +1,13 @@
 package ui;
 
 import core.Recipe;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
+/**
+ * ListCell for Recipe. Displays Recipe.
+ */
 public class ListViewCell extends ListCell<Recipe> {
 
   private HBox hBox = null;

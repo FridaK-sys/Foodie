@@ -14,9 +14,9 @@ public class Cookbook {
 
   /**
    * Constructor for a cookbook with name and list of recipes.
-   * 
-   * @param name    name of cookbook
-   * 
+   *
+   * @param name name of cookbook
+   *
    * @param recipes list of recipes
    */
 
@@ -40,11 +40,10 @@ public class Cookbook {
 
   /**
    * Sets name of cookbook.
-   * 
+   *
    * @param name name of cookbook
    * 
-   * @throws IllegalArgumentException if param contains other characters than
-   *                                  letters and numbers.
+   * @throws IllegalArgumentException if param contains other characters than letters and numbers.
    */
 
   public void setName(String name) {
@@ -60,9 +59,9 @@ public class Cookbook {
 
   /**
    * Adds recipe to cookbook.
-   * 
+   *
    * @param recipe recipe to add
-   * 
+   *
    * @throws IllegalArgumentException if list already contains recipe
    */
 
@@ -74,7 +73,7 @@ public class Cookbook {
 
   /**
    * Removes recipe from recipeList.
-   * 
+   *
    * @param index index in recipeList of recipe to remove
    * 
    */
@@ -84,7 +83,7 @@ public class Cookbook {
 
   /**
    * Removes recipe from recipeList.
-   * 
+   *
    * @param name name of recipe to remove
    * 
    */
@@ -95,8 +94,28 @@ public class Cookbook {
   }
 
   /**
-   * Makes list of all recipes in recipeList with fav = true.
+   * Replaces a recipe in list with param.
+   *
+   * @param name   name of recipe to remove
    * 
+   * @param recipe recipe to put in
+   * 
+   */
+  public void replaceRecipe(String name, Recipe recipe) {
+    int index = 0;
+    for (Recipe r : this.getRecipes()) {
+      if (r.getName().equals(name)) {
+        this.removeRecipe(name);
+        return;
+      }
+      index++;
+    }
+    this.getRecipes().add(index, recipe);
+  }
+
+  /**
+   * Makes list of all recipes in recipeList with fav = true.
+   *
    * @return list of recipes in recipeList with fav = true
    * 
    */
@@ -106,7 +125,7 @@ public class Cookbook {
 
   /**
    * Checks if recipe is in cookbook based on name of recipe.
-   * 
+   *
    * @param recipeName name of recipe
    * 
    * @return true if recipe is in RecipeList, false if not.
@@ -123,11 +142,11 @@ public class Cookbook {
 
   /**
    * Makes list of all recipes in recipeList with label.
-   * 
+   *
    * @param label recipelabel
-   * 
+   *
    * @return list of all recipes in recipeList with label = param
-   * 
+   *
    * @throws IllegalArgumentException if param is not valid
    * 
    */
@@ -140,5 +159,16 @@ public class Cookbook {
 
   public String toString() {
     return getName();
+  }
+
+  /**
+   * Sets new recipes in cookbook.
+   *
+   * @param recipes recipes to add
+   *
+   * 
+   */
+  public void setRecipes(List<Recipe> recipes) {
+    this.recipes = recipes;
   }
 }
