@@ -2,47 +2,51 @@
 Cookbook "1" -- "*" Recipe
 Recipe "1" -- "*" Ingredient
 
-Cookbook : String name
-Cookbook : List<Recipe> recipes
-Cookbook : String getName()
-Cookbook : void setName(String)
-Cookbook : List<Recipe> getRecipes()
-Cookbook : addRecipe(Recipe)
-Cookbook : removeRecipe(int index)
-Cookbook : removeRecipe(String name)
-Cookbook : List<Recipe> getFavRecipes()
-Cookbook : boolean isInCookbook(String)
-Cookbook : List<Recipe> getRecipesWithLabel(String)
+Cookbook : -String name
+Cookbook : -List<Recipe> recipes
+Cookbook : +String getName()
+Cookbook : +void setName(String)
+Cookbook : +List<Recipe> getRecipes()
+Cookbook : +addRecipe(Recipe)
+Cookbook : +addRecipe(int, Recipe)
+Cookbook : +removeRecipe(int)
+Cookbook : +removeRecipe(String)
+Cookbook : +replaceRecipe(String, Recipe)
+Cookbook : +List<Recipe> getFavRecipes()
+Cookbook : +boolean isInCookbook(String)
+Cookbook : +List<Recipe> getRecipesWithLabel(String)
+Cookbook : +setRecipes(List<Recipe>)
 
 
-Recipe : String name
-Recipe : String description
-Recipe : int portions
-Recipe : boolean fav
-Recipe : String label
-Recipe : String getName()
-Recipe : void setName(String)
-Recipe : String getDescription()
-Recipe : void setDescription(String)
-Recipe : int getPortions()
-Recipe : void setPortions(int)
-Recipe : List<Ingredient> getIngredients()
-Recipe : void addIngredient(Ingredient)
-Recipe : void removeIngredient(int index)
-Recipe : boolean getFav()
-Recipe : void setFav(boolean)
-Recipe : String getLabel()
-Recipe : void setLabel(String)
-Recipe : void removeLabel()
+Recipe : -String name
+Recipe : -String description
+Recipe : -int portions
+Recipe : -boolean fav
+Recipe : -String label
+Recipe : -List<Ingredient> ingredients
+Recipe : +String getName()
+Recipe : +void setName(String)
+Recipe : +String getDescription()
+Recipe : +void setDescription(String)
+Recipe : +int getPortions()
+Recipe : +void setPortions(int)
+Recipe : +List<Ingredient> getIngredients()
+Recipe : +void addIngredient(Ingredient)
+Recipe : +void removeIngredient(int)
+Recipe : +boolean getFav()
+Recipe : +void setFav(boolean)
+Recipe : +String getLabel()
+Recipe : +void setLabel(String)
+Recipe : +void removeLabel()
 
-Ingredient : String name
-Ingredient : double amount
-Ingredient : String unit
-Ingredient : String getName()
-Ingredient : void setName(String)
-Ingredient : double getAmount()
-Ingredient : void setAmount(double)
-Ingredient : String getUnit()
-Ingredient : void setUnit(String)
+Ingredient : -String name
+Ingredient : -double amount
+Ingredient : -String unit
+Ingredient : +String getName()
+Ingredient : +void setName(String)
+Ingredient : +double getAmount()
+Ingredient : +void setAmount(double)
+Ingredient : +String getUnit()
+Ingredient : +void setUnit(String)
 
 @enduml
