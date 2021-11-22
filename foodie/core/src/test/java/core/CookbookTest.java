@@ -37,35 +37,19 @@ public class CookbookTest {
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 
-		cookbook1 = new Cookbook("Mine oppskrifter", recipes);
+		cookbook1 = new Cookbook(recipes);
 		cookbook2 = new Cookbook();
 	}
 
 	@Test
 	public void testConstructor() {
-		assertEquals(cookbook1.getName(), "Mine oppskrifter", "Name does not match value set in constructor");
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2),
 				"List of recipes does not match value set in constructor");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Cookbook("$~@", recipes);
-		}, "Invalid name for cookbook");
 	}
 
 	@Test
 	public void testEmptyConstructor() {
-		assertEquals(cookbook2.getName(), "Cookbook", "Name does not match value set in constructor");
 		assertEquals(cookbook2.getRecipes(), new ArrayList<>(), "List should be empty");
-	}
-
-	@Test
-	public void testSetName() {
-		cookbook1.setName("Vegetar");
-		assertEquals(cookbook1.getName(), "Vegetar", "Incorrect name");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			cookbook1.setName("$~@");
-		}, "Invalid name for cookbook");
 	}
 
 	@Test

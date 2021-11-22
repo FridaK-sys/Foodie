@@ -65,7 +65,6 @@ public class CookbookPersistenceTest {
   }
 
   private void checkCookbook(Cookbook defaultCookbook, Cookbook testCookbook) {
-    assertEquals(defaultCookbook.getName(), testCookbook.getName(), "Name of cookbook was wrong");
     assertEquals(defaultCookbook.getRecipes().toString(), testCookbook.getRecipes().toString(),
         "List of recipes was wrong");
     assertEquals(defaultCookbook.getRecipes().get(0).getDescription(),
@@ -147,7 +146,6 @@ public class CookbookPersistenceTest {
     try {
       persistence.setSaveFile("/cookbook");
       Cookbook cookbook = persistence.loadCookbook();
-      assertEquals("Cookbook", cookbook.getName(), "Name of cookbook was not the default");
       assertEquals(0, cookbook.getRecipes().size(), "List of recipes in cookbook should be empty");
 
       // cleanup

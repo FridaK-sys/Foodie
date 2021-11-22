@@ -17,7 +17,6 @@ public class CookbookJsonTest extends AbstractJsonTest {
 
   final static String cookbookJson = """
       {
-        "name": "Cookbook",
         "recipes" :[
           {
             "name": "Brownies",
@@ -80,13 +79,12 @@ public class CookbookJsonTest extends AbstractJsonTest {
     List<Recipe> recipes = new ArrayList<>();
     recipes.add(recipe1);
     recipes.add(recipe2);
-    Cookbook cookbook = new Cookbook("Cookbook", recipes);
+    Cookbook cookbook = new Cookbook(recipes);
     return cookbook;
   }
 
   static void checkCookbook(Cookbook cookbook) {
     Cookbook defaultCookbook = createCookbook();
-    assertEquals(defaultCookbook.getName(), cookbook.getName(), "Wrong name of cookbook");
     assertEquals(defaultCookbook.getRecipes().toString(), cookbook.getRecipes().toString(),
         "List of recipes was wrong");
   }

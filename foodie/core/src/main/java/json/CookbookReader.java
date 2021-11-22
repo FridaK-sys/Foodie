@@ -25,9 +25,6 @@ class CookbookReader extends JsonDeserializer<Cookbook> {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     if (treeNode instanceof ObjectNode objectNode) {
       Cookbook cookbook = new Cookbook();
-      JsonNode nameNode = objectNode.get("name");
-      String name = nameNode.asText();
-      cookbook.setName(name);
       JsonNode recipesNode = objectNode.get("recipes");
       for (JsonNode recipeNode : (ArrayNode) recipesNode) {
         Recipe recipe = recipeReader.deserialize(recipeNode);
