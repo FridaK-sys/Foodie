@@ -52,6 +52,14 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         stage.show();
     }
 
+    
+    @BeforeEach
+    public void setupItems() {
+        setTestData();
+        this.controller.setDataAccess(dataAccess);
+        // this.controller.initData(cookbook, dataAccess);
+    }
+
 
     @Test
     public void testRecipeView() {
@@ -87,6 +95,9 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         clickOn("#faveButton");
         assertFalse(dataAccess.getCookbook().getRecipes().get(2).getFav());
         assertEquals(button.getText(), "Add to favorite");
+        clickOn("#faveButton");
+        assertTrue(dataAccess.getCookbook().getRecipes().get(2).getFav());
+        assertEquals(button.getText(), "Remove from favorite");
     }
 
     // @Test
