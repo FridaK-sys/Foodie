@@ -29,6 +29,7 @@ public class ViewRecipeController extends AbstractController {
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
   private CookbookAccess dataAccess = CookbookApp.getAccess();
+  private Recipe viewRecipe;
 
   private Stage stage;
 
@@ -57,15 +58,14 @@ public class ViewRecipeController extends AbstractController {
    * Sets or removes favorite for Recipe.
    */
   public void favoriseRecipeButton(ActionEvent ae) {
-    if (selectedRecipe.getFav() == true) {
-      selectedRecipe.setFav(false);
+    if (viewRecipe.getFav() == true) {
+      viewRecipe.setFav(false);
       faveButton.setText("Add to favorite");
     } else {
-      selectedRecipe.setFav(true);
+      viewRecipe.setFav(true);
       faveButton.setText("Remove from favorite");
     }
-    dataAccess.deleteRecipe(selectedRecipe.getName());
-    dataAccess.addRecipe(selectedRecipe);
+    dataAccess.editRecipe(viewRecipe.getName(), viewRecipe);
 
   }
 
@@ -127,9 +127,10 @@ public class ViewRecipeController extends AbstractController {
   }
 
   public void initData(Recipe recipe) {
+    this.viewRecipe = recipe;
     this.portion = recipe.getPortions();
     if (recipe.getName() != null) {
-      recipeTitle.setText(selectedRecipe.getName());
+      recipeTitle.setText(recipe.getName());
     } else {
       recipeTitle.setText("oppskrift");
     }
@@ -141,13 +142,13 @@ public class ViewRecipeController extends AbstractController {
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
       textField.setText(recipe.getDescription());
     }
-    if (selectedRecipe.getFav() == true) {
+    if (recipe.getFav() == true) {
       faveButton.setText("Remove from favorite");
     } else {
       faveButton.setText("Add to favorite");
     }
-    if (!selectedRecipe.getLabel().isBlank()) {
-      labelTag.setText(selectedRecipe.getLabel());
+    if (!recipe.getLabel().isBlank()) {
+      labelTag.setText(recipe.getLabel());
     }
 
   }
@@ -170,5 +171,9 @@ public class ViewRecipeController extends AbstractController {
   protected void setUpStorage() {
     
   }
+
+  public void setDataAccess(CookbookAccess dataAccess){
+    this.dataAccess = dataAccess;
+  } 
 
 }
