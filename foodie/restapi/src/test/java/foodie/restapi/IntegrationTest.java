@@ -58,20 +58,20 @@ public class IntegrationTest {
                                                         .andExpect(status().isOk()).andReturn();
 
                         // GET-request returns correct data
-
                         Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
                                         result.getResponse().getContentAsString(StandardCharsets.UTF_8),
                                         Cookbook.class);
                         assertNotNull("Cookbook was null", cookbook);
                         assertEquals("Cookbook", cookbook.getName(), "Name of Cookbook was not default name");
-                        assertEquals(2, cookbook.getRecipes().size(), "Cookbook did not have default amout of recipes");
+                        assertEquals(2, cookbook.getRecipes().size(),
+                                        "Cookbook did not have default amount of recipes");
                 } catch (Exception e) {
                         fail(e.getMessage());
                 }
         }
 
         @Test
-        void addRecipe() throws Exception {
+        void addRecipe() {
                 try {
                         Recipe recipe = new Recipe("recipe3", 2);
                         String json = mapper.writeValueAsString(recipe);
@@ -83,18 +83,6 @@ public class IntegrationTest {
                                         .andExpect(status().isOk()).andReturn();
                         assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()),
                                         "Response was not true");
-
-                        // GET-request returns updated cookbook
-                        cookbook.addRecipe(recipe);
-                        when(cookbookService.getCookbook()).thenReturn(cookbook);
-                        MvcResult result2 =
-                                        mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
-                                                        .andReturn();
-                        Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
-                                        result2.getResponse().getContentAsString(StandardCharsets.UTF_8),
-                                        Cookbook.class);
-                        assertTrue(cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("recipe3")),
-                                        "Recipe was not added");
 
                 } catch (Exception e) {
                         fail(e.getMessage());
@@ -109,7 +97,7 @@ public class IntegrationTest {
                         Recipe recipe = new Recipe("Cake");
                         recipe.setPortions(2);
                         String json = mapper.writeValueAsString(recipe);
-                        // PUT-request returns OK-status code
+                        // PUT-request returns OK-status code and resnponse = true
                         when(cookbookService.editRecipe(recipe.getName(), recipe)).thenReturn(true);
                         MvcResult result = mvc
                                         .perform(MockMvcRequestBuilders.put("/cookbook/" + recipe.getName() + "/edit")
@@ -126,19 +114,6 @@ public class IntegrationTest {
                         assertEquals(result.getResponse().getContentAsString(),
                                         result2.getResponse().getContentAsString(), "Response was not the same");
 
-                        // GET-request returns updated cookbook
-                        cookbook.replaceRecipe(recipe.getName(), recipe);
-                        when(cookbookService.getCookbook()).thenReturn(cookbook);
-                        MvcResult result3 =
-                                        mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
-                                                        .andReturn();
-                        Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
-                                        result3.getResponse().getContentAsString(StandardCharsets.UTF_8),
-                                        Cookbook.class);
-                        Recipe res = cookbook.getRecipes().stream().filter(r -> r.getName().equals("Cake")).findAny()
-                                        .orElse(new Recipe("New", 1));
-                        assertEquals(2, res.getPortions(), "Recipe was not edited");
-
                 } catch (Exception e) {
                         fail(e.getMessage());
                 }
@@ -149,24 +124,12 @@ public class IntegrationTest {
         void removeRecipe() throws Exception {
                 try {
                         String name = "Cake";
-                        // DELETE-request returns OK-status code and true
+                        // DELETE-request returns OK-status code and response = true
                         when(cookbookService.removeRecipe(name)).thenReturn(true);
                         MvcResult result = mvc.perform(MockMvcRequestBuilders.delete("/cookbook/" + name))
                                         .andExpect(status().isOk()).andReturn();
                         assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()),
                                         "Response was not true");
-
-                        // GET-request returns updated cookbook
-                        cookbook.removeRecipe(name);
-                        when(cookbookService.getCookbook()).thenReturn(cookbook);
-                        MvcResult result2 =
-                                        mvc.perform(MockMvcRequestBuilders.get(CookbookService.COOKBOOK_SERVICE_PATH))
-                                                        .andReturn();
-                        Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule()).readValue(
-                                        result2.getResponse().getContentAsString(StandardCharsets.UTF_8),
-                                        Cookbook.class);
-                        assertTrue(!cookbook.getRecipes().stream().anyMatch(r -> r.getName().equals("Cake")),
-                                        "Recipe was not removed");
 
                 } catch (Exception e) {
                         fail(e.getMessage());
