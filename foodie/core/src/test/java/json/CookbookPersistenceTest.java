@@ -1,9 +1,9 @@
 package json;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -39,12 +39,14 @@ public class CookbookPersistenceTest {
   }
 
   private Cookbook createDefaultCookbook() {
-    Recipe r1 = new Recipe("Cake", 1);
+    Recipe r1 = new Recipe("Cake");
+    r1.setPortions(1);
     r1.setDescription("Recipe for cake");
     r1.setLabel("breakfast");
     r1.addIngredient(new Ingredient("Flour", 200.0, "g"));
     r1.addIngredient(new Ingredient("Egg", 2.0, "stk"));
-    Recipe r2 = new Recipe("Hot chocolate", 1);
+    Recipe r2 = new Recipe("Hot chocolate");
+    r2.setPortions(1);
     r2.setDescription("Good dessert");
     r2.addIngredient(new Ingredient("Sugar", 1.5, "dl"));
     r2.addIngredient(new Ingredient("Cocoa", 1.0, "dl"));
@@ -63,24 +65,26 @@ public class CookbookPersistenceTest {
   }
 
   private void checkCookbook(Cookbook defaultCookbook, Cookbook testCookbook) {
-    assertEquals(defaultCookbook.getName(), testCookbook.getName());
-    assertEquals(defaultCookbook.getRecipes().toString(), testCookbook.getRecipes().toString());
+    assertEquals(defaultCookbook.getName(), testCookbook.getName(), "Name of cookbook was wrong");
+    assertEquals(defaultCookbook.getRecipes().toString(), testCookbook.getRecipes().toString(),
+        "List of recipes was wrong");
     assertEquals(defaultCookbook.getRecipes().get(0).getDescription(),
-        testCookbook.getRecipes().get(0).getDescription());
+        testCookbook.getRecipes().get(0).getDescription(), "Description of first recipe was wrong");
   }
 
   @Test
   public void createObjectMapper() {
     ObjectMapper mapper = CookbookPersistence.createObjectMapper();
-    assertNotNull(mapper);
-    assertEquals(mapper.getRegisteredModuleIds().toString(), "[CookbookModule]");
+    assertNotNull("Objectmapper was null", mapper);
+    assertEquals(mapper.getRegisteredModuleIds().toString(), "[CookbookModule]",
+        "The registered modules in mapper was wrong");
   }
 
   @Test
   public void createModule() {
     SimpleModule module = CookbookPersistence.createModule();
-    assertNotNull(module);
-    assertEquals(module.getClass(), CookbookModule.class);
+    assertNotNull("Module was null", module);
+    assertEquals(module.getClass(), CookbookModule.class, "Module is not a CookbookModule");
   }
 
   @Test
@@ -103,7 +107,7 @@ public class CookbookPersistenceTest {
       persistence.writeCookbook(cookbook, writer);
       String writtenFile = Files.readString(Paths.get(persistence.getSaveFilePath()));
       String defaultFile = Files.readString(Paths.get(defaultCookbookPath));
-      assertEquals(defaultFile, writtenFile);
+      assertEquals(defaultFile, writtenFile, "File was not written correctly");
 
       // cleanup
       Files.delete(Paths.get(persistence.getSaveFilePath()));
@@ -143,8 +147,8 @@ public class CookbookPersistenceTest {
     try {
       persistence.setSaveFile("/cookbook");
       Cookbook cookbook = persistence.loadCookbook();
-      assertEquals("Cookbook", cookbook.getName());
-      assertEquals(0, cookbook.getRecipes().size());
+      assertEquals("Cookbook", cookbook.getName(), "Name of cookbook was not the default");
+      assertEquals(0, cookbook.getRecipes().size(), "List of recipes in cookbook should be empty");
 
       // cleanup
       Files.delete(Paths.get(persistence.getSaveFilePath()));

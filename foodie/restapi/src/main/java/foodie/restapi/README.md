@@ -33,7 +33,7 @@ Vi har tre tester for å teste funkjsonaliteten i REST-API klassene:
 - IntegrationTest - integrasjonstest for å teste at sammenkoblngen mellom CookbookController og CookbokService
 - Ende-til-ende-test ligger i ui-test-mappen.
 
-I IntegrationTest bruker vi Spring Boots MockMvc som lager en Mockserver slik at vi kan teste serveren uten å bruke den. WebMvcTest-annotasjonen starter opp Spring application context og sender HTTP-forespørsler til mockserveren. Grunnen til at vi velger å bruke MockMvc er fordi vi ikke vil at dataen på servern skal endres på hver gang man kjører testene.
+I IntegrationTest bruker vi Spring Boots MockMvc som lager en Mockserver slik at vi kan teste serveren uten å bruke den. WebMvcTest-annotasjonen starter opp Spring application context og sender HTTP-forespørsler til mockserveren slik at vi kan teste at HTTP-forspørslene i CookbookController fungerer. Vi bruker MockBean for å lage en mocket CookbookService slik at den ekte serveren ikke blir endret. Grunnen til at vi velger å bruke MockMvc er fordi vi ikke vil at dataen på servern skal endres på hver gang man kjører testene.
 
 
 

@@ -36,6 +36,8 @@
       </HBox>
       <Button fx:id="saveRecipeButton" layoutX="489.0" layoutY="360.0" mnemonicParsing="false" onAction="#saveRecipe" text="Save" />
       <Button fx:id="deleteRecipeButton" layoutX="369.0" layoutY="360.0" mnemonicParsing="false" onAction="#deleteRecipe" text="Delete recipe" />
+      <Button fx:id="deleteIngredientButton" layoutX="251.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleDeleteIngredient" text="Delete" />
+      <Button fx:id="editIngredientButton" layoutX="199.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleEditIngredient" text="Edit" />
    </children>
 </AnchorPane>
 

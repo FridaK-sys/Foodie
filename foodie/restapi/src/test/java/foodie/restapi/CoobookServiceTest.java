@@ -31,33 +31,35 @@ class CookbookServiceTest {
   @Test
   void createDefaultCookbook() {
     Cookbook cookbook = CookbookService.createDefaultCookbook();
-    assertEquals("Cookbook", cookbook.getName());
-    assertEquals("Cake", cookbook.getRecipes().get(0).getName());
-    assertEquals(200.0, cookbook.getRecipes().get(0).getIngredients().get(0).getAmount());
-    assertEquals("Hot chocolate", cookbook.getRecipes().get(1).getName());
+    assertEquals("Cookbook", cookbook.getName(), "Name of default cookbook was wrong");
+    assertEquals("Cake", cookbook.getRecipes().get(0).getName(), "Name of first recipe in default cookbook was wrong");
+    assertEquals(200.0, cookbook.getRecipes().get(0).getIngredients().get(0).getAmount(),
+        "Amount of first ingredient in first recipe was wrong");
+    assertEquals("Hot chocolate", cookbook.getRecipes().get(1).getName(), "Name of second recipe was wrong");
   }
 
   @Test
   void addRecipe() {
     Recipe recipe = new Recipe("recipe3", 5);
-    assertTrue(service.addRecipe(recipe));
-    assertTrue(service.getCookbook().getRecipes().contains(recipe));
+    assertTrue(service.addRecipe(recipe), "addRecipe-method did not return true");
+    assertTrue(service.getCookbook().getRecipes().contains(recipe), "Recipe was not added");
   }
 
   @Test
   void removeRecipe() {
     String name = "Cake";
-    assertTrue(service.removeRecipe(name));
-    assertTrue(!service.getCookbook().getRecipes().stream().anyMatch(r -> r.getName().equals(name)));
+    assertTrue(service.removeRecipe(name), "removeRecipe-method did not return true");
+    assertTrue(!service.getCookbook().getRecipes().stream().anyMatch(r -> r.getName().equals(name)),
+        "Recipe was not removed");
   }
 
   @Test
   void editRecipe() {
     String name = "Cake";
     Recipe recipe = new Recipe(name, 3);
-    assertTrue(service.editRecipe(name, recipe));
+    assertTrue(service.editRecipe(name, recipe), "editRecipe-method did not return true");
     assertEquals(3, service.getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findAny()
-        .orElse(new Recipe("Cake", 1)).getPortions());
+        .orElse(new Recipe("Cake", 1)).getPortions(), "Recipe was not edited");
   }
 
 }

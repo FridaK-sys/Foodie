@@ -1,7 +1,6 @@
 package foodie.restapi;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,25 +26,24 @@ class CookbookControllerTest {
   @Test
   void testGetCookbook() {
     Cookbook cookbook = controller.getCookbook();
-    assertNotNull(cookbook);
-    assertEquals("Cookbook", cookbook.getName());
+    assertNotNull(cookbook, "Cookbook was null");
   }
 
   @Test
   void testAddRecipe() {
-    assertTrue(controller.addRecipe("recipe", new Recipe("recipe", 1)));
+    assertTrue("addRecipe-method did not return true", controller.addRecipe("recipe", new Recipe("recipe", 1)));
   }
 
   @Test
   void testEditRecipe() {
     controller.addRecipe("recipe", new Recipe("recipe", 1));
-    assertTrue(controller.editRecipe("recipe", new Recipe("recipe", 2)));
+    assertTrue("editRecipe-method did not return true", controller.editRecipe("recipe", new Recipe("recipe", 2)));
   }
 
   @Test
   void testRemoveRecipe() {
     controller.addRecipe("recipe", new Recipe("recipe", 1));
-    assertTrue(controller.removeRecipe("recipe"));
+    assertTrue("removeRecipe-method did not return true", controller.removeRecipe("recipe"));
   }
 
 }
