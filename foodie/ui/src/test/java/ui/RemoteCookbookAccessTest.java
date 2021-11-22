@@ -86,6 +86,7 @@ public class RemoteCookbookAccessTest {
   
     List<Recipe> recipes = cookbookAccess.getCookbook().getRecipes();
     assertEquals(1, recipes.size());
+    assertEquals("Brownies", recipes.get(0).getName());
 
   }
 
