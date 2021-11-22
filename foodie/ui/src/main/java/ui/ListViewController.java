@@ -164,7 +164,7 @@ public class ListViewController implements FoodieController {
       new ChangeListener<Recipe>() {
       @Override
       public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
-        Recipe newValue) {
+          Recipe newValue) {
         if (newValue != null) {
           changeSceneToViewRecipe(newValue);
         }
@@ -182,7 +182,8 @@ public class ListViewController implements FoodieController {
     group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
       @Override
-      public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+      public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
+      Toggle new_toggle) {
         // Has selection.
         if (group.getSelectedToggle() != null) {
           RadioButton button = (RadioButton) group.getSelectedToggle();

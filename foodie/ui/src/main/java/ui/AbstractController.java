@@ -55,7 +55,7 @@ public abstract class AbstractController implements FoodieController, Initializa
     return mainListViewController.getCookbook();
   }
 
-  static void setSelectedRecipe(Recipe recipe){
+  static void setSelectedRecipe(Recipe recipe) {
     selectedRecipe = recipe;
   }
 

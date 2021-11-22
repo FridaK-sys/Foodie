@@ -116,15 +116,15 @@ public class NewRecipeController extends AbstractController {
   }
 
   @FXML
-  public void handleDeleteIngredient(){
+  public void handleDeleteIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
-    if (ing != null){
+    if (ing != null)  {
       ingredients.remove(ing);
     }
   }
 
   @FXML
-  public void handleEditIngredient(){
+  public void handleEditIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -219,7 +219,6 @@ public class NewRecipeController extends AbstractController {
    * Initialises data from another scene.
    *
    * @param recipe Recipe to initialize
-   * @param cookbook Cookbook to initialize
    * 
    */
   public void initData(Recipe recipe) {
@@ -308,8 +307,6 @@ public class NewRecipeController extends AbstractController {
 
   /**
    * Sets the SceneTarget for return button.
-   *
-   * @param sceneTarget previous scene.
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
@@ -379,8 +376,7 @@ public class NewRecipeController extends AbstractController {
   protected void setUpStorage() {
   }
 
-  public void setDataAccess(CookbookAccess dataAccess){
+  public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
   }
-
 }

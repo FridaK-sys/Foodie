@@ -68,9 +68,12 @@ public class RemoteCookbookAccess implements CookbookAccess {
     try {
       String jsonVisit = mapper.writeValueAsString(recipe);
       final HttpRequest req =
-          HttpRequest.newBuilder(URI.create(endPoint + "/" + name + "/" + "edit")).header("Accept", 
-          "application/json")
-              .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(jsonVisit)).build();
+          HttpRequest
+          .newBuilder(URI.create(endPoint + "/" + name + "/" + "edit"))
+          .header("Accept", "application/json")
+          .header("Content-Type", "application/json")
+          .PUT(BodyPublishers.ofString(jsonVisit))
+          .build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.
       BodyHandlers.ofString());
       Boolean successfullyEdit = mapper.readValue(res.body(), Boolean.class);

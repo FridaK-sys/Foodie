@@ -1,10 +1,12 @@
 package ui;
 
 import core.Recipe;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Holds FXML information.
+ */
 public class FxmlModel {
 
   private String resourceName;
@@ -15,11 +17,12 @@ public class FxmlModel {
   private FoodieController controller;
 
   /**
-   * Construct an FxmlModel object
-   * 
+   * Construct an FxmlModel object.
+   *
    * @param resourceName the resource name for this FXML
    * @param sceneName the {@link SceneName} for this FXML
    * @param stage the primary stage that the scene will be set to
+   * 
    */
   public FxmlModel(String resourceName, SceneName sceneName, Stage stage) {
     this.resourceName = resourceName;
@@ -28,17 +31,23 @@ public class FxmlModel {
     // this. controller = controller;
   }
 
-  /** @return the resource name for this FXML file */
+  /** 
+   * @return the resource name for this FXML file 
+   */
   public String getResourceName() {
     return resourceName;
   }
 
-  /** @return the {@link SceneName} for this FXML file */
+  /** 
+   *@return the {@link SceneName} for this FXML file 
+   */
   public SceneName getSceneName() {
     return sceneName;
   }
 
-  /** @param scene the scene to set, loaded from this FxmlModel */
+  /**
+   * @param scene the scene to set, loaded from this FxmlModel 
+   */
   public void setScene(Scene scene) {
     this.scene = scene;
   }
@@ -68,7 +77,7 @@ public class FxmlModel {
     return stage;
   }
 
-  public void setRecipe(Recipe recipe){
+  public void setRecipe(Recipe recipe) {
     this.recipe = recipe;
   }
 
@@ -76,7 +85,7 @@ public class FxmlModel {
       return recipe;
   }
 
-  public FoodieController getController(){
+  public FoodieController getController() {
     return controller;
   }
 

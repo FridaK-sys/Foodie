@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class FxmlHandler {
-
-
 	/**
 	 * Either builds the scene from {@link FxmlInfo} or loads the built scene.<br>
 	 * <br>
@@ -52,9 +50,7 @@ public class FxmlHandler {
 		
 		if (controller != null) {
 			controller.setStage(fxmlModel.getStage());
-			
 		}
-
 		return scene;
 	}
 
