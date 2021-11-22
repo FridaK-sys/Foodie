@@ -35,17 +35,15 @@ import core.Ingredient;
 import core.Recipe;
 import ui.utils.RemoteCookbookAccess;
 
+
+/**
+ * Test class for RemoteCookbookAccess
+ */
 public class RemoteCookbookAccessTest {
 
   private WireMockConfiguration config;
   private WireMockServer wireMockServer;
   private RemoteCookbookAccess cookbookAccess;
-
-  @Autowired
-  private MockMvc mvc;
-
-  @Autowired
-  private ObjectMapper mapper = new ObjectMapper();
 
   private static final String GET_COOKBOOK_RESPONSE = """
       {
