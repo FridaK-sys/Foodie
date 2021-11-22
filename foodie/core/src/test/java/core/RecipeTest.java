@@ -117,8 +117,8 @@ public class RecipeTest {
 
 	@Test
 	public void testSetLabel() {
-		recipe1.setLabel("Dinner");
-		assertEquals("Dinner", recipe1.getLabel(), "Incorrect label");
+		recipe1.setLabel("dinner");
+		assertEquals("dinner", recipe1.getLabel(), "Incorrect label");
 		assertThrows(IllegalArgumentException.class, () -> recipe1.setLabel("Vegetar"), "Vegetar is not a valid label");
 	}
 
