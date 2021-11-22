@@ -5,7 +5,7 @@ Brukergrensesnittet består av en kokebok i form av et **Cookbook**-objekt med e
 
 ## Arkitektur
 
-Vi har to varianter av applikasjonen. Den ene bruker lokale data lagret på fil, mens den andre benytter data håndtert gjennom REST-APIet på en server. Derfor har vi to kontroller-klasser **LocalAppController** og **RestAppController**. Datatilgangen er spesifisert i klassene **RemoteCookbookAccess** og **LocalCookbookAccess**, og disse implementerer grensesnittet **CookbookAccess**. 
+Vi har to varianter av applikasjonen. Den ene bruker lokale data lagret på fil, mens den andre benytter data håndtert gjennom REST-APIet på en server. Derfor har vi to kontroller-klasser `LocalAppController` og `RestAppController`. Datatilgangen er spesifisert i klassene `RemoteCookbookAccess` og `LocalCookbookAccess`, og disse implementerer grensesnittet **CookbookAccess**. 
 
 ![Datatilgang](dataAccess.png)
 
@@ -13,6 +13,6 @@ Samspillet med kontrollerne til applikasjonen er illustrert på klassediagrammet
 
 ![Kontrollere](controllers.png)
 
-Følgende diagram viser samspillet mellom kjernemodulen, brukergrensesnittmodulen, REST-tjenesten når en bruker oppretter en ny oppskrift og legger denne til i kokeboken.
+Følgende sekvensdiagram viser samspillet mellom kjernemodulen, brukergrensesnittmodulen, REST-tjenesten når en bruker oppretter en ny oppskrift og legger denne til i kokeboken.
 
 ![Sekvensdiagram](sequence.png)
