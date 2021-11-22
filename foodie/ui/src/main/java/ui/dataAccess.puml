@@ -1,0 +1,11 @@
+@startuml
+interface CookbookAccess
+class LocalCookbookAccess
+class RemoteCookbookAccess
+class LocalAppController
+class RestAppController
+LocalCookbookAccess ..|> CookbookAccess
+RemoteCookbookAccess ..|> CookbookAccess
+LocalAppController --> LocalCookbookAccess
+RestAppController --> RemoteCookbookAccess
+@enduml
