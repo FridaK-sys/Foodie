@@ -73,7 +73,7 @@ public class IntegrationTest {
         @Test
         void addRecipe() {
                 try {
-                        Recipe recipe = new Recipe("recipe3", 2);
+                        Recipe recipe = new Recipe("recipe3");
                         String json = mapper.writeValueAsString(recipe);
                         // POST-request returns OK-status code and response = true
                         when(cookbookService.addRecipe(recipe)).thenReturn(true);
