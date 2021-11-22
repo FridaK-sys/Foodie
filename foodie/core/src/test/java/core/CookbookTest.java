@@ -81,6 +81,16 @@ public class CookbookTest {
 	}
 
 	@Test
+	public void testReplaceRecipe() {
+		int index1 = cookbook1.getRecipes().indexOf(recipe1);
+		Recipe recipe4 = new Recipe("Brød");
+		cookbook1.replaceRecipe("Bløtkake", recipe4);
+		assertTrue(!cookbook1.getRecipes().contains(recipe1), "recipe1 was not removed");
+		assertTrue(cookbook1.getRecipes().contains(recipe4), "recipe4 was not added");
+		assertEquals(index1, cookbook1.getRecipes().indexOf(recipe4), "recipe4 was placed on wrong index");
+	}
+
+	@Test
 	public void testRemoveRecipeString() {
 		cookbook1.removeRecipe("Bløtkake");
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2), "Incorrect list of recipes");
