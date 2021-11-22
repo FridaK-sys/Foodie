@@ -1,5 +1,7 @@
 package ui;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -7,9 +9,18 @@ import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.ObjectInputFilter.Status;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -29,6 +40,12 @@ public class RemoteCookbookAccessTest {
   private WireMockServer wireMockServer;
   private RemoteCookbookAccess cookbookAccess;
 
+  @Autowired
+  private MockMvc mvc;
+
+  @Autowired
+  private ObjectMapper mapper = new ObjectMapper();
+
   private static final String GET_COOKBOOK_RESPONSE = """
       {
         "name": "Cookbook",
@@ -38,7 +55,7 @@ public class RemoteCookbookAccessTest {
             "description": "Den beste oppskriften på brownies!",
             "portions": 1,
             "fav": true,
-            "label": "Dessert",
+            "label": "breakfast",
             "ingredients" :[
               {
                 "name": "Egg",
@@ -63,40 +80,29 @@ public class RemoteCookbookAccessTest {
   }
 
   @Test
-  public void testGetCookbook() {
+  void testGetCookbook() {
     stubFor(get(urlEqualTo("/cookbook")).withHeader("Accept", equalTo("application/json")).willReturn(
         aResponse().withStatus(200).withHeader("Content-Type", "application/json").withBody(GET_COOKBOOK_RESPONSE)));
+  
     List<Recipe> recipes = cookbookAccess.getCookbook().getRecipes();
     assertEquals(1, recipes.size());
 
   }
 
-  private void addRecipe() {
-    List<Ingredient> ings = new ArrayList<>();
-    Ingredient ing = new Ingredient("Mel", 200, "g");
-    ings.add(ing);
-
-    Recipe recipe = new Recipe("Mel", "Vikig ingrediens", 1, ings);
-    cookbookAccess.addRecipe(recipe);
-
-  }
-
   @Test
-  public void testAddRecipe() {
-    List<Ingredient> ings = new ArrayList<>();
-    Ingredient ing = new Ingredient("Mel", 200, "g");
-    ings.add(ing);
+  void testAddRecipe() throws Exception{
+    Recipe recipe = new Recipe("Appelsin", 1);
+    try {
+      String json = mapper.writeValueAsString(recipe);
+      MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/cookbook/" + recipe.getName())
+          .contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk()).andReturn();
+      assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
+    } catch (JsonProcessingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-    Recipe recipe = new Recipe("Mel", "Vikig ingrediens", 1, ings);
-    cookbookAccess.addRecipe(recipe);
-    assertEquals(true, cookbookAccess.addRecipe(recipe));
-    // stubFor(get(urlEqualTo("/cookbook")).withHeader("Accept",
-    // equalTo("application/json")).willReturn(
-    // aResponse().withStatus(200).withHeader("Content-Type",
-    // "application/json").withBody(GET_COOKBOOK_RESPONSE)));
-
-    // List<Recipe> recipes = cookbookAccess.getCookbook().getRecipes();
-    // assertEquals(2, recipes.size());
+    
 
   }
 

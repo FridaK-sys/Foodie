@@ -27,7 +27,7 @@ public class LocalCookbookAccessTest {
   private Cookbook createDefaultCookbook() {
     Recipe r1 = new Recipe("Cake", 1);
     r1.setDescription("Recipe for cake");
-    r1.setLabel("Breakfast");
+    r1.setLabel("breakfast");
     r1.addIngredient(new Ingredient("Flour", 200.0, "g"));
     r1.addIngredient(new Ingredient("Egg", 2.0, "stk"));
     Recipe r2 = new Recipe("Hot chocolate", 1);
@@ -44,6 +44,7 @@ public class LocalCookbookAccessTest {
   void setup() throws IllegalStateException, IOException {
     localCookbook = new LocalCookbookAccess("default-cookbook.json");
     persistence = new CookbookPersistence();
+    persistence.setSaveFile("user.dir");
     persistence.loadCookbook();
 
     // defaultCookbookPath = System.getProperty("user.dir") + File.separator
