@@ -8,6 +8,7 @@ import ui.utils.CookbookAccess;
 /**
  * Abstract class for RestApp- and LocalAppController.
  */
+/
 public abstract class AbstractController implements FoodieController, Initializable {
 
   protected CookbookAccess dataAccess;
