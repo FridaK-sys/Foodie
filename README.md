@@ -5,7 +5,7 @@
 Dette prosjektet er tilknyttet emnet IT1901 Informatikk prosjektarbeid I.
 
 ## Om appen
-Foodie lar deg opprette dine egne kokebøker og legge til oppskrifter i disse. Hver oppskrift kan redigeres ved å legge til eller fjerne ingredienser, samt skalere antall porsjoner for oppskriften. Appen er ment til å brukes som en digital samling av kokebøker for å bidra til en lettere matlagingsopplevelse i hverdagen. 
+Foodie lar deg opprette din egen kokebok og legge til oppskrifter i denne. Hver oppskrift kan redigeres ved å legge til eller fjerne ingredienser, samt skalere antall porsjoner. Dessuten kan man sortere oppskrifter basert på merkelapper og angi en oppskrift som favoritt. Appen er ment til å brukes som en digital kokebok for å bidra til en lettere matlagingsopplevelse i hverdagen. 
 
 ## Oppsett av prosjektet 
 - Selve kodingsprosjektet ligger i mappen `foodie`. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
