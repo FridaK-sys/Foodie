@@ -58,6 +58,20 @@ public class Cookbook {
   }
 
   /**
+   * Adds recipe to cookbook.
+   *
+   * @param recipe recipe to add
+   * 
+   * @throws IllegalArgumentException if list already contains recipe
+   */
+
+  public void addRecipe(Recipe recipe) {
+    if (!recipes.contains(recipe)) {
+      recipes.add(recipe);
+    }
+  }
+
+  /**
    * Adds recipe to cookbook at certain index
    *
    * @param recipe recipe to add
@@ -70,21 +84,6 @@ public class Cookbook {
   public void addRecipe(int index, Recipe recipe) {
     if (!recipes.contains(recipe)) {
       recipes.add(index, recipe);
-    }
-  }
-
-
-  /**
-   * Adds recipe to cookbook.
-   *
-   * @param recipe recipe to add
-   *
-   * @throws IllegalArgumentException if list already contains recipe
-   */
-
-  public void addRecipe(Recipe recipe) {
-    if (!recipes.contains(recipe)) {
-      recipes.add(recipe);
     }
   }
 
@@ -170,10 +169,6 @@ public class Cookbook {
     return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
   }
 
-  public String toString() {
-    return getName();
-  }
-
   /**
    * Sets new recipes in cookbook.
    *
@@ -183,5 +178,9 @@ public class Cookbook {
    */
   public void setRecipes(List<Recipe> recipes) {
     this.recipes = recipes;
+  }
+
+  public String toString() {
+    return getName();
   }
 }
