@@ -11,7 +11,6 @@ import ui.utils.CookbookAccess;
 /**
  * Abstract class for RestApp- and LocalAppController.
  */
-/
 public abstract class AbstractController implements FoodieController, Initializable {
 
   protected CookbookAccess dataAccess;
@@ -56,7 +55,7 @@ public abstract class AbstractController implements FoodieController, Initializa
     return mainListViewController.getCookbook();
   }
 
-  static void setSelectedRecipe(Recipe recipe){
+  static void setSelectedRecipe(Recipe recipe) {
     selectedRecipe = recipe;
   }
 
