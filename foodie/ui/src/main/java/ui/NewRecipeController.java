@@ -19,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
@@ -85,6 +86,51 @@ public class NewRecipeController extends AbstractController {
 
   @FXML
   private HBox hb;
+
+
+
+public void numLetValidate(KeyEvent k) {
+  TextField source = (TextField) k.getSource();
+  if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
+    errorMessageLabel.setText("Must be letters or numbers");
+    source.setStyle("-fx-border-color: RED; -fx-background-color: RED");
+  } else {
+    errorMessageLabel.setText("");
+    source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+  }
+}
+
+public void intValidate(KeyEvent k) {
+  TextField source = (TextField) k.getSource();
+  if (source.getText().isEmpty()) {
+    return;
+  }
+  try {
+    Integer.parseInt(source.getText());
+    errorMessageLabel.setText("");
+    source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+  } catch (Exception e) {
+    errorMessageLabel.setText("Must be an integer");
+    source.setStyle("-fx-border-color: RED; -fx-background-color: RED");
+  }
+}
+
+public void doubleValidate(KeyEvent k) {
+  TextField source = (TextField) k.getSource();
+  if (source.getText().isEmpty()) {
+    return;
+  }
+  try {
+    Double.parseDouble(source.getText());
+    errorMessageLabel.setText("");
+    source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+  } catch (Exception e) {
+    errorMessageLabel.setText("Must be a decimal");
+    source.setStyle("-fx-border-color: RED; -fx-background-color: RED");
+  }
+}
+
+
 
   /**
    * Adds ingredient to recipe.
