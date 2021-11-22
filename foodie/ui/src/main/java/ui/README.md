@@ -13,6 +13,6 @@ Samspillet med kontrollerne til applikasjonen er illustrert på klassediagrammet
 
 ![Kontrollere](controllers.png)
 
-Følgende diagram viser samspillet mellom kontrollerne, datatilgangsobjektet, REST-tjenesten og diverse hjelpeobjekter ?? når man skal redigere en oppskrift i brukergrensesnittet ?
+Følgende diagram viser samspillet mellom kjernemodulen, brukergrensesnittmodulen, REST-tjenesten når en bruker oppretter en ny oppskrift og legger denne til i kokeboken.
 
 ![Sekvensdiagram](sequence.png)
