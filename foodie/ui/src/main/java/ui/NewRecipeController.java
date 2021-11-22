@@ -17,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
@@ -35,6 +37,7 @@ public class NewRecipeController extends AbstractController {
   // private int index;
   private String recipeName;
   private Stage stage;
+  private ToggleGroup group;
 
   private CookbookAccess dataAccess = CookbookApp.getAccess();
 
@@ -65,11 +68,13 @@ public class NewRecipeController extends AbstractController {
   @FXML
   private Button backButton;
   @FXML
-  private Button breakfastTag;
+  private ToggleButton breakfast;
   @FXML
-  private Button lunchTag;
+  private ToggleButton lunch;
   @FXML
-  private Button dinnerTag;
+  private ToggleButton dinner;
+  @FXML
+  private ToggleButton dessert;
 
   @FXML
   private Button saveRecipeButton;
@@ -105,6 +110,7 @@ public class NewRecipeController extends AbstractController {
 
     } catch (NumberFormatException e) {
       errorMessageLabel.setText("Invalid input: ingredient amount must be a number");
+      e.printStackTrace();
       e.printStackTrace();
     } catch (IllegalArgumentException e) {
       errorMessageLabel.setText("Invalid Ingredient name");
@@ -146,11 +152,16 @@ public class NewRecipeController extends AbstractController {
       dataAccess.addRecipe(createRecipe());
       backButton.fire();
 
-    } catch (Exception e) {
-      errorMessageLabel.setText(e.getMessage());
-      System.out.println(e.getMessage());
-    }
+    } catch (NullPointerException e) {
+      errorMessageLabel.setText("You have empty fields");
+      e.printStackTrace();
+  } catch (Exception e) {
+    System.out.println("testingerror");
+    // e.printStackTrace();
+    errorMessageLabel.setText("Invalid input");
+
   }
+}
 
   /**
    * Saves edited recipe to server.
@@ -175,43 +186,30 @@ public class NewRecipeController extends AbstractController {
    * Creates edited recipe.
    */
   public Recipe createRecipe() {
-    if (recipePortions.getText() == null || recipeTitle.getText().isBlank() || recipePortions
-        .getText().isBlank()) {
-      throw new IllegalArgumentException("Missing name or portion size");
-    }
     if (!editing) {
       if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
         (this.recipeTitle).setText("");
         throw new IllegalArgumentException("This recipe title already exists");
       }
     }
-    try {
       this.newRecipe = new Recipe(recipeTitle.getText());
+      newRecipe.setPortions(Integer.parseInt(recipePortions.getText()));
       if (!(recipeDescription.getText() == null)) {
         this.newRecipe.setDescription(recipeDescription.getText());
-      }
-      if (ingredients.isEmpty()) {
-        throw new IllegalArgumentException("You have missing ingredients");
       }
 
       for (Ingredient i : ingredients) {
         this.newRecipe.addIngredient(i);
       }
-      if (!this.label.isBlank()) {
-        this.newRecipe.setLabel(this.label);
+      if (group.getSelectedToggle() != null) {
+        this.newRecipe.setLabel((String) group.getSelectedToggle().getUserData());
+      } else {
+        this.newRecipe.removeLabel();
       }
 
       this.newRecipe.setDescription(recipeDescription.getText());
 
       return newRecipe;
-
-    } catch (NullPointerException e) {
-      throw new NullPointerException("You have empty fields");
-    } catch (NumberFormatException e) {
-      throw new NumberFormatException("Ingredient amount must be a number");
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException(e.getMessage());
-    }
 
   }
 
@@ -229,7 +227,16 @@ public class NewRecipeController extends AbstractController {
       this.recipeDescription.setText(recipe.getDescription());
     }
     if (!recipe.getLabel().isEmpty()) {
-      setLabel(recipe.getLabel());
+      switch (recipe.getLabel()){
+        case "breakfast":
+          group.selectToggle(breakfast);
+        case "lunch":
+          group.selectToggle(lunch);
+        case "dinner":
+          group.selectToggle(dinner);
+        case "dessert":
+          group.selectToggle(dessert);
+      }
     }
     ingredients.setAll(recipe.getIngredients());
     this.editing = true;
@@ -257,23 +264,6 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Sets label to "breakfast" if breakfastTag is pushed.
-   *
-   * @param ae when breakfast tag is pushed
-   */
-  public void breakfastTagPushed(ActionEvent ae) {
-    setLabel("breakfast");
-  }
-
-  public void lunchTagPushed(ActionEvent ae) {
-    setLabel("lunch");
-  }
-
-  public void dinnerTagPushed(ActionEvent ae) {
-    setLabel("dinner");
-  }
-
-  /**
    * Sets new label.
    *
    * @param label label to be set
@@ -281,10 +271,10 @@ public class NewRecipeController extends AbstractController {
   public void setLabel(String label) {
     if (!this.label.equals(label)) {
       this.label = label;
-      setLabelButton(label);
+      // setLabelButton(label);
     } else {
       this.label = "";
-      setLabelButton("blank");
+      // setLabelButton("blank");
     }
   }
 
@@ -297,9 +287,24 @@ public class NewRecipeController extends AbstractController {
     setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
     clear();
     ingredientListView.setItems(ingredients);
-    setLabelButton("blank");
+    // setLabelButton("blank");
+    setToggleGroup();
     hb.setSpacing(20);
   }
+
+  private void setToggleGroup() {
+    this.group = new ToggleGroup();
+    breakfast.setToggleGroup(group);
+    breakfast.setUserData("breakfast");
+    lunch.setToggleGroup(group);
+    lunch.setUserData("lunch");
+    dinner.setToggleGroup(group);
+    dinner.setUserData("dinner");
+    dessert.setToggleGroup(group);
+    dessert.setUserData("dessert");
+
+  }
+
 
   public List<Ingredient> getIngredients() {
     return new ArrayList<Ingredient>(ingredients);
@@ -328,32 +333,6 @@ public class NewRecipeController extends AbstractController {
       setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
     }
 
-  }
-
-  /**
-   * Changes color based on which label is selected.
-   *
-   * @param label selected label
-   */
-  public void setLabelButton(String label) {
-    if (label.equals("breakfast")) {
-      breakfastTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
-      dinnerTag.setStyle("-fx-background-color: white");
-      lunchTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("lunch")) {
-      lunchTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
-      dinnerTag.setStyle("-fx-background-color: white");
-      breakfastTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("dinner")) {
-      dinnerTag.setStyle("-fx-text-fill: white; -fx-background-color: red;");
-      breakfastTag.setStyle("-fx-background-color: white");
-      lunchTag.setStyle("-fx-background-color: white");
-    } else if (label.equals("blank")) {
-      lunchTag.setStyle("-fx-background-color: white");
-      breakfastTag.setStyle("-fx-background-color: white");
-      dinnerTag.setStyle("-fx-background-color: white");
-
-    }
   }
 
   public void clearTextFields(){
