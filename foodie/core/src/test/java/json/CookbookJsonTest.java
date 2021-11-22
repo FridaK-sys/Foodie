@@ -86,15 +86,16 @@ public class CookbookJsonTest extends AbstractJsonTest {
 
   static void checkCookbook(Cookbook cookbook) {
     Cookbook defaultCookbook = createCookbook();
-    assertEquals(defaultCookbook.getName(), cookbook.getName());
-    assertEquals(defaultCookbook.getRecipes().toString(), cookbook.getRecipes().toString());
+    assertEquals(defaultCookbook.getName(), cookbook.getName(), "Wrong name of cookbook");
+    assertEquals(defaultCookbook.getRecipes().toString(), cookbook.getRecipes().toString(),
+        "List of recipes was wrong");
   }
 
   @Test
   public void testSerialization() {
     try {
       String actualJson = mapper.writeValueAsString(createCookbook());
-      assertEqualsIgnoreWhitespace(cookbookJson, actualJson);
+      assertEqualsIgnoreWhitespace(cookbookJson, actualJson, "Serialization was not done correctly");
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
