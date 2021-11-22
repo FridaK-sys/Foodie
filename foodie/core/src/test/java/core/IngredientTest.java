@@ -18,13 +18,13 @@ public class IngredientTest {
 
 	@Test
 	public void testConstructor() {
-		assertEquals(ingredient1.getName(), "Mel");
-		assertEquals(ingredient1.getAmount(), 200);
-		assertEquals(ingredient1.getUnit(), "g");
+		assertEquals(ingredient1.getName(), "Mel", "Name does not match value set in constructor");
+		assertEquals(ingredient1.getAmount(), 200, "Amount does not match value set in constructor");
+		assertEquals(ingredient1.getUnit(), "g", "Unit does not match value set in constructor");
 
-		assertEquals(ingredient2.getName(), "Smør");
-		assertEquals(ingredient2.getAmount(), 0);
-		assertEquals(ingredient2.getUnit(), "");
+		assertEquals(ingredient2.getName(), "Smør", "Name does not match value set in constructor");
+		assertEquals(ingredient2.getAmount(), 0, "Amount should be 0");
+		assertEquals(ingredient2.getUnit(), "", "Unit should be the empty string");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Ingredient("$~@");
@@ -47,7 +47,7 @@ public class IngredientTest {
 	@Test
 	public void testSetName() {
 		ingredient1.setName("Smør");
-		assertEquals(ingredient1.getName(), "Smør");
+		assertEquals(ingredient1.getName(), "Smør", "Incorrect name");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			ingredient1.setName("$~@");
@@ -57,7 +57,7 @@ public class IngredientTest {
 	@Test
 	public void testSetAmount() {
 		ingredient1.setAmount(250);
-		assertEquals(ingredient1.getAmount(), 250);
+		assertEquals(ingredient1.getAmount(), 250, "Incorrect amount");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			ingredient1.setAmount(0);
