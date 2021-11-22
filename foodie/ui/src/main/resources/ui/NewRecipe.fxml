@@ -25,7 +25,7 @@
       </Label>
       <Button fx:id="addIngredient" layoutX="278.0" layoutY="124.0" mnemonicParsing="false" onAction="#addIngredientButton" prefHeight="26.0" prefWidth="28.0" text="+" />
       <Button fx:id="createRecipeButton" layoutX="454.0" layoutY="360.0" mnemonicParsing="false" onAction="#createRecipeButtonPushed" text="Create new recipe" />
-      <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" text="&lt;-" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" text="&lt;-"  />
       <Label fx:id="errorMessageLabel" layoutX="43.0" layoutY="365.0" prefHeight="17.0" prefWidth="266.0" />
       <HBox fx:id="hb" layoutX="343.0" layoutY="71.0" prefHeight="30.0" prefWidth="220.0">
          <children>

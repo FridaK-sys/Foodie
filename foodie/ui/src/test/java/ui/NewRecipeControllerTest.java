@@ -44,6 +44,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
     Parent root = fxmlLoader.load();
     this.controller = fxmlLoader.getController();
+    
 
     Scene scene = new Scene(root);
 
@@ -54,7 +55,8 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   @BeforeEach
   public void setupItems() {
     setTestData();
-    this.controller.initData(cookbook, dataAccess);
+    this.controller.setDataAccess(dataAccess);
+    // this.controller.initData(cookbook, dataAccess);
   }
 
   @Test
@@ -69,6 +71,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
   @Test
   public void testNewRecipe() throws FileNotFoundException {
+    this.controller.clear();
     clickOn("#recipeTitle").write("Eple");
     clickOn("#recipePortions").write("2");
     clickOn("#ingredientTitle").write("Eple");
@@ -83,7 +86,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   @Test
   public void testEditRecipe() {
     dataAccess.addRecipe(recipe4);
-    this.controller.initData(recipe4, 1, dataAccess);
+    this.controller.initData(recipe4);
     TextField nrecipeTitle = lookup("#recipeTitle").query();
     TextField portions = lookup("#recipePortions").query();
 
@@ -107,7 +110,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   public void testDeleteButton() {
     dataAccess.addRecipe(recipe4);
     assertTrue(dataAccess.getCookbook().getRecipes().size() == 4);
-    this.controller.initData(recipe4, 1, dataAccess);
+    this.controller.initData(recipe4);
     clickOn("#deleteRecipeButton");
     testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
   }

@@ -6,10 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
-
+import java.util.function.Predicate;
+import core.Recipe;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 public class ListViewTest extends AbstractAppTest {
@@ -44,8 +48,29 @@ public class ListViewTest extends AbstractAppTest {
 
   @Test
   public void testRecipeListView() {
+    // ListView<Recipe> recipessListView = lookup("#mainListView").query();
+    // recipessListView.get
+    // Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
+
+    // clickOn(listViewCell(listCell, 1));;
     checkRecipesListViewItems(recipe1, recipe2, recipe3);
   }
+
+  private Node findNode(Predicate<Node> nodeTest, int num) {
+    int count = 0;
+    for (Node node : lookup(nodeTest).queryAll()) {
+      if (nodeTest.test(node) && count++ == num) {
+        return node;
+      }
+    }
+    return null;
+  }
+
+
+  private ListViewCell listViewCell(Predicate<ListViewCell> test, int num) {
+    return (ListViewCell) findNode(node -> node instanceof ListViewCell listCell && test.test(listCell), num);
+  }
+
 
   @Test
   public void testToggleButtons() {
@@ -68,9 +93,9 @@ public class ListViewTest extends AbstractAppTest {
 
 
 
-  @Test
-  public void testChangeSceneToNewRecipeButtonPushed() {
-    clickOn("#newButton");
-  }
+  // @Test
+  // public void testChangeSceneToNewRecipeButtonPushed() {
+  //   clickOn("#newButton");
+  // }
 
 }
