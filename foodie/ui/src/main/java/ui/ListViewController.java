@@ -77,6 +77,14 @@ public class ListViewController implements FoodieController {
     });
     setToggles();
     updateListView();
+    setListViewCellfactory();
+  }
+
+  private void setListViewCellfactory() {
+    mainListView.setCellFactory(listView -> {
+      ListViewCell listCell = new ListViewCell();
+      return listCell;
+    });
   }
 
   /**
@@ -98,6 +106,7 @@ public class ListViewController implements FoodieController {
   public void update() {
     mainBook = dataAccess.getCookbook();
     updateListView();
+    setListViewCellfactory();
   }
 
   /**
@@ -115,6 +124,7 @@ public class ListViewController implements FoodieController {
    * Updates the list view.
    */
   public void updateListView() {
+    setListViewCellfactory();
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
     setToggles();
@@ -166,6 +176,7 @@ public class ListViewController implements FoodieController {
       public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
           Recipe newValue) {
         if (newValue != null) {
+          System.out.println("Exception kommer her da, ser det:");
           changeSceneToViewRecipe(newValue);
         }
         System.out.println("ListView selection changed from oldValue = " + oldValue 
