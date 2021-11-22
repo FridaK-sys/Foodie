@@ -65,7 +65,7 @@ public class RemoteCookbookAccessTest {
   }
 
   @Test
-  void testGetCookbook() {
+  public void testGetCookbook() {
     stubFor(get(urlEqualTo("/cookbook")).withHeader("Accept", equalTo("application/json")).willReturn(
         aResponse().withStatus(200).withHeader("Content-Type", "application/json").withBody(GET_COOKBOOK_RESPONSE)));
   

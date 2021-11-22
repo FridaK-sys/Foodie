@@ -14,7 +14,7 @@ public class LocalAppControllerTest {
   LocalAppController localController = new LocalAppController();
 
   @Test
-  void setUpStorage(){
+  public void setUpStorage(){
     assertNull(localController.dataAccess, "dataAccess is not null");
     localController.setUpStorage();
     assertNotNull(localController.dataAccess,"dataAccess is null");
