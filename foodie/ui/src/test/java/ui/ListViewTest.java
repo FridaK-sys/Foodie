@@ -50,9 +50,9 @@ public class ListViewTest extends AbstractAppTest {
   public void testRecipeListView() {
     // ListView<Recipe> recipessListView = lookup("#mainListView").query();
     // recipessListView.get
-    Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
+    // Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
 
-    clickOn(listViewCell(listCell, 1));;
+    // clickOn(listViewCell(listCell, 1));;
     checkRecipesListViewItems(recipe1, recipe2, recipe3);
   }
 
@@ -93,9 +93,9 @@ public class ListViewTest extends AbstractAppTest {
 
 
 
-  @Test
-  public void testChangeSceneToNewRecipeButtonPushed() {
-    clickOn("#newButton");
-  }
+  // @Test
+  // public void testChangeSceneToNewRecipeButtonPushed() {
+  //   clickOn("#newButton");
+  // }
 
 }

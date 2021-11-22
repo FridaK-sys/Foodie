@@ -27,8 +27,6 @@ public class LocalAppController extends AbstractController {
     CookbookApp.setAccess(dataAccess);
   }
 
-  
-
   /**
    * Initialize method.
    */

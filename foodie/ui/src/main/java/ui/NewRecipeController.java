@@ -200,33 +200,33 @@ public class NewRecipeController extends AbstractController {
 
   }
 
-  /**
-   * Initialises data from another scene.
-   *
-   * @param recipe 
-   * @param recipeIndex
-   * @param dataAccess
-   */
-  public void initData(Recipe recipe, int recipeIndex) {
-    (this.recipeTitle).setText(recipe.getName());
-    this.recipePortions.setText(String.valueOf(recipe.getPortions()));
-    // this.dataAccess = dataAccess;
-    this.recipeName = recipe.getName();
-    if (!recipe.getDescription().isEmpty()) {
-      this.recipeDescription.setText(recipe.getDescription());
-    }
-    if (!recipe.getLabel().isEmpty()) {
-      setLabel(recipe.getLabel());
-    }
-    ingredients.addAll(recipe.getIngredients());
-    this.editing = true;
-    // this.index = recipeIndex;
+  // /**
+  //  * Initialises data from another scene.
+  //  *
+  //  * @param recipe 
+  //  * @param recipeIndex
+  //  * @param dataAccess
+  //  */
+  // public void initData(Recipe recipe, int recipeIndex) {
+  //   (this.recipeTitle).setText(recipe.getName());
+  //   this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+  //   // this.dataAccess = dataAccess;
+  //   this.recipeName = recipe.getName();
+  //   if (!recipe.getDescription().isEmpty()) {
+  //     this.recipeDescription.setText(recipe.getDescription());
+  //   }
+  //   if (!recipe.getLabel().isEmpty()) {
+  //     setLabel(recipe.getLabel());
+  //   }
+  //   ingredients.addAll(recipe.getIngredients());
+  //   this.editing = true;
+  //   // this.index = recipeIndex;
 
-    createRecipeButton.setVisible(false);
-    saveRecipeButton.setVisible(true);
-    deleteRecipeButton.setVisible(true);
+  //   createRecipeButton.setVisible(false);
+  //   saveRecipeButton.setVisible(true);
+  //   deleteRecipeButton.setVisible(true);
 
-  }
+  // }
 
   /**
    * Initialises data from another scene.
@@ -270,21 +270,6 @@ public class NewRecipeController extends AbstractController {
     deleteRecipeButton.setVisible(true);
 
   }
-
-  // /**
-  //  * Initialises data from another scene.
-  //  *
-  //  * @param cookbook Cookbook to initialize
-  //  * @param dataAccess CookbookInterface to initialize
-  //  */
-  // public void initData(Cookbook cookbook, CookbookAccess dataAccess) {
-  //   this.cookbook = cookbook;
-
-  //   createRecipeButton.setVisible(true);
-  //   saveRecipeButton.setVisible(false);
-  //   deleteRecipeButton.setVisible(false);
-
-  // }
 
   /**
    * Sets label to "breakfast" if breakfastTag is pushed.
@@ -394,6 +379,10 @@ public class NewRecipeController extends AbstractController {
 
   @Override
   protected void setUpStorage() {
+  }
+
+  public void setDataAccess(CookbookAccess dataAccess){
+    this.dataAccess = dataAccess;
   }
 
 }

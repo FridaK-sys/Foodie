@@ -211,6 +211,7 @@ public class ListViewController implements FoodieController {
   public void setRecipes(Cookbook cookbook) {
     this.mainBook = cookbook;
     recipes.setAll(cookbook.getRecipes());
+    updateListView();
   }
 
   public Cookbook getCookbook() {

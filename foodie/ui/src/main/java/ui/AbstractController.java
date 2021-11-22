@@ -27,8 +27,8 @@ public abstract class AbstractController implements FoodieController, Initializa
 
 
   public void setCookbookAccess(CookbookAccess access) {
-    this.dataAccess = access;
-    initializeRecipesView();
+    CookbookApp.setAccess(dataAccess);
+    dataAccess = access;
   }
 
   public void initializeRecipesView() {
