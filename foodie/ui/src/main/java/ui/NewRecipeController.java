@@ -170,8 +170,7 @@ public class NewRecipeController extends AbstractController {
       }
     }
     try {
-      this.newRecipe = new Recipe(recipeTitle.getText(), Integer.parseInt(recipePortions.getText()))
-      ;
+      this.newRecipe = new Recipe(recipeTitle.getText());
       if (!(recipeDescription.getText() == null)) {
         this.newRecipe.setDescription(recipeDescription.getText());
       }

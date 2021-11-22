@@ -33,18 +33,22 @@ class CookbookControllerTest {
 
   @Test
   void testAddRecipe() {
-    assertTrue(controller.addRecipe("recipe", new Recipe("recipe", 1)));
+    assertTrue(controller.addRecipe("recipe", new Recipe("recipe")));
   }
 
   @Test
   void testEditRecipe() {
-    controller.addRecipe("recipe", new Recipe("recipe", 1));
-    assertTrue(controller.editRecipe("recipe", new Recipe("recipe", 2)));
+    Recipe r1 = new Recipe("recipe");
+    r1.setPortions(1);
+    Recipe r2 = new Recipe("recipe");
+    r2.setPortions(2);
+    controller.addRecipe("recipe", r1);
+    assertTrue(controller.editRecipe("recipe", r2));
   }
 
   @Test
   void testRemoveRecipe() {
-    controller.addRecipe("recipe", new Recipe("recipe", 1));
+    controller.addRecipe("recipe", new Recipe("recipe"));
     assertTrue(controller.removeRecipe("recipe"));
   }
 

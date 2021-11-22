@@ -39,12 +39,14 @@ public class CookbookPersistenceTest {
   }
 
   private Cookbook createDefaultCookbook() {
-    Recipe r1 = new Recipe("Cake", 1);
+    Recipe r1 = new Recipe("Cake");
+    r1.setPortions(1);
     r1.setDescription("Recipe for cake");
     r1.setLabel("breakfast");
     r1.addIngredient(new Ingredient("Flour", 200.0, "g"));
     r1.addIngredient(new Ingredient("Egg", 2.0, "stk"));
-    Recipe r2 = new Recipe("Hot chocolate", 1);
+    Recipe r2 = new Recipe("Hot chocolate");
+    r2.setPortions(1);
     r2.setDescription("Good dessert");
     r2.addIngredient(new Ingredient("Sugar", 1.5, "dl"));
     r2.addIngredient(new Ingredient("Cocoa", 1.0, "dl"));
