@@ -12,6 +12,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -70,6 +71,52 @@ public class RemoteCookbookAccessTest {
             ]
           }]}""";
 
+  private static final String GET_COOKBOOK_RESPONSE2 = """
+      {
+        "name": "Cookbook",
+        "recipes" :[
+          {
+            "name": "Brownies",
+            "description": "Den beste oppskriften på brownies!",
+            "portions": 1,
+            "fav": true,
+            "label": "breakfast",
+            "ingredients" :[
+              {
+                "name": "Egg",
+                "amount": 2.0,
+                "unit": "stk"
+              },
+              {
+                "name": "Kakao",
+                "amount": 1.0,
+                "unit": "dl"
+              }
+            ]
+          },
+           {
+          "name": "Pizza",
+          "description": "The best homemade pizza",
+          "portions": 2,
+          "fav": false,
+          "label": "dinner",
+          "ingredients": [
+              {
+                  "name": "Grandis",
+                  "amount": 2.0,
+                  "unit": "stk"
+              },
+              {
+                  "name": "Cola",
+                  "amount": 2.0,
+                  "unit": "stk"
+              }
+          ]
+      }
+          
+          
+      ]}""";
+
   @BeforeEach
   public void startWireMockServerAndSetup() throws URISyntaxException {
     config = WireMockConfiguration.wireMockConfig().port(8081);
@@ -89,22 +136,18 @@ public class RemoteCookbookAccessTest {
 
   }
 
-  @Test
-  void testAddRecipe() throws Exception{
-    Recipe recipe = new Recipe("Appelsin", 1);
-    try {
-      String json = mapper.writeValueAsString(recipe);
-      MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/cookbook/" + recipe.getName())
-          .contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk()).andReturn();
-      assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
-    } catch (JsonProcessingException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+  // @Test
+  // void testAddRecipe() throws Exception{
+
+  //   stubFor(post(urlEqualTo("/cookbook/Pizza")).withRequestBody(equalTo(
+  //       "application/json"))
+  //       .willReturn(aResponse().withHeader("Content-Type", "application/json").withBody(GET_COOKBOOK_RESPONSE2)));
+  //   List<Recipe> recipes = cookbookAccess.getCookbook().getRecipes();
+  //   assertEquals(2, recipes.size());
 
     
-
-  }
+  
+  // }
 
   @AfterEach
   public void stopWireMockServer() {
