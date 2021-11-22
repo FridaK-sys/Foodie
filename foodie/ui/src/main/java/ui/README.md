@@ -2,12 +2,12 @@
 
 Vi har brukt JavaFX og FXML for å utarbeide brukergrensesnittet.
 
-## Arkitektur
+## Arkitektur for datalagring
 
-Vi har to varianter av applikasjonen. Den ene bruker lokale data lagret på fil, mens den andre bruker data håndtert gjennom et REST-API på en server. Derfor har vi to FXML filer (X og Y) og de tilhørende Kontroller klassene (LocalAppController og RestAppController). Siden kontrollerne har en del felles kode har vi laget en abstrakt klasse (AbstractController) som begge arver fra. Datatilgangen er spesifisert i egne klasser som RemoteCookbookAccess og LocalCookbookAccess. Remote og Local implementerer grensesnittet CookbookInterface. Forskjellen er at Local utfører operasjonene lokalt mens Remote gjør det ved å bruke REST-APIet.
+Vi har to varianter av applikasjonen. Den ene bruker lokale data lagret på fil, mens den andre bruker data håndtert gjennom et REST-API på en server. Derfor har vi to FXML filer Main.fxml og MainRest.fxml og de tilhørende kontroller-klassene **LocalAppController** og **RestAppController**. Siden kontrollerne har en del felles kode har vi laget en abstrakt klasse (AbstractController) som begge arver fra. Datatilgangen er spesifisert i klassene **RemoteCookbookAccess** og **LocalCookbookAccess**, og disse implementerer grensesnittet **CookbookAccess**. Forskjellen er at Local utfører operasjonene lokalt mens Remote gjør det ved å bruke REST-APIet.
 
-Appklassen (CookbookApp) velger hvilken variant som skal brukes. Noe mer...
-Dette er illustrert på klassediagrammet. 
+
+Samspillet med kontrollerne i UI i illustrert på klassediagrammet under. 
 
 ![Kontrollere](controllers.png)
 
