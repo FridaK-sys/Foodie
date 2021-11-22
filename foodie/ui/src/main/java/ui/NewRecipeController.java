@@ -90,9 +90,6 @@ public class NewRecipeController extends AbstractController {
    */
   public void addIngredientButton(ActionEvent ae) {
     try {
-      if (ingredientTitle.getText().isBlank()) {
-        throw new IllegalArgumentException("Missing a title here...");
-      }
       if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
             (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getText()));
@@ -102,19 +99,38 @@ public class NewRecipeController extends AbstractController {
         ingredients.add(newIngredient);
       }
 
-      ingredientAmount.setText(null);
-      ingredientTitle.setText(null);
-      ingredientUnit.setText(null);
+      ingredientAmount.clear();
+      ingredientTitle.clear();
+      ingredientUnit.clear();
 
     } catch (NumberFormatException e) {
       errorMessageLabel.setText("Invalid input: ingredient amount must be a number");
       e.printStackTrace();
     } catch (IllegalArgumentException e) {
-      errorMessageLabel.setText(e.getMessage());
+      errorMessageLabel.setText("Invalid Ingredient name");
       e.printStackTrace();
     } catch (NullPointerException e) {
       errorMessageLabel.setText("The ingredient needs a title");
       e.printStackTrace();
+    }
+  }
+
+  @FXML
+  public void handleDeleteIngredient(){
+    Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
+    if (ing != null){
+      ingredients.remove(ing);
+    }
+  }
+
+  @FXML
+  public void handleEditIngredient(){
+    Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
+    if (ing != null) {
+      ingredients.remove(ing);
+      ingredientAmount.setText(Double.toString(ing.getAmount()));
+      ingredientTitle.setText(ing.getName());
+      ingredientUnit.setText(ing.getUnit());
     }
   }
 
@@ -200,34 +216,6 @@ public class NewRecipeController extends AbstractController {
 
   }
 
-  // /**
-  //  * Initialises data from another scene.
-  //  *
-  //  * @param recipe 
-  //  * @param recipeIndex
-  //  * @param dataAccess
-  //  */
-  // public void initData(Recipe recipe, int recipeIndex) {
-  //   (this.recipeTitle).setText(recipe.getName());
-  //   this.recipePortions.setText(String.valueOf(recipe.getPortions()));
-  //   // this.dataAccess = dataAccess;
-  //   this.recipeName = recipe.getName();
-  //   if (!recipe.getDescription().isEmpty()) {
-  //     this.recipeDescription.setText(recipe.getDescription());
-  //   }
-  //   if (!recipe.getLabel().isEmpty()) {
-  //     setLabel(recipe.getLabel());
-  //   }
-  //   ingredients.addAll(recipe.getIngredients());
-  //   this.editing = true;
-  //   // this.index = recipeIndex;
-
-  //   createRecipeButton.setVisible(false);
-  //   saveRecipeButton.setVisible(true);
-  //   deleteRecipeButton.setVisible(true);
-
-  // }
-
   /**
    * Initialises data from another scene.
    *
@@ -245,7 +233,7 @@ public class NewRecipeController extends AbstractController {
     if (!recipe.getLabel().isEmpty()) {
       setLabel(recipe.getLabel());
     }
-    ingredients.addAll(recipe.getIngredients());
+    ingredients.setAll(recipe.getIngredients());
     this.editing = true;
     // this.cookbook = cookbook;
 
@@ -256,14 +244,13 @@ public class NewRecipeController extends AbstractController {
   }
 
   public void clear() {
-    this.recipeTitle.clear();;
-    this.recipePortions.clear();;
-    this.recipeName = "";
-    this.recipeDescription.clear();
+    clearTextFields();
+    
     setLabel("");
     
     ingredients.clear();
     this.editing = false;
+    
 
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
@@ -335,6 +322,9 @@ public class NewRecipeController extends AbstractController {
   @Override
   public void update() {
     if (getSelectedrecipe() != null) {
+      ingredientAmount.setText("");
+      ingredientTitle.setText("");
+      ingredientUnit.setText("");
       initData(selectedRecipe);
       setBackButtonTarget(CookbookApp.getScenes().get(SceneName.VIEWRECIPE));
     } else {
@@ -370,6 +360,15 @@ public class NewRecipeController extends AbstractController {
     }
   }
 
+  public void clearTextFields(){
+    ingredientAmount.clear();
+    ingredientTitle.clear();
+    ingredientUnit.clear();
+    this.recipeTitle.clear();;
+    this.recipePortions.clear();;
+    this.recipeName = "";
+    this.recipeDescription.clear();
+  }
 
 
   @Override
