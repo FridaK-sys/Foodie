@@ -95,8 +95,8 @@ public class CookbookTest {
 
 	@Test
 	public void testGetRecipesWithLabel() {
-		assertEquals(cookbook1.getRecipesWithLabel("Dinner"), Arrays.asList(recipe2), "Incorrect list of recipes");
-		assertTrue(cookbook1.getRecipesWithLabel("Breakfast").isEmpty(), "List should be empty");
+		assertEquals(cookbook1.getRecipesWithLabel("dinner"), Arrays.asList(recipe2), "Incorrect list of recipes");
+		assertTrue(cookbook1.getRecipesWithLabel("breakfast").isEmpty(), "List should be empty");
 		assertThrows(IllegalArgumentException.class, () -> {
 			cookbook1.getRecipesWithLabel("Snacks");
 		}, "Invalid label");

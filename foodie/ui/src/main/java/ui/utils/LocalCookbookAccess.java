@@ -62,8 +62,8 @@ public class LocalCookbookAccess implements CookbookAccess {
 
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
-    cookbook.removeRecipe(name);
-    cookbook.addRecipe(recipe);
+    cookbook.replaceRecipe(name, recipe);
+    // cookbook.add
     try {
       persistence.saveCookbook(cookbook);
     } catch (IllegalStateException e) {
