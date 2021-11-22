@@ -28,12 +28,13 @@ public class RecipeTest {
 
 	@Test
 	public void testConstructor() {
-		assertEquals(recipe1.getName(), "Bløtkake");
-		assertEquals(recipe1.getDescription(), "Den beste oppskriften på bløtkake!");
-		assertEquals(recipe1.getPortions(), 1);
-		assertEquals(recipe1.getIngredients(), ingredients);
-		assertEquals(recipe1.getFav(), false);
-		assertEquals(recipe1.getLabel(), "");
+		assertEquals(recipe1.getName(), "Bløtkake", "Name does not match value set in constructor");
+		assertEquals(recipe1.getDescription(), "Den beste oppskriften på bløtkake!",
+				"Description does not match value set in constructor");
+		assertEquals(recipe1.getPortions(), 1, "Portions does not match value set in constructor");
+		assertEquals(recipe1.getIngredients(), ingredients, "List of ingredients does not match value set in constructor");
+		assertEquals(recipe1.getFav(), false, "Recipe is not set as favorite");
+		assertEquals(recipe1.getLabel(), "", "Label does not match value set in constructor");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Recipe("$~@", "Min favoritt dessert", 10, ingredients);
@@ -46,12 +47,12 @@ public class RecipeTest {
 
 	@Test
 	public void testConstructor2() {
-		assertEquals(recipe2.getName(), "Taco");
-		assertEquals(recipe2.getDescription(), "nothing here...");
-		assertEquals(recipe2.getPortions(), 0);
-		assertEquals(recipe2.getIngredients(), new ArrayList<>());
-		assertEquals(recipe2.getFav(), false);
-		assertEquals(recipe2.getLabel(), "");
+		assertEquals(recipe2.getName(), "Taco", "Name does not match value set in constructor");
+		assertEquals(recipe2.getDescription(), "nothing here...", "Description is incorrect");
+		assertEquals(recipe2.getPortions(), 0, "Portions should be 0 for an empty recipe");
+		assertEquals(recipe2.getIngredients(), new ArrayList<>(), "List should be empty");
+		assertEquals(recipe2.getFav(), false, "Recipe is not set as favorite");
+		assertEquals(recipe2.getLabel(), "", "Label should be the empty string");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Recipe("$~@", "Min favoritt dessert", 10, ingredients);
@@ -61,7 +62,7 @@ public class RecipeTest {
 	@Test
 	public void testSetName() {
 		recipe1.setName("Muffins");
-		assertEquals(recipe1.getName(), "Muffins");
+		assertEquals(recipe1.getName(), "Muffins", "Incorrect name");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			recipe1.setName("");
@@ -74,11 +75,10 @@ public class RecipeTest {
 
 	@Test
 	public void testSetPortions() {
-
 		recipe1.setPortions(3);
-		assertEquals(recipe1.getPortions(), 3);
-		assertEquals(recipe1.getIngredients().get(0).getAmount(), 600);
-		assertEquals(recipe1.getIngredients().get(1).getAmount(), 6);
+		assertEquals(recipe1.getPortions(), 3, "Incorrect number of portions");
+		assertEquals(recipe1.getIngredients().get(0).getAmount(), 600, "Incorrect amount of ingredient");
+		assertEquals(recipe1.getIngredients().get(1).getAmount(), 6, "Incorrect amount of ingredient");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			recipe1.setPortions(0);
@@ -92,7 +92,8 @@ public class RecipeTest {
 	@Test
 	public void testAddIngredient() {
 		recipe1.addIngredient(ingredient3);
-		assertEquals(recipe1.getIngredients(), Arrays.asList(ingredient1, ingredient2, ingredient3));
+		assertEquals(recipe1.getIngredients(), Arrays.asList(ingredient1, ingredient2, ingredient3),
+				"Incorrect list of ingredients");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			recipe1.addIngredient(ingredient3);
@@ -102,30 +103,30 @@ public class RecipeTest {
 	@Test
 	public void testRemoveIngredient() {
 		recipe1.removeIngredient(0);
-		assertEquals(recipe1.getIngredients(), Arrays.asList(ingredient2));
+		assertEquals(recipe1.getIngredients(), Arrays.asList(ingredient2), "Incorrect list of ingredients");
 	}
 
 	@Test
 	public void testFavorite() {
-		assertEquals(recipe1.getFav(), false);
+		assertEquals(recipe1.getFav(), false, "Recipe is not favorite");
 		recipe1.setFav(true);
-		assertEquals(recipe1.getFav(), true);
+		assertEquals(recipe1.getFav(), true, "Recipe is favorite");
 		recipe1.setFav(false);
-		assertEquals(recipe1.getFav(), false);
+		assertEquals(recipe1.getFav(), false, "Recipe is not favorite");
 	}
 
 	@Test
 	public void testSetLabel() {
+		recipe1.setLabel("Dinner");
+		assertEquals("Dinner", recipe1.getLabel(), "Incorrect label");
 		assertThrows(IllegalArgumentException.class, () -> recipe1.setLabel("Vegetar"), "Vegetar is not a valid label");
-		recipe1.setLabel("dinner");
-		assertEquals("dinner", recipe1.getLabel());
 	}
 
 	@Test
 	public void testRemoveLabel() {
 		recipe1.setLabel("dinner");
 		recipe1.removeLabel();
-		assertEquals("", recipe1.getLabel());
+		assertEquals("", recipe1.getLabel(), "Label should be the empty string");
 	}
 
 }

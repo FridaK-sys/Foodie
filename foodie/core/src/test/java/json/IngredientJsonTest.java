@@ -25,16 +25,16 @@ public class IngredientJsonTest extends AbstractJsonTest {
 
   static void checkIngredient(Ingredient ingredient) {
     Ingredient defaultIngredient = createIngredient();
-    assertEquals(defaultIngredient.getName(), ingredient.getName());
-    assertEquals(defaultIngredient.getAmount(), ingredient.getAmount());
-    assertEquals(defaultIngredient.getUnit(), ingredient.getUnit());
+    assertEquals(defaultIngredient.getName(), ingredient.getName(), "Name was wrong");
+    assertEquals(defaultIngredient.getAmount(), ingredient.getAmount(), "Amount was wrong");
+    assertEquals(defaultIngredient.getUnit(), ingredient.getUnit(), "Unit was wrong");
   }
 
   @Test
   public void testSerialization() {
     try {
       String actualJson = mapper.writeValueAsString(createIngredient());
-      assertEqualsIgnoreWhitespace(ingredientJson, actualJson);
+      assertEqualsIgnoreWhitespace(ingredientJson, actualJson, "Serialization was not done correctly");
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }

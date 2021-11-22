@@ -50,16 +50,17 @@ public class RecipeJsonTest extends AbstractJsonTest {
 
   static void checkRecipe(Recipe recipe) {
     Recipe defaultRecipe = createRecipe();
-    assertEquals(defaultRecipe.getName(), recipe.getName());
-    assertEquals(defaultRecipe.getLabel(), recipe.getLabel());
-    assertEquals(defaultRecipe.getIngredients().toString(), recipe.getIngredients().toString());
+    assertEquals(defaultRecipe.getName(), recipe.getName(), "Name was wrong");
+    assertEquals(defaultRecipe.getLabel(), recipe.getLabel(), "Label was wrong");
+    assertEquals(defaultRecipe.getIngredients().toString(), recipe.getIngredients().toString(),
+        "List of ingredients was wrong");
   }
 
   @Test
   public void testSerialization() {
     try {
       String actualJson = mapper.writeValueAsString(createRecipe());
-      assertEqualsIgnoreWhitespace(recipeJson, actualJson);
+      assertEqualsIgnoreWhitespace(recipeJson, actualJson, "Serialization was not done correctly");
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
