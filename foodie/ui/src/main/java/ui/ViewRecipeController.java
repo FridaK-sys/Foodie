@@ -16,26 +16,30 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import ui.utils.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import ui.utils.CookbookAccess;
 
 /**
  * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
  */
-public class ViewRecipeController implements FoodieController, Initializable {
+public class ViewRecipeController extends AbstractController {
 
-  private Recipe selectedRecipe;
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
-  private int index;
-  private SceneTarget sceneTarget;
-  private CookbookAccess dataAccess;
+  private CookbookAccess dataAccess = CookbookApp.getAccess();
+  private Recipe viewRecipe;
+
+  private Stage stage;
 
   @FXML
   private Label recipeTitle;
+
+  @FXML
   private Label labelTag;
+
+  @FXML
   private Label portions;
 
   @FXML
@@ -46,21 +50,22 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   @FXML
   private Button faveButton;
+
+  @FXML
   private Button backButton;
 
   /**
    * Sets or removes favorite for Recipe.
    */
   public void favoriseRecipeButton(ActionEvent ae) {
-    if (selectedRecipe.getFav() == true) {
-      selectedRecipe.setFav(false);
+    if (viewRecipe.getFav() == true) {
+      viewRecipe.setFav(false);
       faveButton.setText("Add to favorite");
     } else {
-      selectedRecipe.setFav(true);
+      viewRecipe.setFav(true);
       faveButton.setText("Remove from favorite");
     }
-    dataAccess.deleteRecipe(selectedRecipe.getName());
-    dataAccess.addRecipe(selectedRecipe);
+    dataAccess.editRecipe(viewRecipe.getName(), viewRecipe);
 
   }
 
@@ -84,7 +89,7 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   /**
    * Alters portions and updated IngredientListView.
-   * 
+   *
    * @param portionSize new portion size
    */
   public void alterPortions(int portionSize) {
@@ -96,27 +101,36 @@ public class ViewRecipeController implements FoodieController, Initializable {
 
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setItems(ingredients);
-
-    textField.setText("Hmm her var det tomt...");
-
+    
   }
 
   /**
-   * Passes information when switching scene. Updates page with selected params.
-   * 
-   * @param recipe selected Recipe
-   * @param index index for the selected Recipe in mainListView
-   * @param scene scene target for main page
-   * @param dataAccess access to Cookbook
+   * Loads new RecipeController with selected recipe for editing and sets page to edit recipe.
+   *
+   * @param ae
+   * @throws IOException if failed or interrupted I/O operations
    */
-  public void initData(Recipe recipe, int index, SceneTarget scene, CookbookAccess dataAccess) {
-    this.index = index;
-    this.selectedRecipe = recipe;
-    this.portion = selectedRecipe.getPortions();
-    this.sceneTarget = scene;
-    this.dataAccess = dataAccess;
-    if (selectedRecipe.getName() != null) {
-      recipeTitle.setText(selectedRecipe.getName());
+  public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
+    FxmlModel model = CookbookApp.getScenes().get(SceneName.NEWRECIPE);
+    Scene scene = model.getScene();
+    model.getController().update();
+    stage.setScene(scene);
+
+  }
+
+  @FXML
+  private void handleBackbutton() {
+    FxmlModel model = CookbookApp.getScenes().get(SceneName.MAIN);
+    Scene scene = model.getScene();
+    model.getController().update();
+    stage.setScene(scene);
+  }
+
+  public void initData(Recipe recipe) {
+    this.viewRecipe = recipe;
+    this.portion = recipe.getPortions();
+    if (recipe.getName() != null) {
+      recipeTitle.setText(recipe.getName());
     } else {
       recipeTitle.setText("oppskrift");
     }
@@ -128,57 +142,38 @@ public class ViewRecipeController implements FoodieController, Initializable {
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
       textField.setText(recipe.getDescription());
     }
-    if (selectedRecipe.getFav() == true) {
+    if (recipe.getFav() == true) {
       faveButton.setText("Remove from favorite");
     } else {
       faveButton.setText("Add to favorite");
     }
-    if (!selectedRecipe.getLabel().isBlank()) {
-      labelTag.setText(selectedRecipe.getLabel());
+    if (!recipe.getLabel().isBlank()) {
+      labelTag.setText(recipe.getLabel());
     }
 
   }
 
-  /**
-   * Loads new RecipeController with selected recipe for editing and sets page to edit recipe.
-   * 
-   * @param ae
-   * @throws IOException if failed or interrupted I/O operations
-   */
-  public void changeToEditRecipe(ActionEvent ae) throws IOException {
-    URL fxmlLocation = getClass().getResource("NewRecipe.fxml");
-    FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-
-    Parent root = fxmlLoader.load();
-    Scene viewRecipesScene = new Scene(root);
-
-    // viewRecipesScene.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
-
-    NewRecipeController controller = fxmlLoader.getController();
-    controller.initData(selectedRecipe, index, dataAccess);
-    controller.setBackButtonTarget(new SceneTarget(faveButton.getScene()));
-
-    Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-    stage.setScene(viewRecipesScene);
-    stage.show();
-  }
 
   /**
    * Updates page when switching back to scene.
    */
   @Override
   public void update() {
-    Recipe recipe = dataAccess.getCookbook().getRecipes().get(index);
-    initData(recipe, this.index, this.sceneTarget, dataAccess);
+    initData(getSelectedrecipe());
   }
 
-  /**
-   * Sets the SceneTarget for return button.
-   * 
-   * @param sceneTarget previous scene.
-   */
-  public void setBackButtonTarget(SceneTarget sceneTarget) {
-    backButton.setOnAction(sceneTarget.getActionEventHandler());
+  @Override
+  public void setStage(Stage stage) {
+    this.stage = stage;
   }
+
+  @Override
+  protected void setUpStorage() {
+    
+  }
+
+  public void setDataAccess(CookbookAccess dataAccess){
+    this.dataAccess = dataAccess;
+  } 
 
 }

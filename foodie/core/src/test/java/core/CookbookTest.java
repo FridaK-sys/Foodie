@@ -29,11 +29,11 @@ public class CookbookTest {
 
 		recipe1 = new Recipe("Bløtkake", "Den beste oppskriften på bløtkake!", 1, ingredientList1);
 		recipe2 = new Recipe("Kjøttkaker", "Mormor sin oppskrift", 4, ingredientList1);
-		recipe1.setLabel("Dessert");
-		recipe2.setLabel("Dinner");
+		recipe1.setLabel("dessert");
+		recipe2.setLabel("dinner");
 		recipe1.setFav(true);
 		recipe3 = new Recipe("Wok", "Rask middag", 5, ingredientList1);
-		recipe3.setLabel("Dinner");
+		recipe3.setLabel("dinner");
 		recipes.add(recipe1);
 		recipes.add(recipe2);
 

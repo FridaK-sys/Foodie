@@ -1,72 +1,108 @@
-// package ui;
+package ui;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.net.URL;
 
-// import java.net.URL;
-// import java.util.ArrayList;
-// import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import core.Ingredient;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import ui.ViewRecipeController;
 
-// import org.junit.Test;
-// import org.junit.jupiter.api.BeforeEach;
+public class ViewRecipeControllerTest extends AbstractAppTest {
 
-// import core.Ingredient;
-// import core.Recipe;
-// import javafx.fxml.FXML;
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.scene.control.Label;
-// import javafx.stage.Stage;
-// import ui.ViewRecipeController;
+    private ViewRecipeController controller = new ViewRecipeController();
 
-// public class ViewRecipeControllerTest extends AbstractAppTest {
+    @FXML
+    private Label recipeTitle;
 
-//     private ViewRecipeController controller = new ViewRecipeController();
-//     private Recipe recipe1;
-//     private Ingredient ing1;
-//     private List<Ingredient> ingredients = new ArrayList<>();
+    @FXML
+    private Label portions, labelTag;
 
-//     @FXML
-//     private Label recipeTitle;
+    @FXML
+    private TextArea textField;
 
-//     @FXML
-//     private Label portions;
+    @FXML
+    private Button faveButton;
 
-//     @Override
-//     public void start(final Stage stage) throws Exception {
+    @Override
+    public void start(final Stage stage) throws Exception {
 
-//         URL fxmlLocation = getClass().getResource("ViewRecipes_test.fxml");
-//         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-//         Parent root = fxmlLoader.load();
-//         setupItems();
+        URL fxmlLocation = getClass().getResource("ViewRecipes_test.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+        Parent root = fxmlLoader.load();
+        setTestData();
 
-//         Scene scene = new Scene(root);
-//         this.controller = fxmlLoader.getController();
-//         controller.initData(recipe1, 1, null, null);
+        Scene scene = new Scene(root);
+        this.controller = fxmlLoader.getController();
+        controller.initData(recipe3);
 
-//         stage.setTitle("Cookbook<3");
+        stage.setScene(scene);
+        stage.show();
+    }
 
-//         stage.setScene(scene);
-//         stage.show();
-//     }
+    
+    @BeforeEach
+    public void setupItems() {
+        setTestData();
+        this.controller.setDataAccess(dataAccess);
+        // this.controller.initData(cookbook, dataAccess);
+    }
 
-//     @BeforeEach
-//     public void setupItems() {
-//         recipe1 = new Recipe("Eple", 2);
-//         ing1 = new Ingredient("Eple", 3, "stk");
-//         ingredients.add(ing1);
 
-//         recipe1.addIngredient(ing1);
-//         recipe1.setDescription("Epler...");
-//     }
+    @Test
+    public void testRecipeView() {
+        Label title = lookup("#recipeTitle").query();
+        Label portion = lookup("#portions").query();
+        ListView<Ingredient> ingredientListView = lookup("#ingredientsListView").query();
+        assertEquals(recipe3.getName(), title.getText());
+        assertEquals(recipe3.getPortions(), Integer.parseInt(portion.getText()));
+        for (int i = 0; i < recipe3.getIngredients().size(); i++) {
+            checkIngredient(ingredientListView.getItems().get(i), recipe3.getIngredients().get(i));
+        }
+    }
+
+    @Test
+    public void testLabel() {
+        Label label = lookup("#labelTag").query();
+        assertEquals(recipe3.getLabel(), label.getText(),
+                "Incorrect label, expected: " + recipe3.getLabel() + ", " + label.getText() + " was displayed");
+    }
+
+    @Test
+    public void testDescription() {
+        TextArea description = lookup("#textField").query();
+        assertEquals(recipe3.getDescription(), description.getText(), "Incorrect description, expected: "
+                + recipe3.getDescription() + ", " + description.getText() + " was displayed");
+    }
+
+    @Test
+    public void testFaveButton() {
+        Button button = lookup("#faveButton").query();
+        assertEquals(button.getText(), "Remove from favorite");
+        assertTrue(recipe3.getFav());
+        clickOn("#faveButton");
+        assertFalse(dataAccess.getCookbook().getRecipes().get(2).getFav());
+        assertEquals(button.getText(), "Add to favorite");
+        clickOn("#faveButton");
+        assertTrue(dataAccess.getCookbook().getRecipes().get(2).getFav());
+        assertEquals(button.getText(), "Remove from favorite");
+    }
 
     // @Test
-    // public void testRecipeView() {
-    // assertEquals(recipe1.getName(), recipeTitle.getText());
-    // assertEquals(recipe1.getPortions(), Integer.parseInt(portions.getText()));
-    // for (int i = 0; i < ingredients.size(); i++) {
-    // checkIngredient(recipe1.getIngredients().get(i), ingredients.get(i));
-    // }
+    // public void testPortionButtons(){
+
     // }
 
-// }
+}

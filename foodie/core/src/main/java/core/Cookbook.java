@@ -111,9 +111,9 @@ public class Cookbook {
   }
 
   /**
-   * Replaces a recipe in list with param
-   * 
-   * @param name name of recipe to remove
+   * Replaces a recipe in list with param.
+   *
+   * @param name   name of recipe to remove
    * 
    * @param recipe recipe to put in
    * 
@@ -172,5 +172,16 @@ public class Cookbook {
 
   public String toString() {
     return getName();
+  }
+
+  /**
+   * Sets new recipes in cookbook.
+   *
+   * @param recipes recipes to add
+   *
+   * 
+   */
+  public void setRecipes(List<Recipe> recipes) {
+    this.recipes = recipes;
   }
 }

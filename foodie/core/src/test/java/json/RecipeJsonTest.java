@@ -20,7 +20,7 @@ public class RecipeJsonTest extends AbstractJsonTest {
         "description": "Den beste oppskriften på brownies!",
         "portions": 1,
         "fav": true,
-        "label": "Dessert",
+        "label": "dessert",
         "ingredients" :[
           {
             "name": "Egg",
@@ -43,7 +43,7 @@ public class RecipeJsonTest extends AbstractJsonTest {
     ingredients.add(ingredient1);
     ingredients.add(ingredient2);
     Recipe recipe = new Recipe("Brownies", "Den beste oppskriften på brownies!", 1, ingredients);
-    recipe.setLabel("Dessert");
+    recipe.setLabel("dessert");
     recipe.setFav(true);
     return recipe;
   }

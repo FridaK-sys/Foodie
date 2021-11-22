@@ -24,7 +24,7 @@ public class CookbookJsonTest extends AbstractJsonTest {
             "description": "Den beste oppskriften på brownies!",
             "portions": 1,
             "fav": true,
-            "label": "Dessert",
+            "label": "dessert",
             "ingredients" :[
               {
                 "name": "Egg",
@@ -43,7 +43,7 @@ public class CookbookJsonTest extends AbstractJsonTest {
             "description": "Bestemor sin oppskrift",
             "portions": 4,
             "fav": false,
-            "label": "Dessert",
+            "label": "dessert",
             "ingredients" :[
               {
                 "name": "Mel",
@@ -73,10 +73,10 @@ public class CookbookJsonTest extends AbstractJsonTest {
     ingredients2.add(ingredient3);
     ingredients2.add(ingredient4);
     Recipe recipe1 = new Recipe("Brownies", "Den beste oppskriften på brownies!", 1, ingredients1);
-    recipe1.setLabel("Dessert");
+    recipe1.setLabel("dessert");
     recipe1.setFav(true);
     Recipe recipe2 = new Recipe("Pepperkaker", "Bestemor sin oppskrift", 4, ingredients2);
-    recipe2.setLabel("Dessert");
+    recipe2.setLabel("dessert");
     List<Recipe> recipes = new ArrayList<>();
     recipes.add(recipe1);
     recipes.add(recipe2);

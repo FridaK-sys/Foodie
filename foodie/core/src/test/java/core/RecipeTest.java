@@ -124,7 +124,7 @@ public class RecipeTest {
 
 	@Test
 	public void testRemoveLabel() {
-		recipe1.setLabel("Dinner");
+		recipe1.setLabel("dinner");
 		recipe1.removeLabel();
 		assertEquals("", recipe1.getLabel(), "Label should be the empty string");
 	}

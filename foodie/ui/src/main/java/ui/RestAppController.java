@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 import ui.utils.RemoteCookbookAccess;
 
@@ -38,7 +39,7 @@ public class RestAppController extends AbstractController {
    * Initialize method.
    *
    */
-
+  @Override
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
@@ -65,6 +66,12 @@ public class RestAppController extends AbstractController {
   @Override
   public void update() {
     mainListViewController.update();
+  }
+
+  @Override
+  public void setStage(Stage stage) {
+    // TODO Auto-generated method stub
+    
   }
 
 }

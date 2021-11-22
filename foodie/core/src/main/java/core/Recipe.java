@@ -17,10 +17,10 @@ public class Recipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   public static final List<String> labels = Collections.unmodifiableList(new ArrayList<String>() {
     {
-      add("Breakfast");
-      add("Lunch");
-      add("Dinner");
-      add("Dessert");
+      add("breakfast");
+      add("lunch");
+      add("dinner");
+      add("dessert");
     }
   });
 
@@ -42,16 +42,6 @@ public class Recipe {
     this.label = "";
   }
 
-  // denne må fjernes
-  public Recipe(String name, int portions) {
-    setName(name);
-    this.portions = portions;
-    this.description = "nothing here...";
-    this.ingredients = new ArrayList<Ingredient>();
-    this.fav = false;
-    this.label = "";
-  }
-
   /**
    * Constructor for a empty recipe.
    *
@@ -60,6 +50,7 @@ public class Recipe {
    */
   public Recipe(String name) {
     setName(name);
+    this.portions = 0;
     this.description = "nothing here...";
     this.ingredients = new ArrayList<Ingredient>();
     this.fav = false;
@@ -175,8 +166,8 @@ public class Recipe {
       throw new IllegalArgumentException("Invalid label");
     }
   }
-  
-  /** 
+
+  /**
    * Removes label from recipe.
    */
   public void removeLabel() {
