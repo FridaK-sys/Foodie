@@ -39,8 +39,8 @@ public abstract class AbstractAppTest extends ApplicationTest {
         recipe1 = cookbook.getRecipes().get(0);
         recipe2 = cookbook.getRecipes().get(1);
         recipe3 = cookbook.getRecipes().get(2);
-
-        recipe4 = new Recipe("Eple", 2);
+        recipe4 = new Recipe("Eple");
+        recipe4.setPortions(2);
         ing1 = new Ingredient("Eple", 3, "stk");
         ingredients.add(ing1);
         recipe4.addIngredient(ing1);
