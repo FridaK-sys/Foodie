@@ -31,18 +31,22 @@ class CookbookControllerTest {
 
   @Test
   void testAddRecipe() {
-    assertTrue("addRecipe-method did not return true", controller.addRecipe("recipe", new Recipe("recipe", 1)));
+    assertTrue("addRecipe-method did not return true", controller.addRecipe("recipe", new Recipe("recipe")));
   }
 
   @Test
   void testEditRecipe() {
-    controller.addRecipe("recipe", new Recipe("recipe", 1));
-    assertTrue("editRecipe-method did not return true", controller.editRecipe("recipe", new Recipe("recipe", 2)));
+    Recipe r1 = new Recipe("recipe");
+    Recipe r2 = new Recipe("recipe");
+    r1.setPortions(1);
+    r2.setPortions(2);
+    controller.addRecipe("recipe", r1);
+    assertTrue("editRecipe-method did not return true", controller.editRecipe("recipe", r2));
   }
 
   @Test
   void testRemoveRecipe() {
-    controller.addRecipe("recipe", new Recipe("recipe", 1));
+    controller.addRecipe("recipe", new Recipe("recipe"));
     assertTrue("removeRecipe-method did not return true", controller.removeRecipe("recipe"));
   }
 

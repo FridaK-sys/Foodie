@@ -40,7 +40,7 @@ class CookbookServiceTest {
 
   @Test
   void addRecipe() {
-    Recipe recipe = new Recipe("recipe3", 5);
+    Recipe recipe = new Recipe("recipe3");
     assertTrue(service.addRecipe(recipe), "addRecipe-method did not return true");
     assertTrue(service.getCookbook().getRecipes().contains(recipe), "Recipe was not added");
   }
@@ -56,10 +56,11 @@ class CookbookServiceTest {
   @Test
   void editRecipe() {
     String name = "Cake";
-    Recipe recipe = new Recipe(name, 3);
+    Recipe recipe = new Recipe(name);
+    recipe.setPortions(3);
     assertTrue(service.editRecipe(name, recipe), "editRecipe-method did not return true");
     assertEquals(3, service.getCookbook().getRecipes().stream().filter(r -> r.getName().equals(name)).findAny()
-        .orElse(new Recipe("Cake", 1)).getPortions(), "Recipe was not edited");
+        .orElse(new Recipe("Cake")).getPortions(), "Recipe was not edited");
   }
 
 }
