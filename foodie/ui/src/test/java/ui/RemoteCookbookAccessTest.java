@@ -71,52 +71,7 @@ public class RemoteCookbookAccessTest {
             ]
           }]}""";
 
-  private static final String GET_COOKBOOK_RESPONSE2 = """
-      {
-        "name": "Cookbook",
-        "recipes" :[
-          {
-            "name": "Brownies",
-            "description": "Den beste oppskriften på brownies!",
-            "portions": 1,
-            "fav": true,
-            "label": "breakfast",
-            "ingredients" :[
-              {
-                "name": "Egg",
-                "amount": 2.0,
-                "unit": "stk"
-              },
-              {
-                "name": "Kakao",
-                "amount": 1.0,
-                "unit": "dl"
-              }
-            ]
-          },
-           {
-          "name": "Pizza",
-          "description": "The best homemade pizza",
-          "portions": 2,
-          "fav": false,
-          "label": "dinner",
-          "ingredients": [
-              {
-                  "name": "Grandis",
-                  "amount": 2.0,
-                  "unit": "stk"
-              },
-              {
-                  "name": "Cola",
-                  "amount": 2.0,
-                  "unit": "stk"
-              }
-          ]
-      }
-          
-          
-      ]}""";
-
+  
   @BeforeEach
   public void startWireMockServerAndSetup() throws URISyntaxException {
     config = WireMockConfiguration.wireMockConfig().port(8081);
