@@ -1,0 +1,27 @@
+@startuml
+interface FoodieController
+class AbstractController
+class LocalAppController
+class RestAppController
+class ListViewController
+class NewRecipeController
+class ViewRecipeController
+class ListViewCell
+class CookbookApp
+
+AbstractController ..|> FoodieController
+NewRecipeController --|> AbstractController
+LocalAppController --|> AbstractController
+ListViewController --|> AbstractController
+RestAppController --|> AbstractController
+ViewRecipeController --|> AbstractController
+RestAppController --> ListViewController
+LocalAppController --> ListViewController
+ListViewController --> ListViewCell
+AbstractController --> CookbookApp
+LocalAppController --> CookbookApp
+RestAppController --> CookbookApp
+ListViewController --> CookbookApp
+NewRecipeController --> CookbookApp
+ViewRecipeController --> CookbookApp
+@enduml
