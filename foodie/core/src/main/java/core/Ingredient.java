@@ -89,8 +89,10 @@ public class Ingredient {
     this.unit = unit;
   }
 
+  @Override
   public String toString() {
-    return getName() + ": " + Double.toString(amount) + getUnit();
+    String name = Double.toString(amount) + " "+ getUnit() +"\t" + getName();
+    return name;
   }
 
 }

@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+
 import javafx.stage.Stage;
 import ui.ViewRecipeController;
 
@@ -102,6 +102,7 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         assertEquals(button.getText(), "Remove from favorite");
     }
 
+    
     // @Test
     // public void testPortionButtons(){
 

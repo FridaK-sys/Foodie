@@ -44,6 +44,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
     Parent root = fxmlLoader.load();
     this.controller = fxmlLoader.getController();
+    controller.setStage(stage);
     
 
     Scene scene = new Scene(root);

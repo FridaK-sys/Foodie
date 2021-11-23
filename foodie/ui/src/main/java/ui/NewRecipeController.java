@@ -334,6 +334,7 @@ public void doubleValidate(KeyEvent k) {
 
   public void deleteRecipe(ActionEvent ea) {
     dataAccess.deleteRecipe(recipeTitle.getText());
+    backButton.fire();
   }
 
   @Override
