@@ -1,6 +1,7 @@
 package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import ui.utils.LocalCookbookAccess;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -24,12 +26,12 @@ public class AppTest extends AbstractAppTest {
 
     @Override
     public void start(final Stage stage) throws Exception {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource("Main_test.fxml"));
-        final Parent root = loader.load();
-        this.controller = loader.getController();
-        setTestData();
-        this.controller.setCookbookAccess(dataAccess);
-        stage.setScene(new Scene(root));
+        SceneHandler.initialize(stage);
+
+
+        stage.setScene(SceneHandler.getScenes().get(SceneName.MAIN).getScene());
+        controller = (AbstractController) SceneHandler.getScenes().get(SceneName.MAIN).getController();
+        stage.setTitle("Multi-Scene Demo");
         stage.show();
     }
 
@@ -40,11 +42,33 @@ public class AppTest extends AbstractAppTest {
     }
 
     @Test
+    public void testDataAccess(){
+        assertNotNull(this.controller.getAccess());
+    }
+
+    @Test
     public void testRecipeListView() {
-        // ListView<Recipe> recipessListView = lookup("#mainListView").query();
-        // recipessListView.get
+        
+        assertTrue(Window.getWindows().size() == 1);
+        Stage firstStage = (Stage) Window.getWindows().get(0);
+        Scene firstScene = firstStage.getScene();
+
+        // System.out.println(windowNumber);
         Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
-        clickOn(listViewCell(listCell, 1));;
+        clickOn(listViewCell(listCell, 1));
+        clickOn("#recipeTitle");
+        Scene scene = lookup("#recipeTitle").query().getScene();
+        if (Window.getWindows().contains(lookup("#recipeTitle").query().getScene().getWindow())){
+            System.out.println("JADDA");
+        }
+
+        assertTrue(Window.getWindows().size() == 1);
+        Stage secondStage = (Stage) Window.getWindows().get(0);
+        Scene secondScene = secondStage.getScene();
+
+        assertEquals(firstStage, secondStage);
+        assertNotEquals(firstScene, secondScene);
+        
 
         // checkRecipesListViewItems(recipe1, recipe2, recipe3);
     }
