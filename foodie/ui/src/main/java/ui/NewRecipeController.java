@@ -36,10 +36,10 @@ public class NewRecipeController extends AbstractController {
   private boolean editing = false;
   // private int index;
   private String recipeName;
-  private Stage stage;
+  // private Stage stage;
   private ToggleGroup group;
 
-  private CookbookAccess dataAccess = CookbookApp.getAccess();
+  // private CookbookAccess dataAccess = AbstractController.getAccess();
 
   @FXML
   private TextField ingredientTitle;
@@ -230,12 +230,18 @@ public class NewRecipeController extends AbstractController {
       switch (recipe.getLabel()){
         case "breakfast":
           group.selectToggle(breakfast);
+          break;
         case "lunch":
           group.selectToggle(lunch);
+          break;
         case "dinner":
           group.selectToggle(dinner);
+          break;
         case "dessert":
           group.selectToggle(dessert);
+          break;
+        default:
+        break;
       }
     }
     ingredients.setAll(recipe.getIngredients());
@@ -284,7 +290,7 @@ public class NewRecipeController extends AbstractController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
+    setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     clear();
     ingredientListView.setItems(ingredients);
     // setLabelButton("blank");
@@ -327,10 +333,10 @@ public class NewRecipeController extends AbstractController {
       ingredientTitle.setText("");
       ingredientUnit.setText("");
       initData(selectedRecipe);
-      setBackButtonTarget(CookbookApp.getScenes().get(SceneName.VIEWRECIPE));
+      setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
     } else {
       clear();
-      setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
+      setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
 
   }

@@ -43,6 +43,7 @@ public class RestAppController extends AbstractController {
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
+    mainListViewController.setMaster(this);
   }
 
   /**
@@ -54,10 +55,6 @@ public class RestAppController extends AbstractController {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
 
-  public void setCookbookAccess(CookbookAccess access) {
-    this.dataAccess = access;
-    initializeRecipesView();
-  }
 
   /**
    * Updates the mainListViewController.
@@ -68,10 +65,5 @@ public class RestAppController extends AbstractController {
     mainListViewController.update();
   }
 
-  @Override
-  public void setStage(Stage stage) {
-    // TODO Auto-generated method stub
-    
-  }
 
 }
