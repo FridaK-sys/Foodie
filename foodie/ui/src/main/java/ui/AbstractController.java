@@ -32,9 +32,15 @@ public abstract class AbstractController implements FoodieController, Initializa
   protected abstract void setUpStorage();
 
 
-  // public void setCookbookAccess(CookbookAccess access) {
-  //   AbstractController.DATA_ACCESS = access;
-  // }
+  public void setCookbookAccess(CookbookAccess access) {
+    this.dataAccess = access;
+    updateMainListView();
+  }
+
+
+  private void updateMainListView() {
+    mainListViewController.setCookbookAccess(dataAccess);
+  }
 
 
   public CookbookAccess getAccess() {
