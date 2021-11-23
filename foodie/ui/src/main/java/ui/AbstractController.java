@@ -34,7 +34,7 @@ public abstract class AbstractController implements FoodieController, Initializa
 
   public void setCookbookAccess(CookbookAccess access) {
     this.dataAccess = access;
-    updateMainListView();
+    update();
   }
 
 
@@ -57,7 +57,6 @@ public abstract class AbstractController implements FoodieController, Initializa
   }
 
   public void changeSceneToViewRecipe() {
-    // this.selectedRecipe = recipe;
     changeScene(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
   }
 
@@ -65,6 +64,7 @@ public abstract class AbstractController implements FoodieController, Initializa
     Scene scene = model.getScene();
     AbstractController controller = (AbstractController) model.getController();
     controller.setSelectedRecipe(selectedRecipe);
+    controller.setCookbookAccess(dataAccess);
     controller.update();
     
     stage.setScene(scene);

@@ -214,11 +214,9 @@ public void doubleValidate(KeyEvent k) {
    */
   public void saveRecipe() {
     try {
-      Recipe updatedRecipe = createRecipe();
-      setSelectedRecipe(updatedRecipe);
-      dataAccess.editRecipe(recipeName, updatedRecipe);
-      // dataAccess.deleteRecipe(recipeName);
-      // dataAccess.addRecipe(updatedRecipe);
+      newRecipe = createRecipe();
+      dataAccess.editRecipe(recipeName, newRecipe);
+      setSelectedRecipe(newRecipe);
       backButton.fire();
 
     } catch (Exception e) {
@@ -367,13 +365,17 @@ public void doubleValidate(KeyEvent k) {
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
-      model.getController().update();
+      AbstractController controller = (AbstractController) model.getController();
+      System.out.println(newRecipe);
+      controller.setSelectedRecipe(getSelectedrecipe());
+      controller.update();
       stage.setScene(model.getScene());
     });
   }
 
   @Override
   public void update() {
+    System.out.println(newRecipe);
     if (getSelectedrecipe() != null) {
       ingredientAmount.setText("");
       ingredientTitle.setText("");

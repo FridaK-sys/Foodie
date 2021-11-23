@@ -33,15 +33,14 @@ public class LocalAppController extends AbstractController {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    // setStage(stage);
     setUpStorage();
     initializeRecipesView();
-    // mainListViewController.setStage(this.stage);
     mainListViewController.setMaster(this);
   }
 
   @Override
   public void update() {
+    mainListViewController.setCookbookAccess(dataAccess);
     mainListViewController.update();
   }
 

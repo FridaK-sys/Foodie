@@ -113,7 +113,11 @@ public class ViewRecipeController extends AbstractController {
   public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
     Scene scene = model.getScene();
-    model.getController().update();
+    NewRecipeController controller = (NewRecipeController) model.getController();
+    controller.setSelectedRecipe(selectedRecipe);
+    controller.setCookbookAccess(dataAccess);
+    // controller.setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
+    controller.update();
     stage.setScene(scene);
 
   }
@@ -149,6 +153,8 @@ public class ViewRecipeController extends AbstractController {
     }
     if (!recipe.getLabel().isBlank()) {
       labelTag.setText(recipe.getLabel());
+    } else {
+      labelTag.setText("");
     }
 
   }
