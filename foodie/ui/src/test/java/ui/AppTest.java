@@ -5,14 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.util.WaitForAsyncUtils;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import ui.utils.CookbookAccess;
 import ui.utils.LocalCookbookAccess;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -23,44 +26,54 @@ import core.Recipe;
 public class AppTest extends AbstractAppTest {
 
     private AbstractController controller;
+    private CookbookAccess dataAccess = new LocalCookbookAccess("/foodie-test.json");
 
     @Override
     public void start(final Stage stage) throws Exception {
-        SceneHandler.initialize(stage);
-
+        SceneHandler.initializeTest(stage);
 
         stage.setScene(SceneHandler.getScenes().get(SceneName.MAIN).getScene());
         controller = (AbstractController) SceneHandler.getScenes().get(SceneName.MAIN).getController();
+        controller.setCookbookAccess(dataAccess);
         stage.setTitle("Multi-Scene Demo");
         stage.show();
     }
 
+    @BeforeEach
+    public void setAccess(){
+        
+    }
+
     @Test
     public void testController() {
-        assertNotNull(this.controller, "Error loading controller");
-        assertNotNull(this.controller.getCookbook(), "Error accessing data");
+        assertNotNull(controller, "Error loading controller");
+        assertNotNull(controller.getCookbook(), "Error accessing data");
     }
 
     @Test
     public void testDataAccess(){
+        // Platform.runLater(new Runnable() {
+
+        //     @Override
+        //     public void run() {
+        //         controller.setCookbookAccess(new LocalCookbookAccess("/foodie-test.json"));
+
+        //     }
+
+        // });
         assertNotNull(this.controller.getAccess());
+        assertEquals(this.controller.getAccess(), this.dataAccess);
     }
 
     @Test
     public void testRecipeListView() {
-        
         assertTrue(Window.getWindows().size() == 1);
         Stage firstStage = (Stage) Window.getWindows().get(0);
         Scene firstScene = firstStage.getScene();
-
-        // System.out.println(windowNumber);
         Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
+
         clickOn(listViewCell(listCell, 1));
         clickOn("#recipeTitle");
-        Scene scene = lookup("#recipeTitle").query().getScene();
-        if (Window.getWindows().contains(lookup("#recipeTitle").query().getScene().getWindow())){
-            System.out.println("JADDA");
-        }
 
         assertTrue(Window.getWindows().size() == 1);
         Stage secondStage = (Stage) Window.getWindows().get(0);
@@ -68,9 +81,15 @@ public class AppTest extends AbstractAppTest {
 
         assertEquals(firstStage, secondStage);
         assertNotEquals(firstScene, secondScene);
-        
+    }
 
-        // checkRecipesListViewItems(recipe1, recipe2, recipe3);
+    @Test
+    public void testEditRecipe() {
+        Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
+
+        clickOn(listViewCell(listCell, 1));
+        clickOn("#recipeTitle");
+        clickOn("#")
     }
 
     private Node waitForNode(Predicate<Node> nodeTest, int num) {
