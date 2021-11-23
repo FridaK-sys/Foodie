@@ -14,7 +14,7 @@ public class SceneHandler {
   private static final String MAIN_FXML = "Main.fxml";
   private static final String VIEW_RECIPE_FXML = "ViewRecipe.fxml";
   private static final String NEW_RECIPE_FXML = "NewRecipe.fxml";
-  private static final String LISTVIEW_FXML = "ListView.fxml";
+  private static final String LISTVIEW_FXML = "Main_test.fxml";
 
   private static Map<SceneName, FxmlModel> scenes = new HashMap<>();
 
@@ -28,6 +28,13 @@ public class SceneHandler {
     scenes.put(SceneName.VIEWRECIPE, new FxmlModel(VIEW_RECIPE_FXML, SceneName.VIEWRECIPE, stage));
     scenes.put(SceneName.NEWRECIPE, new FxmlModel(NEW_RECIPE_FXML, SceneName.NEWRECIPE, stage));
     scenes.put(SceneName.LISTVIEW, new FxmlModel(LISTVIEW_FXML, SceneName.LISTVIEW, stage));
+  }
+  
+  public static void initializeTest(Stage stage) {
+    scenes.put(SceneName.MAIN, new FxmlModel(LISTVIEW_FXML, SceneName.MAIN, stage));
+    scenes.put(SceneName.VIEWRECIPE, new FxmlModel(VIEW_RECIPE_FXML, SceneName.VIEWRECIPE, stage));
+    scenes.put(SceneName.NEWRECIPE, new FxmlModel(NEW_RECIPE_FXML, SceneName.NEWRECIPE, stage));
+    scenes.put(SceneName.LISTVIEW, new FxmlModel(MAIN_FXML, SceneName.LISTVIEW, stage));
   }
   /**
    * Update the scene Map with new FxmlInfo
