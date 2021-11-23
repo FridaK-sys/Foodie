@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import core.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
@@ -14,7 +15,7 @@ import ui.utils.LocalCookbookAccess;
 public class LocalAppController extends AbstractController {
 
   @FXML
-  private Pane mainListView;
+  private AnchorPane pane;
 
 
   /**
@@ -24,7 +25,6 @@ public class LocalAppController extends AbstractController {
   @Override
   protected void setUpStorage() {
     dataAccess = new LocalCookbookAccess("/checkCookbookff.json");
-    CookbookApp.setAccess(dataAccess);
   }
 
   /**
@@ -35,12 +35,12 @@ public class LocalAppController extends AbstractController {
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
-    mainListViewController.setStage(this.stage);
     mainListViewController.setMaster(this);
   }
 
   @Override
   public void update() {
+    mainListViewController.setCookbookAccess(dataAccess);
     mainListViewController.update();
   }
 

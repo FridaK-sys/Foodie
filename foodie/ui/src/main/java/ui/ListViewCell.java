@@ -22,7 +22,8 @@ public class ListViewCell extends ListCell<Recipe> {
       setGraphic(null);
     } else {
       hBox = new HBox();
-      recipeTitle = new Label(recipe.getName());
+      recipeTitle = new Label();
+      recipeTitle.setText(recipe.getName());
       hBox.getChildren().add(recipeTitle);
 
       setGraphic(hBox);

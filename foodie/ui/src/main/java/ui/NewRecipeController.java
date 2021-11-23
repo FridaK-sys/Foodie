@@ -37,10 +37,10 @@ public class NewRecipeController extends AbstractController {
   private boolean editing = false;
   // private int index;
   private String recipeName;
-  private Stage stage;
+  // private Stage stage;
   private ToggleGroup group;
 
-  private CookbookAccess dataAccess = CookbookApp.getAccess();
+  // private CookbookAccess dataAccess = AbstractController.getAccess();
 
   @FXML
   private TextField ingredientTitle;
@@ -214,11 +214,9 @@ public void doubleValidate(KeyEvent k) {
    */
   public void saveRecipe() {
     try {
-      Recipe updatedRecipe = createRecipe();
-      setSelectedRecipe(updatedRecipe);
-      dataAccess.editRecipe(recipeName, updatedRecipe);
-      // dataAccess.deleteRecipe(recipeName);
-      // dataAccess.addRecipe(updatedRecipe);
+      newRecipe = createRecipe();
+      dataAccess.editRecipe(recipeName, newRecipe);
+      setSelectedRecipe(newRecipe);
       backButton.fire();
 
     } catch (Exception e) {
@@ -276,12 +274,18 @@ public void doubleValidate(KeyEvent k) {
       switch (recipe.getLabel()){
         case "breakfast":
           group.selectToggle(breakfast);
+          break;
         case "lunch":
           group.selectToggle(lunch);
+          break;
         case "dinner":
           group.selectToggle(dinner);
+          break;
         case "dessert":
           group.selectToggle(dessert);
+          break;
+        default:
+        break;
       }
     }
     ingredients.setAll(recipe.getIngredients());
@@ -330,7 +334,7 @@ public void doubleValidate(KeyEvent k) {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
+    setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     clear();
     ingredientListView.setItems(ingredients);
     // setLabelButton("blank");
@@ -361,22 +365,26 @@ public void doubleValidate(KeyEvent k) {
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
-      model.getController().update();
+      AbstractController controller = (AbstractController) model.getController();
+      System.out.println(newRecipe);
+      controller.setSelectedRecipe(getSelectedrecipe());
+      controller.update();
       stage.setScene(model.getScene());
     });
   }
 
   @Override
   public void update() {
+    System.out.println(newRecipe);
     if (getSelectedrecipe() != null) {
       ingredientAmount.setText("");
       ingredientTitle.setText("");
       ingredientUnit.setText("");
       initData(selectedRecipe);
-      setBackButtonTarget(CookbookApp.getScenes().get(SceneName.VIEWRECIPE));
+      setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
     } else {
       clear();
-      setBackButtonTarget(CookbookApp.getScenes().get(SceneName.MAIN));
+      setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
 
   }

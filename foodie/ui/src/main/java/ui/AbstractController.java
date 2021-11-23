@@ -5,6 +5,7 @@ import core.Recipe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 
@@ -16,9 +17,13 @@ public abstract class AbstractController implements FoodieController, Initializa
 
   protected CookbookAccess dataAccess;
 
+  protected Recipe selectedRecipe = null;
+
   protected Stage stage;
 
-  static Recipe selectedRecipe;
+
+  @FXML
+  Pane listView;
 
   @FXML
   ListViewController mainListViewController;
@@ -28,8 +33,18 @@ public abstract class AbstractController implements FoodieController, Initializa
 
 
   public void setCookbookAccess(CookbookAccess access) {
-    CookbookApp.setAccess(dataAccess);
-    dataAccess = access;
+    this.dataAccess = access;
+    update();
+  }
+
+
+  private void updateMainListView() {
+    mainListViewController.setCookbookAccess(dataAccess);
+  }
+
+
+  public CookbookAccess getAccess() {
+    return dataAccess;
   }
 
   public void initializeRecipesView() {
@@ -38,17 +53,20 @@ public abstract class AbstractController implements FoodieController, Initializa
 
   public void changeSceneToNewRecipe() {
     setSelectedRecipe(null);
-    changeScene(CookbookApp.getScenes().get(SceneName.NEWRECIPE));
+    changeScene(SceneHandler.getScenes().get(SceneName.NEWRECIPE));
   }
 
-  public void changeSceneToViewRecipe(Recipe recipe) {
-    setSelectedRecipe(recipe);
-    changeScene(CookbookApp.getScenes().get(SceneName.VIEWRECIPE));
+  public void changeSceneToViewRecipe() {
+    changeScene(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
   }
 
   public void changeScene(FxmlModel model) {
     Scene scene = model.getScene();
-    model.getController().update();
+    AbstractController controller = (AbstractController) model.getController();
+    controller.setSelectedRecipe(selectedRecipe);
+    controller.setCookbookAccess(dataAccess);
+    controller.update();
+    
     stage.setScene(scene);
   }
 
@@ -56,8 +74,8 @@ public abstract class AbstractController implements FoodieController, Initializa
     return mainListViewController.getCookbook();
   }
 
-  static void setSelectedRecipe(Recipe recipe) {
-    selectedRecipe = recipe;
+  void setSelectedRecipe(Recipe recipe) {
+    this.selectedRecipe = recipe;
   }
 
   public Recipe getSelectedrecipe() {

@@ -24,6 +24,8 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
 
     private ViewRecipeController controller = new ViewRecipeController();
 
+    
+
     @FXML
     private Label recipeTitle;
 

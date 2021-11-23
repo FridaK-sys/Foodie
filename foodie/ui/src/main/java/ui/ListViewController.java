@@ -35,8 +35,8 @@ public class ListViewController implements FoodieController {
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
   private ToggleGroup group = new ToggleGroup();
   private CookbookAccess dataAccess;
-  private LocalAppController mainController;
-  private Stage stage;
+  private AbstractController mainController;
+  // private Stage stage;
 
   @FXML
   private ListView<Recipe> mainListView;
@@ -70,13 +70,22 @@ public class ListViewController implements FoodieController {
     updateListView();
   }
 
-  public void initialize(URL url, ResourceBundle rb) {
+  @FXML
+  void initialize(URL url, ResourceBundle rb) {
     mainListView.setCellFactory(listView -> {
       ListViewCell listCell = new ListViewCell();
       return listCell;
     });
     setToggles();
     updateListView();
+    setListViewCellfactory();
+  }
+
+  private void setListViewCellfactory() {
+    mainListView.setCellFactory(listView -> {
+      ListViewCell listCell = new ListViewCell();
+      return listCell;
+    });
   }
 
   /**
@@ -88,8 +97,8 @@ public class ListViewController implements FoodieController {
     mainController.changeSceneToNewRecipe();
   }
 
-  public void changeSceneToViewRecipe(Recipe recipe) {
-    mainController.changeSceneToViewRecipe(recipe);
+  public void changeSceneToViewRecipe() {
+    mainController.changeSceneToViewRecipe();
   }
 
   /**
@@ -98,6 +107,7 @@ public class ListViewController implements FoodieController {
   public void update() {
     mainBook = dataAccess.getCookbook();
     updateListView();
+    setListViewCellfactory();
   }
 
   /**
@@ -115,6 +125,7 @@ public class ListViewController implements FoodieController {
    * Updates the list view.
    */
   public void updateListView() {
+    setListViewCellfactory();
     recipes.setAll(mainBook.getRecipes());
     mainListView.setItems(recipes);
     setToggles();
@@ -149,10 +160,10 @@ public class ListViewController implements FoodieController {
 
   @Override
   public void setStage(Stage stage) {
-    this.stage = stage;
+    // this.stage = stage;
   }
 
-  public void setMaster(LocalAppController master) {
+  public void setMaster(AbstractController master) {
     this.mainController = master;
   }
 
@@ -166,13 +177,17 @@ public class ListViewController implements FoodieController {
       public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
           Recipe newValue) {
         if (newValue != null) {
-          changeSceneToViewRecipe(newValue);
+          System.out.println("Exception kommer her da, ser det:" + newValue.toString());
+          System.out.println("Exception kommer her da, ser det:" + newValue);
+          mainController.setSelectedRecipe(newValue);
+          changeSceneToViewRecipe();
         }
         System.out.println("ListView selection changed from oldValue = " + oldValue 
           + " to newValue = " + newValue);
       }
     });
   }
+
 
   /**
    * Listener to update ListView with selected toggle label.

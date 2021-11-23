@@ -43,7 +43,7 @@ public class FxmlHandler {
 
 		// Write back the updated FxmlInfo to the scenes Map in Main
 		fxmlModel.setScene(scene);
-		CookbookApp.updateScenes(fxmlModel.getSceneName(), fxmlModel);
+		SceneHandler.updateScenes(fxmlModel.getSceneName(), fxmlModel);
 
 		FoodieController controller = loader.getController();
 		fxmlModel.setController(controller);
