@@ -54,6 +54,12 @@ public class ViewRecipeController extends AbstractController {
   @FXML
   private Button backButton;
 
+  @FXML
+  private Button decreaseButton;
+
+  @FXML
+  private Button increaseButton;
+
   /**
    * Sets or removes favorite for Recipe.
    */
@@ -138,7 +144,15 @@ public class ViewRecipeController extends AbstractController {
     } else {
       recipeTitle.setText("oppskrift");
     }
-    portions.setText(Integer.toString(recipe.getPortions()));
+    if (recipe.getPortions() == 0){
+      portions.setText("");
+      increaseButton.setVisible(false);
+      decreaseButton.setVisible(false);
+    } else {
+      portions.setText(Integer.toString(recipe.getPortions()));
+      increaseButton.setVisible(true);
+      decreaseButton.setVisible(true);
+    }
     if (!recipe.getIngredients().isEmpty()) {
       ingredients.clear();
       ingredients.addAll(recipe.getIngredients());
