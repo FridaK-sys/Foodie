@@ -29,13 +29,9 @@
 //     stage.setScene(scene);
 //     stage.show();
 
-//   }
-
-//   @Test
-//   void setUpStorage(){
-//     assertNull(localController.get, "dataAccess is not null");
-//     localController.setUpStorage();
-//     assertNotNull(localController.dataAccess,"dataAccess is null");
-//   }
+    assertNull(localController.dataAccess, "dataAccess is not null");
+    localController.setUpStorage();
+    assertNotNull(localController.dataAccess,"dataAccess is null");
+  }
   
 // }
