@@ -103,8 +103,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyEdit = mapper.readValue(res.body(), Boolean.class);
       if (successfullyEdit != null && successfullyEdit) {
-        cookbook.removeRecipe(name);
-        cookbook.addRecipe(recipe);
+        cookbook.replaceRecipe(name, recipe);
         return true;
       }
       return false;

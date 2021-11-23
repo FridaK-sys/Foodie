@@ -23,7 +23,7 @@
             <Pane prefHeight="29.0" prefWidth="140.0" />
             <HBox alignment="BASELINE_CENTER" prefHeight="33.0" prefWidth="140.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#decPortion" prefHeight="26.0" prefWidth="30.0" text="-">
+                  <Button fx:id="decreaseButton" mnemonicParsing="false" onAction="#decPortion" prefHeight="26.0" prefWidth="30.0" text="-">
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -32,7 +32,7 @@
                      </HBox.margin>
                   </Button>
                   <Label fx:id="portions" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="48.0" text="p" textAlignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#incPortion" prefHeight="26.0" prefWidth="27.0" text="+">
+                  <Button fx:id="increaseButton" mnemonicParsing="false" onAction="#incPortion" prefHeight="26.0" prefWidth="27.0" text="+">
                      <font>
                         <Font size="11.0" />
                      </font>

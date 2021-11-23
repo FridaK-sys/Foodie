@@ -237,7 +237,9 @@ public void doubleValidate(KeyEvent k) {
       }
     }
       this.newRecipe = new Recipe(recipeTitle.getText());
-      newRecipe.setPortions(Integer.parseInt(recipePortions.getText()));
+      if(!recipePortions.getText().isEmpty()){
+        newRecipe.setPortions(Integer.parseInt(recipePortions.getText()));
+      }
       if (!(recipeDescription.getText() == null)) {
         this.newRecipe.setDescription(recipeDescription.getText());
       }
@@ -265,7 +267,9 @@ public void doubleValidate(KeyEvent k) {
    */
   public void initData(Recipe recipe) {
     this.recipeTitle.setText(recipe.getName());
-    this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    if (recipe.getPortions() != 0){
+      this.recipePortions.setText(String.valueOf(recipe.getPortions()));
+    }
     this.recipeName = recipe.getName();
     if (!recipe.getDescription().isEmpty()) {
       this.recipeDescription.setText(recipe.getDescription());
