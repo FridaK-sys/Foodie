@@ -6,10 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import ui.utils.CookbookAccess;
+import javafx.scene.control.ListCell;
+import javafx.scene.text.Text;
 
 /**
  * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
@@ -106,6 +104,10 @@ public class ViewRecipeController extends AbstractController {
   }
 
   public void initialize(URL location, ResourceBundle resources) {
+    ingredientsListView.setCellFactory(listView -> {
+      IngredientListCell listCell = new IngredientListCell();
+      return listCell;
+    });
     ingredientsListView.setItems(ingredients);
     
   }
@@ -119,10 +121,10 @@ public class ViewRecipeController extends AbstractController {
   public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
     Scene scene = model.getScene();
+
     NewRecipeController controller = (NewRecipeController) model.getController();
     controller.setSelectedRecipe(selectedRecipe);
     controller.setCookbookAccess(dataAccess);
-    // controller.setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
     controller.update();
     stage.setScene(scene);
 
@@ -145,17 +147,21 @@ public class ViewRecipeController extends AbstractController {
       recipeTitle.setText("oppskrift");
     }
     if (recipe.getPortions() == 0){
-      portions.setText("");
+      portions.setText("0");
+      portions.setVisible(false);
       increaseButton.setVisible(false);
       decreaseButton.setVisible(false);
     } else {
+      portions.setVisible(true);
       portions.setText(Integer.toString(recipe.getPortions()));
       increaseButton.setVisible(true);
       decreaseButton.setVisible(true);
     }
     if (!recipe.getIngredients().isEmpty()) {
+      // ingredients.clear();
+      ingredients.setAll(recipe.getIngredients());
+    } else{
       ingredients.clear();
-      ingredients.addAll(recipe.getIngredients());
     }
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
       textField.setText(recipe.getDescription());
@@ -196,5 +202,26 @@ public class ViewRecipeController extends AbstractController {
   public void setDataAccess(CookbookAccess dataAccess){
     this.dataAccess = dataAccess;
   } 
+  
+  static class IngredientListCell extends ListCell<Ingredient> {
+    private Text ingredientCell;
+
+    IngredientListCell() {
+      ingredientCell = new Text();
+
+    }
+
+    @Override
+    public void updateItem(Ingredient ingredient, boolean empty) {
+      super.updateItem(ingredient, empty);
+      if (ingredient != null && !empty) {
+        ingredientCell.setText(ingredient.toString());
+        setStyle("-fx-background-color: white;" + "-fx-background-insets: 0;");
+        setGraphic(ingredientCell);
+      } else {
+        setStyle("-fx-background-color: white;");
+      }
+    }
+  }
 
 }
