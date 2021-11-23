@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import ui.utils.CookbookAccess;
@@ -40,8 +41,8 @@ public class AppTest extends AbstractAppTest {
     }
 
     @BeforeEach
-    public void setAccess(){
-        
+    public void setupItems(){
+        setTestData();
     }
 
     @Test
@@ -88,8 +89,31 @@ public class AppTest extends AbstractAppTest {
         Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
 
         clickOn(listViewCell(listCell, 1));
-        clickOn("#recipeTitle");
-        clickOn("#")
+
+        Scene firstStage = (Scene) Window.getWindows().get(0).getScene();
+
+        Label tag = lookup("#labelTag").query();
+        String recipeTag = dataAccess.getCookbook().getRecipes().get(1).getLabel();
+        assertEquals(recipeTag, "breakfast");
+
+        clickOn("#editRecipe");
+
+        Scene secondStage = (Scene) Window.getWindows().get(0).getScene();
+
+        testSceneChange(firstStage, secondStage);
+        clickOn("#lunch");
+        clickOn("#saveRecipeButton");
+
+        Label tag2 = lookup("#labelTag").query();
+        String recipeTag2 = dataAccess.getCookbook().getRecipes().get(1).getLabel();
+        assertEquals(recipeTag2, "lunch", "not saved to file");
+        assertEquals(tag2.getText(), "lunch", "label not updated");
+
+    }
+
+    private void testSceneChange(Scene s1, Scene s2){
+        // assertEquals(s1, s2);
+        assertNotEquals(s1, s2);
     }
 
     private Node waitForNode(Predicate<Node> nodeTest, int num) {
