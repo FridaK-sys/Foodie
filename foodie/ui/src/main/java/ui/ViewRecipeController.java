@@ -28,10 +28,10 @@ public class ViewRecipeController extends AbstractController {
 
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
-  private CookbookAccess dataAccess = CookbookApp.getAccess();
+  // private CookbookAccess dataAccess = AbstractController.getAccess();
   private Recipe viewRecipe;
 
-  private Stage stage;
+  // private Stage stage;
 
   @FXML
   private Label recipeTitle;
@@ -93,8 +93,8 @@ public class ViewRecipeController extends AbstractController {
    * @param portionSize new portion size
    */
   public void alterPortions(int portionSize) {
-    selectedRecipe.setPortions(portionSize);
-    ingredients.setAll(selectedRecipe.getIngredients());
+    viewRecipe.setPortions(portionSize);
+    ingredients.setAll(viewRecipe.getIngredients());
     portions.setText(Integer.toString(portionSize));
     this.portion = portionSize;
   }
@@ -111,7 +111,7 @@ public class ViewRecipeController extends AbstractController {
    * @throws IOException if failed or interrupted I/O operations
    */
   public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
-    FxmlModel model = CookbookApp.getScenes().get(SceneName.NEWRECIPE);
+    FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
     Scene scene = model.getScene();
     model.getController().update();
     stage.setScene(scene);
@@ -120,7 +120,7 @@ public class ViewRecipeController extends AbstractController {
 
   @FXML
   private void handleBackbutton() {
-    FxmlModel model = CookbookApp.getScenes().get(SceneName.MAIN);
+    FxmlModel model = SceneHandler.getScenes().get(SceneName.MAIN);
     Scene scene = model.getScene();
     model.getController().update();
     stage.setScene(scene);
@@ -159,7 +159,8 @@ public class ViewRecipeController extends AbstractController {
    */
   @Override
   public void update() {
-    initData(getSelectedrecipe());
+    System.out.println(selectedRecipe.toString());
+    initData(this.selectedRecipe);
   }
 
   @Override
