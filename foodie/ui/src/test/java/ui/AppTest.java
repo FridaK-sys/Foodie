@@ -53,35 +53,51 @@ public class AppTest extends AbstractAppTest {
 
     @Test
     public void testDataAccess(){
-        // Platform.runLater(new Runnable() {
-
-        //     @Override
-        //     public void run() {
-        //         controller.setCookbookAccess(new LocalCookbookAccess("/foodie-test.json"));
-
-        //     }
-
-        // });
         assertNotNull(this.controller.getAccess());
         assertEquals(this.controller.getAccess(), this.dataAccess);
     }
 
     @Test
-    public void testRecipeListView() {
+    public void testSceneChange() {
         assertTrue(Window.getWindows().size() == 1);
         Stage firstStage = (Stage) Window.getWindows().get(0);
         Scene firstScene = firstStage.getScene();
         Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
 
         clickOn(listViewCell(listCell, 1));
-        clickOn("#recipeTitle");
 
         assertTrue(Window.getWindows().size() == 1);
-        Stage secondStage = (Stage) Window.getWindows().get(0);
-        Scene secondScene = secondStage.getScene();
+        Scene secondScene = (Scene) Window.getWindows().get(0).getScene();
 
-        assertEquals(firstStage, secondStage);
-        assertNotEquals(firstScene, secondScene);
+
+        testSceneChange(firstScene, secondScene);
+
+        clickOn("#editRecipe");
+
+        Scene thirdScene = (Scene) Window.getWindows().get(0).getScene();
+
+        testSceneChange(thirdScene, secondScene);
+
+        clickOn("#backButton");
+
+        Scene fourthScene = (Scene) Window.getWindows().get(0).getScene();
+
+        testSceneChange(thirdScene, secondScene);
+        assertEquals(fourthScene, secondScene);
+
+        clickOn("#backButton");
+
+        Scene fifthScene = (Scene) Window.getWindows().get(0).getScene();
+
+        testSceneChange(fifthScene, fourthScene);
+        assertEquals(fifthScene, firstScene);
+
+        clickOn("#newButton");
+
+        Scene sixthScene = (Scene) Window.getWindows().get(0).getScene();
+        testSceneChange(sixthScene, fifthScene);
+        assertEquals(thirdScene, sixthScene);
+
     }
 
     @Test
@@ -97,10 +113,6 @@ public class AppTest extends AbstractAppTest {
         assertEquals(recipeTag, "breakfast");
 
         clickOn("#editRecipe");
-
-        Scene secondStage = (Scene) Window.getWindows().get(0).getScene();
-
-        testSceneChange(firstStage, secondStage);
         clickOn("#lunch");
         clickOn("#saveRecipeButton");
 
@@ -112,7 +124,6 @@ public class AppTest extends AbstractAppTest {
     }
 
     private void testSceneChange(Scene s1, Scene s2){
-        // assertEquals(s1, s2);
         assertNotEquals(s1, s2);
     }
 
