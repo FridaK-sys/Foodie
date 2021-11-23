@@ -30,10 +30,7 @@
             <ListView fx:id="mainListView" prefHeight="312.0" prefWidth="600.0" />
             <Pane prefHeight="66.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="viewButton" layoutX="392.0" layoutY="18.0" mnemonicParsing="false" text="Show recipe" />
                   <Button fx:id="newButton" layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" text="New recipe" />
-                  <Button fx:id="deleteButton" layoutX="34.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Delete recipe" />
-                  <Button layoutX="475.0" layoutY="18.0" mnemonicParsing="false"  text="Edit" />
                </children></Pane>
             
          </children></VBox>
