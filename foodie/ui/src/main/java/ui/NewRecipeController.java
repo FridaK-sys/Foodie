@@ -309,8 +309,10 @@ public void doubleValidate(KeyEvent k) {
     
     ingredients.clear();
     this.editing = false;
-    
 
+    if (group.getSelectedToggle() != null) {
+      group.getSelectedToggle().setSelected(false);
+    }
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
     deleteRecipeButton.setVisible(true);
@@ -341,7 +343,7 @@ public void doubleValidate(KeyEvent k) {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
-    clear();
+    update();
     ingredientListView.setItems(ingredients);
     // setLabelButton("blank");
     setToggleGroup();
@@ -388,6 +390,7 @@ public void doubleValidate(KeyEvent k) {
       ingredientUnit.setText("");
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
+      
     } else {
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
