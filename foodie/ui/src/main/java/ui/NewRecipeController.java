@@ -34,14 +34,11 @@ public class NewRecipeController extends AbstractController {
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
-  private String label = "";
+  // private String label = "";
   private boolean editing = false;
-  // private int index;
   private String recipeName;
-  // private Stage stage;
   private ToggleGroup group;
 
-  // private CookbookAccess dataAccess = AbstractController.getAccess();
 
   @FXML
   private TextField ingredientTitle;
@@ -295,7 +292,6 @@ public void doubleValidate(KeyEvent k) {
     }
     ingredients.setAll(recipe.getIngredients());
     this.editing = true;
-    // this.cookbook = cookbook;
 
     createRecipeButton.setVisible(false);
     saveRecipeButton.setVisible(true);
@@ -370,9 +366,7 @@ public void doubleValidate(KeyEvent k) {
   public void update() {
     System.out.println(newRecipe);
     if (getSelectedrecipe() != null) {
-      ingredientAmount.setText("");
-      ingredientTitle.setText("");
-      ingredientUnit.setText("");
+      clearTextFields();
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
       
