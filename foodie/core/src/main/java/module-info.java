@@ -7,5 +7,6 @@ module foodie.core {
   requires com.fasterxml.jackson.annotation;
   requires com.fasterxml.jackson.core;
   requires transitive com.fasterxml.jackson.databind;
-
 }
+
+

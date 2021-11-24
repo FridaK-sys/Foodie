@@ -67,6 +67,12 @@
 			<scope>test</scope>
         </dependency>   
 
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
+        </dependency> 
+
     <!-- WireMock -->
     <dependency>
     <groupId>com.github.tomakehurst</groupId>
@@ -122,6 +128,50 @@
                     <propertyName>jaCoCoArgLine</propertyName>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>ui.CookbookApp</mainClass>
+                    <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>foodiefx</launcher>
+                    <jlinkImageName>foodiefx</jlinkImageName>
+                    <jlinkZipName>foodiefx</jlinkZipName>
+                </configuration>
+            </plugin>
+            <!-- config above and below taken from https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9 -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>FoodieFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>foodie.ui/foodie.ui.FoodieApp</module>
+                    <runtimeImage>target/foodiefx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>FoodieFX</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>FoodieFX</winMenuGroup>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 </project>
