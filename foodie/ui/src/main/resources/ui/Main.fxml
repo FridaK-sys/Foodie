@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RestAppController">
+<AnchorPane fx:id="pane" prefWidth="760.0" prefHeight="560.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RestAppController">
    <children>
-         <Pane fx:id="listView"/>
+         <AnchorPane fx:id="listView"/>
    </children>
    <fx:include fx:id="mainListView" source="ListView.fxml"/>
 </AnchorPane>
