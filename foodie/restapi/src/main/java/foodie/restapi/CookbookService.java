@@ -104,7 +104,7 @@ public class CookbookService {
    * @param name name of recipe to remove
    */
   public boolean removeRecipe(String name) {
-    cookbook.removeRecipe(name);
+    cookbook.removeRecipe(name.replaceAll("-", " "));
     autoSaveCookbook();
     return true;
   }
@@ -116,7 +116,7 @@ public class CookbookService {
    * @param recipe edited recipe
    */
   public boolean editRecipe(String name, Recipe recipe) {
-    cookbook.replaceRecipe(name, recipe);
+    cookbook.replaceRecipe(name.replaceAll("-", " "), recipe);
     autoSaveCookbook();
     return true;
   }

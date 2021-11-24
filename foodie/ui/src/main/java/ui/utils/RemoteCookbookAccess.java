@@ -76,7 +76,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
     try {
       String jsonRecipe = mapper.writeValueAsString(recipe);
       final HttpRequest req =
-          HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName())).header("Accept", 
+          HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName().replaceAll(" ", "-"))).header("Accept", 
           "application/json")
               .header("Content-Type", "application/json").POST(BodyPublishers.ofString(jsonRecipe))
               .build();
@@ -98,7 +98,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
     try {
       String jsonRecipe = mapper.writeValueAsString(recipe);
       final HttpRequest req =
-          HttpRequest.newBuilder(URI.create(endPoint + "/" + name + "/" + "edit")).header("Accept", "application/json")
+          HttpRequest.newBuilder(URI.create(endPoint + "/" + name.replaceAll(" ", "-") + "/" + "edit")).header("Accept", "application/json")
               .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(jsonRecipe)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyEdit = mapper.readValue(res.body(), Boolean.class);
@@ -126,7 +126,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
   @Override
   public boolean deleteRecipe(String name) {
     try {
-      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + name))
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + name.replaceAll(" ", "-")))
           .header("Accept", "application/json").DELETE().build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, 
       HttpResponse.BodyHandlers.ofString());
