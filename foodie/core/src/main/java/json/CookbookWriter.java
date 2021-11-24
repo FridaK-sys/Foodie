@@ -20,7 +20,6 @@ public class CookbookWriter extends JsonSerializer<Cookbook> {
   public void serialize(Cookbook cookbook, JsonGenerator jsonGen,
       SerializerProvider provider) throws IOException {
     jsonGen.writeStartObject();
-    jsonGen.writeStringField("name", cookbook.getName());
     jsonGen.writeArrayFieldStart("recipes");
     for (Recipe recipe : cookbook.getRecipes()) {
       jsonGen.writeObject(recipe);

@@ -4,24 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A cookbook containing a name and list of recipes.
+ * A cookbook containing a list of recipes.
  */
 
 public class Cookbook {
 
-  private String name;
   private List<Recipe> recipes = new ArrayList<>();
 
   /**
-   * Constructor for a cookbook with name and list of recipes.
-   *
-   * @param name name of cookbook
+   * Constructor for a cookbook with list of recipes.
    *
    * @param recipes list of recipes
    */
 
-  public Cookbook(String name, List<Recipe> recipes) {
-    setName(name);
+  public Cookbook(List<Recipe> recipes) {
     this.recipes = new ArrayList<>(recipes);
   }
 
@@ -30,12 +26,7 @@ public class Cookbook {
    */
 
   public Cookbook() {
-    this.name = "Cookbook";
     this.recipes = new ArrayList<>();
-  }
-
-  public String getName() {
-    return name;
   }
 
   /**
@@ -46,12 +37,6 @@ public class Cookbook {
    * @throws IllegalArgumentException if param contains other characters than letters and numbers.
    */
 
-  public void setName(String name) {
-    if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
-      throw new IllegalArgumentException("Invalid name");
-    }
-    this.name = name;
-  }
 
   public List<Recipe> getRecipes() {
     return new ArrayList<>(recipes);
@@ -181,6 +166,6 @@ public class Cookbook {
   }
 
   public String toString() {
-    return getName();
+    return getRecipes().toString();
   }
 }

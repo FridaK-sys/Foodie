@@ -62,7 +62,6 @@ public class IntegrationTest {
                                         result.getResponse().getContentAsString(StandardCharsets.UTF_8),
                                         Cookbook.class);
                         assertNotNull("Cookbook was null", cookbook);
-                        assertEquals("Cookbook", cookbook.getName(), "Name of Cookbook was not default name");
                         assertEquals(2, cookbook.getRecipes().size(),
                                         "Cookbook did not have default amount of recipes");
                 } catch (Exception e) {

@@ -31,7 +31,6 @@ class CookbookServiceTest {
   @Test
   void createDefaultCookbook() {
     Cookbook cookbook = CookbookService.createDefaultCookbook();
-    assertEquals("Cookbook", cookbook.getName(), "Name of default cookbook was wrong");
     assertEquals("Cake", cookbook.getRecipes().get(0).getName(), "Name of first recipe in default cookbook was wrong");
     assertEquals(200.0, cookbook.getRecipes().get(0).getIngredients().get(0).getAmount(),
         "Amount of first ingredient in first recipe was wrong");
