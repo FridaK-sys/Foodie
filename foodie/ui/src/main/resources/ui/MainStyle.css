@@ -1,0 +1,48 @@
+.root   {  
+    -fx-font-family : "monospace";  
+    -fx-background-color: #ffffff;
+    } 
+    
+    .button {
+        -fx-font: 16px;
+        -fx-font-weight: 600;
+       
+        /* -fx-padding: 10; */
+        -fx-background-color: #fbeee0;
+        -fx-border-radius: 50px;
+        /* -fx-border-width: 2px; */
+        /* -fx-border-color: black; */
+        -fx-background-radius: 20;
+    }
+
+    .button:hover {
+      -fx-background-color: #f7efe7;
+  }
+    
+    .toggle-button{
+      -fx-background-color: #ecd9d9;
+      -fx-border-radius: 20;
+      -fx-background-radius: 20;
+    }
+
+    .toggle-button:selected {
+      -fx-background-color: #f5f0f0;
+  }
+
+  .listViewCell{
+    -fx-height: 30px;
+    -fx-spacing: 30;
+    -fx-padding: 20;
+    -fx-background-color: #e7c5c5;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 20;
+    -fx-font: 16px;
+    -fx-font-weight: 600;
+  }
+
+  .listViewCell:hover{
+    -fx-background-color: #e6d8d8;
+
+  }
+
+    

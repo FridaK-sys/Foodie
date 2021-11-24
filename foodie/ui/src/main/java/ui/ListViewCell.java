@@ -19,9 +19,11 @@ public class ListViewCell extends ListCell<Recipe> {
     super.updateItem(recipe, empty);
     setText(null);
     if (empty || recipe == null) {
+      setStyle("-fx-background-color: white;");
       setGraphic(null);
     } else {
       hBox = new HBox();
+      hBox.getStyleClass().add("listViewCell");
       recipeTitle = new Label();
       recipeTitle.setText(recipe.getName());
       hBox.getChildren().add(recipeTitle);

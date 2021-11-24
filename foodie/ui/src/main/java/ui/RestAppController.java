@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
@@ -13,7 +14,7 @@ import ui.utils.RemoteCookbookAccess;
 public class RestAppController extends AbstractController {
 
   @FXML
-  private Pane mainListView;
+  private AnchorPane mainListView;
 
   @FXML
   ListViewController mainListViewController;

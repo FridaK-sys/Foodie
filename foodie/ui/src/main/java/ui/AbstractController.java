@@ -5,6 +5,7 @@ import core.Recipe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
@@ -23,7 +24,7 @@ public abstract class AbstractController implements FoodieController, Initializa
 
 
   @FXML
-  Pane listView;
+  AnchorPane listView;
 
   @FXML
   ListViewController mainListViewController;
