@@ -55,6 +55,8 @@ public class ListViewController implements FoodieController {
   
   @FXML
   private RadioButton dinner;
+  @FXML
+  private RadioButton dessert;
 
   /**
    * Sets the CookbookAccess for this controller so the data can come from both remote and local
@@ -214,10 +216,13 @@ public class ListViewController implements FoodieController {
     lunch.getStyleClass().add("toggle-button");
     dinner.getStyleClass().remove("radio-button");
     dinner.getStyleClass().add("toggle-button");
+    dessert.getStyleClass().remove("radio-button");
+    dessert.getStyleClass().add("toggle-button");
     all.setToggleGroup(group);
     breakfast.setToggleGroup(group);
     lunch.setToggleGroup(group);
     dinner.setToggleGroup(group);
+    dessert.setToggleGroup(group);
 
   }
 
