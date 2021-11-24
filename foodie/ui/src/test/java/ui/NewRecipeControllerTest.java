@@ -39,7 +39,7 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
   @Override
   public void start(final Stage stage) throws Exception {
-
+    SceneHandler.initializeTest(stage);
     URL fxmlLocation = getClass().getResource("NewRecipe_test.fxml");
     FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
     Parent root = fxmlLoader.load();
@@ -109,9 +109,11 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
   @Test
   public void testDeleteButton() {
+    SceneHandler.getScenes().get(SceneName.MAIN).getScene();
     dataAccess.addRecipe(recipe4);
     assertTrue(dataAccess.getCookbook().getRecipes().size() == 4);
-    this.controller.initData(recipe4);
+    this.controller.setSelectedRecipe(recipe4);
+    this.controller.update();
     clickOn("#deleteRecipeButton");
     testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
   }
