@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -305,8 +306,6 @@ public void doubleValidate(KeyEvent k) {
   public void clear() {
     clearTextFields();
     
-    setLabel("");
-    
     ingredients.clear();
     this.editing = false;
 
@@ -319,23 +318,8 @@ public void doubleValidate(KeyEvent k) {
 
   }
 
-  /**
-   * Sets new label.
-   *
-   * @param label label to be set
-   */
-  public void setLabel(String label) {
-    if (!this.label.equals(label)) {
-      this.label = label;
-      // setLabelButton(label);
-    } else {
-      this.label = "";
-      // setLabelButton("blank");
-    }
-  }
-
   public void deleteRecipe(ActionEvent ea) {
-    dataAccess.deleteRecipe(recipeTitle.getText());
+    dataAccess.deleteRecipe(selectedRecipe.getName());
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     backButton.fire();
   }
@@ -343,11 +327,12 @@ public void doubleValidate(KeyEvent k) {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
-    update();
-    ingredientListView.setItems(ingredients);
-    // setLabelButton("blank");
     setToggleGroup();
+    
+    ingredientListView.setItems(ingredients);
+    
     hb.setSpacing(20);
+    update();
   }
 
   private void setToggleGroup() {
@@ -373,11 +358,11 @@ public void doubleValidate(KeyEvent k) {
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
+      Scene scene = model.getScene();
       AbstractController controller = (AbstractController) model.getController();
-      System.out.println(newRecipe);
       controller.setSelectedRecipe(getSelectedrecipe());
       controller.update();
-      stage.setScene(model.getScene());
+      stage.setScene(scene);
     });
   }
 

@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -203,25 +204,5 @@ public class ViewRecipeController extends AbstractController {
     this.dataAccess = dataAccess;
   } 
   
-  static class IngredientListCell extends ListCell<Ingredient> {
-    private Text ingredientCell;
-
-    IngredientListCell() {
-      ingredientCell = new Text();
-
-    }
-
-    @Override
-    public void updateItem(Ingredient ingredient, boolean empty) {
-      super.updateItem(ingredient, empty);
-      if (ingredient != null && !empty) {
-        ingredientCell.setText(ingredient.toString());
-        setStyle("-fx-background-color: white;" + "-fx-background-insets: 0;");
-        setGraphic(ingredientCell);
-      } else {
-        setStyle("-fx-background-color: white;");
-      }
-    }
-  }
 
 }

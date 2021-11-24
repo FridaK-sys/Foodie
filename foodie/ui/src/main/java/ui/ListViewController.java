@@ -72,13 +72,10 @@ public class ListViewController implements FoodieController {
 
   @FXML
   void initialize(URL url, ResourceBundle rb) {
-    mainListView.setCellFactory(listView -> {
-      ListViewCell listCell = new ListViewCell();
-      return listCell;
-    });
+    setListViewCellfactory();
     setToggles();
     updateListView();
-    setListViewCellfactory();
+    
   }
 
   private void setListViewCellfactory() {

@@ -7,5 +7,5 @@ package ui;
  * @version 2018-06-06
  */
 public enum SceneName {
-  MAIN, VIEWRECIPE, NEWRECIPE, LISTVIEW;
+  MAIN, VIEWRECIPE, NEWRECIPE, MAINTEST;
 }
