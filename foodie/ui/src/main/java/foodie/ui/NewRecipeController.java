@@ -87,55 +87,53 @@ public class NewRecipeController extends AbstractController {
   private HBox hb;
 
 
-
-public void numLetValidate(KeyEvent k) {
-  TextField source = (TextField) k.getSource();
-  if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
-    errorMessageLabel.setText("Must be letters or numbers");
-    source.getStyleClass().add("text-field-red");
-  } else {
-    errorMessageLabel.setText("");
-    source.getStyleClass().setAll("text-field");
+  public void numLetValidate(KeyEvent k) {
+    TextField source = (TextField) k.getSource();
+    if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
+      errorMessageLabel.setText("Must be letters or numbers");
+      source.getStyleClass().add("text-field-red");
+    } else {
+      errorMessageLabel.setText("");
+      source.getStyleClass().setAll("text-field");
+    }
   }
-}
 
-public void intValidate(KeyEvent k) {
-  TextField source = (TextField) k.getSource();
-  if (source.getText().isEmpty()) {
-    source.getStyleClass().setAll("text-field");
-    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
-    return;
-  }
-  try {
-    Integer.parseInt(source.getText());
-    errorMessageLabel.setText("");
-    source.getStyleClass().setAll("text-field");
-    
-  } catch (Exception e) {
-    errorMessageLabel.setText("Must be an integer");
-    source.getStyleClass().add("text-field-red");
-  }
-}
+  public void intValidate(KeyEvent k) {
+    TextField source = (TextField) k.getSource();
+    if (source.getText().isEmpty()) {
+      source.getStyleClass().setAll("text-field");
+      // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+      return;
+    }
+    try {
+      Integer.parseInt(source.getText());
+      errorMessageLabel.setText("");
+      source.getStyleClass().setAll("text-field");
 
-public void doubleValidate(KeyEvent k) {
-  TextField source = (TextField) k.getSource();
-  if (source.getText().isEmpty()) {
-    source.getStyleClass().setAll("text-field");
-    return;
+    } catch (Exception e) {
+      errorMessageLabel.setText("Must be an integer");
+      source.getStyleClass().add("text-field-red");
+    }
   }
-  try {
-    Double.parseDouble(source.getText());
-    errorMessageLabel.setText("");
-    source.getStyleClass().setAll("text-field");
-  } catch (Exception e) {
-    errorMessageLabel.setText("Must be a decimal");
-    source.getStyleClass().add("text-field-red");
-    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
 
-    // source.setStyle("-fx-backround-color: RED;");
+  public void doubleValidate(KeyEvent k) {
+    TextField source = (TextField) k.getSource();
+    if (source.getText().isEmpty()) {
+      source.getStyleClass().setAll("text-field");
+      return;
+    }
+    try {
+      Double.parseDouble(source.getText());
+      errorMessageLabel.setText("");
+      source.getStyleClass().setAll("text-field");
+    } catch (Exception e) {
+      errorMessageLabel.setText("Must be a decimal");
+      source.getStyleClass().add("text-field-red");
+      // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+
+      // source.setStyle("-fx-backround-color: RED;");
+    }
   }
-}
-
 
 
   /**
@@ -149,7 +147,7 @@ public void doubleValidate(KeyEvent k) {
     try {
       if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
-            (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getValue().toString()));
+            Double.parseDouble(ingredientAmount.getText()), ingredientUnit.getValue().toString());
         ingredients.add(newIngredient);
       } else {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText());
@@ -176,7 +174,7 @@ public void doubleValidate(KeyEvent k) {
   @FXML
   public void handleDeleteIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
-    if (ing != null)  {
+    if (ing != null) {
       ingredients.remove(ing);
     }
   }
@@ -207,13 +205,12 @@ public void doubleValidate(KeyEvent k) {
     } catch (NullPointerException e) {
       errorMessageLabel.setText("You have empty fields");
       e.printStackTrace();
-  } catch (Exception e) {
-    System.out.println("testingerror");
-    // e.printStackTrace();
-    errorMessageLabel.setText("Invalid input");
-
+    } catch (Exception e) {
+      System.out.println("testingerror");
+      // e.printStackTrace();
+      errorMessageLabel.setText("Invalid input");
+    }
   }
-}
 
   /**
    * Saves edited recipe to server.
@@ -242,38 +239,34 @@ public void doubleValidate(KeyEvent k) {
         throw new IllegalArgumentException("This recipe title already exists");
       }
     }
-      this.newRecipe = new Recipe(recipeTitle.getText());
-      if(!recipePortions.getText().isEmpty()){
-        newRecipe.setPortions(Integer.parseInt(recipePortions.getText()));
-      }
-      if (!(recipeDescription.getText() == null)) {
-        this.newRecipe.setDescription(recipeDescription.getText());
-      }
-
-      for (Ingredient i : ingredients) {
-        this.newRecipe.addIngredient(i);
-      }
-      if (group.getSelectedToggle() != null) {
-        this.newRecipe.setLabel((String) group.getSelectedToggle().getUserData());
-      } else {
-        this.newRecipe.removeLabel();
-      }
-
+    this.newRecipe = new Recipe(recipeTitle.getText());
+    if (!recipePortions.getText().isEmpty()) {
+      newRecipe.setPortions(Integer.parseInt(recipePortions.getText()));
+    }
+    if (!(recipeDescription.getText() == null)) {
       this.newRecipe.setDescription(recipeDescription.getText());
-
-      return newRecipe;
-
+    }
+    for (Ingredient i : ingredients) {
+      this.newRecipe.addIngredient(i);
+    }
+    if (group.getSelectedToggle() != null) {
+      this.newRecipe.setLabel((String) group.getSelectedToggle().getUserData());
+    } else {
+      this.newRecipe.removeLabel();
+    }
+    this.newRecipe.setDescription(recipeDescription.getText());
+    return newRecipe;
   }
 
   /**
    * Initialises data from another scene.
    *
-   * @param recipe Recipe to initialize
+   * @param recipe the recipe to initialize
    * 
    */
   public void initData(Recipe recipe) {
     this.recipeTitle.setText(recipe.getName());
-    if (recipe.getPortions() != 0){
+    if (recipe.getPortions() != 0) {
       this.recipePortions.setText(String.valueOf(recipe.getPortions()));
     }
     this.recipeName = recipe.getName();
@@ -281,7 +274,7 @@ public void doubleValidate(KeyEvent k) {
       this.recipeDescription.setText(recipe.getDescription());
     }
     if (!recipe.getLabel().isEmpty()) {
-      switch (recipe.getLabel()){
+      switch (recipe.getLabel()) {
         case "breakfast":
           group.selectToggle(breakfast);
           break;
@@ -295,7 +288,7 @@ public void doubleValidate(KeyEvent k) {
           group.selectToggle(dessert);
           break;
         default:
-        break;
+          break;
       }
     }
     ingredients.setAll(recipe.getIngredients());
@@ -304,22 +297,17 @@ public void doubleValidate(KeyEvent k) {
     createRecipeButton.setVisible(false);
     saveRecipeButton.setVisible(true);
     deleteRecipeButton.setVisible(true);
-
   }
 
   public void clear() {
     clearTextFields();
-    
-    ingredients.clear();
     this.editing = false;
-
     if (group.getSelectedToggle() != null) {
       group.getSelectedToggle().setSelected(false);
     }
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
     deleteRecipeButton.setVisible(true);
-
   }
 
   public void deleteRecipe(ActionEvent ea) {
@@ -332,10 +320,7 @@ public void doubleValidate(KeyEvent k) {
   public void initialize(URL location, ResourceBundle resources) {
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
-    
-    ingredientListView.setItems(ingredients);
-    
-    hb.setSpacing(20);
+
     update();
   }
 
@@ -350,7 +335,6 @@ public void doubleValidate(KeyEvent k) {
     dinner.setUserData("dinner");
     dessert.setToggleGroup(group);
     dessert.setUserData("dessert");
-
   }
 
 
@@ -378,15 +362,12 @@ public void doubleValidate(KeyEvent k) {
       clearTextFields();
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
-      
-    } else {
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
-
   }
 
-  public void clearTextFields(){
+  public void clearTextFields() {
     ingredientAmount.clear();
     ingredientTitle.clear();
     ingredientUnit.setValue(null);
@@ -403,8 +384,7 @@ public void doubleValidate(KeyEvent k) {
   }
 
   @Override
-  protected void setUpStorage() {
-  }
+  protected void setUpStorage() {}
 
   public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;

@@ -8,8 +8,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.util.List;
 import java.net.http.HttpResponse;
+import java.util.List;
 import foodie.json.CookbookModule;
 
 /**
@@ -41,8 +41,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
   public Cookbook getCookbook() {
     if (cookbook == null) {
       try {
-        final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", 
-        "application/json").GET().build();
+        final HttpRequest req = HttpRequest.newBuilder(endPoint).header("Accept", "application/json").GET().build();
         final HttpResponse<String> res =
             HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
         this.cookbook = mapper.readValue(res.body(), Cookbook.class);
@@ -52,16 +51,6 @@ public class RemoteCookbookAccess implements CookbookAccess {
     }
     return cookbook;
   }
-
-  /**
-   * Edit Recipe. Sends http get request to remote server.
-   *
-   * @param name the name of the recipe will be removed
-   * @param recipe an edited version of the recipe that is added
-   * @return true if added or false if not added
-   * @throws RuntimeException if IOException or InterruptedException occured
-   * 
-   */
 
   /**
    * Adds Recipe. Sends http get request to remote server.
@@ -75,11 +64,9 @@ public class RemoteCookbookAccess implements CookbookAccess {
   public boolean addRecipe(Recipe recipe) {
     try {
       String jsonRecipe = mapper.writeValueAsString(recipe);
-      final HttpRequest req =
-          HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName().replaceAll(" ", "-"))).header("Accept", 
-          "application/json")
-              .header("Content-Type", "application/json").POST(BodyPublishers.ofString(jsonRecipe))
-              .build();
+      final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + recipe.getName().replaceAll(" ", "-")))
+          .header("Accept", "application/json").header("Content-Type", "application/json")
+          .POST(BodyPublishers.ofString(jsonRecipe)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyAdded = mapper.readValue(res.body(), Boolean.class);
       if (successfullyAdded != null && successfullyAdded) {
@@ -93,13 +80,22 @@ public class RemoteCookbookAccess implements CookbookAccess {
 
   }
 
+  /**
+   * Edit Recipe. Sends http get request to remote server.
+   *
+   * @param name the name of the recipe will be removed
+   * @param recipe an edited version of the recipe that is added
+   * @return true if added or false if not added
+   * @throws RuntimeException if IOException or InterruptedException occured
+   */
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
     try {
       String jsonRecipe = mapper.writeValueAsString(recipe);
       final HttpRequest req =
-          HttpRequest.newBuilder(URI.create(endPoint + "/" + name.replaceAll(" ", "-") + "/" + "edit")).header("Accept", "application/json")
-              .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(jsonRecipe)).build();
+          HttpRequest.newBuilder(URI.create(endPoint + "/" + name.replaceAll(" ", "-") + "/" + "edit"))
+              .header("Accept", "application/json").header("Content-Type", "application/json")
+              .PUT(BodyPublishers.ofString(jsonRecipe)).build();
       final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyEdit = mapper.readValue(res.body(), Boolean.class);
       if (successfullyEdit != null && successfullyEdit) {
@@ -119,7 +115,6 @@ public class RemoteCookbookAccess implements CookbookAccess {
    *
    * @param name the name of the recipe you want to delete
    * @return true if successfully removed or false if not removed
-   * 
    * @throws RuntimeException if IOException or InterruptedException occured
    */
 
@@ -128,8 +123,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
     try {
       final HttpRequest req = HttpRequest.newBuilder(URI.create(endPoint + "/" + name.replaceAll(" ", "-")))
           .header("Accept", "application/json").DELETE().build();
-      final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, 
-      HttpResponse.BodyHandlers.ofString());
+      final HttpResponse<String> res = HttpClient.newBuilder().build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyRemoved = mapper.readValue(res.body(), Boolean.class);
       if (successfullyRemoved != null && successfullyRemoved) {
         cookbook.removeRecipe(name);
@@ -142,15 +136,11 @@ public class RemoteCookbookAccess implements CookbookAccess {
   }
 
   /**
-   * Sets list of recipes
+   * Sets list of recipes.
    *
-   * @param cookbook the cookbook with recipes
-   *
+   * @param recipes recipes to be set
    * @return true if edited
-   * 
-   * 
    */
-
   @Override
   public boolean setRecipes(List<Recipe> recipes) {
     // cookbook.setRecipes(recipes);

@@ -1,13 +1,11 @@
 package foodie.ui;
 
-import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
 import foodie.core.Recipe;
+import java.io.File;
 import foodie.ui.utils.CookbookAccess;
 import foodie.ui.utils.LocalCookbookAccess;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

@@ -31,7 +31,6 @@ public class Recipe {
    * @param description description of recipe
    * @param portions number of portions
    * @param ingredients list of ingredient
-   * 
    */
   public Recipe(String name, String description, int portions, List<Ingredient> ingredients) {
     setName(name);
@@ -46,7 +45,6 @@ public class Recipe {
    * Constructor for a empty recipe.
    *
    * @param name name of recipe
-   * 
    */
   public Recipe(String name) {
     setName(name);
@@ -65,9 +63,7 @@ public class Recipe {
    * Sets name of recipe.
    *
    * @param name name of recipe
-   * 
    * @throws IllegalArgumentException if param contains other characters than letters and numbers
-   * 
    */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
@@ -92,9 +88,7 @@ public class Recipe {
    * Sets portions. Updates the amount of each ingredient to fit with portions.
    *
    * @param portions number of portions
-   * 
    * @throws IllegalArgumentException if param is negative integer
-   * 
    */
   public void setPortions(int portions) {
     if (portions < 0) {
@@ -113,9 +107,7 @@ public class Recipe {
    * Add ingredient to recipe.
    *
    * @param ingredient ingredient to add
-   * 
    * @throws IllegalArgumentException if list already contains ingredient
-   * 
    */
   public void addIngredient(Ingredient ingredient) {
     if (!ingredients.contains(ingredient)) {
@@ -129,9 +121,7 @@ public class Recipe {
    * Remove ingredient from recipe.
    *
    * @param index index in ingredientList of ingredient to be removed
-   *
    * @throws IllegalArgumentException if index is larger than size of ingredientList
-   * 
    */
   public void removeIngredient(int index) {
     ingredients.remove(index);
@@ -153,9 +143,7 @@ public class Recipe {
    * Sets label for recipe.
    *
    * @param label recipelabel
-   * 
    * @throws IllegalArgumentException if label is not valid
-   * 
    */
   public void setLabel(String label) {
     if (label.isEmpty()) {
@@ -176,7 +164,6 @@ public class Recipe {
 
   /**
    * Writes name of recipe and ingredients to string.
-   * 
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();

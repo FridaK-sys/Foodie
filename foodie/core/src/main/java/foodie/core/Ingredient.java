@@ -22,7 +22,6 @@ public class Ingredient {
    * @param name   name of ingredient
    * @param amount amount of ingredient
    * @param unit   unit of ingredient
-   * 
    */
   public Ingredient(String name, double amount, String unit) {
     setName(name);
@@ -34,7 +33,6 @@ public class Ingredient {
    * Constructor for ingredient with name.
    *
    * @param name name of ingredient
-   * 
    */
   public Ingredient(String name) {
     setName(name);
@@ -50,10 +48,8 @@ public class Ingredient {
    * Sets name of ingredient.
    *
    * @param name name of ingredient
-   *
    * @throws IllegalArgumentException if param contains other characters than
    *                                  letters and numbers
-   * 
    */
   public void setName(String name) {
     if (!name.matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$")) {
@@ -70,9 +66,7 @@ public class Ingredient {
    * Sets amount of ingredient.
    *
    * @param amount amount of ingredient
-   * 
    * @throws IllegalArgumentException if param is a negative integer or zero
-   * 
    */
   public void setAmount(double amount) {
     if (amount <= 0) {
@@ -91,7 +85,7 @@ public class Ingredient {
 
   @Override
   public String toString() {
-    String name = Double.toString(amount) + " "+ getUnit() +"\t" + getName();
+    String name = Double.toString(amount) + " " + getUnit() + "\t" + getName();
     return name;
   }
 

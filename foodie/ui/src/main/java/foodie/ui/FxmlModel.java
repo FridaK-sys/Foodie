@@ -18,14 +18,6 @@ public class FxmlModel {
   private Recipe recipe;
   private FoodieController controller;
 
-  /**
-   * Construct an FxmlModel object.
-   *
-   * @param resourceName the resource name for this FXML
-   * @param sceneName the {@link SceneName} for this FXML
-   * @param stage the primary stage that the scene will be set to
-   * 
-   */
   public FxmlModel(String resourceName, SceneName sceneName, Stage stage) {
     this.resourceName = resourceName;
     this.sceneName = sceneName;
@@ -33,30 +25,21 @@ public class FxmlModel {
     // this. controller = controller;
   }
 
-  /** 
-   * @return the resource name for this FXML file 
-   */
   public String getResourceName() {
     return resourceName;
   }
 
-  /** 
-   *@return the {@link SceneName} for this FXML file 
-   */
   public SceneName getSceneName() {
     return sceneName;
   }
 
-  /**
-   * @param scene the scene to set, loaded from this FxmlModel 
-   */
   public void setScene(Scene scene) {
     this.scene = scene;
   }
 
   /**
-   * Builds the scene iff {@code scene} is {@code null}. Then it returns the scene to the caller.
-   * 
+   * Builds the scene if scene is null. Then it returns the scene to the caller.
+   *
    * @return the scene
    */
   public Scene getScene() {
@@ -69,22 +52,25 @@ public class FxmlModel {
     return scene;
   }
 
-  /** @return {@code true} if the scene has been built, otherwise {@code false} */
+  /** 
+   * Checks if the scene has been built.
+   *
+   * @return true if the scene has been built successfully, false otherwise
+   */
   public boolean hasScene() {
     return scene != null;
   }
 
-  /** @return the primary stage for this Scene */
   public Stage getStage() {
     return stage;
   }
 
-  public void setRecipe(Recipe recipe) {
-    this.recipe = recipe;
+  public Recipe getRecipe() {
+    return recipe;
   }
 
-  public Recipe getRecipe() {
-      return recipe;
+  public void setRecipe(Recipe recipe) {
+    this.recipe = recipe;
   }
 
   public FoodieController getController() {

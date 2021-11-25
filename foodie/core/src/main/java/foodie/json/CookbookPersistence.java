@@ -51,11 +51,8 @@ public class CookbookPersistence {
    * Reads a cookbook from file using reader.
    *
    * @param reader the reader that reads file
-   *
    * @return cookbook from file
-   *
    * @throws IOException if IOException occured during reading for instance FileNotFoundException
-   * 
    */
   public Cookbook readCookbook(Reader reader) throws IOException {
     return this.mapper.readValue(reader, Cookbook.class);
@@ -66,7 +63,6 @@ public class CookbookPersistence {
    *
    * @param cookbook the cookbook to write to file
    * @param writer the writer that writes to file
-   *
    * @throws IOException if IOException occured during writing for instance FileNotFoundException
    */
   public void writeCookbook(Cookbook cookbook, Writer writer) throws IOException {
@@ -88,10 +84,8 @@ public class CookbookPersistence {
    * Loads a Cookbook from the saved file (saveFilePath) in the user.home folder.
    *
    * @return the loaded Cookbook
-   * 
    * @throws IOException if IOException occured during reading file
    * @throws IllegalStateException if saveFilePath is not set
-   * 
    */
   public Cookbook loadCookbook() throws IOException, IllegalStateException {
     if (this.saveFilePath == null) {
@@ -111,9 +105,7 @@ public class CookbookPersistence {
    * Saves a cookbook to the saveFilePath in the user.home folder.
    *
    * @param cookbook cookbook to save
-   * 
    * @throws IllegalStateException if saveFilePath is not set
-   * 
    * @throws IOException if IOException occured during writing to file
    */
   public void saveCookbook(Cookbook cookbook) throws IOException, IllegalStateException {

@@ -14,15 +14,11 @@ import javafx.stage.Stage;
 /**
  * Abstract class for RestApp- and LocalAppController.
  */
-/* */
 public abstract class AbstractController implements FoodieController, Initializable {
 
   protected CookbookAccess dataAccess;
-
   protected Recipe selectedRecipe = null;
-
   protected Stage stage;
-
 
   @FXML
   AnchorPane listView;
@@ -30,9 +26,7 @@ public abstract class AbstractController implements FoodieController, Initializa
   @FXML
   ListViewController mainListViewController;
 
-  
   protected abstract void setUpStorage();
-
 
   public void setCookbookAccess(CookbookAccess access) {
     this.dataAccess = access;
@@ -63,12 +57,12 @@ public abstract class AbstractController implements FoodieController, Initializa
   }
 
   public void changeScene(FxmlModel model) {
-    Scene scene = model.getScene();
+    final Scene scene = model.getScene();
     AbstractController controller = (AbstractController) model.getController();
     controller.setSelectedRecipe(selectedRecipe);
     controller.setCookbookAccess(dataAccess);
     controller.update();
-    
+
     stage.setScene(scene);
   }
 
@@ -88,5 +82,5 @@ public abstract class AbstractController implements FoodieController, Initializa
   public void setStage(Stage stage) {
     this.stage = stage;
   }
-  
+
 }

@@ -53,7 +53,7 @@ public class ListViewController implements FoodieController {
 
   @FXML
   private RadioButton lunch;
-  
+
   @FXML
   private RadioButton dinner;
   @FXML
@@ -78,7 +78,7 @@ public class ListViewController implements FoodieController {
     setListViewCellfactory();
     setToggles();
     updateListView();
-    
+
   }
 
   private void setListViewCellfactory() {
@@ -119,7 +119,7 @@ public class ListViewController implements FoodieController {
     sortListview(button.getId(), fav.isSelected());
   }
 
-  
+
 
   /**
    * Updates the list view.
@@ -171,21 +171,23 @@ public class ListViewController implements FoodieController {
    * Listener to open a Recipe from ListView when selected.
    */
   public void setListViewListener() {
-    mainListView.getSelectionModel().selectedItemProperty().addListener(
-      new ChangeListener<Recipe>() {
-      @Override
-      public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
-          Recipe newValue) {
-        if (newValue != null) {
-          System.out.println("Exception kommer her da, ser det:" + newValue.toString());
-          System.out.println("Exception kommer her da, ser det:" + newValue);
-          mainController.setSelectedRecipe(newValue);
-          changeSceneToViewRecipe();
-        }
-        System.out.println("ListView selection changed from oldValue = " + oldValue 
-          + " to newValue = " + newValue);
-      }
-    });
+    mainListView
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(new ChangeListener<Recipe>() {
+          @Override
+          public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
+              Recipe newValue) {
+                if (newValue != null) {
+                  System.out.println("Exception kommer her da, ser det:" + newValue.toString());
+                  System.out.println("Exception kommer her da, ser det:" + newValue);
+                  mainController.setSelectedRecipe(newValue);
+                  changeSceneToViewRecipe();
+                }
+                System.out.println("ListView selection changed from " + oldValue + " to " 
+                    + newValue);
+              }
+            });
   }
 
 
@@ -195,10 +197,9 @@ public class ListViewController implements FoodieController {
   public void setToggleListener() {
     all.setSelected(true);
     group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-
       @Override
-      public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
-      Toggle new_toggle) {
+      public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, 
+            Toggle newToggle) {
         // Has selection.
         if (group.getSelectedToggle() != null) {
           RadioButton button = (RadioButton) group.getSelectedToggle();
