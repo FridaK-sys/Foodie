@@ -113,7 +113,7 @@ public class ViewRecipeController extends AbstractController {
    * @param ae
    * @throws IOException if failed or interrupted I/O operations
    */
-  public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
+  public void changeSceneToEditRecipe(ActionEvent ae){
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
     changeScene(model);
   }
