@@ -26,8 +26,6 @@ public abstract class AbstractController implements Initializable {
   @FXML
   ListViewController mainListViewController;
 
-  
-
   protected abstract void update();
 
   public void setCookbookAccess(CookbookAccess access) {
