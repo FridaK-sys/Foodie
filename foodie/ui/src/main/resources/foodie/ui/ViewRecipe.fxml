@@ -18,7 +18,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="84.0" layoutY="120.0" prefHeight="320.0" prefWidth="232.0">
+      <VBox fx:id="ingredientsVBox" layoutX="84.0" layoutY="120.0" prefHeight="320.0" prefWidth="232.0">
          <children>
             <Pane prefHeight="34.0" prefWidth="232.0">
                <children>
@@ -63,7 +63,10 @@
       <TextArea fx:id="textField" editable="false" layoutX="413.0" layoutY="143.0" prefHeight="297.0" prefWidth="272.0" />
       <Button fx:id="backButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackbutton" text="&lt;-" />
       <Button fx:id="faveButton" layoutX="574.0" layoutY="40.0" mnemonicParsing="false" onAction="#favoriseRecipeButton" prefHeight="39.0" prefWidth="103.0" text="Fave" />
-      <Label fx:id="labelTag" layoutX="364.0" layoutY="42.0" prefHeight="17.0" prefWidth="73.0" />
+      <Label fx:id="labelTag" layoutX="445.0" layoutY="48.0" prefHeight="17.0" prefWidth="73.0">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <Button fx:id="editRecipe" layoutX="658.0" layoutY="494.0" mnemonicParsing="false" onAction="#changeSceneToEditRecipe" text="Edit" />
       <Label layoutX="518.0" layoutY="120.0" text="Description" />
    </children>
