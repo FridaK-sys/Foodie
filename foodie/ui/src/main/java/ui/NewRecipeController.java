@@ -88,7 +88,7 @@ public class NewRecipeController extends AbstractController {
 
 
 
-public void numLetValidate(KeyEvent k) {
+private void numLetValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
     errorMessageLabel.setText("Must be letters or numbers");
@@ -99,7 +99,7 @@ public void numLetValidate(KeyEvent k) {
   }
 }
 
-public void intValidate(KeyEvent k) {
+private void intValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
     source.setStyle("");
@@ -117,7 +117,7 @@ public void intValidate(KeyEvent k) {
   }
 }
 
-public void doubleValidate(KeyEvent k) {
+private void doubleValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
     source.setStyle("");
@@ -142,7 +142,7 @@ public void doubleValidate(KeyEvent k) {
    * 
    * @throws IllegalArgumentException if ingredient-title is not set
    */
-  public void addIngredientButton(ActionEvent ae) {
+  private void addIngredientButton(ActionEvent ae) {
     try {
       if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
@@ -165,13 +165,13 @@ public void doubleValidate(KeyEvent k) {
       errorMessageLabel.setText("Invalid Ingredient name");
       e.printStackTrace();
     } catch (NullPointerException e) {
-      errorMessageLabel.setText("The ingredient needs a title");
+      errorMessageLabel.setText("You have missing fields");
       e.printStackTrace();
     }
   }
 
   @FXML
-  public void handleDeleteIngredient() {
+  private void handleDeleteIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null)  {
       ingredients.remove(ing);
@@ -179,7 +179,7 @@ public void doubleValidate(KeyEvent k) {
   }
 
   @FXML
-  public void handleEditIngredient() {
+  private void handleEditIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -195,7 +195,7 @@ public void doubleValidate(KeyEvent k) {
    * @param ae when create new recipe-button is pushed
    * 
    */
-  public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
+  private void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
       System.out.println(dataAccess.toString());
       dataAccess.addRecipe(createRecipe());
@@ -215,7 +215,7 @@ public void doubleValidate(KeyEvent k) {
   /**
    * Saves edited recipe to server.
    */
-  public void saveRecipe() {
+  private void saveRecipe() {
     try {
       newRecipe = createRecipe();
       dataAccess.editRecipe(recipeName, newRecipe);
@@ -232,7 +232,7 @@ public void doubleValidate(KeyEvent k) {
   /**
    * Creates edited recipe.
    */
-  public Recipe createRecipe() {
+  private Recipe createRecipe() {
     if (!editing) {
       if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
         (this.recipeTitle).setText("");
@@ -268,7 +268,7 @@ public void doubleValidate(KeyEvent k) {
    * @param recipe Recipe to initialize
    * 
    */
-  public void initData(Recipe recipe) {
+  protected void initData(Recipe recipe) {
     this.recipeTitle.setText(recipe.getName());
     if (recipe.getPortions() != 0){
       this.recipePortions.setText(String.valueOf(recipe.getPortions()));
@@ -304,22 +304,20 @@ public void doubleValidate(KeyEvent k) {
 
   }
 
-  public void clear() {
+
+  private void clear() {
     clearTextFields();
-    
     ingredients.clear();
     this.editing = false;
-
     if (group.getSelectedToggle() != null) {
       group.getSelectedToggle().setSelected(false);
     }
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
     deleteRecipeButton.setVisible(true);
-
   }
 
-  public void deleteRecipe(ActionEvent ea) {
+  private void deleteRecipe(ActionEvent ea) {
     dataAccess.deleteRecipe(selectedRecipe.getName());
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     backButton.fire();
@@ -329,9 +327,7 @@ public void doubleValidate(KeyEvent k) {
   public void initialize(URL location, ResourceBundle resources) {
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
-    
     ingredientListView.setItems(ingredients);
-    
     hb.setSpacing(20);
     update();
   }
@@ -351,9 +347,7 @@ public void doubleValidate(KeyEvent k) {
   }
 
 
-  public List<Ingredient> getIngredients() {
-    return new ArrayList<Ingredient>(ingredients);
-  }
+
 
   /**
    * Sets the SceneTarget for return button.
@@ -405,5 +399,9 @@ public void doubleValidate(KeyEvent k) {
 
   public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
+  }
+
+  protected List<Ingredient> getIngredients() {
+    return new ArrayList<Ingredient>(ingredients);
   }
 }
