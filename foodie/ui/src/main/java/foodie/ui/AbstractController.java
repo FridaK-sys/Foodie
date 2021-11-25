@@ -1,13 +1,12 @@
 package foodie.ui;
 
-import core.Cookbook;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Recipe;
 import foodie.ui.utils.CookbookAccess;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -17,8 +16,11 @@ import javafx.stage.Stage;
 public abstract class AbstractController implements Initializable {
 
   protected CookbookAccess dataAccess;
+
   protected Recipe selectedRecipe = null;
+
   protected Stage stage;
+
 
   @FXML
   AnchorPane listView;
@@ -27,6 +29,7 @@ public abstract class AbstractController implements Initializable {
   ListViewController mainListViewController;
 
   protected abstract void update();
+
 
   public void setCookbookAccess(CookbookAccess access) {
     this.dataAccess = access;
@@ -54,7 +57,7 @@ public abstract class AbstractController implements Initializable {
     controller.setSelectedRecipe(getSelectedrecipe());
     controller.setCookbookAccess(dataAccess);
     controller.update();
-
+    
     stage.setScene(scene);
   }
 
@@ -79,5 +82,5 @@ public abstract class AbstractController implements Initializable {
   protected CookbookAccess getAccess() {
     return dataAccess;
   }
-
+  
 }

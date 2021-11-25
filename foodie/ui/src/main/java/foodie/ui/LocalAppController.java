@@ -1,16 +1,11 @@
 package foodie.ui;
 
-import core.Recipe;
-import java.io.File;
-import foodie.ui.utils.CookbookAccess;
 import foodie.ui.utils.LocalCookbookAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+
 
 public class LocalAppController extends AbstractController {
 
