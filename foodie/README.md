@@ -6,6 +6,9 @@ Dette prosjektet er konfigurert som et multi-modul-prosjekt med maven.
 - Restserver og restapi ligger i modulen `rest`
 - Prosjektet inneholder tester for alle moduelene, med rimelig god dekningsgrad.
 
+## Om appen
+Foodie lar deg opprette din egen kokebok og legge til oppskrifter i denne. Hver oppskrift kan redigeres ved å legge til eller fjerne ingredienser, samt skalere antall porsjoner. Dessuten kan man sortere oppskrifter basert på merkelapper og angi en oppskrift som favoritt. Appen er ment til å brukes som en digital kokebok for å bidra til en lettere matlagingsopplevelse i hverdagen. 
+
 ## Arkitekturdiagram
 
 ![Arkitektur](architecture.png)
