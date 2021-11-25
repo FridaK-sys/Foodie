@@ -61,8 +61,6 @@ public abstract class AbstractController implements Initializable {
     stage.setScene(scene);
   }
 
-  /** @param stage the stage to set */
-
   public void setStage(Stage stage) {
     this.stage = stage;
   }

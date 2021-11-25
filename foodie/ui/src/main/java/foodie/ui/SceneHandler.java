@@ -30,9 +30,10 @@ public class SceneHandler {
     scenes.put(SceneName.VIEWRECIPE, new FxmlModel(VIEW_RECIPE_FXML, SceneName.VIEWRECIPE, stage));
     scenes.put(SceneName.NEWRECIPE, new FxmlModel(NEW_RECIPE_FXML, SceneName.NEWRECIPE, stage));
   }
+  
   /**
    * Update the scene Map with new FxmlInfo
-   * 
+   *
    * @param name the {@link SceneName} that is the key to update
    * @param info the {@link FxmlInfo} that is the data to update
    */

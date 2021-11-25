@@ -20,6 +20,7 @@ public class CookbookApp extends Application {
       System.setProperty("java.awt.headless", "true");
     }
   }
+  
   public static void main(String[] args) throws Exception {
     launch(CookbookApp.class, args);
   }
