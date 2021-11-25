@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -23,7 +22,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 
 /**
@@ -35,7 +33,6 @@ public class NewRecipeController extends AbstractController {
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
-  // private String label = "";
   private boolean editing = false;
   private String recipeName;
   private ToggleGroup group;
@@ -88,7 +85,7 @@ public class NewRecipeController extends AbstractController {
 
 
 
-private void numLetValidate(KeyEvent k) {
+  public void numLetValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
     errorMessageLabel.setText("Must be letters or numbers");
@@ -99,25 +96,23 @@ private void numLetValidate(KeyEvent k) {
   }
 }
 
-private void intValidate(KeyEvent k) {
+public void intValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
     source.setStyle("");
-    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
     return;
   }
   try {
     Integer.parseInt(source.getText());
     errorMessageLabel.setText("");
     source.setStyle("");
-    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
   } catch (Exception e) {
     errorMessageLabel.setText("Must be an integer");
     source.setStyle("-fx-backround-color: #f1a9a9;");
   }
 }
 
-private void doubleValidate(KeyEvent k) {
+public void doubleValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
     source.setStyle("");
@@ -142,7 +137,7 @@ private void doubleValidate(KeyEvent k) {
    * 
    * @throws IllegalArgumentException if ingredient-title is not set
    */
-  private void addIngredientButton(ActionEvent ae) {
+  public void addIngredientButton(ActionEvent ae) {
     try {
       if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
@@ -171,7 +166,7 @@ private void doubleValidate(KeyEvent k) {
   }
 
   @FXML
-  private void handleDeleteIngredient() {
+  protected void handleDeleteIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null)  {
       ingredients.remove(ing);
@@ -179,7 +174,7 @@ private void doubleValidate(KeyEvent k) {
   }
 
   @FXML
-  private void handleEditIngredient() {
+  protected void handleEditIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -195,7 +190,7 @@ private void doubleValidate(KeyEvent k) {
    * @param ae when create new recipe-button is pushed
    * 
    */
-  private void createRecipeButtonPushed(ActionEvent ae) throws IOException {
+  public void createRecipeButtonPushed(ActionEvent ae) throws IOException {
     try {
       System.out.println(dataAccess.toString());
       dataAccess.addRecipe(createRecipe());
@@ -215,7 +210,8 @@ private void doubleValidate(KeyEvent k) {
   /**
    * Saves edited recipe to server.
    */
-  private void saveRecipe() {
+  @FXML
+  protected void saveRecipe() {
     try {
       newRecipe = createRecipe();
       dataAccess.editRecipe(recipeName, newRecipe);
@@ -305,19 +301,20 @@ private void doubleValidate(KeyEvent k) {
   }
 
 
-  private void clear() {
+  protected void clear() {
     clearTextFields();
     ingredients.clear();
     this.editing = false;
     if (group.getSelectedToggle() != null) {
       group.getSelectedToggle().setSelected(false);
     }
+    
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
     deleteRecipeButton.setVisible(true);
   }
 
-  private void deleteRecipe(ActionEvent ea) {
+  public void deleteRecipe(ActionEvent ea) {
     dataAccess.deleteRecipe(selectedRecipe.getName());
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     backButton.fire();
@@ -328,7 +325,6 @@ private void doubleValidate(KeyEvent k) {
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
     ingredientListView.setItems(ingredients);
-    hb.setSpacing(20);
     update();
   }
 
@@ -354,17 +350,12 @@ private void doubleValidate(KeyEvent k) {
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
-      Scene scene = model.getScene();
-      AbstractController controller = (AbstractController) model.getController();
-      controller.setSelectedRecipe(getSelectedrecipe());
-      controller.update();
-      stage.setScene(scene);
+      changeScene(model);
     });
   }
 
   @Override
   public void update() {
-    System.out.println(newRecipe);
     if (getSelectedrecipe() != null) {
       clearTextFields();
       initData(selectedRecipe);
@@ -374,7 +365,6 @@ private void doubleValidate(KeyEvent k) {
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
-
   }
 
   public void clearTextFields(){
@@ -387,15 +377,6 @@ private void doubleValidate(KeyEvent k) {
     this.recipeDescription.clear();
   }
 
-
-  @Override
-  public void setStage(Stage stage) {
-    this.stage = stage;
-  }
-
-  @Override
-  protected void setUpStorage() {
-  }
 
   public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
