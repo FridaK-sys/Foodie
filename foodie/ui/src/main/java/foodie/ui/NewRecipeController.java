@@ -97,6 +97,11 @@ public class NewRecipeController extends AbstractController {
   private HBox hb;
 
 
+  /**
+   * Validates input while typing, gives the field a red frame if unvalid input is typed.
+   *
+   * @param k the input typed
+   */
   public void numLetValidate(KeyEvent k) {
     TextField source = (TextField) k.getSource();
     if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
@@ -108,6 +113,11 @@ public class NewRecipeController extends AbstractController {
     }
   }
 
+  /**
+   * Validates integer-input while typing, gives the field a red frame if unvalid input is typed.
+   *
+   * @param k the input typed
+   */
   public void intValidate(KeyEvent k) {
     TextField source = (TextField) k.getSource();
     if (source.getText().isEmpty()) {
@@ -125,6 +135,11 @@ public class NewRecipeController extends AbstractController {
     }
   }
 
+  /**
+   * Validates double-input while typing, gives the field a red frame if unvalid input is typed.
+   *
+   * @param k the input typed
+   */
   public void doubleValidate(KeyEvent k) {
     TextField source = (TextField) k.getSource();
     if (source.getText().isEmpty()) {
@@ -306,6 +321,10 @@ public class NewRecipeController extends AbstractController {
   }
 
 
+  /**
+   * Clears all text-field and sets sets visibility of buttons to fit the new-recipe page.
+   *
+   */
   protected void clear() {
     clearTextFields();
     ingredients.clear();
@@ -319,7 +338,12 @@ public class NewRecipeController extends AbstractController {
     deleteRecipeButton.setVisible(true);
   }
 
-  public void deleteRecipe(ActionEvent ea) {
+  /**
+   * Deletes recipe from dataAccess and change scene to main-page.
+   *
+   */
+  @FXML
+  public void deleteRecipe() {
     dataAccess.deleteRecipe(selectedRecipe.getName());
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     backButton.fire();
@@ -385,6 +409,7 @@ public class NewRecipeController extends AbstractController {
 
   /**
    * Listener to open a Recipe from ListView when selected.
+   *
    */
   public void setListViewListener() {
     ingredientListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Ingredient>() {
@@ -404,12 +429,13 @@ public class NewRecipeController extends AbstractController {
       public void handle(Event event) {
         ingredientListView.getSelectionModel().clearSelection();
       }
-
     });
   }
 
   
-
+  /**
+   * Clears all text-field.
+   */
   public void clearTextFields() {
     ingredientAmount.clear();
     ingredientTitle.clear();

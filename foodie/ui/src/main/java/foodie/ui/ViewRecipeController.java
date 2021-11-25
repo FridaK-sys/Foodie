@@ -104,6 +104,9 @@ public class ViewRecipeController extends AbstractController {
     this.portion = portionSize;
   }
 
+  /**
+   * Initializes controller and sets the CellFactory for listview.
+   */
   public void initialize(URL location, ResourceBundle resources) {
     ingredientsListView.setCellFactory(listView -> {
       IngredientListCell listCell = new IngredientListCell();
@@ -130,6 +133,11 @@ public class ViewRecipeController extends AbstractController {
     changeScene(model);
   }
 
+  /**
+   * Populates fields and lists with information from selected recipe.
+   *
+   * @param recipe the recipe to display
+   */
   public void initData(Recipe recipe) {
     this.viewRecipe = recipe;
     this.portion = recipe.getPortions();

@@ -9,22 +9,29 @@ import javafx.stage.Stage;
  */
 public class FxmlModel {
 
-  private String resourceName;
+  private String filepath;
   private SceneName sceneName;
   private Stage stage;
   private Scene scene;
   private Recipe recipe;
   private AbstractController controller;
 
-  public FxmlModel(String resourceName, SceneName sceneName, Stage stage) {
-    this.resourceName = resourceName;
+  /**
+   * Construct an FxmlModel.
+   *
+   * @param filepath the resource name for this FXML
+   * @param sceneName the SceneName for this FXML
+   * @param stage the stage that the scene will be set to
+   */
+  public FxmlModel(String filepath, SceneName sceneName, Stage stage) {
+    this.filepath = filepath;
     this.sceneName = sceneName;
     this.stage = stage;
     // this. controller = controller;
   }
 
   public String getResourceName() {
-    return resourceName;
+    return filepath;
   }
 
   public SceneName getSceneName() {

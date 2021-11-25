@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Abstract class for RestApp- and LocalAppController.
  */
-/* */
+
 public abstract class AbstractController implements Initializable {
 
   protected CookbookAccess dataAccess;
@@ -49,6 +49,12 @@ public abstract class AbstractController implements Initializable {
   public void changeSceneToViewRecipe() {
     changeScene(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
   }
+
+  /**
+   * Changes scene to target and updates the targeted controller so the page loads with corect data.
+   *
+   * @param model the FXML file info to load the scene with.
+   */
 
   public void changeScene(FxmlModel model) {
     final Scene scene = model.getScene();

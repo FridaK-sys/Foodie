@@ -5,9 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 
+/**
+ * ListCell for ringredients.
+ * Displays name, unit and amount.
+ */
 public class IngredientListCell extends ListCell<Ingredient> {
 
-  private HBox hBox = null;
+  private HBox hbox = null;
 
   private Label recipeTitle = null;
 
@@ -19,13 +23,12 @@ public class IngredientListCell extends ListCell<Ingredient> {
       setStyle("-fx-background-color: white;");
       setGraphic(null);
     } else {
-      hBox = new HBox();
+      hbox = new HBox();
       recipeTitle = new Label();
       recipeTitle.setText(ingredient.toString());
-      hBox.getChildren().add(recipeTitle);
-      hBox.getStyleClass().add("ingredientListCell");
-      // setStyle("-fx-background-color: white;");
-      setGraphic(hBox);
+      hbox.getChildren().add(recipeTitle);
+      hbox.getStyleClass().add("ingredientListCell");
+      setGraphic(hbox);
     }
   }
   

@@ -7,6 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * Handles loading FXML files and updates the scenes MAP in SceneHandler.
+ *
+ */
 public class FxmlHandler {
   /**
    * Either builds the scene from FxmlInfo or loads the built scene. 
@@ -14,7 +18,7 @@ public class FxmlHandler {
    * If the URL is null then the FXML file could not be found.
    *
    * @param fxmlModel the FXML file info to load the scene with
-   * @return the built scene, or null if there was an error
+   * @return the completed scene, or null
    */
   public Scene load(FxmlModel fxmlModel) {
     if (fxmlModel.hasScene()) {
@@ -22,7 +26,7 @@ public class FxmlHandler {
     }
     URL url = getClass().getResource(fxmlModel.getResourceName());
     if (url == null) {
-      System.out.println("error");
+      System.out.println("Could not load file");
     }
     FXMLLoader loader = new FXMLLoader(url);
     Scene scene;
@@ -34,7 +38,7 @@ public class FxmlHandler {
       Platform.exit();
       return null;
     }
-    // Write back the updated FxmlInfo to the scenes Map in Main
+
     fxmlModel.setScene(scene);
     SceneHandler.updateScenes(fxmlModel.getSceneName(), fxmlModel);
 
