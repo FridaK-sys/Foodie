@@ -1,5 +1,4 @@
 {
-  "name" : "Cookbook",
   "recipes" : [ {
     "name" : "Cake",
     "description" : "Recipe for cake",
