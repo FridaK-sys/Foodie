@@ -2,9 +2,10 @@ package foodie.ui.utils;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
+import foodie.json.CookbookPersistence;
 import java.io.IOException;
 import java.util.List;
-import foodie.json.CookbookPersistence;
+
 
 
 /**
@@ -113,7 +114,7 @@ public class LocalCookbookAccess implements CookbookAccess {
   }
 
   /**
-   * Sets list of recipes
+   * Sets a list of recipes.
    *
    * @param recipes list of recipes to be set 
    * @return true if edited
