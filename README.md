@@ -21,7 +21,7 @@ For å kjøre prosjektet, skriv følgende kommandoer i terminalen. Dette kjører
 - `cd foodie`
 - `mvn -pl ui javafx:run`
 
-For å se appen i GitPod må du inn på Remote Explorer og trykke på "Open browser" på port 6080. For å avslutte appen: kryss ut app-vinduet og skriv `Control + C` i terminalen. For å avslutte serveren, gå inn i terminalen der serveren ble startet og skriv `Control + C`.
+For å se appen i GitPod må du inn på Remote Explorer og trykke på "Open browser" på port 6080. For å avslutte appen: kryss ut appen (øverst til høyre) og lukk app-vinduet. For å avslutte serveren, gå inn i terminalen der serveren ble startet og skriv `Control + C`.
 
 ## Shippable product
 Vi bruker **jlink** og **jpackage** for å lage et "shippable product" av vår applikasjon. 
