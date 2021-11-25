@@ -59,7 +59,6 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
     public void setupItems() {
         setTestData();
         this.controller.setDataAccess(dataAccess);
-        // this.controller.initData(cookbook, dataAccess);
     }
 
 
@@ -101,11 +100,5 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
         assertTrue(dataAccess.getCookbook().getRecipes().get(2).getFav());
         assertEquals(button.getText(), "Remove from favorite");
     }
-
-    
-    // @Test
-    // public void testPortionButtons(){
-
-    // }
 
 }

@@ -39,7 +39,6 @@ public class ListViewTest extends AbstractAppTest {
   public void setupItems() {
     setTestData();
     this.controller.setRecipes(cookbook);
-    // assertNotNull(cookbook);
   }
 
   @Test
@@ -47,50 +46,6 @@ public class ListViewTest extends AbstractAppTest {
     assertNotNull(this.controller);
     testRecipes(cookbook.getRecipes(), recipe1, recipe2, recipe3);
   }
-
-  // @Test
-  // public void testRecipeListView() {
-  //   // ListView<Recipe> recipessListView = lookup("#mainListView").query();
-  //   // recipessListView.get
-  //   Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
-  //   clickOn(listViewCell(listCell, 1));;
-
-  //   // checkRecipesListViewItems(recipe1, recipe2, recipe3);
-  // }
-
-  // private Node waitForNode(Predicate<Node> nodeTest, int num) {
-  //   WaitForAsyncUtils.waitForFxEvents();
-  //   Node[] nodes = new Node[1];
-  //   try {
-  //     WaitForAsyncUtils.waitFor(200, TimeUnit.MILLISECONDS, () -> {
-  //       while (true) {
-  //         if ((nodes[0] = findNode(nodeTest, num)) != null) {
-  //           return true;
-  //         }
-  //         Thread.sleep(100);
-  //       }
-  //     });
-  //   } catch (TimeoutException e) {
-  //     fail("No appropriate node available");
-  //   }
-  //   return nodes[0];
-  // }
-
-  // private Node findNode(Predicate<Node> nodeTest, int num) {
-  //   int count = 0;
-  //   for (Node node : lookup(nodeTest).queryAll()) {
-  //     if (nodeTest.test(node) && count++ == num) {
-  //       return node;
-  //     }
-  //   }
-  //   return null;
-  // }
-
-  // private ListViewCell listViewCell(Predicate<ListViewCell> test, int num) {
-  //   return (ListViewCell) waitForNode(node -> node instanceof ListViewCell listCell && test.test(listCell), num);
-  // }
-
-
 
   @Test
   public void testToggleButtons() {
@@ -110,17 +65,5 @@ public class ListViewTest extends AbstractAppTest {
     clickOn("#all");
     checkRecipesListViewItems(recipe1, recipe2, recipe3);
   }
-
-
-  // @Test
-  // public void testSelectRecipe() throws InterruptedException{
-
-  //   Thread.sleep(200);
-  // }
-
-  // @Test
-  // public void testChangeSceneToNewRecipeButtonPushed() {
-  //   clickOn("#newButton");
-  // }
 
 }
