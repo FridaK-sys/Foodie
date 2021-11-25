@@ -1,10 +1,10 @@
-package json;
+package foodie.json;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 /**
  * A Jackson module for configuring JSON serialization of Cookbook instances.

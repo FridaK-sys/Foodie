@@ -1,10 +1,10 @@
-package json;
+package foodie.json;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import foodie.core.Ingredient;
 import org.junit.jupiter.api.Test;
-import core.Ingredient;
 
 /**
  * Test class for IngredientDeserializer and IngredientSerializer

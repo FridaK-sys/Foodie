@@ -1,4 +1,4 @@
-package json;
+package foodie.json;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -15,11 +15,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
+import foodie.json.CookbookModule;
+import foodie.json.CookbookPersistence;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
 
 /**
  * Test class for CookbookPersistence-class. Works as integration test.

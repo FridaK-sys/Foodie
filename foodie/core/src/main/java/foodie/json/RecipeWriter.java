@@ -1,10 +1,10 @@
-package json;
+package foodie.json;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 import java.io.IOException;
 
 /**

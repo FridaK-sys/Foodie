@@ -16,8 +16,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import core.Recipe;
+import foodie.core.Recipe;
 import foodie.ui.utils.RemoteCookbookAccess;
 
 

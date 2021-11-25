@@ -1,6 +1,7 @@
-package json;
+package foodie.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import foodie.json.CookbookModule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
