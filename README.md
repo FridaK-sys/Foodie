@@ -25,6 +25,8 @@ For å kjøre prosjektet, skriv følgende kommandoer i terminalen. Dette kjører
 - `cd foodie`
 - `mvn -pl ui javafx:run`
 
+For å se appen i GitPod må du inn på Remote Explorer og trykke på "Open browser" på port 6080. 
+
 ## Shippable product
 Vi bruker **jlink** og **jpackage** for å lage et "shippable product" av vår applikasjon. 
 jlink genererer en kjørbar fil (.exe, .app), mens jpackage oppretter installasjonsprogrammet for den kjørbare filen. Installasjonsfilen kan kjøres på en annen maskin med samme operativsystem. jpackage vil lage en .dmg fil for Mac, .msi fil for Windows og .deb eller .rpm for Linux.
