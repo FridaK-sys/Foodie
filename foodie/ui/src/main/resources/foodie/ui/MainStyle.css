@@ -1,0 +1,104 @@
+.root   {  
+    -fx-font-family : "monospace"; 
+    -fx-font-weight:  600;
+    -fx-background-color: #ffffff;
+    -fx-focus-color: transparent;
+    } 
+    
+    .button {
+        -fx-font-weight: 600;
+        -fx-background-color: #e6d8d8;
+        -fx-border-radius: 50px;
+        -fx-background-radius: 20;
+    }
+
+    .button:hover {
+      -fx-background-color: #f7efe7;
+  }
+    
+    .toggle-button{
+      -fx-height: 15px;
+      -fx-background-color: rgb(102, 140, 162);
+      -fx-border-radius: 20;
+      -fx-background-radius: 20;
+    }
+
+    .toggle-button:selected {
+      -fx-background-color: rgb(149, 177, 194);
+  }
+
+  .listViewCell{
+    -fx-height: 30px;
+    -fx-spacing: 30;
+    -fx-padding: 20;
+    -fx-background-color: #f3ecec;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 20;
+    -fx-font: 16px;
+    -fx-font-weight: 700;
+  }
+
+  .listViewCell:hover{
+    -fx-background-color: #e6d8d8;
+
+  }
+
+  .ingredientListCell{
+    -fx-height: 5px;
+    /* -fx-spacing: 50; */
+    -fx-padding: 5;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 20;
+    -fx-font: 16px;
+    -fx-font-weight: 700;
+  }
+
+  .ingredientListCell:hover{
+    -fx-background-color: #ffffff;
+  }
+
+  .listView{
+    -fx-border-color: rgb(221, 221, 221);
+  }
+  
+
+
+  .choice-box{
+    -fx-background-color: white;
+    -fx-border-color: rgb(221, 221, 221);
+
+    -fx-border-radius: 6px;
+    
+  }
+  .text-field{
+    -fx-background-color: white;
+    -fx-border-color: rgb(221, 221, 221);
+
+    -fx-border-radius: 6px;
+    -fx-control-inner-background: #ffffff;
+    -fx-background-insets: 0;
+    -fx-background-color: -fx-text-box-border, -fx-control-inner-background;
+    -fx-focus-color: transparent;
+  }
+  .text-area{
+    -fx-background-color: white;
+    -fx-border-color: rgb(221, 221, 221);
+
+    -fx-border-radius: 6px;
+    -fx-control-inner-background: #ffffff;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent;
+  }
+
+  .text-field-red{
+    -fx-border-color: rgba(190, 109, 109, 0.658);
+
+  }
+
+  .clear{
+    -fx-border-color: BLACK; 
+    -fx-background-color: WHITE"
+  }
+
+    

@@ -1,13 +1,20 @@
 module foodie.ui {
   requires transitive foodie.core;
-  requires javafx.controls;
   requires transitive javafx.base;
+  requires javafx.controls;
   requires javafx.fxml;
   requires java.net.http;
   requires com.fasterxml.jackson.databind;
 
-  exports ui;
-  
+  //requires de.jensd.fx.glyphs.commons;
+  //requires de.jensd.fx.glyphs.fontawesome;
 
-  opens ui to javafx.graphics, javafx.fxml;
+  // requires javafx.media;
+  // opens com.acme.treefx to javafx.graphics;
+
+  exports foodie.ui;
+
+  opens foodie.ui to javafx.graphics, javafx.fxml;
+
+
 }

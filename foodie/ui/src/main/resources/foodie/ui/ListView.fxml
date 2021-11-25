@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- <?import ui.ListViewController?> -->
+
+<AnchorPane prefWidth="760.0" prefHeight="560.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.ListViewController">
+     <VBox alignment="CENTER"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="98.0" prefWidth="767.0" spacing="5.0">
+               <children>
+                  <RadioButton fx:id="all" mnemonicParsing="false" text="All recipes">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group" />
+                     </toggleGroup>
+               </RadioButton>
+                  <RadioButton fx:id="breakfast" mnemonicParsing="false" text="Breakfast" toggleGroup="$group" />
+                  <RadioButton fx:id="lunch" mnemonicParsing="false" text="Lunch" toggleGroup="$group" />
+                  <RadioButton fx:id="dinner" mnemonicParsing="false" text="Dinner" toggleGroup="$group" />
+                  <RadioButton fx:id="dessert" mnemonicParsing="false" text="Dessert" toggleGroup="$group">
+                  <cursor>
+                     <Cursor fx:constant="DEFAULT" />
+                  </cursor>
+               </RadioButton>
+                  <ToggleButton fx:id="fav" mnemonicParsing="false" onAction="#toggleFav" text="Favorited" />
+               </children>
+            </HBox>
+            <ListView fx:id="mainListView" prefHeight="404.0" prefWidth="767.0" />
+            <Pane prefHeight="73.0" prefWidth="651.0">
+               <children>
+                  <Button fx:id="newButton" alignment="CENTER" layoutX="285.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeSceneToNewRecipe" prefHeight="41.0" prefWidth="197.0" text="New recipe" />
+               </children>
+         </Pane>
+            
+               </children>
+   </VBox>
+</AnchorPane>
