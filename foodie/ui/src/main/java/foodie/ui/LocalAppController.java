@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-
+/**
+ * Controller for running the application with local acces to data stored on the user-device.
+ */
 public class LocalAppController extends AbstractController {
 
   @FXML

@@ -9,7 +9,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-
+/**
+ * Controller for running the application with REST service.
+ * 
+ */
 public class RestAppController extends AbstractController {
 
   @FXML

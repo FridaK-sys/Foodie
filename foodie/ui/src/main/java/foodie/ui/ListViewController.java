@@ -169,7 +169,6 @@ public class ListViewController {
       @Override
       public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, 
             Toggle newToggle) {
-        // Has selection.
         if (group.getSelectedToggle() != null) {
           RadioButton button = (RadioButton) group.getSelectedToggle();
           sortListview(button.getId(), fav.isSelected());
