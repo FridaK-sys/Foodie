@@ -1,5 +1,5 @@
 module foodie.ui {
-  requires foodie.core;
+  requires transitive foodie.core;
   requires transitive javafx.base;
   requires javafx.controls;
   requires javafx.fxml;
