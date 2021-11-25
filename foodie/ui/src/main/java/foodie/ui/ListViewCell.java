@@ -17,7 +17,7 @@ public class ListViewCell extends ListCell<Recipe> {
   @Override
   protected void updateItem(Recipe recipe, boolean empty) {
     super.updateItem(recipe, empty);
-    setText(null);
+    // setText(null);
     if (empty || recipe == null) {
       setStyle("-fx-background-color: white;");
       setGraphic(null);

@@ -53,6 +53,13 @@ public class ViewRecipeController extends AbstractController {
   @FXML
   private Button increaseButton;
 
+  @FXML
+  private Label ingredientsLabel;
+
+  @FXML
+  private Label portionsneeded;
+;
+
   /**
    * Sets or removes favorite for Recipe.
    */

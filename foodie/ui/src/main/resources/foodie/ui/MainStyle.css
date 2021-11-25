@@ -4,6 +4,17 @@
     -fx-background-color: #ffffff;
     -fx-focus-color: transparent;
     } 
+
+.label{
+  -fx-font-family : "monospace"; 
+}
+
+.vbox{
+  -fx-background-color: #e6d8d8;
+  -fx-border-radius: 50px;
+        -fx-background-radius: 20;
+ 
+}
     
     .button {
         -fx-font-weight: 600;
@@ -54,14 +65,19 @@
   }
 
   .ingredientListCell:hover{
-    -fx-background-color: #ffffff;
+    -fx-background-color: #f7e9e9;
+  }
+  .ingredientListCell:selected{
+    -fx-background-color: #9c5656;
   }
 
-  .listView{
-    -fx-border-color: rgb(221, 221, 221);
+  /* .list-view:hover{
+    -fx-background-color: #e6d8d8;
   }
-  
-
+  .list-view{
+    -fx-background-color: #e6d8d8;
+  } */
+ 
 
   .choice-box{
     -fx-background-color: white;
