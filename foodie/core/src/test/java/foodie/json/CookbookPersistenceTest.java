@@ -18,8 +18,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
-import foodie.json.CookbookModule;
-import foodie.json.CookbookPersistence;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
