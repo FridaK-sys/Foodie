@@ -20,9 +20,9 @@ Prosjektet bruker Maven til bygging og kjøring.
 For å kjøre prosjektet, skriv følgende kommandoer i terminalen. Dette kjører også alt av tester. 
 - `cd foodie` 
 - `mvn install` 
-- `cd rest``
+- `cd rest`
 - `mvn spring-boot:run` for å starte serveren
-Åpne en ny terminal og skriv
+- Åpne en ny terminal og skriv
 - `cd foodie`
 - `mvn -pl ui javafx:run`
 
@@ -33,6 +33,14 @@ jlink genererer en kjørbar fil (.exe, .app), mens jpackage oppretter installasj
 Applikasjonen kan kjøres med disse tilleggene lokalt på IDE, men ikke i Gitpod, grunnet at "fake root" ikke er tilgjengelig. 
 
 For å starte jlink og jpackage skriv følgende kommandoer i terminalen ..
+- `cd foodie` 
+- `mvn install` 
+- `cd rest`
+- `mvn spring-boot:run` for å starte serveren
+- Åpne en ny terminal og skriv
+- `cd foodie`
+- `cd ui`
+- `mvn `
 
 
 

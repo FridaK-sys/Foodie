@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * Abstract class for RestApp- and LocalAppController.
  */
 /* */
-public abstract class AbstractController implements FoodieController, Initializable {
+public abstract class AbstractController implements Initializable {
 
   protected CookbookAccess dataAccess;
 
@@ -30,7 +30,8 @@ public abstract class AbstractController implements FoodieController, Initializa
   ListViewController mainListViewController;
 
   
-  protected abstract void setUpStorage();
+
+  protected abstract void update();
 
 
   public void setCookbookAccess(CookbookAccess access) {
@@ -38,15 +39,6 @@ public abstract class AbstractController implements FoodieController, Initializa
     update();
   }
 
-
-  private void updateMainListView() {
-    mainListViewController.setCookbookAccess(dataAccess);
-  }
-
-
-  public CookbookAccess getAccess() {
-    return dataAccess;
-  }
 
   public void initializeRecipesView() {
     mainListViewController.setCookbookAccess(dataAccess);
@@ -63,19 +55,26 @@ public abstract class AbstractController implements FoodieController, Initializa
 
   public void changeScene(FxmlModel model) {
     Scene scene = model.getScene();
-    AbstractController controller = (AbstractController) model.getController();
-    controller.setSelectedRecipe(selectedRecipe);
+    AbstractController controller = model.getController();
+    
+    controller.setSelectedRecipe(getSelectedrecipe());
     controller.setCookbookAccess(dataAccess);
     controller.update();
     
     stage.setScene(scene);
   }
 
-  public Cookbook getCookbook() {
-    return mainListViewController.getCookbook();
+  /** @param stage the stage to set */
+
+  public void setStage(Stage stage) {
+    this.stage = stage;
   }
 
-  void setSelectedRecipe(Recipe recipe) {
+  protected Cookbook getCookbook() {
+    return mainListViewController.getCookbook();
+  }
+  
+  public void setSelectedRecipe(Recipe recipe) {
     this.selectedRecipe = recipe;
   }
 
@@ -83,9 +82,8 @@ public abstract class AbstractController implements FoodieController, Initializa
     return selectedRecipe;
   }
 
-  @Override
-  public void setStage(Stage stage) {
-    this.stage = stage;
+  protected CookbookAccess getAccess() {
+    return dataAccess;
   }
   
 }

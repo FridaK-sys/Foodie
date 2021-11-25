@@ -17,12 +17,11 @@ public class LocalAppController extends AbstractController {
   @FXML
   private AnchorPane pane;
 
-
   /**
    * Makes local CookbookAccess file.
    */
 
-  @Override
+
   protected void setUpStorage() {
     dataAccess = new LocalCookbookAccess("/checkCookbookff.json");
   }
@@ -35,7 +34,7 @@ public class LocalAppController extends AbstractController {
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
-    mainListViewController.setMaster(this);
+    mainListViewController.setMainController(this);
   }
 
   @Override

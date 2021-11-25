@@ -25,7 +25,8 @@ public class IngredientListCell extends ListCell<Ingredient> {
       recipeTitle = new Label();
       recipeTitle.setText(ingredient.toString());
       hBox.getChildren().add(recipeTitle);
-      setStyle("-fx-background-color: white;");
+      hBox.getStyleClass().add("ingredientListCell");
+      // setStyle("-fx-background-color: white;");
       setGraphic(hBox);
     }
   }

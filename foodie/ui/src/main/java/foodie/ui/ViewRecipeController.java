@@ -13,13 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.control.ListCell;
-import javafx.scene.text.Text;
 
 /**
  * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
@@ -28,10 +25,8 @@ public class ViewRecipeController extends AbstractController {
 
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
-  // private CookbookAccess dataAccess = AbstractController.getAccess();
   private Recipe viewRecipe;
 
-  // private Stage stage;
 
   @FXML
   private Label recipeTitle;
@@ -110,8 +105,8 @@ public class ViewRecipeController extends AbstractController {
       IngredientListCell listCell = new IngredientListCell();
       return listCell;
     });
+    ingredientsListView.getSelectionModel();
     ingredientsListView.setItems(ingredients);
-    
   }
 
   /**
@@ -122,22 +117,13 @@ public class ViewRecipeController extends AbstractController {
    */
   public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
-    Scene scene = model.getScene();
-
-    NewRecipeController controller = (NewRecipeController) model.getController();
-    controller.setSelectedRecipe(selectedRecipe);
-    controller.setCookbookAccess(dataAccess);
-    controller.update();
-    stage.setScene(scene);
-
+    changeScene(model);
   }
 
   @FXML
-  private void handleBackbutton() {
+  public void handleBackbutton() {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.MAIN);
-    Scene scene = model.getScene();
-    model.getController().update();
-    stage.setScene(scene);
+    changeScene(model);
   }
 
   public void initData(Recipe recipe) {
@@ -160,7 +146,6 @@ public class ViewRecipeController extends AbstractController {
       decreaseButton.setVisible(true);
     }
     if (!recipe.getIngredients().isEmpty()) {
-      // ingredients.clear();
       ingredients.setAll(recipe.getIngredients());
     } else{
       ingredients.clear();
@@ -181,24 +166,12 @@ public class ViewRecipeController extends AbstractController {
 
   }
 
-
   /**
    * Updates page when switching back to scene.
    */
   @Override
   public void update() {
-    System.out.println(selectedRecipe.toString());
-    initData(this.selectedRecipe);
-  }
-
-  @Override
-  public void setStage(Stage stage) {
-    this.stage = stage;
-  }
-
-  @Override
-  protected void setUpStorage() {
-    
+    initData(getSelectedrecipe());
   }
 
   public void setDataAccess(CookbookAccess dataAccess){

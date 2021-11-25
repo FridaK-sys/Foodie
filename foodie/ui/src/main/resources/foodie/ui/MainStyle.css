@@ -43,6 +43,26 @@
 
   }
 
+  .ingredientListCell{
+    -fx-height: 5px;
+    /* -fx-spacing: 50; */
+    -fx-padding: 5;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 20;
+    -fx-font: 16px;
+    -fx-font-weight: 700;
+  }
+
+  .ingredientListCell:hover{
+    -fx-background-color: #ffffff;
+  }
+
+  .listView{
+    -fx-border-color: rgb(221, 221, 221);
+  }
+  
+
 
   .choice-box{
     -fx-background-color: white;

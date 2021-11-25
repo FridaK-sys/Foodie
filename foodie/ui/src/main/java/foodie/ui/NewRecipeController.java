@@ -9,11 +9,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -23,8 +26,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 /**
  * Controller for page responsible for creating and editing recipes.
@@ -35,7 +38,6 @@ public class NewRecipeController extends AbstractController {
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
-  // private String label = "";
   private boolean editing = false;
   private String recipeName;
   private ToggleGroup group;
@@ -82,6 +84,12 @@ public class NewRecipeController extends AbstractController {
   private Button deleteRecipeButton;
   @FXML
   private Button createRecipeButton;
+  @FXML
+  private Button deleteIngredientButton;
+  @FXML
+  private Button editIngredientButton;
+  @FXML
+  private AnchorPane page;
 
   @FXML
   private HBox hb;
@@ -109,32 +117,27 @@ public class NewRecipeController extends AbstractController {
       Integer.parseInt(source.getText());
       errorMessageLabel.setText("");
       source.getStyleClass().setAll("text-field");
-
     } catch (Exception e) {
-      errorMessageLabel.setText("Must be an integer");
+      errorMessageLabel.setText("Must be a integer");
       source.getStyleClass().add("text-field-red");
     }
   }
 
-  public void doubleValidate(KeyEvent k) {
-    TextField source = (TextField) k.getSource();
-    if (source.getText().isEmpty()) {
-      source.getStyleClass().setAll("text-field");
-      return;
-    }
-    try {
-      Double.parseDouble(source.getText());
-      errorMessageLabel.setText("");
-      source.getStyleClass().setAll("text-field");
-    } catch (Exception e) {
-      errorMessageLabel.setText("Must be a decimal");
-      source.getStyleClass().add("text-field-red");
-      // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
-
-      // source.setStyle("-fx-backround-color: RED;");
-    }
+public void doubleValidate(KeyEvent k) {
+  TextField source = (TextField) k.getSource();
+  if (source.getText().isEmpty()) {
+    source.getStyleClass().setAll("text-field");
+    return;
   }
-
+  try {
+    Double.parseDouble(source.getText());
+    errorMessageLabel.setText("");
+    source.getStyleClass().setAll("text-field");
+  } catch (Exception e) {
+    errorMessageLabel.setText("Must be a decimal");
+    source.getStyleClass().add("text-field-red");
+  }
+}
 
   /**
    * Adds ingredient to recipe.
@@ -166,13 +169,13 @@ public class NewRecipeController extends AbstractController {
       errorMessageLabel.setText("Invalid Ingredient name");
       e.printStackTrace();
     } catch (NullPointerException e) {
-      errorMessageLabel.setText("The ingredient needs a title");
+      errorMessageLabel.setText("You have missing fields");
       e.printStackTrace();
     }
   }
 
   @FXML
-  public void handleDeleteIngredient() {
+  protected void handleDeleteIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -180,7 +183,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   @FXML
-  public void handleEditIngredient() {
+  protected void handleEditIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -215,7 +218,8 @@ public class NewRecipeController extends AbstractController {
   /**
    * Saves edited recipe to server.
    */
-  public void saveRecipe() {
+  @FXML
+  protected void saveRecipe() {
     try {
       newRecipe = createRecipe();
       dataAccess.editRecipe(recipeName, newRecipe);
@@ -232,7 +236,7 @@ public class NewRecipeController extends AbstractController {
   /**
    * Creates edited recipe.
    */
-  public Recipe createRecipe() {
+  private Recipe createRecipe() {
     if (!editing) {
       if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
         (this.recipeTitle).setText("");
@@ -264,7 +268,7 @@ public class NewRecipeController extends AbstractController {
    * @param recipe the recipe to initialize
    * 
    */
-  public void initData(Recipe recipe) {
+  protected void initData(Recipe recipe) {
     this.recipeTitle.setText(recipe.getName());
     if (recipe.getPortions() != 0) {
       this.recipePortions.setText(String.valueOf(recipe.getPortions()));
@@ -299,12 +303,15 @@ public class NewRecipeController extends AbstractController {
     deleteRecipeButton.setVisible(true);
   }
 
-  public void clear() {
+
+  protected void clear() {
     clearTextFields();
+    ingredients.clear();
     this.editing = false;
     if (group.getSelectedToggle() != null) {
       group.getSelectedToggle().setSelected(false);
     }
+    
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
     deleteRecipeButton.setVisible(true);
@@ -318,9 +325,13 @@ public class NewRecipeController extends AbstractController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    ingredientListView.getStyleClass().add("ingredientListCell");
+    deleteIngredientButton.setDisable(true);
+    editIngredientButton.setDisable(true);
+    setListViewListener();
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
-
+    ingredientListView.setItems(ingredients);
     update();
   }
 
@@ -338,36 +349,60 @@ public class NewRecipeController extends AbstractController {
   }
 
 
-  public List<Ingredient> getIngredients() {
-    return new ArrayList<Ingredient>(ingredients);
-  }
+
 
   /**
    * Sets the SceneTarget for return button.
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
-      Scene scene = model.getScene();
-      AbstractController controller = (AbstractController) model.getController();
-      controller.setSelectedRecipe(getSelectedrecipe());
-      controller.update();
-      stage.setScene(scene);
+      changeScene(model);
     });
   }
 
+  
   @Override
   public void update() {
-    System.out.println(newRecipe);
     if (getSelectedrecipe() != null) {
       clearTextFields();
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
+
+    } else {
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
   }
 
-  public void clearTextFields() {
+
+  /**
+   * Listener to open a Recipe from ListView when selected.
+   */
+  public void setListViewListener() {
+    ingredientListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Ingredient>() {
+      @Override
+      public void changed(ObservableValue<? extends Ingredient> observable, Ingredient oldValue, Ingredient newValue) {
+        if (newValue != null) {
+          deleteIngredientButton.setDisable(false);
+          editIngredientButton.setDisable(false);
+        } else{
+          deleteIngredientButton.setDisable(true);
+          editIngredientButton.setDisable(true);
+        }
+      }
+    });
+    page.setOnMouseClicked(new EventHandler<Event>() {
+      @Override
+      public void handle(Event event) {
+        ingredientListView.getSelectionModel().clearSelection();
+      }
+
+    });
+  }
+
+  
+
+  public void clearTextFields(){
     ingredientAmount.clear();
     ingredientTitle.clear();
     ingredientUnit.setValue(null);
@@ -378,15 +413,11 @@ public class NewRecipeController extends AbstractController {
   }
 
 
-  @Override
-  public void setStage(Stage stage) {
-    this.stage = stage;
-  }
-
-  @Override
-  protected void setUpStorage() {}
-
   public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
+  }
+
+  protected List<Ingredient> getIngredients() {
+    return new ArrayList<Ingredient>(ingredients);
   }
 }

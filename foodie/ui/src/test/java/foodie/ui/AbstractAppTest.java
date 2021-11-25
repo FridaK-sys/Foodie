@@ -67,8 +67,8 @@ public abstract class AbstractAppTest extends ApplicationTest {
     }
 
     public void checkRecipesListViewItems(Recipe... recipes) {
-        ListView<Recipe> todoListView = lookup("#mainListView").query();
-        testRecipes(todoListView.getItems(), recipes);
+        ListView<Recipe> recipeListView = lookup("#mainListView").query();
+        testRecipes(recipeListView.getItems(), recipes);
     }
 
     public void testRecipes(List<Recipe> re, Recipe... recipes) {
