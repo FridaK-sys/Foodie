@@ -9,9 +9,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,7 +26,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -82,6 +97,12 @@ public class NewRecipeController extends AbstractController {
   private Button deleteRecipeButton;
   @FXML
   private Button createRecipeButton;
+  @FXML
+  private Button deleteIngredientButton;
+  @FXML
+  private Button editIngredientButton;
+  @FXML
+  private AnchorPane page;
 
   @FXML
   private HBox hb;
@@ -109,32 +130,27 @@ public class NewRecipeController extends AbstractController {
       Integer.parseInt(source.getText());
       errorMessageLabel.setText("");
       source.getStyleClass().setAll("text-field");
-
     } catch (Exception e) {
-      errorMessageLabel.setText("Must be an integer");
+      errorMessageLabel.setText("Must be a integer");
       source.getStyleClass().add("text-field-red");
     }
   }
 
-  public void doubleValidate(KeyEvent k) {
-    TextField source = (TextField) k.getSource();
-    if (source.getText().isEmpty()) {
-      source.getStyleClass().setAll("text-field");
-      return;
-    }
-    try {
-      Double.parseDouble(source.getText());
-      errorMessageLabel.setText("");
-      source.getStyleClass().setAll("text-field");
-    } catch (Exception e) {
-      errorMessageLabel.setText("Must be a decimal");
-      source.getStyleClass().add("text-field-red");
-      // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
-
-      // source.setStyle("-fx-backround-color: RED;");
-    }
+public void doubleValidate(KeyEvent k) {
+  TextField source = (TextField) k.getSource();
+  if (source.getText().isEmpty()) {
+    source.getStyleClass().setAll("text-field");
+    return;
   }
-
+  try {
+    Double.parseDouble(source.getText());
+    errorMessageLabel.setText("");
+    source.getStyleClass().setAll("text-field");
+  } catch (Exception e) {
+    errorMessageLabel.setText("Must be a decimal");
+    source.getStyleClass().add("text-field-red");
+  }
+}
 
   /**
    * Adds ingredient to recipe.
@@ -318,6 +334,10 @@ public class NewRecipeController extends AbstractController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    ingredientListView.getStyleClass().add("ingredientListCell");
+    deleteIngredientButton.setDisable(true);
+    editIngredientButton.setDisable(true);
+    setListViewListener();
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
 
@@ -367,7 +387,34 @@ public class NewRecipeController extends AbstractController {
     }
   }
 
-  public void clearTextFields() {
+  /**
+   * Listener to open a Recipe from ListView when selected.
+   */
+  public void setListViewListener() {
+    ingredientListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Ingredient>() {
+      @Override
+      public void changed(ObservableValue<? extends Ingredient> observable, Ingredient oldValue, Ingredient newValue) {
+        if (newValue != null) {
+          deleteIngredientButton.setDisable(false);
+          editIngredientButton.setDisable(false);
+        } else{
+          deleteIngredientButton.setDisable(true);
+          editIngredientButton.setDisable(true);
+        }
+      }
+    });
+    page.setOnMouseClicked(new EventHandler<Event>() {
+      @Override
+      public void handle(Event event) {
+        ingredientListView.getSelectionModel().clearSelection();
+      }
+
+    });
+  }
+
+  
+
+  public void clearTextFields(){
     ingredientAmount.clear();
     ingredientTitle.clear();
     ingredientUnit.setValue(null);
