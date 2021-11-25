@@ -1,6 +1,6 @@
 module foodie.core {
-  exports core;
-  exports json;
+  exports foodie.core;
+  exports foodie.json;
 
   requires java.desktop;
   requires com.fasterxml.jackson.annotation;
