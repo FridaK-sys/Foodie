@@ -12,17 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
 
 /**
@@ -36,7 +30,6 @@ public class ListViewController {
   private ToggleGroup group = new ToggleGroup();
   private CookbookAccess dataAccess;
   private AbstractController mainController;
-  // private Stage stage;
 
   @FXML
   private ListView<Recipe> mainListView;
@@ -78,7 +71,7 @@ public class ListViewController {
    *
    * @throws IOException if file not found or could not be loaded
    */
-  protected void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
+  public void changeSceneToNewRecipe(ActionEvent ae) throws IOException {
     mainController.changeSceneToNewRecipe();
   }
 
@@ -94,7 +87,7 @@ public class ListViewController {
    * Displays fav recipies when button is toggled.
    */
   @FXML
-  private void toggleFav() {
+  public void toggleFav() {
     RadioButton button = (RadioButton) group.getSelectedToggle();
     sortListview(button.getId(), fav.isSelected());
   }
@@ -145,15 +138,14 @@ public class ListViewController {
     }
   }
 
-
-  protected void setMaster(AbstractController master) {
+  public void setMainController(AbstractController master) {
     this.mainController = master;
   }
 
   /**
    * Listener to open a Recipe from ListView when selected.
    */
-  private void setListViewListener() {
+  protected void setListViewListener() {
     mainListView.getSelectionModel().selectedItemProperty().addListener(
       new ChangeListener<Recipe>() {
       @Override
@@ -163,8 +155,6 @@ public class ListViewController {
           mainController.setSelectedRecipe(newValue);
           mainController.changeSceneToViewRecipe();
         }
-        System.out.println("ListView selection changed from oldValue = " + oldValue 
-          + " to newValue = " + newValue);
       }
     });
   }
@@ -189,17 +179,6 @@ public class ListViewController {
     });
   }
 
-  protected void setRecipes(Cookbook cookbook) {
-    this.mainBook = cookbook;
-    recipes.setAll(cookbook.getRecipes());
-    updateListView();
-  }
-
-  protected Cookbook getCookbook() {
-    Cookbook initiatedCookbook = mainBook;
-    return initiatedCookbook;
-  }
-
   private void setToggles() {
     all.getStyleClass().remove("radio-button");
     all.getStyleClass().add("toggle-button");
@@ -217,6 +196,17 @@ public class ListViewController {
     dinner.setToggleGroup(group);
     dessert.setToggleGroup(group);
 
+  }
+
+  protected void setRecipes(Cookbook cookbook) {
+    this.mainBook = cookbook;
+    recipes.setAll(cookbook.getRecipes());
+    updateListView();
+  }
+
+  protected Cookbook getCookbook() {
+    Cookbook initiatedCookbook = mainBook;
+    return initiatedCookbook;
   }
 
 }
