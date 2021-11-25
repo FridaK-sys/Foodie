@@ -360,16 +360,20 @@ public void doubleValidate(KeyEvent k) {
     });
   }
 
+  
   @Override
   public void update() {
     if (getSelectedrecipe() != null) {
       clearTextFields();
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
+
+    } else {
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
   }
+
 
   /**
    * Listener to open a Recipe from ListView when selected.
