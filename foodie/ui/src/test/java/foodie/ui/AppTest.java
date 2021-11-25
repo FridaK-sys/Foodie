@@ -40,7 +40,7 @@ public class AppTest extends AbstractAppTest {
         SceneHandler.initializeTest(stage);
 
         stage.setScene(SceneHandler.getScenes().get(SceneName.MAIN).getScene());
-        controller = (AbstractController) SceneHandler.getScenes().get(SceneName.MAIN).getController();
+        controller = SceneHandler.getScenes().get(SceneName.MAIN).getController();
         controller.setCookbookAccess(dataAccess);
         stage.setTitle("Multi-Scene Demo");
         stage.show();
@@ -112,7 +112,6 @@ public class AppTest extends AbstractAppTest {
 
         clickOn(listViewCell(listCell, 1));
 
-        Scene firstStage = (Scene) Window.getWindows().get(0).getScene();
 
         Label tag = lookup("#labelTag").query();
         String recipeTag = dataAccess.getCookbook().getRecipes().get(1).getLabel();

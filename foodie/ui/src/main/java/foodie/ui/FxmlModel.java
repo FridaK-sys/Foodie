@@ -14,7 +14,7 @@ public class FxmlModel {
   private Stage stage;
   private Scene scene;
   private Recipe recipe;
-  private FoodieController controller;
+  private AbstractController controller;
 
   public FxmlModel(String resourceName, SceneName sceneName, Stage stage) {
     this.resourceName = resourceName;
@@ -71,11 +71,11 @@ public class FxmlModel {
     this.recipe = recipe;
   }
 
-  public FoodieController getController() {
+  public AbstractController getController() {
     return controller;
   }
 
-  public void setController(FoodieController controller) {
+  public void setController(AbstractController controller) {
     this.controller = controller;
   }
 

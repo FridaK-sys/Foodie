@@ -13,22 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
 
 /**
  * Controller for main page in the application.
  */
-public class ListViewController implements FoodieController {
+public class ListViewController {
 
 
   private Cookbook mainBook = new Cookbook();
@@ -36,7 +30,6 @@ public class ListViewController implements FoodieController {
   private ToggleGroup group = new ToggleGroup();
   private CookbookAccess dataAccess;
   private AbstractController mainController;
-  // private Stage stage;
 
   @FXML
   private ListView<Recipe> mainListView;
@@ -66,26 +59,12 @@ public class ListViewController implements FoodieController {
    * 
    */
 
-  public void setCookbookAccess(CookbookAccess dataAccess) {
-    this.dataAccess = dataAccess;
-    this.mainBook = dataAccess.getCookbook();
-    updateListView();
-  }
-
+  
   @FXML
   void initialize(URL url, ResourceBundle rb) {
-    setListViewCellfactory();
-    setToggles();
     updateListView();
-
   }
 
-  private void setListViewCellfactory() {
-    mainListView.setCellFactory(listView -> {
-      ListViewCell listCell = new ListViewCell();
-      return listCell;
-    });
-  }
 
   /**
    * Loads NewRecipeController.
@@ -96,17 +75,12 @@ public class ListViewController implements FoodieController {
     mainController.changeSceneToNewRecipe();
   }
 
-  public void changeSceneToViewRecipe() {
-    mainController.changeSceneToViewRecipe();
-  }
-
   /**
    * Loads cookbook from dataAccess and updates view.
    */
-  public void update() {
+  protected void update() {
     mainBook = dataAccess.getCookbook();
-    updateListView();
-    setListViewCellfactory();
+    recipes.setAll(mainBook.getRecipes());
   }
 
   /**
@@ -118,19 +92,27 @@ public class ListViewController implements FoodieController {
     sortListview(button.getId(), fav.isSelected());
   }
 
-
-
   /**
    * Updates the list view.
    */
-  public void updateListView() {
-    setListViewCellfactory();
-    recipes.setAll(mainBook.getRecipes());
-    mainListView.setItems(recipes);
+  protected void updateListView() {
+    mainListView.setCellFactory(listView -> {
+      ListViewCell listCell = new ListViewCell();
+      return listCell;
+    });
     setToggles();
     setToggleListener();
     setListViewListener();
+    recipes.setAll(mainBook.getRecipes());
+    mainListView.setItems(recipes);
     mainListView.getSelectionModel().clearSelection();
+  }
+
+
+  protected void setCookbookAccess(CookbookAccess dataAccess) {
+    this.dataAccess = dataAccess;
+    this.mainBook = dataAccess.getCookbook();
+    updateListView();
   }
 
   /**
@@ -139,7 +121,7 @@ public class ListViewController implements FoodieController {
    * @param label the selected label
    * @param fav if fav is toggled
    */
-  public void sortListview(String label, Boolean fav) {
+  private void sortListview(String label, Boolean fav) {
     if (label.equals("all")) {
       if (fav) {
         recipes.setAll((mainBook.getRecipes()).stream().filter(r -> r.getFav() == true).toList());
@@ -156,44 +138,32 @@ public class ListViewController implements FoodieController {
     }
   }
 
-
-  @Override
-  public void setStage(Stage stage) {
-    // this.stage = stage;
-  }
-
-  public void setMaster(AbstractController master) {
+  public void setMainController(AbstractController master) {
     this.mainController = master;
   }
 
   /**
    * Listener to open a Recipe from ListView when selected.
    */
-  public void setListViewListener() {
-    mainListView
-        .getSelectionModel()
-        .selectedItemProperty()
-        .addListener(new ChangeListener<Recipe>() {
-          @Override
-          public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
-              Recipe newValue) {
-                if (newValue != null) {
-                  System.out.println("Exception kommer her da, ser det:" + newValue.toString());
-                  System.out.println("Exception kommer her da, ser det:" + newValue);
-                  mainController.setSelectedRecipe(newValue);
-                  changeSceneToViewRecipe();
-                }
-                System.out.println("ListView selection changed from " + oldValue + " to " 
-                    + newValue);
-              }
-            });
+  protected void setListViewListener() {
+    mainListView.getSelectionModel().selectedItemProperty().addListener(
+      new ChangeListener<Recipe>() {
+      @Override
+      public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
+          Recipe newValue) {
+        if (newValue != null) {
+          mainController.setSelectedRecipe(newValue);
+          mainController.changeSceneToViewRecipe();
+        }
+      }
+    });
   }
 
 
   /**
    * Listener to update ListView with selected toggle label.
    */
-  public void setToggleListener() {
+  private void setToggleListener() {
     all.setSelected(true);
     group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
       @Override
@@ -208,7 +178,7 @@ public class ListViewController implements FoodieController {
     });
   }
 
-  public void setToggles() {
+  private void setToggles() {
     all.getStyleClass().remove("radio-button");
     all.getStyleClass().add("toggle-button");
     breakfast.getStyleClass().add("toggle-button");
@@ -227,13 +197,13 @@ public class ListViewController implements FoodieController {
 
   }
 
-  public void setRecipes(Cookbook cookbook) {
+  protected void setRecipes(Cookbook cookbook) {
     this.mainBook = cookbook;
     recipes.setAll(cookbook.getRecipes());
     updateListView();
   }
 
-  public Cookbook getCookbook() {
+  protected Cookbook getCookbook() {
     Cookbook initiatedCookbook = mainBook;
     return initiatedCookbook;
   }

@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import ui.utils.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -107,7 +106,6 @@ public class ViewRecipeController extends AbstractController {
     });
     ingredientsListView.getSelectionModel();
     ingredientsListView.setItems(ingredients);
-    
   }
 
   /**
@@ -118,22 +116,13 @@ public class ViewRecipeController extends AbstractController {
    */
   public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
-    Scene scene = model.getScene();
-
-    NewRecipeController controller = (NewRecipeController) model.getController();
-    controller.setSelectedRecipe(selectedRecipe);
-    controller.setCookbookAccess(dataAccess);
-    controller.update();
-    stage.setScene(scene);
-
+    changeScene(model);
   }
 
   @FXML
-  private void handleBackbutton() {
+  public void handleBackbutton() {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.MAIN);
-    Scene scene = model.getScene();
-    model.getController().update();
-    stage.setScene(scene);
+    changeScene(model);
   }
 
   public void initData(Recipe recipe) {
@@ -156,7 +145,6 @@ public class ViewRecipeController extends AbstractController {
       decreaseButton.setVisible(true);
     }
     if (!recipe.getIngredients().isEmpty()) {
-      // ingredients.clear();
       ingredients.setAll(recipe.getIngredients());
     } else{
       ingredients.clear();
@@ -182,13 +170,7 @@ public class ViewRecipeController extends AbstractController {
    */
   @Override
   public void update() {
-    System.out.println(selectedRecipe.toString());
-    initData(this.selectedRecipe);
-  }
-
-  @Override
-  protected void setUpStorage() {
-    
+    initData(getSelectedrecipe());
   }
 
   public void setDataAccess(CookbookAccess dataAccess){

@@ -15,8 +15,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -28,18 +28,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * Controller for page responsible for creating and editing recipes.
@@ -50,7 +38,6 @@ public class NewRecipeController extends AbstractController {
   private Recipe newRecipe;
   private Cookbook cookbook = new Cookbook();
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
-  // private String label = "";
   private boolean editing = false;
   private String recipeName;
   private ToggleGroup group;
@@ -182,13 +169,13 @@ public void doubleValidate(KeyEvent k) {
       errorMessageLabel.setText("Invalid Ingredient name");
       e.printStackTrace();
     } catch (NullPointerException e) {
-      errorMessageLabel.setText("The ingredient needs a title");
+      errorMessageLabel.setText("You have missing fields");
       e.printStackTrace();
     }
   }
 
   @FXML
-  public void handleDeleteIngredient() {
+  protected void handleDeleteIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -196,7 +183,7 @@ public void doubleValidate(KeyEvent k) {
   }
 
   @FXML
-  public void handleEditIngredient() {
+  protected void handleEditIngredient() {
     Ingredient ing = ingredientListView.getSelectionModel().getSelectedItem();
     if (ing != null) {
       ingredients.remove(ing);
@@ -231,7 +218,8 @@ public void doubleValidate(KeyEvent k) {
   /**
    * Saves edited recipe to server.
    */
-  public void saveRecipe() {
+  @FXML
+  protected void saveRecipe() {
     try {
       newRecipe = createRecipe();
       dataAccess.editRecipe(recipeName, newRecipe);
@@ -248,7 +236,7 @@ public void doubleValidate(KeyEvent k) {
   /**
    * Creates edited recipe.
    */
-  public Recipe createRecipe() {
+  private Recipe createRecipe() {
     if (!editing) {
       if ((this.cookbook).isInCookbook(recipeTitle.getText())) {
         (this.recipeTitle).setText("");
@@ -280,7 +268,7 @@ public void doubleValidate(KeyEvent k) {
    * @param recipe the recipe to initialize
    * 
    */
-  public void initData(Recipe recipe) {
+  protected void initData(Recipe recipe) {
     this.recipeTitle.setText(recipe.getName());
     if (recipe.getPortions() != 0) {
       this.recipePortions.setText(String.valueOf(recipe.getPortions()));
@@ -315,12 +303,15 @@ public void doubleValidate(KeyEvent k) {
     deleteRecipeButton.setVisible(true);
   }
 
-  public void clear() {
+
+  protected void clear() {
     clearTextFields();
+    ingredients.clear();
     this.editing = false;
     if (group.getSelectedToggle() != null) {
       group.getSelectedToggle().setSelected(false);
     }
+    
     createRecipeButton.setVisible(true);
     saveRecipeButton.setVisible(false);
     deleteRecipeButton.setVisible(true);
@@ -340,7 +331,7 @@ public void doubleValidate(KeyEvent k) {
     setListViewListener();
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
-
+    ingredientListView.setItems(ingredients);
     update();
   }
 
@@ -358,34 +349,31 @@ public void doubleValidate(KeyEvent k) {
   }
 
 
-  public List<Ingredient> getIngredients() {
-    return new ArrayList<Ingredient>(ingredients);
-  }
+
 
   /**
    * Sets the SceneTarget for return button.
    */
   public void setBackButtonTarget(FxmlModel model) {
     backButton.setOnAction(ea -> {
-      Scene scene = model.getScene();
-      AbstractController controller = (AbstractController) model.getController();
-      controller.setSelectedRecipe(getSelectedrecipe());
-      controller.update();
-      stage.setScene(scene);
+      changeScene(model);
     });
   }
 
+  
   @Override
   public void update() {
-    System.out.println(newRecipe);
     if (getSelectedrecipe() != null) {
       clearTextFields();
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
+
+    } else {
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
   }
+
 
   /**
    * Listener to open a Recipe from ListView when selected.
@@ -425,15 +413,11 @@ public void doubleValidate(KeyEvent k) {
   }
 
 
-  @Override
-  public void setStage(Stage stage) {
-    this.stage = stage;
-  }
-
-  @Override
-  protected void setUpStorage() {}
-
   public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
+  }
+
+  protected List<Ingredient> getIngredients() {
+    return new ArrayList<Ingredient>(ingredients);
   }
 }
