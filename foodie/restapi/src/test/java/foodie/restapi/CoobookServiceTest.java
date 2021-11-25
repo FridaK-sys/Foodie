@@ -8,8 +8,9 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.fail;
-import core.Cookbook;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 /**
  * Unit test for CookbookService

@@ -19,9 +19,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import core.Cookbook;
-import core.Recipe;
-import json.CookbookModule;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
+import foodie.json.CookbookModule;
 
 /**
  * Unit-test (isolated integration-test) of CookbookController

@@ -11,13 +11,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 import foodie.ui.utils.CookbookAccess;
 import foodie.ui.utils.LocalCookbookAccess;
 import javafx.scene.control.ListView;
-import json.CookbookPersistence;
+import foodie.json.CookbookPersistence;
 
 public abstract class AbstractAppTest extends ApplicationTest {
 

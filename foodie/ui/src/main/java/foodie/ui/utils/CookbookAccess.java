@@ -1,7 +1,7 @@
 package foodie.ui.utils;
 
-import core.Cookbook;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Recipe;
 import java.util.List;
 
 

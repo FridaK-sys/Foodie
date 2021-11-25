@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.util.WaitForAsyncUtils;
@@ -22,11 +23,20 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 import foodie.ui.utils.CookbookAccess;
 import foodie.ui.utils.LocalCookbookAccess;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 public class AppTest extends AbstractAppTest {
 
     private AbstractController controller;
     private CookbookAccess dataAccess = new LocalCookbookAccess("/foodie-test.json");
+    
+    @BeforeAll
+    public static void setupHeadless() {
+        CookbookApp.supportHeadless();
+    }
+
 
     @Override
     public void start(final Stage stage) throws Exception {

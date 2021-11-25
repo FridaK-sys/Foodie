@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.URL;
-
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import core.Ingredient;
+import foodie.core.Ingredient;
 import foodie.ui.ViewRecipeController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,14 +17,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import foodie.core.Cookbook;
+import foodie.core.Recipe;
 
 import javafx.stage.Stage;
 
 public class ViewRecipeControllerTest extends AbstractAppTest {
 
     private ViewRecipeController controller = new ViewRecipeController();
-
-    
 
     @FXML
     private Label recipeTitle;
@@ -37,6 +37,11 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
 
     @FXML
     private Button faveButton;
+
+    @BeforeAll
+    public static void setupHeadless() {
+        CookbookApp.supportHeadless();
+    }
 
     @Override
     public void start(final Stage stage) throws Exception {
