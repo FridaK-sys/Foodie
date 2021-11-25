@@ -45,7 +45,7 @@ public class FxmlHandler {
 		fxmlModel.setScene(scene);
 		SceneHandler.updateScenes(fxmlModel.getSceneName(), fxmlModel);
 
-		FoodieController controller = loader.getController();
+		AbstractController controller = loader.getController();
 		fxmlModel.setController(controller);
 
 		scene.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
