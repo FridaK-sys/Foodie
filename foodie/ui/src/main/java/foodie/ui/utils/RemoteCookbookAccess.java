@@ -3,6 +3,7 @@ package foodie.ui.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
+import foodie.json.CookbookModule;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,7 +11,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.util.List;
-import foodie.json.CookbookModule;
 
 /**
  * Allows server side persistence. Uses GET, POST, PUT and DELETE methods to modify a recipe.

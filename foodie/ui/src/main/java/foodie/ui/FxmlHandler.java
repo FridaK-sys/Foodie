@@ -9,9 +9,10 @@ import javafx.scene.Scene;
 
 public class FxmlHandler {
   /**
-   * Either builds the scene from FxmlInfo or loads the built scene. Uses this class's ClassLoader to
-   * find the URL of the FXML file. If the URL is null then the FXML file could not be found.
-   * 
+   * Either builds the scene from FxmlInfo or loads the built scene. 
+   * Uses this class's ClassLoader to find the URL of the FXML file. 
+   * If the URL is null then the FXML file could not be found.
+   *
    * @param fxmlModel the FXML file info to load the scene with
    * @return the built scene, or null if there was an error
    */

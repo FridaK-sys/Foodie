@@ -50,10 +50,10 @@ public interface CookbookAccess {
   boolean deleteRecipe(String name);
 
   /**
-   * Sets the cookbook
+   * Sets a list of recipes as a cookbook.
    * 
    *
-   * @param cookbook the new cookbook
+   * @param recipes to be set
    * @return true if set
    * 
    */

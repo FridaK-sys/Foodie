@@ -1,9 +1,8 @@
 package foodie.ui;
 
-
-import javafx.stage.Stage;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.stage.Stage;
 
 public class SceneHandler {
 
@@ -11,15 +10,13 @@ public class SceneHandler {
   private static final String VIEW_RECIPE_FXML = "ViewRecipe.fxml";
   private static final String NEW_RECIPE_FXML = "NewRecipe.fxml";
   private static final String MAINTEST_FXML = "Main_test.fxml";
-
   private static Map<SceneName, FxmlModel> scenes = new HashMap<>();
 
-  /** @return a Map of the {@link FxmlInfo} by {@link SceneName} */
   public static Map<SceneName, FxmlModel> getScenes() {
-    return new HashMap<SceneName, FxmlModel> (scenes);
+    return new HashMap<SceneName, FxmlModel>(scenes);
   }
 
-  public static void initialize(Stage stage){
+  public static void initialize(Stage stage) {
     scenes.put(SceneName.MAIN, new FxmlModel(MAIN_FXML, SceneName.MAIN, stage));
     scenes.put(SceneName.VIEWRECIPE, new FxmlModel(VIEW_RECIPE_FXML, SceneName.VIEWRECIPE, stage));
     scenes.put(SceneName.NEWRECIPE, new FxmlModel(NEW_RECIPE_FXML, SceneName.NEWRECIPE, stage));
@@ -30,9 +27,9 @@ public class SceneHandler {
     scenes.put(SceneName.VIEWRECIPE, new FxmlModel(VIEW_RECIPE_FXML, SceneName.VIEWRECIPE, stage));
     scenes.put(SceneName.NEWRECIPE, new FxmlModel(NEW_RECIPE_FXML, SceneName.NEWRECIPE, stage));
   }
-  
+
   /**
-   * Update the scene Map with new FxmlInfo
+   * Update the scene Map with new FxmlInfo.
    *
    * @param name the {@link SceneName} that is the key to update
    * @param info the {@link FxmlInfo} that is the data to update

@@ -125,21 +125,21 @@ public class NewRecipeController extends AbstractController {
     }
   }
 
-public void doubleValidate(KeyEvent k) {
-  TextField source = (TextField) k.getSource();
-  if (source.getText().isEmpty()) {
-    source.getStyleClass().setAll("text-field");
-    return;
+  public void doubleValidate(KeyEvent k) {
+    TextField source = (TextField) k.getSource();
+    if (source.getText().isEmpty()) {
+      source.getStyleClass().setAll("text-field");
+      return;
+    }
+    try {
+      Double.parseDouble(source.getText());
+      errorMessageLabel.setText("");
+      source.getStyleClass().setAll("text-field");
+    } catch (Exception e) {
+      errorMessageLabel.setText("Must be a decimal");
+      source.getStyleClass().add("text-field-red");
+    }
   }
-  try {
-    Double.parseDouble(source.getText());
-    errorMessageLabel.setText("");
-    source.getStyleClass().setAll("text-field");
-  } catch (Exception e) {
-    errorMessageLabel.setText("Must be a decimal");
-    source.getStyleClass().add("text-field-red");
-  }
-}
 
   /**
    * Adds ingredient to recipe.
@@ -393,7 +393,7 @@ public void doubleValidate(KeyEvent k) {
         if (newValue != null) {
           deleteIngredientButton.setDisable(false);
           editIngredientButton.setDisable(false);
-        } else{
+        } else {
           deleteIngredientButton.setDisable(true);
           editIngredientButton.setDisable(true);
         }
@@ -410,7 +410,7 @@ public void doubleValidate(KeyEvent k) {
 
   
 
-  public void clearTextFields(){
+  public void clearTextFields() {
     ingredientAmount.clear();
     ingredientTitle.clear();
     ingredientUnit.setValue(null);

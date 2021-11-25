@@ -151,10 +151,10 @@ public class ListViewController {
       @Override
       public void changed(ObservableValue<? extends Recipe> observable, Recipe oldValue, 
           Recipe newValue) {
-        if (newValue != null) {
-          mainController.setSelectedRecipe(newValue);
-          mainController.changeSceneToViewRecipe();
-        }
+          if (newValue != null) {
+            mainController.setSelectedRecipe(newValue);
+            mainController.changeSceneToViewRecipe();
+          }
       }
     });
   }

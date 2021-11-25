@@ -51,7 +51,7 @@ public abstract class AbstractController implements Initializable {
   }
 
   public void changeScene(FxmlModel model) {
-    Scene scene = model.getScene();
+    final Scene scene = model.getScene();
     AbstractController controller = model.getController();
     
     controller.setSelectedRecipe(getSelectedrecipe());

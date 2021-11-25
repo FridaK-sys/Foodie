@@ -4,6 +4,9 @@ package foodie.ui;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import foodie.ui.utils.CookbookAccess;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,9 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
@@ -58,7 +58,6 @@ public class ViewRecipeController extends AbstractController {
 
   @FXML
   private Label portionsneeded;
-;
 
   /**
    * Sets or removes favorite for Recipe.
@@ -117,10 +116,10 @@ public class ViewRecipeController extends AbstractController {
   /**
    * Loads new RecipeController with selected recipe for editing and sets page to edit recipe.
    *
-   * @param ae
+   * @param ae ActionEvent
    * @throws IOException if failed or interrupted I/O operations
    */
-  public void changeSceneToEditRecipe(ActionEvent ae){
+  public void changeSceneToEditRecipe(ActionEvent ae) {
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
     changeScene(model);
   }
@@ -139,7 +138,7 @@ public class ViewRecipeController extends AbstractController {
     } else {
       recipeTitle.setText("oppskrift");
     }
-    if (recipe.getPortions() == 0){
+    if (recipe.getPortions() == 0) {
       portions.setText("0");
       portions.setVisible(false);
       increaseButton.setVisible(false);
@@ -152,7 +151,7 @@ public class ViewRecipeController extends AbstractController {
     }
     if (!recipe.getIngredients().isEmpty()) {
       ingredients.setAll(recipe.getIngredients());
-    } else{
+    } else {
       ingredients.clear();
     }
     if (!(recipe.getDescription().isEmpty() || recipe.getDescription().isBlank())) {
@@ -179,7 +178,7 @@ public class ViewRecipeController extends AbstractController {
     initData(getSelectedrecipe());
   }
 
-  public void setDataAccess(CookbookAccess dataAccess){
+  public void setDataAccess(CookbookAccess dataAccess) {
     this.dataAccess = dataAccess;
   } 
   
