@@ -15,8 +15,8 @@
 
 <!-- <?import ui.ListViewController?> -->
 
-<AnchorPane prefHeight="560.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.ListViewController">
-     <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefWidth="760.0" prefHeight="560.0" xmlns="http://javafx.com/javafx/12.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.ListViewController">
+     <VBox alignment="CENTER"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
          <HBox prefHeight="50.0" prefWidth="760.0">
             <children>

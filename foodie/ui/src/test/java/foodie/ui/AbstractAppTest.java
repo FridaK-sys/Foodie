@@ -10,14 +10,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-
-import core.Cookbook;
-import core.Ingredient;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
+import foodie.json.CookbookPersistence;
 import foodie.ui.utils.CookbookAccess;
 import foodie.ui.utils.LocalCookbookAccess;
 import javafx.scene.control.ListView;
-import json.CookbookPersistence;
 
 public abstract class AbstractAppTest extends ApplicationTest {
 
@@ -80,7 +79,7 @@ public abstract class AbstractAppTest extends ApplicationTest {
             i++;
         }
         assertTrue(i == recipes.length, ("Incorrect length of recipes, was: " + i + " , should be: " + recipes.length));
-        System.out.println(re.toString());
+       
     }
 
     private Cookbook populationData() {

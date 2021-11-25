@@ -1,5 +1,4 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/.../...)
-
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2115/gr2115)
 # Foodie-prosjektet 
 
 Dette prosjektet er tilknyttet emnet IT1901 Informatikk prosjektarbeid I.
@@ -25,6 +24,8 @@ For å kjøre prosjektet, skriv følgende kommandoer i terminalen. Dette kjører
 - Åpne en ny terminal og skriv
 - `cd foodie`
 - `mvn -pl ui javafx:run`
+
+For å se appen i GitPod må du inn på Remote Explorer og trykke på "Open browser" på port 6080. 
 
 ## Shippable product
 Vi bruker **jlink** og **jpackage** for å lage et "shippable product" av vår applikasjon. 

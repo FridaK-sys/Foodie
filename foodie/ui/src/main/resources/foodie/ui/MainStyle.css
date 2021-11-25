@@ -45,7 +45,6 @@
     -fx-background-color: #f3ecec;
     -fx-border-radius: 50px;
     -fx-background-radius: 20;
-    -fx-font: 16px;
     -fx-font-weight: 700;
   }
 
@@ -114,7 +113,7 @@
 
   .clear{
     -fx-border-color: BLACK; 
-    -fx-background-color: WHITE"
+    -fx-background-color: WHITE;
   }
 
     

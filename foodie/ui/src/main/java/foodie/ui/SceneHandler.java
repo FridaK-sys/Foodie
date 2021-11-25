@@ -1,7 +1,6 @@
 package foodie.ui;
 
-import core.Recipe;
-import foodie.ui.utils.CookbookAccess;
+
 import javafx.stage.Stage;
 import java.util.HashMap;
 import java.util.Map;

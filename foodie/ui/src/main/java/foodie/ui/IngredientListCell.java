@@ -1,6 +1,6 @@
 package foodie.ui;
 
-import core.Ingredient;
+import foodie.core.Ingredient;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;

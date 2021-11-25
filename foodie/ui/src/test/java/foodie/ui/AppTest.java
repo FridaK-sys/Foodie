@@ -23,6 +23,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 import foodie.ui.utils.CookbookAccess;
 import foodie.ui.utils.LocalCookbookAccess;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 
 public class AppTest extends AbstractAppTest {
 
