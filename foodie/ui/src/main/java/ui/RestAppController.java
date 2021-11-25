@@ -44,14 +44,13 @@ public class RestAppController extends AbstractController {
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();
     initializeRecipesView();
-    mainListViewController.setMaster(this);
+    mainListViewController.setMainController(this);
   }
 
   /**
    * Makes the URI endpoint.
    */
 
-  @Override
   protected void setUpStorage() {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
