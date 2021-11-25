@@ -147,7 +147,7 @@ public class NewRecipeController extends AbstractController {
     try {
       if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
-            (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getValue().toString()));
+            Double.parseDouble(ingredientAmount.getText()), ingredientUnit.getValue().toString());
         ingredients.add(newIngredient);
       } else {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText());

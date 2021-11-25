@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 public interface FoodieController {
   public void update();
 
-  /** @param stage the stage to set */
-  void setStage(Stage stage);
+  public void setStage(Stage stage);
 
 }

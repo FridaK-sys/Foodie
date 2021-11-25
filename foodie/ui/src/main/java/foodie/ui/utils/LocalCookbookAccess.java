@@ -19,7 +19,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * Constructor initializes persistence and cookbook.
    *
    * @param path the path that is converted to a URI
-   * 
    */
 
   public LocalCookbookAccess(String path) {
@@ -54,10 +53,7 @@ public class LocalCookbookAccess implements CookbookAccess {
    *
    * @param name the name of the recipe to be removed
    * @param recipe the edited recipe that is added
-   * 
    * @return true if edited
-   * 
-   * 
    */
 
   @Override
@@ -79,10 +75,7 @@ public class LocalCookbookAccess implements CookbookAccess {
    * Adds recipe.
    *
    * @param recipe the recipe that is added
-   *
    * @return true if added
-   * 
-   * 
    */
 
   @Override
@@ -103,10 +96,7 @@ public class LocalCookbookAccess implements CookbookAccess {
    * Deletes recipe.
    *
    * @param name the name of the recipe that is deleted
-   *
    * @return true if edited
-   * 
-   * 
    */
 
   @Override
@@ -125,11 +115,8 @@ public class LocalCookbookAccess implements CookbookAccess {
   /**
    * Sets list of recipes
    *
-   * @param cookbook the cookbook with recipes
-   *
+   * @param recipes list of recipes to be set 
    * @return true if edited
-   * 
-   * 
    */
 
   @Override
