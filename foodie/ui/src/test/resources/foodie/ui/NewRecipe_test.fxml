@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.NewRecipeController">
+   <children>
+      <TextField fx:id="recipeTitle" layoutX="41.0" layoutY="102.0" onKeyTyped="#numLetValidate" prefHeight="30.0" prefWidth="175.0" promptText="Title of your recipe" />
+      <TextField fx:id="recipePortions" layoutX="228.0" layoutY="102.0" onKeyTyped="#intValidate" prefHeight="30.0" prefWidth="89.0" promptText="Portions" />
+      <TextField fx:id="ingredientTitle" layoutX="42.0" layoutY="186.0" onKeyTyped="#numLetValidate" prefHeight="26.0" prefWidth="114.0" promptText="Ingredient" />
+      <TextField fx:id="ingredientAmount" layoutX="165.0" layoutY="186.0" onKeyTyped="#doubleValidate" prefHeight="26.0" prefWidth="69.0" promptText="Amount" />
+      <ListView fx:id="ingredientListView" layoutX="41.0" layoutY="219.0" prefHeight="260.0" prefWidth="301.0" />
+      <TextArea fx:id="recipeDescription" layoutX="406.0" layoutY="163.0" prefHeight="316.0" prefWidth="301.0" promptText="Description" />
+      <Label layoutX="97.0" layoutY="28.0" text="Create a new recipe!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="addIngredient" layoutX="314.0" layoutY="186.0" mnemonicParsing="false" onAction="#addIngredientButton" prefHeight="26.0" prefWidth="28.0" text="+" />
+      <Button fx:id="createRecipeButton" layoutX="545.0" layoutY="498.0" mnemonicParsing="false" onAction="#createRecipeButtonPushed" prefHeight="30.0" prefWidth="144.0" text="Create new recipe" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" text="&lt;-" />
+      <Label fx:id="errorMessageLabel" layoutX="32.0" layoutY="521.0" prefHeight="17.0" prefWidth="266.0" />
+      <HBox fx:id="hb" layoutX="374.0" layoutY="115.0" prefHeight="30.0" prefWidth="341.0">
+         <children>
+            <ToggleButton fx:id="breakfast" mnemonicParsing="false" text="breakfast" />
+            <ToggleButton fx:id="lunch" mnemonicParsing="false" text="lunch" />
+            <ToggleButton fx:id="dinner" mnemonicParsing="false" text="dinner" />
+            <ToggleButton fx:id="dessert" mnemonicParsing="false" text="dessert" />
+         </children>
+      </HBox>
+      <Button fx:id="saveRecipeButton" layoutX="587.0" layoutY="498.0" mnemonicParsing="false" onAction="#saveRecipe" prefHeight="30.0" prefWidth="60.0" text="Save" />
+      <Button fx:id="deleteRecipeButton" layoutX="580.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteRecipe" prefHeight="30.0" prefWidth="130.0" text="Delete recipe" />
+      <Button fx:id="deleteIngredientButton" layoutX="192.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleDeleteIngredient" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+      <Button fx:id="editIngredientButton" layoutX="99.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleEditIngredient" prefHeight="30.0" prefWidth="60.0" text="Edit" />
+      <Label layoutX="141.0" layoutY="163.0" text="Add ingredients" />
+      <Label layoutX="514.0" layoutY="94.0" text="Tag your recipe" />
+      <ChoiceBox fx:id="ingredientUnit" layoutX="243.0" layoutY="186.0" prefHeight="26.0" prefWidth="60.0" />
+   </children>
+</AnchorPane>

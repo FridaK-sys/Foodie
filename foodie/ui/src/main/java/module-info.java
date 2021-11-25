@@ -10,9 +10,9 @@ module foodie.ui {
   // requires javafx.media;
   // opens com.acme.treefx to javafx.graphics;
 
-  exports ui;
+  exports foodie.ui;
 
-  opens ui to javafx.graphics, javafx.fxml;
+  opens foodie.ui to javafx.graphics, javafx.fxml;
 
 
 }
