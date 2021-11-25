@@ -92,44 +92,47 @@ public void numLetValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
     errorMessageLabel.setText("Must be letters or numbers");
-    source.setStyle("-fx-backround-color: #f1a9a9;");
+    source.getStyleClass().add("text-field-red");
   } else {
     errorMessageLabel.setText("");
-    source.setStyle("");
+    source.getStyleClass().setAll("text-field");
   }
 }
 
 public void intValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
-    source.setStyle("");
+    source.getStyleClass().setAll("text-field");
     // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
     return;
   }
   try {
     Integer.parseInt(source.getText());
     errorMessageLabel.setText("");
-    source.setStyle("");
-    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+    source.getStyleClass().setAll("text-field");
+    
   } catch (Exception e) {
     errorMessageLabel.setText("Must be an integer");
-    source.setStyle("-fx-backround-color: #f1a9a9;");
+    source.getStyleClass().add("text-field-red");
   }
 }
 
 public void doubleValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
-    source.setStyle("");
+    source.getStyleClass().setAll("text-field");
     return;
   }
   try {
     Double.parseDouble(source.getText());
     errorMessageLabel.setText("");
-    source.setStyle("");
+    source.getStyleClass().setAll("text-field");
   } catch (Exception e) {
     errorMessageLabel.setText("Must be a decimal");
-    source.setStyle("-fx-backround-color: RED;");
+    source.getStyleClass().add("text-field-red");
+    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+
+    // source.setStyle("-fx-backround-color: RED;");
   }
 }
 
