@@ -16,6 +16,7 @@ import core.Ingredient;
 import foodie.ui.NewRecipeController;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -132,7 +133,12 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     dataAccess.addRecipe(recipe4);
     assertTrue(dataAccess.getCookbook().getRecipes().size() == 4);
     this.controller.setSelectedRecipe(recipe4);
-    this.controller.update();
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        controller.update();
+      }
+    });
     clickOn("#deleteRecipeButton");
     testRecipes(dataAccess.getCookbook().getRecipes(), recipe1, recipe2, recipe3);
   }

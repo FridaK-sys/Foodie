@@ -90,6 +90,8 @@ public class NewRecipeController extends AbstractController {
   private Button editIngredientButton;
   @FXML
   private AnchorPane page;
+  @FXML
+  private Label titleLabel;
 
   @FXML
   private HBox hb;
@@ -364,11 +366,13 @@ public void doubleValidate(KeyEvent k) {
   @Override
   public void update() {
     if (getSelectedrecipe() != null) {
+      titleLabel.setText("Edit your recipe!");
       clearTextFields();
       initData(selectedRecipe);
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.VIEWRECIPE));
 
     } else {
+      titleLabel.setText("Create a new recipe!");
       clear();
       setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     }
