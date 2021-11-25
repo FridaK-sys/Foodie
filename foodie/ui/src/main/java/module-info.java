@@ -9,6 +9,7 @@ module foodie.ui {
 
 
   exports foodie.ui;
+  exports foodie.ui.utils;
 
   opens foodie.ui to javafx.graphics, javafx.fxml;
 

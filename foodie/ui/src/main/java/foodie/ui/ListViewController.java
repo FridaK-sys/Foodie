@@ -1,7 +1,6 @@
 package foodie.ui;
 
 import foodie.core.Cookbook;
-import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import foodie.ui.utils.CookbookAccess;
 import java.io.IOException;

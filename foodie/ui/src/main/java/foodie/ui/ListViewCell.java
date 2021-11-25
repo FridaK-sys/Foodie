@@ -1,7 +1,5 @@
 package foodie.ui;
 
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
