@@ -1,6 +1,7 @@
 package foodie.ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.net.URL;
@@ -13,6 +14,10 @@ public class ListViewTest extends AbstractAppTest {
 
   private ListViewController controller;
 
+  @BeforeAll
+  public static void setupHeadless() {
+    CookbookApp.supportHeadless();
+  }
 
   @Override
   public void start(final Stage stage) throws Exception {

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.URL;
-
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import core.Ingredient;
@@ -24,8 +24,6 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
 
     private ViewRecipeController controller = new ViewRecipeController();
 
-    
-
     @FXML
     private Label recipeTitle;
 
@@ -37,6 +35,11 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
 
     @FXML
     private Button faveButton;
+
+    @BeforeAll
+    public static void setupHeadless() {
+        CookbookApp.supportHeadless();
+    }
 
     @Override
     public void start(final Stage stage) throws Exception {
