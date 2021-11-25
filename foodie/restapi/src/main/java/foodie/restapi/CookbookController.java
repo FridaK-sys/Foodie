@@ -1,7 +1,7 @@
 package foodie.restapi;
 
-import core.Cookbook;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Recipe;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

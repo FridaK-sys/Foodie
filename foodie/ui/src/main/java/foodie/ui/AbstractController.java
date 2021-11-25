@@ -1,7 +1,8 @@
 package foodie.ui;
 
-import core.Cookbook;
-import core.Recipe;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 import foodie.ui.utils.CookbookAccess;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

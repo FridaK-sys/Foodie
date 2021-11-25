@@ -1,6 +1,8 @@
 package foodie.restapi;
 
-import core.Cookbook;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

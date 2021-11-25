@@ -11,8 +11,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import core.Cookbook;
-import core.Ingredient;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
 import foodie.ui.NewRecipeController;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
@@ -39,6 +39,11 @@ public class NewRecipeControllerTest extends AbstractAppTest {
 
   @FXML
   private ListView<Ingredient> ingredientListView;
+
+  @BeforeAll
+  public static void setupHeadless() {
+    CookbookApp.supportHeadless();
+  }
 
   @Override
   public void start(final Stage stage) throws Exception {
