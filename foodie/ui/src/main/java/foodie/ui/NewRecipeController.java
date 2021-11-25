@@ -327,6 +327,10 @@ public void doubleValidate(KeyEvent k) {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    ingredientListView.setCellFactory(listView -> {
+      IngredientListCell listCell = new IngredientListCell();
+      return listCell;
+    });
     ingredientListView.getStyleClass().add("ingredientListCell");
     deleteIngredientButton.setDisable(true);
     editIngredientButton.setDisable(true);

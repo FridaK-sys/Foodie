@@ -13,8 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -115,7 +113,7 @@ public class ViewRecipeController extends AbstractController {
    * @param ae
    * @throws IOException if failed or interrupted I/O operations
    */
-  public void changeSceneToEditRecipe(ActionEvent ae) throws IOException {
+  public void changeSceneToEditRecipe(ActionEvent ae){
     FxmlModel model = SceneHandler.getScenes().get(SceneName.NEWRECIPE);
     changeScene(model);
   }
