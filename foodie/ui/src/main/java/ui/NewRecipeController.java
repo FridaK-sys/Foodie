@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -47,7 +48,7 @@ public class NewRecipeController extends AbstractController {
   private TextField ingredientAmount;
 
   @FXML
-  private TextField ingredientUnit;
+  private ChoiceBox<String> ingredientUnit;
 
   @FXML
   private TextField recipePortions;
@@ -91,40 +92,44 @@ public void numLetValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (!source.getText().matches("^[ÆØÅæøåa-zA-Z0-9\\s]+$") && !source.getText().isEmpty()) {
     errorMessageLabel.setText("Must be letters or numbers");
-    source.setStyle("-fx-border-color: RED; -fx-background-color: RED");
+    source.setStyle("-fx-backround-color: #f1a9a9;");
   } else {
     errorMessageLabel.setText("");
-    source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+    source.setStyle("");
   }
 }
 
 public void intValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
+    source.setStyle("");
+    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
     return;
   }
   try {
     Integer.parseInt(source.getText());
     errorMessageLabel.setText("");
-    source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+    source.setStyle("");
+    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
   } catch (Exception e) {
     errorMessageLabel.setText("Must be an integer");
-    source.setStyle("-fx-border-color: RED; -fx-background-color: RED");
+    source.setStyle("-fx-backround-color: #f1a9a9;");
   }
 }
 
 public void doubleValidate(KeyEvent k) {
   TextField source = (TextField) k.getSource();
   if (source.getText().isEmpty()) {
+    source.setStyle("");
     return;
   }
   try {
     Double.parseDouble(source.getText());
     errorMessageLabel.setText("");
-    source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
+    source.setStyle("");
   } catch (Exception e) {
     errorMessageLabel.setText("Must be a decimal");
-    source.setStyle("-fx-border-color: RED; -fx-background-color: RED");
+    source.setStyle("-fx-backround-color: RED;");
   }
 }
 
@@ -141,7 +146,7 @@ public void doubleValidate(KeyEvent k) {
     try {
       if (ingredientAmount.getText() != null && !ingredientAmount.getText().isEmpty()) {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText(),
-            (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getText()));
+            (Double.parseDouble(ingredientAmount.getText())), (ingredientUnit.getValue().toString()));
         ingredients.add(newIngredient);
       } else {
         Ingredient newIngredient = new Ingredient(ingredientTitle.getText());
@@ -150,7 +155,7 @@ public void doubleValidate(KeyEvent k) {
 
       ingredientAmount.clear();
       ingredientTitle.clear();
-      ingredientUnit.clear();
+      ingredientUnit.setValue(null);;
 
     } catch (NumberFormatException e) {
       errorMessageLabel.setText("Invalid input: ingredient amount must be a number");
@@ -180,7 +185,7 @@ public void doubleValidate(KeyEvent k) {
       ingredients.remove(ing);
       ingredientAmount.setText(Double.toString(ing.getAmount()));
       ingredientTitle.setText(ing.getName());
-      ingredientUnit.setText(ing.getUnit());
+      ingredientUnit.setValue(ing.getUnit());
     }
   }
 
@@ -332,6 +337,7 @@ public void doubleValidate(KeyEvent k) {
   }
 
   private void setToggleGroup() {
+    ingredientUnit.getItems().addAll(Ingredient.units);
     this.group = new ToggleGroup();
     breakfast.setToggleGroup(group);
     breakfast.setUserData("breakfast");
@@ -380,7 +386,7 @@ public void doubleValidate(KeyEvent k) {
   public void clearTextFields(){
     ingredientAmount.clear();
     ingredientTitle.clear();
-    ingredientUnit.clear();
+    ingredientUnit.setValue(null);
     this.recipeTitle.clear();;
     this.recipePortions.clear();;
     this.recipeName = "";
