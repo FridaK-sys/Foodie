@@ -1,14 +1,14 @@
-package foodie.ui;
+package ui;
 
-import foodie.core.Cookbook;
-import foodie.core.Recipe;
-import foodie.ui.utils.CookbookAccess;
+import core.Cookbook;
+import core.Recipe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ui.utils.CookbookAccess;
 
 /**
  * Abstract class for RestApp- and LocalAppController.
@@ -28,6 +28,8 @@ public abstract class AbstractController implements Initializable {
 
   @FXML
   ListViewController mainListViewController;
+
+  
 
   protected abstract void update();
 
@@ -54,7 +56,6 @@ public abstract class AbstractController implements Initializable {
   public void changeScene(FxmlModel model) {
     Scene scene = model.getScene();
     AbstractController controller = model.getController();
-    
     controller.setSelectedRecipe(getSelectedrecipe());
     controller.setCookbookAccess(dataAccess);
     controller.update();
@@ -72,11 +73,11 @@ public abstract class AbstractController implements Initializable {
     return mainListViewController.getCookbook();
   }
   
-  public void setSelectedRecipe(Recipe recipe) {
+  protected void setSelectedRecipe(Recipe recipe) {
     this.selectedRecipe = recipe;
   }
 
-  public Recipe getSelectedrecipe() {
+  protected Recipe getSelectedrecipe() {
     return selectedRecipe;
   }
 
