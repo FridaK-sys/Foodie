@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewRecipeController">
+<AnchorPane fx:id="page" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewRecipeController">
    <children>
       <TextField fx:id="recipeTitle" layoutX="41.0" layoutY="102.0" onKeyTyped="#numLetValidate" prefHeight="30.0" prefWidth="175.0" promptText="Title of your recipe" />
       <TextField fx:id="recipePortions" layoutX="228.0" layoutY="102.0" onKeyTyped="#intValidate" prefHeight="30.0" prefWidth="89.0" promptText="Portions" />
@@ -38,8 +38,8 @@
       </HBox>
       <Button fx:id="saveRecipeButton" layoutX="587.0" layoutY="498.0" mnemonicParsing="false" onAction="#saveRecipe" prefHeight="30.0" prefWidth="60.0" text="Save" />
       <Button fx:id="deleteRecipeButton" layoutX="580.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteRecipe" prefHeight="30.0" prefWidth="130.0" text="Delete recipe" />
-      <Button fx:id="deleteIngredientButton" layoutX="192.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleDeleteIngredient" prefHeight="30.0" prefWidth="60.0" text="Delete" />
-      <Button fx:id="editIngredientButton" layoutX="99.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleEditIngredient" prefHeight="30.0" prefWidth="60.0" text="Edit" />
+      <Button fx:id="deleteIngredientButton" layoutX="192.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleDeleteIngredient" prefHeight="30.0" prefWidth="70.0" text="Delete" />
+      <Button fx:id="editIngredientButton" layoutX="99.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleEditIngredient" prefHeight="30.0" prefWidth="70.0" text="Edit" />
       <Label layoutX="141.0" layoutY="163.0" text="Add ingredients" />
       <Label layoutX="514.0" layoutY="94.0" text="Tag your recipe" />
       <ChoiceBox fx:id="ingredientUnit" layoutX="243.0" layoutY="186.0" prefHeight="26.0" prefWidth="60.0" />

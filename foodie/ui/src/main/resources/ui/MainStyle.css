@@ -43,6 +43,10 @@
 
   }
 
+  .ingredientListCell:hover{
+    -fx-background-color: #dbc6c6;
+  }
+
 
   .choice-box{
     -fx-background-color: white;

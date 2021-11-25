@@ -8,9 +8,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,9 +25,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import ui.utils.CookbookAccess;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * Controller for page responsible for creating and editing recipes.
@@ -82,6 +97,12 @@ public class NewRecipeController extends AbstractController {
   private Button deleteRecipeButton;
   @FXML
   private Button createRecipeButton;
+  @FXML
+  private Button deleteIngredientButton;
+  @FXML
+  private Button editIngredientButton;
+  @FXML
+  private AnchorPane page;
 
   @FXML
   private HBox hb;
@@ -130,9 +151,6 @@ public void doubleValidate(KeyEvent k) {
   } catch (Exception e) {
     errorMessageLabel.setText("Must be a decimal");
     source.getStyleClass().add("text-field-red");
-    // source.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE");
-
-    // source.setStyle("-fx-backround-color: RED;");
   }
 }
 
@@ -330,6 +348,9 @@ public void doubleValidate(KeyEvent k) {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    deleteIngredientButton.setDisable(true);
+    editIngredientButton.setDisable(true);
+    setListViewListener();
     setBackButtonTarget(SceneHandler.getScenes().get(SceneName.MAIN));
     setToggleGroup();
     
@@ -385,6 +406,33 @@ public void doubleValidate(KeyEvent k) {
     }
 
   }
+
+  /**
+   * Listener to open a Recipe from ListView when selected.
+   */
+  public void setListViewListener() {
+    ingredientListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Ingredient>() {
+      @Override
+      public void changed(ObservableValue<? extends Ingredient> observable, Ingredient oldValue, Ingredient newValue) {
+        if (newValue != null) {
+          deleteIngredientButton.setDisable(false);
+          editIngredientButton.setDisable(false);
+        } else{
+          deleteIngredientButton.setDisable(true);
+          editIngredientButton.setDisable(true);
+        }
+      }
+    });
+    page.setOnMouseClicked(new EventHandler<Event>() {
+      @Override
+      public void handle(Event event) {
+        ingredientListView.getSelectionModel().clearSelection();
+      }
+
+    });
+  }
+
+  
 
   public void clearTextFields(){
     ingredientAmount.clear();
