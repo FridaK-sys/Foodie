@@ -11,14 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ui.utils.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import ui.utils.CookbookAccess;
-import javafx.scene.control.ListCell;
-import javafx.scene.text.Text;
 
 /**
  * Loads the scene that displays a single recipe. Ability to set favorite and open recipe editor.
@@ -27,10 +24,8 @@ public class ViewRecipeController extends AbstractController {
 
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
-  // private CookbookAccess dataAccess = AbstractController.getAccess();
   private Recipe viewRecipe;
 
-  // private Stage stage;
 
   @FXML
   private Label recipeTitle;
@@ -109,6 +104,7 @@ public class ViewRecipeController extends AbstractController {
       IngredientListCell listCell = new IngredientListCell();
       return listCell;
     });
+    ingredientsListView.getSelectionModel();
     ingredientsListView.setItems(ingredients);
     
   }
@@ -180,7 +176,6 @@ public class ViewRecipeController extends AbstractController {
 
   }
 
-
   /**
    * Updates page when switching back to scene.
    */
@@ -188,11 +183,6 @@ public class ViewRecipeController extends AbstractController {
   public void update() {
     System.out.println(selectedRecipe.toString());
     initData(this.selectedRecipe);
-  }
-
-  @Override
-  public void setStage(Stage stage) {
-    this.stage = stage;
   }
 
   @Override
