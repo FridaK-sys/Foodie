@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import ui.NewRecipeController;
 
@@ -57,14 +58,19 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   public void setupItems() {
     setTestData();
     this.controller.setDataAccess(dataAccess);
-    // this.controller.initData(cookbook, dataAccess);
   }
 
   @Test
   public void testNewIngredient() {
     clickOn("#ingredientTitle").write("Eple");
     clickOn("#ingredientAmount").write("3");
-    clickOn("#ingredientUnit").write("stk");
+    clickOn("#ingredientUnit");
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.ENTER);
     clickOn("#addIngredient");
     checkIngredient(controller.getIngredients().get(0), ing1);
   }
@@ -77,7 +83,13 @@ public class NewRecipeControllerTest extends AbstractAppTest {
     clickOn("#recipePortions").write("2");
     clickOn("#ingredientTitle").write("Eple");
     clickOn("#ingredientAmount").write("3");
-    clickOn("#ingredientUnit").write("stk");
+    clickOn("#ingredientUnit");
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.DOWN);
+    type(KeyCode.ENTER);
     clickOn("#addIngredient");
     clickOn("#recipeDescription").write("Epler...");
     clickOn("#createRecipeButton");
