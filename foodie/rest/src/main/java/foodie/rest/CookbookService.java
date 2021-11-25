@@ -1,13 +1,13 @@
-package foodie.restapi;
+package foodie.rest;
 
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import foodie.core.Cookbook;
+import foodie.core.Ingredient;
+import foodie.core.Recipe;
 import foodie.json.CookbookPersistence;
 import org.springframework.stereotype.Service;
 

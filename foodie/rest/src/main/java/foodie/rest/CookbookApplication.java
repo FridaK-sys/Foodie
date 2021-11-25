@@ -1,9 +1,8 @@
-package foodie.restapi;
+package foodie.rest;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import foodie.json.CookbookPersistence;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 

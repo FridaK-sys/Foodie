@@ -1,8 +1,8 @@
-package foodie.restapi;
+package foodie.rest;
 
+import java.io.IOException;
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
-import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package foodie.restapi;
+package foodie.rest;
 
 
 import static org.junit.Assert.assertNotNull;
@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import foodie.core.Cookbook;
+import foodie.core.Recipe;
+import foodie.json.CookbookModule;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,10 +22,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
-import foodie.json.CookbookModule;
 
 /**
  * Unit-test (isolated integration-test) of CookbookController

@@ -1,4 +1,4 @@
-module foodie.restapi {
+module foodie.rest {
   requires com.fasterxml.jackson.databind;
 
   requires transitive foodie.core;
@@ -10,6 +10,6 @@ module foodie.restapi {
   requires spring.core;
   requires java.net.http;
 
-  opens foodie.restapi to spring.beans, spring.context, spring.web, spring.core;
+  opens foodie.rest to spring.beans, spring.context, spring.web, spring.core;
 
 }

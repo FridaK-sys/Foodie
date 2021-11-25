@@ -1,16 +1,14 @@
-package foodie.restapi;
+package foodie.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-
+import foodie.core.Cookbook;
+import foodie.core.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.fail;
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
 
 /**
  * Unit test for CookbookService
