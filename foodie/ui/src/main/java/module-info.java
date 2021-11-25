@@ -5,7 +5,6 @@ module foodie.ui {
   requires javafx.fxml;
   requires java.net.http;
   requires com.fasterxml.jackson.databind;
-  requires java.persistence;
 
 
   // requires javafx.media;
