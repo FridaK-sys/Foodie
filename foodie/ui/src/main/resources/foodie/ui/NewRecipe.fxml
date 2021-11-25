@@ -19,7 +19,7 @@
       <TextField fx:id="ingredientAmount" layoutX="165.0" layoutY="186.0" onKeyTyped="#doubleValidate" prefHeight="26.0" prefWidth="69.0" promptText="Amount" />
       <ListView fx:id="ingredientListView" layoutX="41.0" layoutY="219.0" prefHeight="260.0" prefWidth="301.0" />
       <TextArea fx:id="recipeDescription" layoutX="406.0" layoutY="163.0" prefHeight="316.0" prefWidth="301.0" promptText="Description" />
-      <Label layoutX="97.0" layoutY="28.0" text="Create a new recipe!">
+      <Label fx:id="titleLabel" layoutX="115.0" layoutY="42.0" text="Create a new recipe!">
          <font>
             <Font size="18.0" />
          </font>
@@ -27,8 +27,8 @@
       <Button fx:id="addIngredient" layoutX="314.0" layoutY="186.0" mnemonicParsing="false" onAction="#addIngredientButton" prefHeight="26.0" prefWidth="28.0" text="+" />
       <Button fx:id="createRecipeButton" layoutX="545.0" layoutY="498.0" mnemonicParsing="false" onAction="#createRecipeButtonPushed" prefHeight="30.0" prefWidth="144.0" text="Create new recipe" />
       <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" text="&lt;-" />
-      <Label fx:id="errorMessageLabel" layoutX="32.0" layoutY="521.0" prefHeight="17.0" prefWidth="266.0" />
-      <HBox fx:id="hb" layoutX="374.0" layoutY="115.0" prefHeight="30.0" prefWidth="341.0">
+      <Label fx:id="errorMessageLabel" layoutX="41.0" layoutY="68.0" prefHeight="17.0" prefWidth="266.0" />
+      <HBox fx:id="hb" layoutX="386.0" layoutY="117.0" prefHeight="30.0" prefWidth="341.0">
          <children>
             <ToggleButton fx:id="breakfast" mnemonicParsing="false" text="breakfast" />
             <ToggleButton fx:id="lunch" mnemonicParsing="false" text="lunch" />
