@@ -40,6 +40,11 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   @FXML
   private ListView<Ingredient> ingredientListView;
 
+  @BeforeAll
+  public static void setupHeadless() {
+    CookbookApp.supportHeadless();
+  }
+
   @Override
   public void start(final Stage stage) throws Exception {
     SceneHandler.initializeTest(stage);
