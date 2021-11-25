@@ -43,9 +43,4 @@ public class LocalAppController extends AbstractController {
     mainListViewController.update();
   }
 
-  @Override
-  public void setSelectedRecipe(Recipe newValue){
-  this.selectedRecipe = newValue;
-  }
-
 }
