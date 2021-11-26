@@ -1,9 +1,13 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
-import foodie.ui.utils.CookbookAccess;
+import foodie.ui.FxmlModel;
+import foodie.ui.IngredientListCell;
+import foodie.ui.SceneHandler;
+import foodie.ui.SceneName;
+import foodie.ui.storage.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,4 +1,4 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -21,11 +21,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import java.util.function.Predicate;
-import foodie.ui.utils.CookbookAccess;
-import foodie.ui.utils.LocalCookbookAccess;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
+import foodie.ui.CookbookApp;
+import foodie.ui.SceneHandler;
+import foodie.ui.SceneName;
+import foodie.ui.controllers.AbstractController;
+import foodie.ui.controllers.ListViewCell;
+import foodie.ui.storage.CookbookAccess;
+import foodie.ui.storage.LocalCookbookAccess;
 
 public class AppTest extends AbstractAppTest {
 

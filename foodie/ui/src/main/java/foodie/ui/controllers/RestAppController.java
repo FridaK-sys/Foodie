@@ -1,11 +1,11 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 
-import foodie.ui.utils.RemoteCookbookAccess;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import foodie.ui.storage.RemoteCookbookAccess;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 

@@ -1,4 +1,4 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,8 +14,8 @@ import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import foodie.json.CookbookPersistence;
-import foodie.ui.utils.CookbookAccess;
-import foodie.ui.utils.LocalCookbookAccess;
+import foodie.ui.storage.CookbookAccess;
+import foodie.ui.storage.LocalCookbookAccess;
 import javafx.scene.control.ListView;
 
 public abstract class AbstractAppTest extends ApplicationTest {

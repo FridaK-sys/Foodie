@@ -1,4 +1,4 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,7 +18,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
-
+import foodie.ui.CookbookApp;
+import foodie.ui.controllers.ViewRecipeController;
 import javafx.stage.Stage;
 
 public class ViewRecipeControllerTest extends AbstractAppTest {

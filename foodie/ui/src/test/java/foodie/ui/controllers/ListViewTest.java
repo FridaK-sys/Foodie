@@ -1,4 +1,4 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
+import foodie.ui.CookbookApp;
+import foodie.ui.controllers.ListViewController;
 
 public class ListViewTest extends AbstractAppTest {
 

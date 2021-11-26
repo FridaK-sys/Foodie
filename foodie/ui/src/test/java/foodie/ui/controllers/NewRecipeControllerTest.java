@@ -1,4 +1,4 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 
 import java.io.FileNotFoundException;
@@ -13,9 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
-import foodie.ui.NewRecipeController;
+import foodie.ui.CookbookApp;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
+import foodie.ui.controllers.NewRecipeController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
