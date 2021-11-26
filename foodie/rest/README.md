@@ -22,8 +22,10 @@ For å starte restserveren, skriv følgende kommandoer i terminalen:
 - `cd foodie`
 - `mvn install` 
 - `cd rest`
-- `mvn spring-boot:run`
-Da er serveren skrudd på. For å terminere serveren, skriv følgende i terminalen: `ctrl + C`
+- `mvn spring-boot:run` 
+- Da er serveren skrudd på
+- `ctrl + C`for å terminere serveren
+
 
 
 # Testing
