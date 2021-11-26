@@ -44,7 +44,7 @@ public interface CookbookAccess {
 
   /**
    * Sets a list of recipes as a cookbook.
-   * 
+   *
    * @param recipes to be set
    * @return true if set
    */

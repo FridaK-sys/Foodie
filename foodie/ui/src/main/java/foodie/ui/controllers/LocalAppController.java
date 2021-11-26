@@ -1,8 +1,8 @@
 package foodie.ui.controllers;
 
+import foodie.ui.data.LocalCookbookAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
-import foodie.ui.data.LocalCookbookAccess;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
