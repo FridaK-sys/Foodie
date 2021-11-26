@@ -4,7 +4,7 @@ Denne modulen inneholder restserveren og REST-APIet til applikasjonen. Vi har va
 Spring-boot er et populært rammeverk for web-applikasjoner som gjør setup og konfigurasjon av restserveren og REST-APIet enklere.
 
 # Oppsett av restserveren
-- `CookbookApplication` - Starter restserveren, ved å kalle på SpringApplication.run
+- `CookbookApplication` - Starter restserveren ved å kalle på SpringApplication.run
 - `CookbookController` - Håndterer innkommende RESTAPI-forespørsler (GET, POST, PUT og DELETE)
 - `CookbookService` - Håndterer business logikken (informasjonsutvekslingen mellom restserveren og appen) 
 
