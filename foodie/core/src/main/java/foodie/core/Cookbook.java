@@ -30,6 +30,10 @@ public class Cookbook {
   }
 
 
+  public void setRecipes(List<Recipe> recipes) {
+    this.recipes = recipes;
+  }
+
   public List<Recipe> getRecipes() {
     return new ArrayList<>(recipes);
   }
@@ -38,13 +42,14 @@ public class Cookbook {
    * Adds recipe to cookbook.
    *
    * @param recipe recipe to add
-   * @throws IllegalArgumentException if list already contains recipe
+   * @throws IllegalArgumentException if recipelist already contains recipe
    */
 
   public void addRecipe(Recipe recipe) {
-    if (!recipes.contains(recipe)) {
-      recipes.add(recipe);
+    if (recipes.contains(recipe)) {
+      throw new IllegalArgumentException("Recipe is already in cookbook");
     }
+    recipes.add(recipe);
   }
 
   /**
@@ -52,22 +57,12 @@ public class Cookbook {
    *
    * @param recipe recipe to add
    * @param index index of where to put recipe in recipeList
-   * @throws IllegalArgumentException if list already contains recipe
    */
 
-  public void addRecipe(int index, Recipe recipe) {
+  private void addRecipe(int index, Recipe recipe) {
     if (!recipes.contains(recipe)) {
       recipes.add(index, recipe);
     }
-  }
-
-  /**
-   * Removes recipe from recipeList.
-   *
-   * @param index index in recipeList of recipe to remove
-   */
-  public void removeRecipe(int index) {
-    recipes.remove(index);
   }
 
   /**
@@ -85,7 +80,7 @@ public class Cookbook {
    * Replaces a recipe in list with param.
    *
    * @param name   name of recipe to remove
-   * @param recipe recipe to put in
+   * @param recipe recipe to replace with
    */
   public void replaceRecipe(String name, Recipe recipe) {
     Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
@@ -93,15 +88,6 @@ public class Cookbook {
     int index = this.getRecipes().indexOf(res);
     this.removeRecipe(name);
     this.addRecipe(index, recipe);
-  }
-
-  /**
-   * Makes list of all recipes in recipeList with fav = true.
-   *
-   * @return list of recipes in recipeList with fav = true
-   */
-  public List<Recipe> getFavRecipes() {
-    return recipes.stream().filter(r -> r.getFav() == true).toList();
   }
 
   /**
@@ -133,15 +119,7 @@ public class Cookbook {
     return recipes.stream().filter(r -> r.getLabel().equals(label)).toList();
   }
 
-  /**
-   * Sets new recipes in cookbook.
-   *
-   * @param recipes recipes to add
-   */
-  public void setRecipes(List<Recipe> recipes) {
-    this.recipes = recipes;
-  }
-
+  @Override
   public String toString() {
     return getRecipes().toString();
   }

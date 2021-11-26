@@ -16,10 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import foodie.core.Cookbook;
-import foodie.core.Recipe;
 import foodie.ui.CookbookApp;
-import foodie.ui.controllers.ViewRecipeController;
 import javafx.stage.Stage;
 
 public class ViewRecipeControllerTest extends AbstractAppTest {
@@ -38,6 +35,9 @@ public class ViewRecipeControllerTest extends AbstractAppTest {
     @FXML
     private Button faveButton;
 
+    /**
+     * For running the test headless
+     */
     @BeforeAll
     public static void setupHeadless() {
         CookbookApp.supportHeadless();

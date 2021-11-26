@@ -1,7 +1,7 @@
 package foodie.core;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -56,35 +56,28 @@ public class CookbookTest {
 	public void testAddRecipe() {
 		cookbook1.addRecipe(recipe3);
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe1, recipe2, recipe3), "Incorrect list of recipes");
+		assertThrows(IllegalArgumentException.class, () -> {
+			cookbook1.addRecipe(recipe3);
+		}, "Should throw exception when recipe already in cookbook");
 	}
 
 	@Test
-	public void testRemoveRecipeInt() {
-		cookbook1.removeRecipe(0);
-		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2), "Incorrect list of recipes");
-	}
-
-	@Test
-	public void testReplaceRecipe() {
-		int index1 = cookbook1.getRecipes().indexOf(recipe1);
-		Recipe recipe4 = new Recipe("Brød");
-		cookbook1.replaceRecipe("Bløtkake", recipe4);
-		assertTrue(!cookbook1.getRecipes().contains(recipe1), "recipe1 was not removed");
-		assertTrue(cookbook1.getRecipes().contains(recipe4), "recipe4 was not added");
-		assertEquals(index1, cookbook1.getRecipes().indexOf(recipe4), "recipe4 was placed on wrong index");
-	}
-
-	@Test
-	public void testRemoveRecipeString() {
+	public void testRemoveRecipe() {
 		cookbook1.removeRecipe("Bløtkake");
 		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe2), "Incorrect list of recipes");
 	}
 
 	@Test
-	public void testGetFavRecipes() {
-		assertEquals(cookbook1.getFavRecipes(), Arrays.asList(recipe1), "Incorrect list of recipes");
-		recipe1.setFav(false);
-		assertTrue(cookbook1.getFavRecipes().isEmpty(), "List should be empty");
+	public void testReplaceRecipe() {
+		Recipe recipe4 = new Recipe("Brød");
+		cookbook1.replaceRecipe("Bløtkake", recipe4);
+		assertEquals(cookbook1.getRecipes(), Arrays.asList(recipe4, recipe2), "Incorrect list of recipes");
+	}
+
+	@Test
+	public void isInCookbook() {
+		assertTrue(cookbook1.isInCookbook("Bløtkake"));
+		assertFalse(cookbook1.isInCookbook("Pannekaker"));
 	}
 
 	@Test
@@ -95,12 +88,6 @@ public class CookbookTest {
 			cookbook1.getRecipesWithLabel("Snacks");
 		}, "Invalid label");
 
-	}
-
-	@Test
-	public void isInCookbook() {
-		assertTrue(cookbook1.isInCookbook("Bløtkake"));
-		assertFalse(cookbook1.isInCookbook("Pannekaker"));
 	}
 
 }

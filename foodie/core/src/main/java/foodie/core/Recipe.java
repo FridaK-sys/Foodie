@@ -165,6 +165,7 @@ public class Recipe {
   /**
    * Writes name of recipe and ingredients to string.
    */
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     ingredients.stream().forEach(i -> sb.append(i.getName()));

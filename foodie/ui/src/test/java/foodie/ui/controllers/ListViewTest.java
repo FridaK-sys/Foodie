@@ -9,16 +9,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
 import foodie.ui.CookbookApp;
-import foodie.ui.controllers.ListViewController;
 
 public class ListViewTest extends AbstractAppTest {
 
   private ListViewController controller;
 
+  /**
+   * For running the test headless
+   */
   @BeforeAll
   public static void setupHeadless() {
     CookbookApp.supportHeadless();

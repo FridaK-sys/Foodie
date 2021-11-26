@@ -13,7 +13,7 @@ import java.io.IOException;
 public class CookbookWriter extends JsonSerializer<Cookbook> {
 
   /*
-   * format: { "name": "...", "recipes": [ ... ] }
+   * format: { "recipes": [ ... ] }
    */
 
   @Override

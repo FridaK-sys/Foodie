@@ -9,39 +9,32 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.util.WaitForAsyncUtils;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import java.util.function.Predicate;
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
 import foodie.ui.CookbookApp;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.controllers.AbstractController;
-import foodie.ui.controllers.ListViewCell;
 import foodie.ui.storage.CookbookAccess;
 import foodie.ui.storage.LocalCookbookAccess;
 
-public class AppTest extends AbstractAppTest {
+public class CookbookAppTest extends AbstractAppTest {
 
     private AbstractController controller;
     private CookbookAccess dataAccess = new LocalCookbookAccess("/foodie-test.json");
     
+    /**
+     * For running the test headless
+     */
     @BeforeAll
     public static void setupHeadless() {
         CookbookApp.supportHeadless();
     }
-
 
     @Override
     public void start(final Stage stage) throws Exception {

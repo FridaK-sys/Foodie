@@ -3,20 +3,15 @@ package foodie.ui.controllers;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.ui.CookbookApp;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.controllers.NewRecipeController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +26,6 @@ import javafx.stage.Stage;
 public class NewRecipeControllerTest extends AbstractAppTest {
 
   private NewRecipeController controller;
-  private Cookbook originalData;
 
   @FXML
   private TextField recipeTitle, recipePortions, ingredientTitle;
@@ -42,6 +36,9 @@ public class NewRecipeControllerTest extends AbstractAppTest {
   @FXML
   private ListView<Ingredient> ingredientListView;
 
+  /**
+   * For running the test headless
+   */
   @BeforeAll
   public static void setupHeadless() {
     CookbookApp.supportHeadless();

@@ -2,13 +2,13 @@ package foodie.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 import java.io.IOException;
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.fail;
 
 /**
  * Unit test for CookbookService
@@ -26,7 +26,7 @@ class CookbookServiceTest {
       fail(e.getMessage());
     }
   }
-
+  
   @Test
   void createDefaultCookbook() {
     Cookbook cookbook = CookbookService.createDefaultCookbook();
@@ -40,14 +40,14 @@ class CookbookServiceTest {
   void addRecipe() {
     Recipe recipe = new Recipe("recipe3");
     assertTrue(service.addRecipe(recipe), "addRecipe-method did not return true");
-    assertTrue(service.getCookbook().getRecipes().contains(recipe), "Recipe was not added");
+    assertTrue(service.getCookbook().isInCookbook(recipe.getName()), "Recipe was not added");
   }
 
   @Test
   void removeRecipe() {
     String name = "Cake";
     assertTrue(service.removeRecipe(name), "removeRecipe-method did not return true");
-    assertTrue(!service.getCookbook().getRecipes().stream().anyMatch(r -> r.getName().equals(name)),
+    assertFalse(service.getCookbook().getRecipes().stream().anyMatch(r -> r.getName().equals(name)),
         "Recipe was not removed");
   }
 

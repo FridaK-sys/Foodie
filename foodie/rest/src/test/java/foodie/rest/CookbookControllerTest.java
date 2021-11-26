@@ -1,9 +1,9 @@
 package foodie.rest;
 
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,14 +40,11 @@ public class CookbookControllerTest {
 
   private Cookbook cookbook;
 
-
   @BeforeEach
   public void setUp() {
     mapper = new ObjectMapper().registerModule(new CookbookModule());
     cookbook = CookbookService.createDefaultCookbook();
   }
-
-
 
   @Test
   void getCookbook() {
@@ -60,7 +57,7 @@ public class CookbookControllerTest {
       // GET-request returns correct data
       Cookbook cookbook = new ObjectMapper().registerModule(new CookbookModule())
           .readValue(result.getResponse().getContentAsString(StandardCharsets.UTF_8), Cookbook.class);
-      assertNotNull("Cookbook was null", cookbook);
+      assertNotNull(cookbook, "Cookbook was null");
       assertEquals(2, cookbook.getRecipes().size(), "Cookbook did not have default amount of recipes");
     } catch (Exception e) {
       fail(e.getMessage());
@@ -91,6 +88,7 @@ public class CookbookControllerTest {
       Recipe recipe = new Recipe("Cake");
       recipe.setPortions(2);
       String json = mapper.writeValueAsString(recipe);
+
       // PUT-request returns OK-status code and resnponse = true
       when(cookbookService.editRecipe(recipe.getName(), recipe)).thenReturn(true);
       MvcResult result = mvc.perform(MockMvcRequestBuilders.put("/cookbook/" + recipe.getName() + "/edit")
@@ -113,6 +111,7 @@ public class CookbookControllerTest {
   void removeRecipe() throws Exception {
     try {
       String name = "Cake";
+      
       // DELETE-request returns OK-status code and response = true
       when(cookbookService.removeRecipe(name)).thenReturn(true);
       MvcResult result =

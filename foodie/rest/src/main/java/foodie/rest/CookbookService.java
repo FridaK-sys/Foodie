@@ -31,10 +31,6 @@ public class CookbookService {
     this.cookbook = cookbookPersistence.loadCookbook();
   }
 
-  public CookbookPersistence getPersistence() {
-    return this.cookbookPersistence;
-  }
-
   public Cookbook getCookbook() {
     return this.cookbook;
   }
@@ -46,12 +42,11 @@ public class CookbookService {
   /**
    * Creates a default cookbook. Often used for testing.
    */
-
   public static Cookbook createDefaultCookbook() {
     CookbookPersistence cookbookPersistence = new CookbookPersistence();
     try (Reader reader =
         new FileReader(new File(System.getProperty("user.dir") + File.separator 
-        + ("default-cookbook.json")), StandardCharsets.UTF_8)) {
+        + ("/src/main/resources/foodie/rest/default-cookbook.json")), StandardCharsets.UTF_8)) {
       return cookbookPersistence.readCookbook(reader);
     } catch (IOException e) {
       System.out.println("Couldn't read default-cookbook.json, so makes cookbook manually (" 

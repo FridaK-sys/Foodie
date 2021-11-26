@@ -24,7 +24,6 @@ public abstract class AbstractController implements Initializable {
 
   protected Stage stage;
 
-
   @FXML
   AnchorPane listView;
 

@@ -6,7 +6,7 @@ Dette prosjektet er tilknyttet emnet IT1901 Informatikk prosjektarbeid I.
 - Selve kodingsprosjektet ligger i mappen `foodie`. Her er prosjektet delt inn i tre moduler: core, ui og restapi. 
 - Kjernelogikken og filbehandling, samt tester til disse klassene ligger i mappen `core`. Logikken er skrevet i Java og tilknyttede tester med JUnit 5. Vi har valgt å bruke Jackson-biblioteket for å lese og skrive JSON objekter til fil. 
 - Design av brukergrensesnittet er laget med JavaFX og kontroller-klassene som styrer dette ligger i `ui`.
-- REST-APIet og restserver ligger i mappen `rest`, og implementert med Spring Boot. 
+- REST-APIet og restserver ligger i mappen `rest`, og er implementert med Spring Boot. 
 - Brukerhistorier som viser appens hovedfunksjonalitet ligger i mappen `foodie`. 
 - Dokumentasjonen for hver release ligger i mappen `docs`.
 

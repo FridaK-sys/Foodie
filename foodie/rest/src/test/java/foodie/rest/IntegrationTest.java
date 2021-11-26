@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -23,10 +23,10 @@ class IntegrationTest {
         private TestRestTemplate restTemplate;
 
         @Test
-        void testGetLog() {
+        void testGetCookbook() {
                 ResponseEntity<Cookbook> response = restTemplate.getForEntity("/cookbook", Cookbook.class);
-                assertEquals(HttpStatus.OK, response.getStatusCode());
-                assertNotNull(response.getBody());
+                assertEquals(HttpStatus.OK, response.getStatusCode(), "HTTP-status was not ok");
+                assertNotNull(response.getBody(), "Response-body was null");
         }
 
 }

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class CookbookApp extends Application {
 
   /**
-   * Helper method used by tests needing to run headless.
+   * Helper method used in tests when needing to run headless.
    */
   public static void supportHeadless() {
     if (Boolean.getBoolean("headless")) {

@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 /**
  * Class responsible for processing incoming RESTAPI-requests (GET,POST,PUT,DELETE).
  */
+
 @RestController
 @RequestMapping(CookbookService.COOKBOOK_SERVICE_PATH)
 public class CookbookController {

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Abstract class for JsonTests
+ * Abstract class for JsonTests.
  */
 public abstract class AbstractJsonTest {
   protected static ObjectMapper mapper = new ObjectMapper().registerModule(new CookbookModule());
