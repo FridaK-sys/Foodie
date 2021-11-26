@@ -4,7 +4,6 @@ import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import foodie.ui.FxmlModel;
-import foodie.ui.IngredientListCell;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
 import foodie.ui.storage.CookbookAccess;
