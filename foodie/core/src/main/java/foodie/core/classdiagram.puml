@@ -2,20 +2,16 @@
 Cookbook "1" -- "*" Recipe
 Recipe "1" -- "*" Ingredient
 
-Cookbook : -String name
 Cookbook : -List<Recipe> recipes
-Cookbook : +String getName()
-Cookbook : +void setName(String)
+Cookbook : +setRecipes(List<Recipe>)
 Cookbook : +List<Recipe> getRecipes()
 Cookbook : +addRecipe(Recipe)
 Cookbook : +addRecipe(int, Recipe)
-Cookbook : +removeRecipe(int)
 Cookbook : +removeRecipe(String)
 Cookbook : +replaceRecipe(String, Recipe)
 Cookbook : +List<Recipe> getFavRecipes()
 Cookbook : +boolean isInCookbook(String)
 Cookbook : +List<Recipe> getRecipesWithLabel(String)
-Cookbook : +setRecipes(List<Recipe>)
 
 
 Recipe : -String name
