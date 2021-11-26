@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit test for CookbookService
+ * Unit test for CookbookService.
  */
 class CookbookServiceTest {
 

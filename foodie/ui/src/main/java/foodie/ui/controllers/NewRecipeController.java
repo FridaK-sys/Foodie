@@ -101,7 +101,7 @@ public class NewRecipeController extends AbstractController {
 
 
   /**
-   * Validates input while typing, gives the field a red frame if unvalid input is typed.
+   * Validates input while typing, gives the field a red frame if invalid input is typed.
    *
    * @param k the input typed
    */
@@ -117,7 +117,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Validates integer-input while typing, gives the field a red frame if unvalid input is typed.
+   * Validates integer-input while typing, gives the field a red frame if invalid input is typed.
    *
    * @param k the input typed
    */
@@ -139,7 +139,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Validates double-input while typing, gives the field a red frame if unvalid input is typed.
+   * Validates double-input while typing, gives the field a red frame if invalid input is typed.
    *
    * @param k the input typed
    */
@@ -280,7 +280,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Initialises data from another scene.
+   * Initializes data from another scene.
    *
    * @param recipe the recipe to initialize
    * 

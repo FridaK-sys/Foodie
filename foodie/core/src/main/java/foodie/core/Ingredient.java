@@ -67,7 +67,7 @@ public class Ingredient {
    * Sets amount of ingredient.
    *
    * @param amount amount of ingredient
-   * @throws IllegalArgumentException if param is a negative integer or zero
+   * @throws IllegalArgumentException if param is a negative integer 
    */
   public void setAmount(double amount) {
     if (amount <= 0) {

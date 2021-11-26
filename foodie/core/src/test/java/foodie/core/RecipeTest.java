@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Test class for Recipe.
+ */
 public class RecipeTest {
 
 	private Recipe recipe1, recipe2;

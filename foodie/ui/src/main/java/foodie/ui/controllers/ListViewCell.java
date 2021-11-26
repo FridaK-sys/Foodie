@@ -3,12 +3,12 @@ package foodie.ui.controllers;
 import foodie.core.Recipe;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
  * ListCell for Recipe. Displays Recipe.
  */
+
 public class ListViewCell extends ListCell<Recipe> {
 
   private VBox vbox = null;

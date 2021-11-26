@@ -53,11 +53,10 @@ public abstract class AbstractController implements Initializable {
   }
 
   /**
-   * Changes scene to target and updates the targeted controller so the page loads with corect data.
-   *
+   * Changes scene to target and updates the targeted controller so the page loads with correct
+   * data.
    * @param model the FXML file info to load the scene with.
    */
-
   public void changeScene(FxmlModel model) {
     final Scene scene = model.getScene();
     AbstractController controller = model.getController();

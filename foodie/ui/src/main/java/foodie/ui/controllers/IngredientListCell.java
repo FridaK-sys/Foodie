@@ -6,9 +6,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 
 /**
- * ListCell for ringredients.
+ * ListCell for ingredients.
  * Displays name, unit and amount.
  */
+
 public class IngredientListCell extends ListCell<Ingredient> {
 
   private HBox hbox = null;

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Test class for Cookbook.
+ */
 public class CookbookTest {
 
 	private Cookbook cookbook1, cookbook2;

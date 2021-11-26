@@ -21,7 +21,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    *
    * @param path the path that is converted to a URI
    */
-
   public LocalCookbookAccess(String path) {
     persistence = new CookbookPersistence();
     persistence.setSaveFile(path);
@@ -56,7 +55,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * @param recipe the edited recipe that is added
    * @return true if edited
    */
-
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
     cookbook.replaceRecipe(name, recipe);
@@ -78,7 +76,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * @param recipe the recipe that is added
    * @return true if added
    */
-
   @Override
   public boolean addRecipe(Recipe recipe) {
     cookbook.addRecipe(recipe);
@@ -99,7 +96,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * @param name the name of the recipe that is deleted
    * @return true if edited
    */
-
   @Override
   public boolean deleteRecipe(String name) {
     cookbook.removeRecipe(name);
@@ -119,7 +115,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * @param recipes list of recipes to be set 
    * @return true if edited
    */
-
   @Override
   public boolean setRecipes(List<Recipe> recipes) {
     cookbook.setRecipes(recipes);
@@ -132,5 +127,4 @@ public class LocalCookbookAccess implements CookbookAccess {
     }
     return true;
   }
-
 }

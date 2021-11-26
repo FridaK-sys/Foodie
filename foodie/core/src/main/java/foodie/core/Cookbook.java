@@ -16,7 +16,6 @@ public class Cookbook {
    *
    * @param recipes list of recipes
    */
-
   public Cookbook(List<Recipe> recipes) {
     this.recipes = new ArrayList<>(recipes);
   }
@@ -24,11 +23,9 @@ public class Cookbook {
   /**
    * Constructor for an empty cookbook.
    */
-
   public Cookbook() {
     this.recipes = new ArrayList<>();
   }
-
 
   public void setRecipes(List<Recipe> recipes) {
     this.recipes = recipes;
@@ -42,9 +39,8 @@ public class Cookbook {
    * Adds recipe to cookbook.
    *
    * @param recipe recipe to add
-   * @throws IllegalArgumentException if recipelist already contains recipe
+   * @throws IllegalArgumentException if cookbook already contains this recipe
    */
-
   public void addRecipe(Recipe recipe) {
     if (recipes.contains(recipe)) {
       throw new IllegalArgumentException("Recipe is already in cookbook");
@@ -53,37 +49,42 @@ public class Cookbook {
   }
 
   /**
-   * Adds recipe to cookbook at certain index.
+   * Adds recipe to cookbook at given index.
    *
    * @param recipe recipe to add
-   * @param index index of where to put recipe in recipeList
+   * @param index index to place recipe in cookbook
+   * @throws IllegalArgumentException if cookbook already contains this recipe
    */
-
   private void addRecipe(int index, Recipe recipe) {
-    if (!recipes.contains(recipe)) {
-      recipes.add(index, recipe);
+    if (recipes.contains(recipe)) {
+      throw new IllegalArgumentException("Recipe is already in cookbook");
     }
+    recipes.add(index, recipe);
   }
 
   /**
-   * Removes recipe from recipeList.
+   * Removes recipe from cookbook.
    *
    * @param name name of recipe to remove
    */
   public void removeRecipe(String name) {
-    Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
+    Recipe res = recipes.stream()
+        .filter(r -> r.getName().equals(name))
+        .findAny()
         .orElseThrow(() -> new IllegalArgumentException("No recipe with the name " + name));
     recipes.remove(res);
   }
 
   /**
-   * Replaces a recipe in list with param.
+   * Replaces a recipe in cookbook.
    *
    * @param name   name of recipe to remove
-   * @param recipe recipe to replace with
+   * @param recipe recipe replacing the previous recipe
    */
   public void replaceRecipe(String name, Recipe recipe) {
-    Recipe res = recipes.stream().filter(r -> r.getName().equals(name)).findAny()
+    Recipe res = recipes.stream()
+        .filter(r -> r.getName().equals(name))
+        .findAny()
         .orElseThrow(() -> new IllegalArgumentException("No recipe with the name " + name));
     int index = this.getRecipes().indexOf(res);
     this.removeRecipe(name);
@@ -91,10 +92,10 @@ public class Cookbook {
   }
 
   /**
-   * Checks if recipe is in cookbook based on name of recipe.
+   * Checks if recipe is in cookbook.
    *
    * @param recipeName name of recipe
-   * @return true if recipe is in RecipeList, false if not.
+   * @return true if recipe is in RecipeList, false otherwise
    */
   public boolean isInCookbook(String recipeName) {
     for (Recipe r : recipes) {
@@ -106,11 +107,11 @@ public class Cookbook {
   }
 
   /**
-   * Makes list of all recipes in recipeList with label.
+   * Gets a list of all recipes in the cookbook with a given label.
    *
-   * @param label recipelabel
-   * @return list of all recipes in recipeList with label = param
-   * @throws IllegalArgumentException if param is not valid
+   * @param label label for recipes
+   * @return list of all recipes in cookbook with the given label
+   * @throws IllegalArgumentException if label is not valid
    */
   public List<Recipe> getRecipesWithLabel(String label) {
     if (!Recipe.labels.contains(label)) {

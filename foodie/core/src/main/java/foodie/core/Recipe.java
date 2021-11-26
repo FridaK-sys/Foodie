@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Recipe containing a name, description, ingredients, portions, favorite tag and label.
  */
+
 public class Recipe {
 
   private String name;
@@ -120,8 +121,8 @@ public class Recipe {
   /**
    * Remove ingredient from recipe.
    *
-   * @param index index in ingredientList of ingredient to be removed
-   * @throws IllegalArgumentException if index is larger than size of ingredientList
+   * @param index index of ingredient in list to be removed 
+   * @throws IllegalArgumentException if index is larger than size of list
    */
   public void removeIngredient(int index) {
     ingredients.remove(index);
@@ -142,7 +143,7 @@ public class Recipe {
   /**
    * Sets label for recipe.
    *
-   * @param label recipelabel
+   * @param label label to be set for recipe
    * @throws IllegalArgumentException if label is not valid
    */
   public void setLabel(String label) {
@@ -162,9 +163,6 @@ public class Recipe {
     this.label = "";
   }
 
-  /**
-   * Writes name of recipe and ingredients to string.
-   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();

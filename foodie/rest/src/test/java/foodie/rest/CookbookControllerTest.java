@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 /**
- * Unit-test (isolated integration-test) of CookbookController
+ * Unit-test (isolated integration-test) of CookbookController.
  */
 @ContextConfiguration(classes = {CookbookController.class, CookbookService.class, CookbookApplication.class})
 @WebMvcTest(CookbookApplication.class)

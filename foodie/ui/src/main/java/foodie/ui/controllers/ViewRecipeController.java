@@ -1,6 +1,5 @@
 package foodie.ui.controllers;
 
-
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import foodie.ui.FxmlModel;
@@ -27,7 +26,6 @@ public class ViewRecipeController extends AbstractController {
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
   private Recipe viewRecipe;
-
 
   @FXML
   private Label recipeTitle;
