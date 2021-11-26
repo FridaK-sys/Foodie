@@ -9,8 +9,8 @@ import org.testfx.framework.junit5.ApplicationTest;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
-import foodie.ui.storage.CookbookAccess;
-import foodie.ui.storage.LocalCookbookAccess;
+import foodie.ui.data.CookbookAccess;
+import foodie.ui.data.LocalCookbookAccess;
 import javafx.scene.control.ListView;
 
 public abstract class AbstractAppTest extends ApplicationTest {

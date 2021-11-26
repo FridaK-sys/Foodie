@@ -2,7 +2,7 @@ package foodie.ui.controllers;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

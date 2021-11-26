@@ -20,8 +20,8 @@ import java.util.function.Predicate;
 import foodie.ui.CookbookApp;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.storage.CookbookAccess;
-import foodie.ui.storage.LocalCookbookAccess;
+import foodie.ui.data.CookbookAccess;
+import foodie.ui.data.LocalCookbookAccess;
 
 public class CookbookAppTest extends AbstractAppTest {
 

@@ -6,7 +6,7 @@ import foodie.core.Recipe;
 import foodie.ui.FxmlModel;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -184,7 +184,6 @@ public class NewRecipeController extends AbstractController {
     } catch (NumberFormatException e) {
       errorMessageLabel.setText("Invalid input: ingredient amount must be a number");
       e.printStackTrace();
-      e.printStackTrace();
     } catch (IllegalArgumentException e) {
       errorMessageLabel.setText("Invalid Ingredient name");
       e.printStackTrace();
@@ -229,9 +228,7 @@ public class NewRecipeController extends AbstractController {
       errorMessageLabel.setText("You have empty fields");
       e.printStackTrace();
     } catch (Exception e) {
-      System.out.println("testingerror");
-      // e.printStackTrace();
-      errorMessageLabel.setText("Invalid input");
+      System.out.println("You have illegal input");
     }
   }
 
@@ -381,9 +378,6 @@ public class NewRecipeController extends AbstractController {
     dessert.setUserData("dessert");
   }
 
-
-
-
   /**
    * Sets the SceneTarget for return button.
    */
@@ -393,7 +387,6 @@ public class NewRecipeController extends AbstractController {
     });
   }
 
-  
   @Override
   public void update() {
     if (getSelectedrecipe() != null) {

@@ -5,7 +5,7 @@ import foodie.core.Recipe;
 import foodie.ui.FxmlModel;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
