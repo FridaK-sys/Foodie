@@ -54,5 +54,5 @@ Brukeren har behov for å legge til én ingrediens i en oppskrift med angitt nav
 - Legge til en ingrediens
 - Redigere antall porsjoner på en oppskrift 
 
-## Illustrerende skjermbilder av appen
+## Illustrerende skjermbilde av appen
 ![kokebok](FoodieAppIllustration.png)

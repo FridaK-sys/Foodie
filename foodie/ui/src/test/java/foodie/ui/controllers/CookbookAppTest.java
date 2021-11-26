@@ -9,39 +9,32 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.util.WaitForAsyncUtils;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import java.util.function.Predicate;
-import foodie.core.Cookbook;
-import foodie.core.Ingredient;
-import foodie.core.Recipe;
 import foodie.ui.CookbookApp;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.controllers.AbstractController;
-import foodie.ui.controllers.ListViewCell;
-import foodie.ui.storage.CookbookAccess;
-import foodie.ui.storage.LocalCookbookAccess;
+import foodie.ui.data.CookbookAccess;
+import foodie.ui.data.LocalCookbookAccess;
 
-public class AppTest extends AbstractAppTest {
+public class CookbookAppTest extends AbstractAppTest {
 
     private AbstractController controller;
     private CookbookAccess dataAccess = new LocalCookbookAccess("/foodie-test.json");
     
+    /**
+     * For running the test headless
+     */
     @BeforeAll
     public static void setupHeadless() {
         CookbookApp.supportHeadless();
     }
-
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -116,6 +109,7 @@ public class AppTest extends AbstractAppTest {
 
     @Test
     public void testEditRecipe() {
+
         Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
 
         clickOn(listViewCell(listCell, 1));
@@ -123,7 +117,7 @@ public class AppTest extends AbstractAppTest {
 
         Label tag = lookup("#labelTag").query();
         String recipeTag = dataAccess.getCookbook().getRecipes().get(1).getLabel();
-        assertEquals(recipeTag, "breakfast");
+        assertEquals(recipeTag, tag.getText());
 
         clickOn("#editRecipe");
         clickOn("#lunch");

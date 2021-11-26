@@ -1,14 +1,15 @@
 package foodie.ui.controllers;
 
+import foodie.ui.data.LocalCookbookAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
-import foodie.ui.storage.LocalCookbookAccess;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Controller for running the application with local acces to data stored on the user-device.
+ * Controller for running the application with local access to data stored on the user-device.
  */
+
 public class LocalAppController extends AbstractController {
 
   @FXML
@@ -17,8 +18,6 @@ public class LocalAppController extends AbstractController {
   /**
    * Makes local CookbookAccess file.
    */
-
-
   protected void setUpStorage() {
     dataAccess = new LocalCookbookAccess("/checkCookbookff.json");
   }
@@ -26,7 +25,6 @@ public class LocalAppController extends AbstractController {
   /**
    * Initialize method.
    */
-
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     setUpStorage();

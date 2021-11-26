@@ -1,4 +1,4 @@
-package foodie.ui.storage;
+package foodie.ui.data;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
@@ -21,7 +21,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    *
    * @param path the path that is converted to a URI
    */
-
   public LocalCookbookAccess(String path) {
     persistence = new CookbookPersistence();
     persistence.setSaveFile(path);
@@ -50,17 +49,14 @@ public class LocalCookbookAccess implements CookbookAccess {
   }
 
   /**
-   * Edits recipe.
+   * Adds recipe.
    *
-   * @param name the name of the recipe to be removed
-   * @param recipe the edited recipe that is added
-   * @return true if edited
+   * @param recipe the recipe that is added
+   * @return true if added
    */
-
   @Override
-  public boolean editRecipe(String name, Recipe recipe) {
-    cookbook.replaceRecipe(name, recipe);
-    // cookbook.add
+  public boolean addRecipe(Recipe recipe) {
+    cookbook.addRecipe(recipe);
     try {
       persistence.saveCookbook(cookbook);
     } catch (IllegalStateException e) {
@@ -73,15 +69,15 @@ public class LocalCookbookAccess implements CookbookAccess {
   }
 
   /**
-   * Adds recipe.
+   * Edits recipe.
    *
-   * @param recipe the recipe that is added
-   * @return true if added
+   * @param name the name of the recipe to be removed
+   * @param recipe the edited recipe that is added
+   * @return true if edited
    */
-
   @Override
-  public boolean addRecipe(Recipe recipe) {
-    cookbook.addRecipe(recipe);
+  public boolean editRecipe(String name, Recipe recipe) {
+    cookbook.replaceRecipe(name, recipe);
     try {
       persistence.saveCookbook(cookbook);
     } catch (IllegalStateException e) {
@@ -99,7 +95,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * @param name the name of the recipe that is deleted
    * @return true if edited
    */
-
   @Override
   public boolean deleteRecipe(String name) {
     cookbook.removeRecipe(name);
@@ -119,8 +114,6 @@ public class LocalCookbookAccess implements CookbookAccess {
    * @param recipes list of recipes to be set 
    * @return true if edited
    */
-
-  @Override
   public boolean setRecipes(List<Recipe> recipes) {
     cookbook.setRecipes(recipes);
     try {
@@ -132,5 +125,4 @@ public class LocalCookbookAccess implements CookbookAccess {
     }
     return true;
   }
-
 }

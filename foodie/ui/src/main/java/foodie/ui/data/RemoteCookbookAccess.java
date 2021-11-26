@@ -1,4 +1,4 @@
-package foodie.ui.storage;
+package foodie.ui.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import foodie.core.Cookbook;
@@ -10,7 +10,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.util.List;
 
 /**
  * Allows server side persistence. Uses GET, POST, PUT and DELETE methods to modify a recipe.
@@ -24,7 +23,6 @@ public class RemoteCookbookAccess implements CookbookAccess {
   /**
    * Constructor for RemoteCookbookAccess initializes endpoint and mapper.
    */
-
   public RemoteCookbookAccess(URI endPoint) {
     this.endPoint = endPoint;
     this.mapper = new ObjectMapper().registerModule(new CookbookModule());
@@ -35,7 +33,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
    * Gets Cookbook. Sends http get request to remote server.
    *
    * @return the cookbook
-   * @throws RuntimeException if IOException or InterruptedException occured
+   * @throws RuntimeException if IOException or InterruptedException occurred
    */
   @Override
   public Cookbook getCookbook() {
@@ -57,9 +55,8 @@ public class RemoteCookbookAccess implements CookbookAccess {
    *
    * @param recipe the recipe to add
    * @return true if recipe is added or false if not added
-   * @throws RuntimeException if IOException or InterruptedException occured
+   * @throws RuntimeException if IOException or InterruptedException occurred
    */
-
   @Override
   public boolean addRecipe(Recipe recipe) {
     try {
@@ -86,7 +83,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
    * @param name the name of the recipe will be removed
    * @param recipe an edited version of the recipe that is added
    * @return true if added or false if not added
-   * @throws RuntimeException if IOException or InterruptedException occured
+   * @throws RuntimeException if IOException or InterruptedException occurred
    */
   @Override
   public boolean editRecipe(String name, Recipe recipe) {
@@ -115,9 +112,8 @@ public class RemoteCookbookAccess implements CookbookAccess {
    *
    * @param name the name of the recipe you want to delete
    * @return true if successfully removed or false if not removed
-   * @throws RuntimeException if IOException or InterruptedException occured
+   * @throws RuntimeException if IOException or InterruptedException occurred
    */
-
   @Override
   public boolean deleteRecipe(String name) {
     try {
@@ -133,25 +129,6 @@ public class RemoteCookbookAccess implements CookbookAccess {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  /**
-   * Sets list of recipes.
-   *
-   * @param recipes recipes to be set
-   * @return true if edited
-   */
-  @Override
-  public boolean setRecipes(List<Recipe> recipes) {
-    // cookbook.setRecipes(recipes);
-    // try {
-    // persistence.saveCookbook(cookbook);
-    // } catch (IllegalStateException e) {
-    // e.printStackTrace();
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    return true;
   }
 
 }

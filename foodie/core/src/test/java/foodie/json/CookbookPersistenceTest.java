@@ -1,9 +1,9 @@
 package foodie.json;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -26,15 +26,14 @@ import org.junit.jupiter.api.Test;
  */
 public class CookbookPersistenceTest {
 
-  private static CookbookPersistence persistence;
-  private static String defaultCookbookPath;
-  private static ObjectMapper mapper;
+  private String defaultCookbookPath =
+      System.getProperty("user.dir") + File.separator + ("/src/test/resources/foodie/json/test-cookbook.json");
+  private CookbookPersistence persistence;
+  private ObjectMapper mapper;
 
   @BeforeEach
   public void setUp() {
     persistence = new CookbookPersistence();
-    defaultCookbookPath =
-        System.getProperty("user.dir") + File.separator + ("/src/test/java/resources/test-cookbook.json");
     mapper = new ObjectMapper().registerModule(new CookbookModule());
   }
 
@@ -74,7 +73,7 @@ public class CookbookPersistenceTest {
   @Test
   public void createObjectMapper() {
     ObjectMapper mapper = CookbookPersistence.createObjectMapper();
-    assertNotNull("Objectmapper was null", mapper);
+    assertNotNull(mapper, "Objectmapper was null");
     assertEquals(mapper.getRegisteredModuleIds().toString(), "[CookbookModule]",
         "The registered modules in mapper was wrong");
   }
@@ -82,7 +81,7 @@ public class CookbookPersistenceTest {
   @Test
   public void createModule() {
     SimpleModule module = CookbookPersistence.createModule();
-    assertNotNull("Module was null", module);
+    assertNotNull(module, "Module was null");
     assertEquals(module.getClass(), CookbookModule.class, "Module is not a CookbookModule");
   }
 
@@ -119,15 +118,8 @@ public class CookbookPersistenceTest {
   @Test
   public void loadCookbook() {
     // test not allowed to load cookbook without setting path
-    boolean thrown = false;
-    try {
-      persistence.loadCookbook();
-    } catch (IllegalStateException e) {
-      thrown = true;
-    } catch (IOException e) {
-      fail(e.getMessage());
-    }
-    assertTrue("No exception was thrown even though saveFilePath was not set", thrown);
+    assertThrows(IllegalStateException.class, () -> {
+      persistence.loadCookbook();}, "No exception was thrown even though saveFilePath was not set");
 
     // test loading cookbook from existing file
     try {
@@ -160,15 +152,9 @@ public class CookbookPersistenceTest {
     Cookbook cookbook = createDefaultCookbook();
 
     // test not allowed to save cookbook without setting path
-    boolean thrown = false;
-    try {
+    assertThrows(IllegalStateException.class, () -> {
       persistence.saveCookbook(cookbook);
-    } catch (IllegalStateException e) {
-      thrown = true;
-    } catch (IOException e) {
-      fail(e.getMessage());
-    }
-    assertTrue("No exception was thrown even though saveFilePath was not set", thrown);
+    }, "No exception was thrown even though saveFilePath was not set");
 
     // test saving cookbook to existing file
     try {

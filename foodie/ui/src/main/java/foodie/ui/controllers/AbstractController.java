@@ -5,7 +5,7 @@ import foodie.core.Recipe;
 import foodie.ui.FxmlModel;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -23,7 +23,6 @@ public abstract class AbstractController implements Initializable {
   protected Recipe selectedRecipe = null;
 
   protected Stage stage;
-
 
   @FXML
   AnchorPane listView;
@@ -54,11 +53,11 @@ public abstract class AbstractController implements Initializable {
   }
 
   /**
-   * Changes scene to target and updates the targeted controller so the page loads with corect data.
+   * Changes scene to target and updates the targeted controller so the page loads with correct
+   * data.
    *
    * @param model the FXML file info to load the scene with.
    */
-
   public void changeScene(FxmlModel model) {
     final Scene scene = model.getScene();
     AbstractController controller = model.getController();

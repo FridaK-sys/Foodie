@@ -1,7 +1,7 @@
 package foodie.json;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,7 +10,7 @@ import foodie.core.Recipe;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for RecipeDeserializer and RecipeSerializer
+ * Test class for RecipeDeserializer and RecipeSerializer.
  */
 public class RecipeJsonTest extends AbstractJsonTest {
 

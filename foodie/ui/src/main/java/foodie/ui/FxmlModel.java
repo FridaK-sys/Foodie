@@ -28,7 +28,6 @@ public class FxmlModel {
     this.filepath = filepath;
     this.sceneName = sceneName;
     this.stage = stage;
-    // this. controller = controller;
   }
 
   public String getResourceName() {
@@ -51,9 +50,6 @@ public class FxmlModel {
   public Scene getScene() {
     if (scene == null) {
       scene = new FxmlHandler().load(this);
-      // if (logger.isInfoEnabled()) {
-      // logger.info("{} has been built", sceneName);
-      // }
     }
     return scene;
   }

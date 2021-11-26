@@ -3,12 +3,10 @@ package foodie.ui.controllers;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
-import foodie.ui.IngredientListCell;
+import foodie.ui.FxmlModel;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.FxmlHandler;
-import foodie.ui.FxmlModel;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -103,7 +101,7 @@ public class NewRecipeController extends AbstractController {
 
 
   /**
-   * Validates input while typing, gives the field a red frame if unvalid input is typed.
+   * Validates input while typing, gives the field a red frame if invalid input is typed.
    *
    * @param k the input typed
    */
@@ -119,7 +117,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Validates integer-input while typing, gives the field a red frame if unvalid input is typed.
+   * Validates integer-input while typing, gives the field a red frame if invalid input is typed.
    *
    * @param k the input typed
    */
@@ -141,7 +139,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Validates double-input while typing, gives the field a red frame if unvalid input is typed.
+   * Validates double-input while typing, gives the field a red frame if invalid input is typed.
    *
    * @param k the input typed
    */
@@ -185,7 +183,6 @@ public class NewRecipeController extends AbstractController {
 
     } catch (NumberFormatException e) {
       errorMessageLabel.setText("Invalid input: ingredient amount must be a number");
-      e.printStackTrace();
       e.printStackTrace();
     } catch (IllegalArgumentException e) {
       errorMessageLabel.setText("Invalid Ingredient name");
@@ -231,9 +228,7 @@ public class NewRecipeController extends AbstractController {
       errorMessageLabel.setText("You have empty fields");
       e.printStackTrace();
     } catch (Exception e) {
-      System.out.println("testingerror");
-      // e.printStackTrace();
-      errorMessageLabel.setText("Invalid input");
+      System.out.println("You have illegal input");
     }
   }
 
@@ -285,7 +280,7 @@ public class NewRecipeController extends AbstractController {
   }
 
   /**
-   * Initialises data from another scene.
+   * Initializes data from another scene.
    *
    * @param recipe the recipe to initialize
    * 
@@ -383,9 +378,6 @@ public class NewRecipeController extends AbstractController {
     dessert.setUserData("dessert");
   }
 
-
-
-
   /**
    * Sets the SceneTarget for return button.
    */
@@ -395,7 +387,6 @@ public class NewRecipeController extends AbstractController {
     });
   }
 
-  
   @Override
   public void update() {
     if (getSelectedrecipe() != null) {

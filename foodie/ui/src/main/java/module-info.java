@@ -10,6 +10,7 @@ module foodie.ui {
 
   exports foodie.ui;
   exports foodie.ui.controllers;
+  exports foodie.ui.data;
 
   opens foodie.ui to javafx.graphics, javafx.fxml;
   opens foodie.ui.controllers to javafx.graphics, javafx.fxml;

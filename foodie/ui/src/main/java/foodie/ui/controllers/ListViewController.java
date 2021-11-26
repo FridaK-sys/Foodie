@@ -2,7 +2,7 @@ package foodie.ui.controllers;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -22,8 +22,8 @@ import javafx.scene.control.ToggleGroup;
 /**
  * Controller for main page in the application.
  */
-public class ListViewController {
 
+public class ListViewController {
 
   private Cookbook mainBook = new Cookbook();
   private ObservableList<Recipe> recipes = FXCollections.observableArrayList();
@@ -55,16 +55,13 @@ public class ListViewController {
    * Sets the CookbookAccess for this controller so the data can come from both remote and local
    * sources.
    *
-   * @param dataAccess is LocalCookbookAcess or RemoteCookbookAccess
+   * @param dataAccess is LocalCookbookAccess or RemoteCookbookAccess
    * 
    */
-
-  
   @FXML
   void initialize(URL url, ResourceBundle rb) {
     updateListView();
   }
-
 
   /**
    * Loads NewRecipeController.
@@ -84,7 +81,7 @@ public class ListViewController {
   }
 
   /**
-   * Displays fav recipies when button is toggled.
+   * Displays fav recipes when button is toggled.
    */
   @FXML
   public void toggleFav() {

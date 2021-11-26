@@ -1,13 +1,13 @@
 package foodie.json;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import foodie.core.Ingredient;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for IngredientDeserializer and IngredientSerializer
+ * Test class for IngredientDeserializer and IngredientSerializer.
  */
 public class IngredientJsonTest extends AbstractJsonTest {
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="560.0" minWidth="-Infinity" prefWidth="760.0" xmlns="http://javafx.com/javafx/12.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.controllers.ViewRecipeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="560.0" minWidth="-Infinity" prefWidth="760.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodie.ui.controllers.ViewRecipeController">
    <children>
       <Label fx:id="recipeTitle" layoutX="181.0" layoutY="48.0" text="Tittel">
          <font>
@@ -33,7 +33,7 @@
                <children>
                   <Label fx:id="portionsneeded" alignment="CENTER" layoutX="80.0" layoutY="4.0" prefHeight="17.0" prefWidth="73.0" text="portions" />
                </children></Pane>
-            <HBox alignment="BASELINE_CENTER" prefHeight="33.0" prefWidth="140.0">
+            <HBox alignment="BASELINE_CENTER" prefHeight="39.0" prefWidth="232.0">
                <children>
                   <Button fx:id="decreaseButton" mnemonicParsing="false" onAction="#decPortion" prefHeight="26.0" prefWidth="30.0" text="-">
                      <font>
@@ -71,3 +71,4 @@
       <Label layoutX="506.0" layoutY="112.0" text="Description" />
    </children>
 </AnchorPane>
+

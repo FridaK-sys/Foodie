@@ -3,19 +3,13 @@ package foodie.ui.controllers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import foodie.core.Cookbook;
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
-import foodie.json.CookbookPersistence;
-import foodie.ui.storage.CookbookAccess;
-import foodie.ui.storage.LocalCookbookAccess;
+import foodie.ui.data.LocalCookbookAccess;
 import javafx.scene.control.ListView;
 
 public abstract class AbstractAppTest extends ApplicationTest {
@@ -26,7 +20,7 @@ public abstract class AbstractAppTest extends ApplicationTest {
     protected List<Ingredient> ingredients = new ArrayList<>();
     protected Cookbook testCookbook = populationData();
 
-    protected CookbookAccess dataAccess;
+    protected LocalCookbookAccess dataAccess;
 
     protected void setTestData() {
         this.cookbook = null;

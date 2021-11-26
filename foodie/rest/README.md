@@ -4,7 +4,7 @@ Denne modulen inneholder restserveren og REST-APIet til applikasjonen. Vi har va
 Spring-boot er et populært rammeverk for web-applikasjoner som gjør setup og konfigurasjon av restserveren og REST-APIet enklere.
 
 # Oppsett av restserveren
-- `CookbookApplication` - Starter restserveren, ved å kalle på SpringApplication.run
+- `CookbookApplication` - Starter restserveren ved å kalle på SpringApplication.run
 - `CookbookController` - Håndterer innkommende RESTAPI-forespørsler (GET, POST, PUT og DELETE)
 - `CookbookService` - Håndterer business logikken (informasjonsutvekslingen mellom restserveren og appen) 
 
@@ -22,8 +22,10 @@ For å starte restserveren, skriv følgende kommandoer i terminalen:
 - `cd foodie`
 - `mvn install` 
 - `cd rest`
-- `mvn spring-boot:run`
-Da er serveren skrudd på. For å terminere serveren, skriv følgende i terminalen: `ctrl + C`
+- `mvn spring-boot:run` 
+- Da er serveren skrudd på
+- `ctrl + C`for å terminere serveren
+
 
 
 # Testing

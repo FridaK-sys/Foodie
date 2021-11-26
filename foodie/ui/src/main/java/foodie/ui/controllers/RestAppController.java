@@ -1,11 +1,10 @@
 package foodie.ui.controllers;
 
-
+import foodie.ui.data.RemoteCookbookAccess;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import foodie.ui.storage.RemoteCookbookAccess;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
@@ -26,7 +25,6 @@ public class RestAppController extends AbstractController {
    *
    * @return the new URI
    */
-
   private URI uriSetup() {
     URI newUri = null;
     try {
@@ -52,16 +50,13 @@ public class RestAppController extends AbstractController {
   /**
    * Makes the URI endpoint.
    */
-
   protected void setUpStorage() {
     dataAccess = new RemoteCookbookAccess(uriSetup());
   }
 
-
   /**
    * Updates the mainListViewController.
    */
-
   @Override
   public void update() {
     mainListViewController.update();

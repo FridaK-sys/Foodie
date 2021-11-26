@@ -1,13 +1,11 @@
 package foodie.ui.controllers;
 
-
 import foodie.core.Ingredient;
 import foodie.core.Recipe;
 import foodie.ui.FxmlModel;
-import foodie.ui.IngredientListCell;
 import foodie.ui.SceneHandler;
 import foodie.ui.SceneName;
-import foodie.ui.storage.CookbookAccess;
+import foodie.ui.data.CookbookAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +26,6 @@ public class ViewRecipeController extends AbstractController {
   private ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
   private int portion;
   private Recipe viewRecipe;
-
 
   @FXML
   private Label recipeTitle;
@@ -152,12 +149,14 @@ public class ViewRecipeController extends AbstractController {
     }
     if (recipe.getPortions() == 0) {
       portions.setText("0");
+      portionsneeded.setVisible(false);
       portions.setVisible(false);
       increaseButton.setVisible(false);
       decreaseButton.setVisible(false);
     } else {
       portions.setVisible(true);
       portions.setText(Integer.toString(recipe.getPortions()));
+      portionsneeded.setVisible(true);
       increaseButton.setVisible(true);
       decreaseButton.setVisible(true);
     }
