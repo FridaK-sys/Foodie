@@ -1,7 +1,7 @@
 # Kildekode for brukergrensesnittet
 
 Vi har brukt JavaFX og FXML for å utarbeide brukergrensesnittet.
-Brukergrensesnittet består av en kokebok i form av et **Cookbook**-objekt med en liste av oppskrifter i form av **Recipe**-objekt. Brukeren kan klikke på objektene i listen for å komme til en ny side som viser frem innholdet i oppskriftene. Hver oppskrift inneholder en liste av ingredienser representert ved **Ingredient**-objekt. Bukeren har mulighet til å legge til og fjerne oppskrifter samt redigere disse.
+Brukergrensesnittet består av en kokebok i form av et **Cookbook**-objekt med en liste av oppskrifter i form av **Recipe**-objekt. Brukeren kan klikke på objektene i listen for å komme til en ny side som viser frem innholdet i oppskriftene. Hver oppskrift inneholder en liste av ingredienser representert ved **Ingredient**-objekt. Brukeren har mulighet til å legge til og fjerne oppskrifter samt redigere disse.
 
 ## Arkitektur
 
