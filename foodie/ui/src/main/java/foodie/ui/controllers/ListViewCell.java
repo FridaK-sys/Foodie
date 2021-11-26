@@ -1,4 +1,4 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 import foodie.core.Recipe;
 import javafx.scene.control.Label;

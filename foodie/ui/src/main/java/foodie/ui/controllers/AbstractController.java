@@ -1,8 +1,11 @@
-package foodie.ui;
+package foodie.ui.controllers;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
-import foodie.ui.utils.CookbookAccess;
+import foodie.ui.FxmlModel;
+import foodie.ui.SceneHandler;
+import foodie.ui.SceneName;
+import foodie.ui.storage.CookbookAccess;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;

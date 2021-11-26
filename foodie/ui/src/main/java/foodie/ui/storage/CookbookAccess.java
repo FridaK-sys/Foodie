@@ -1,4 +1,4 @@
-package foodie.ui.utils;
+package foodie.ui.storage;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;

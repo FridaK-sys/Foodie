@@ -2,6 +2,7 @@ package foodie.ui;
 
 import java.io.IOException;
 import java.net.URL;
+import foodie.ui.controllers.AbstractController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

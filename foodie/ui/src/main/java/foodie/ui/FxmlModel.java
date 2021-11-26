@@ -1,6 +1,7 @@
 package foodie.ui;
 
 import foodie.core.Recipe;
+import foodie.ui.controllers.AbstractController;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

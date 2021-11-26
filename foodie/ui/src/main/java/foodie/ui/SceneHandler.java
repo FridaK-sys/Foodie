@@ -12,7 +12,7 @@ public class SceneHandler {
   private static final String MAIN_FXML = "Main.fxml";
   private static final String VIEW_RECIPE_FXML = "ViewRecipe.fxml";
   private static final String NEW_RECIPE_FXML = "NewRecipe.fxml";
-  private static final String MAINTEST_FXML = "Main_test.fxml";
+  private static final String MAINTEST_FXML = "controllers/Main_test.fxml";
   private static Map<SceneName, FxmlModel> scenes = new HashMap<>();
 
 

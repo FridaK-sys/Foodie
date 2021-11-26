@@ -1,4 +1,4 @@
-package foodie.ui.utils;
+package foodie.ui.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import foodie.core.Cookbook;
