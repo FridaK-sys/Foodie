@@ -3,16 +3,22 @@
     -fx-font-weight:  600;
     -fx-background-color: #ffffff;
     -fx-focus-color: transparent;
+    font-family : "monospace"; 
+    font-weight:  600;
+    background-color: #ffffff;
     } 
 
 .label{
   -fx-font-family : "monospace"; 
+  font-family : "monospace"; 
 }
 
 .vbox{
   -fx-background-color: #e6d8d8;
   -fx-border-radius: 50px;
-        -fx-background-radius: 20;
+  -fx-background-radius: 20;
+  background-color: #e6d8d8;
+  border-radius: 50px;
  
 }
     
@@ -21,10 +27,14 @@
         -fx-background-color: #e6d8d8;
         -fx-border-radius: 50px;
         -fx-background-radius: 20;
+        font-weight: 600;
+        background-color: #e6d8d8;
+        border-radius: 50px;
     }
 
     .button:hover {
       -fx-background-color: #f7efe7;
+      background-color: #f7efe7;
   }
     
     .toggle-button{
@@ -32,10 +42,14 @@
       -fx-background-color: rgb(102, 140, 162);
       -fx-border-radius: 20;
       -fx-background-radius: 20;
+      height: 15px;
+      background-color: rgb(102, 140, 162);
+      border-radius: 20;
     }
 
     .toggle-button:selected {
       -fx-background-color: rgb(149, 177, 194);
+      background-color: rgb(149, 177, 194);
   }
 
   .listViewCell{
@@ -46,29 +60,42 @@
     -fx-border-radius: 50px;
     -fx-background-radius: 20;
     -fx-font-weight: 700;
+    height: 30px;
+    padding: 20;
+    background-color: #f3ecec;
+    border-radius: 50px;
+    font-weight: 700;
   }
 
   .listViewCell:hover{
     -fx-background-color: #e6d8d8;
+    background-color: #e6d8d8;
 
   }
 
   .ingredientListCell{
     -fx-height: 5px;
-    /* -fx-spacing: 50; */
     -fx-padding: 5;
     -fx-background-color: #ffffff;
     -fx-border-radius: 50px;
     -fx-background-radius: 20;
-    -fx-font: 16px;
+    -fx-font-size: 16;
     -fx-font-weight: 700;
+    height: 5px;
+    padding: 5;
+    background-color: #ffffff;
+    border-radius: 50px;
+    font-size: 16;
+    font-weight: 700;
   }
 
   .ingredientListCell:hover{
     -fx-background-color: #f7e9e9;
+    background-color: #f7e9e9;
   }
   .ingredientListCell:selected{
     -fx-background-color: #9c5656;
+    background-color: #9c5656;
   }
 
   /* .list-view:hover{
@@ -84,6 +111,9 @@
     -fx-border-color: rgb(221, 221, 221);
 
     -fx-border-radius: 6px;
+    background-color: white;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
     
   }
   .text-field{
@@ -95,6 +125,11 @@
     -fx-background-insets: 0;
     -fx-background-color: -fx-text-box-border, -fx-control-inner-background;
     -fx-focus-color: transparent;
+
+    background-color: white;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
+    background-color: -fx-text-box-border, -fx-control-inner-background;
   }
   .text-area{
     -fx-background-color: white;
@@ -104,16 +139,20 @@
     -fx-control-inner-background: #ffffff;
     -fx-background-insets: 0;
     -fx-focus-color: transparent;
+    background-color: white;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
   }
 
   .text-field-red{
     -fx-border-color: rgba(190, 109, 109, 0.658);
+    border-color: rgba(190, 109, 109, 0.658);
 
   }
 
-  .clear{
+  /* .clear{
     -fx-border-color: BLACK; 
     -fx-background-color: WHITE;
-  }
+  } */
 
     
