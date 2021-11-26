@@ -2,7 +2,6 @@ package foodie.ui.data;
 
 import foodie.core.Cookbook;
 import foodie.core.Recipe;
-import java.util.List;
 
 
 /**
@@ -42,11 +41,5 @@ public interface CookbookAccess {
    */
   boolean deleteRecipe(String name);
 
-  /**
-   * Sets a list of recipes as a cookbook.
-   *
-   * @param recipes to be set
-   * @return true if set
-   */
-  boolean setRecipes(List<Recipe> recipes);
+  
 }

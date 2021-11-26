@@ -47,8 +47,6 @@
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
 
-        <!-- web-server-avhengighetene -->
-
         <!-- Spring boot dependencies from https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

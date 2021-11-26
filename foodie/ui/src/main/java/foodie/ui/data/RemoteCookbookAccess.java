@@ -10,7 +10,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.util.List;
 
 /**
  * Allows server side persistence. Uses GET, POST, PUT and DELETE methods to modify a recipe.
@@ -130,25 +129,6 @@ public class RemoteCookbookAccess implements CookbookAccess {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  /**
-   * Sets list of recipes.
-   *
-   * @param recipes recipes to be set
-   * @return true if edited
-   */
-  @Override
-  public boolean setRecipes(List<Recipe> recipes) {
-    // cookbook.setRecipes(recipes);
-    // try {
-    // persistence.saveCookbook(cookbook);
-    // } catch (IllegalStateException e) {
-    // e.printStackTrace();
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    return true;
   }
 
 }
