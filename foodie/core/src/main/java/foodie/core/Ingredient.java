@@ -1,5 +1,6 @@
 package foodie.core;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,8 +86,10 @@ public class Ingredient {
 
   @Override
   public String toString() {
-    String name = Double.toString(amount) + " " + getUnit() + "\t" + getName();
+    DecimalFormat df = new DecimalFormat("#.##");
+    String name = df.format(amount) + " " + getUnit() + "\t" + getName();
     return name;
+
   }
 
 }
