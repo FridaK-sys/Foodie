@@ -109,6 +109,7 @@ public class CookbookAppTest extends AbstractAppTest {
 
     @Test
     public void testEditRecipe() {
+
         Predicate<ListViewCell> listCell = cell -> cell.lookup(".label") != null;
 
         clickOn(listViewCell(listCell, 1));
@@ -116,7 +117,7 @@ public class CookbookAppTest extends AbstractAppTest {
 
         Label tag = lookup("#labelTag").query();
         String recipeTag = dataAccess.getCookbook().getRecipes().get(1).getLabel();
-        assertEquals(recipeTag, "breakfast");
+        assertEquals(recipeTag, tag.getText());
 
         clickOn("#editRecipe");
         clickOn("#lunch");
